@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiming.emeng.mapper.PostMapper">
+  <resultMap id="BaseResultMap" type="com.huiming.emeng.model.Post">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="titile" jdbcType="VARCHAR" property="titile" />
+    <result column="user_id" jdbcType="INTEGER" property="userId" />
+    <result column="release_time" jdbcType="TIMESTAMP" property="releaseTime" />
+    <result column="like" jdbcType="INTEGER" property="like" />
+    <result column="visit" jdbcType="INTEGER" property="visit" />
+    <result column="username" jdbcType="VARCHAR" property="username" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huiming.emeng.model.PostWithBLOBs">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+    <result column="reply" jdbcType="LONGVARCHAR" property="reply" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, titile, user_id, release_time, like, visit, username
+  </sql>
+  <sql id="Blob_Column_List">
+    content, reply
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from post
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from post
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huiming.emeng.model.PostWithBLOBs">
+    insert into post (id, titile, user_id, 
+      release_time, like, visit, 
+      username, content, reply
+      )
+    values (#{id,jdbcType=INTEGER}, #{titile,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
+      #{releaseTime,jdbcType=TIMESTAMP}, #{like,jdbcType=INTEGER}, #{visit,jdbcType=INTEGER}, 
+      #{username,jdbcType=VARCHAR}, #{content,jdbcType=LONGVARCHAR}, #{reply,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huiming.emeng.model.PostWithBLOBs">
+    insert into post
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="titile != null">
+        titile,
+      </if>
+      <if test="userId != null">
+        user_id,
+      </if>
+      <if test="releaseTime != null">
+        release_time,
+      </if>
+      <if test="like != null">
+        like,
+      </if>
+      <if test="visit != null">
+        visit,
+      </if>
+      <if test="username != null">
+        username,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+      <if test="reply != null">
+        reply,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="titile != null">
+        #{titile,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="releaseTime != null">
+        #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="like != null">
+        #{like,jdbcType=INTEGER},
+      </if>
+      <if test="visit != null">
+        #{visit,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reply != null">
+        #{reply,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huiming.emeng.model.PostWithBLOBs">
+    update post
+    <set>
+      <if test="titile != null">
+        titile = #{titile,jdbcType=VARCHAR},
+      </if>
+      <if test="userId != null">
+        user_id = #{userId,jdbcType=INTEGER},
+      </if>
+      <if test="releaseTime != null">
+        release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="like != null">
+        like = #{like,jdbcType=INTEGER},
+      </if>
+      <if test="visit != null">
+        visit = #{visit,jdbcType=INTEGER},
+      </if>
+      <if test="username != null">
+        username = #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="reply != null">
+        reply = #{reply,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huiming.emeng.model.PostWithBLOBs">
+    update post
+    set titile = #{titile,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      like = #{like,jdbcType=INTEGER},
+      visit = #{visit,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR},
+      content = #{content,jdbcType=LONGVARCHAR},
+      reply = #{reply,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Post">
+    update post
+    set titile = #{titile,jdbcType=VARCHAR},
+      user_id = #{userId,jdbcType=INTEGER},
+      release_time = #{releaseTime,jdbcType=TIMESTAMP},
+      like = #{like,jdbcType=INTEGER},
+      visit = #{visit,jdbcType=INTEGER},
+      username = #{username,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiming.emeng.mapper.NavigationMapper">
+  <resultMap id="BaseResultMap" type="com.huiming.emeng.model.Navigation">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="position" jdbcType="TINYINT" property="position" />
+    <result column="document" jdbcType="VARCHAR" property="document" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, position, document, link
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from navigation
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from navigation
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huiming.emeng.model.Navigation">
+    insert into navigation (id, position, document, 
+      link)
+    values (#{id,jdbcType=INTEGER}, #{position,jdbcType=TINYINT}, #{document,jdbcType=VARCHAR}, 
+      #{link,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.huiming.emeng.model.Navigation">
+    insert into navigation
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="position != null">
+        position,
+      </if>
+      <if test="document != null">
+        document,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="position != null">
+        #{position,jdbcType=TINYINT},
+      </if>
+      <if test="document != null">
+        #{document,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huiming.emeng.model.Navigation">
+    update navigation
+    <set>
+      <if test="position != null">
+        position = #{position,jdbcType=TINYINT},
+      </if>
+      <if test="document != null">
+        document = #{document,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Navigation">
+    update navigation
+    set position = #{position,jdbcType=TINYINT},
+      document = #{document,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

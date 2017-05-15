@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiming.emeng.mapper.PassageMapper">
+  <resultMap id="BaseResultMap" type="com.huiming.emeng.model.Passage">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="titile" jdbcType="VARCHAR" property="titile" />
+    <result column="author" jdbcType="VARCHAR" property="author" />
+    <result column="link" jdbcType="VARCHAR" property="link" />
+    <result column="publish_time" jdbcType="TIMESTAMP" property="publishTime" />
+    <result column="type" jdbcType="TINYINT" property="type" />
+    <result column="state" jdbcType="TINYINT" property="state" />
+    <result column="annex" jdbcType="VARCHAR" property="annex" />
+    <result column="recommend" jdbcType="INTEGER" property="recommend" />
+    <result column="lesson" jdbcType="INTEGER" property="lesson" />
+    <result column="chapter" jdbcType="INTEGER" property="chapter" />
+  </resultMap>
+  <resultMap extends="BaseResultMap" id="ResultMapWithBLOBs" type="com.huiming.emeng.model.Passage">
+    <result column="content" jdbcType="LONGVARCHAR" property="content" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, titile, author, link, publish_time, type, state, annex, recommend, lesson, chapter
+  </sql>
+  <sql id="Blob_Column_List">
+    content
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from passage
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from passage
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.huiming.emeng.model.Passage">
+    insert into passage (id, titile, author, 
+      link, publish_time, type, 
+      state, annex, recommend, 
+      lesson, chapter, content
+      )
+    values (#{id,jdbcType=INTEGER}, #{titile,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
+      #{link,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT}, 
+      #{state,jdbcType=TINYINT}, #{annex,jdbcType=VARCHAR}, #{recommend,jdbcType=INTEGER}, 
+      #{lesson,jdbcType=INTEGER}, #{chapter,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.huiming.emeng.model.Passage">
+    insert into passage
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="titile != null">
+        titile,
+      </if>
+      <if test="author != null">
+        author,
+      </if>
+      <if test="link != null">
+        link,
+      </if>
+      <if test="publishTime != null">
+        publish_time,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="state != null">
+        state,
+      </if>
+      <if test="annex != null">
+        annex,
+      </if>
+      <if test="recommend != null">
+        recommend,
+      </if>
+      <if test="lesson != null">
+        lesson,
+      </if>
+      <if test="chapter != null">
+        chapter,
+      </if>
+      <if test="content != null">
+        content,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="titile != null">
+        #{titile,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        #{state,jdbcType=TINYINT},
+      </if>
+      <if test="annex != null">
+        #{annex,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null">
+        #{recommend,jdbcType=INTEGER},
+      </if>
+      <if test="lesson != null">
+        #{lesson,jdbcType=INTEGER},
+      </if>
+      <if test="chapter != null">
+        #{chapter,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.huiming.emeng.model.Passage">
+    update passage
+    <set>
+      <if test="titile != null">
+        titile = #{titile,jdbcType=VARCHAR},
+      </if>
+      <if test="author != null">
+        author = #{author,jdbcType=VARCHAR},
+      </if>
+      <if test="link != null">
+        link = #{link,jdbcType=VARCHAR},
+      </if>
+      <if test="publishTime != null">
+        publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=TINYINT},
+      </if>
+      <if test="state != null">
+        state = #{state,jdbcType=TINYINT},
+      </if>
+      <if test="annex != null">
+        annex = #{annex,jdbcType=VARCHAR},
+      </if>
+      <if test="recommend != null">
+        recommend = #{recommend,jdbcType=INTEGER},
+      </if>
+      <if test="lesson != null">
+        lesson = #{lesson,jdbcType=INTEGER},
+      </if>
+      <if test="chapter != null">
+        chapter = #{chapter,jdbcType=INTEGER},
+      </if>
+      <if test="content != null">
+        content = #{content,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.huiming.emeng.model.Passage">
+    update passage
+    set titile = #{titile,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      annex = #{annex,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=INTEGER},
+      lesson = #{lesson,jdbcType=INTEGER},
+      chapter = #{chapter,jdbcType=INTEGER},
+      content = #{content,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Passage">
+    update passage
+    set titile = #{titile,jdbcType=VARCHAR},
+      author = #{author,jdbcType=VARCHAR},
+      link = #{link,jdbcType=VARCHAR},
+      publish_time = #{publishTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=TINYINT},
+      state = #{state,jdbcType=TINYINT},
+      annex = #{annex,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=INTEGER},
+      lesson = #{lesson,jdbcType=INTEGER},
+      chapter = #{chapter,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
