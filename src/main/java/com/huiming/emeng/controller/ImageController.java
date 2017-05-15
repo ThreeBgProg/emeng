@@ -1,11 +1,6 @@
 package com.huiming.emeng.controller;
 
-import java.awt.Color;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.image.BufferedImage;
 import java.io.IOException;
-import java.util.Random;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -18,6 +13,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.huiming.emeng.bo.ValidateImageBO;
 import com.huiming.emeng.common.ValidateCodeUtil;
 
+/**
+ * 测试  -- 验证码
+ * 
+ * @author Jack
+ * @date 2017年5月15日
+ */
 @Controller
 @RequestMapping("/image")
 public class ImageController {
