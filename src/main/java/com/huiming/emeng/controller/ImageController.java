@@ -1,17 +1,15 @@
 package com.huiming.emeng.controller;
 
-import java.io.IOException;
+import com.huiming.emeng.bo.ValidateImageBO;
+import com.huiming.emeng.common.ValidateCodeUtil;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-
-import com.huiming.emeng.bo.ValidateImageBO;
-import com.huiming.emeng.common.ValidateCodeUtil;
+import java.io.IOException;
 
 /**
  * 测试  -- 验证码

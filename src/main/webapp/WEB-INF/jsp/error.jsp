@@ -4,9 +4,9 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>errorPage</title>
 </head>
 <body>
-
+<h1>数据库连接正常</h1>
 </body>
 </html>

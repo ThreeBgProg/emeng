@@ -24,7 +24,7 @@ public class TestContoller {
 	 * 测试数据库连接情况
 	 * @return
 	 */
-	@RequestMapping("test")
+	@RequestMapping("/test")
 	public String test() {
 		
 		System.out.println(mapper.selectByPrimaryKey(1).getName());
