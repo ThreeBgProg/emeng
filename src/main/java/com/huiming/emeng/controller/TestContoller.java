@@ -1,5 +1,7 @@
 package com.huiming.emeng.controller;
 
+import com.huiming.emeng.model.Navigation;
+import com.huiming.emeng.service.NavigationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -7,6 +9,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import com.huiming.emeng.common.CustomException;
 import com.huiming.emeng.common.CustomException.UnauthorizedError;
 import com.huiming.emeng.mapper.LessonMapper;
+
+import java.util.List;
 
 /**
  * 测试
@@ -19,6 +23,9 @@ public class TestContoller {
 
 	@Autowired
 	private LessonMapper mapper;
+
+	@Autowired
+	private NavigationService navigationService;
 	
 	/**
 	 * 测试数据库连接情况
@@ -26,7 +33,11 @@ public class TestContoller {
 	 */
 	@RequestMapping("/test")
 	public String test() {
-		
+
+		List<Navigation> navigationList = navigationService.selectAllNavigation();
+		for (Navigation navigation : navigationList){
+			System.out.println(navigation);
+		}
 		System.out.println(mapper.selectByPrimaryKey(1).getName());
 		return "error";
 	}
