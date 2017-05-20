@@ -1,6 +1,9 @@
 package com.huiming.emeng.mapper;
 
+import com.huiming.emeng.enums.HomePagePassage;
 import com.huiming.emeng.model.Passage;
+
+import java.util.List;
 
 public interface PassageMapper {
     int deleteByPrimaryKey(Integer id);
@@ -18,10 +21,9 @@ public interface PassageMapper {
     int updateByPrimaryKey(Passage record);
 
     /**
-     * 根据时间的倒叙查询文章
-     * @param type 文章类型
-     * @param selectSum 查询数目
-     * @return
+     *
+     * @param homePagePassage 在主页显示的文章以及文章数目，是一个枚举类
+     * @return 返回文章数组
      */
-   // List<Passage> selectByTypeAndDescendWithTime(Integer type, Integer selectSum);
+    List<Passage> selectByTypeAndDescendWithTime(HomePagePassage homePagePassage);
 }

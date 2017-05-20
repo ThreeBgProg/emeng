@@ -1,5 +1,7 @@
 package com.huiming.emeng.controller;
 
+import com.huiming.emeng.enums.HomePagePassage;
+import com.huiming.emeng.service.HomePagePassageService;
 import com.huiming.emeng.service.NavigationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -18,6 +20,8 @@ public class HomePageController {
      */
     @Autowired
     NavigationService navigationService;
+    @Autowired
+    HomePagePassageService homePagePassageService;
 
     /**
      * 主页控制跳转方法
@@ -28,7 +32,14 @@ public class HomePageController {
 
         //添加导航表模块
         model.addAttribute("navigationList", navigationService.selectAllNavigation());
-
+        //添加最新资料模块
+        model.addAttribute("newestPassageList", homePagePassageService.selectByTypeAndDescendWithTime(HomePagePassage.NEWESTINFORMATION));
+        //添加思政动态模块
+        model.addAttribute("dynamicList",homePagePassageService.selectByTypeAndDescendWithTime(HomePagePassage.IDEOLOGICALANDPOLITICALDYNAMIC));
+        //添加马院头条模块
+        model.addAttribute("headlineList",homePagePassageService.selectByTypeAndDescendWithTime(HomePagePassage.MAYUANHEADLINE));
+        //添加经典作家（名师新作）模块
+        model.addAttribute("teacherPassageList",homePagePassageService.selectByTypeAndDescendWithTime(HomePagePassage.TEACHERPASSAGE));
         return "/";
     }
 
