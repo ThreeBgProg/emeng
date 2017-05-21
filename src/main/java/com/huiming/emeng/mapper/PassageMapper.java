@@ -1,7 +1,7 @@
 package com.huiming.emeng.mapper;
 
-import com.huiming.emeng.enums.HomePagePassage;
 import com.huiming.emeng.model.Passage;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,10 +20,6 @@ public interface PassageMapper {
 
     int updateByPrimaryKey(Passage record);
 
-    /**
-     *
-     * @param homePagePassage 在主页显示的文章以及文章数目，是一个枚举类
-     * @return 返回文章数组
-     */
-    List<Passage> selectByTypeAndDescendWithTime(HomePagePassage homePagePassage);
+
+    List<Passage> selectByTypeAndDescendWithTime(@Param("passageType") Integer passageType, @Param("showPassageNums") Integer showPassageNums);
 }

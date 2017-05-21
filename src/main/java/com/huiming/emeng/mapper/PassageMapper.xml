@@ -31,6 +31,21 @@
     from passage
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectByTypeAndDescendWithTime" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM passage
+    <where>
+      <if test="passageType != null">
+        type = #{passageType}
+      </if>
+      ORDER BY publish_time DESC
+      <if test="showPassageNums != null">
+        limit 0,#{showPassageNums}
+      </if>
+    </where>
+    
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from passage
     where id = #{id,jdbcType=INTEGER}
@@ -195,12 +210,5 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
 
-  <select id="selectByTypeAndDescendWithTime" resultType="HomePagePassage" resultMap="BaseResultMap">
-      SELECT
-    <include refid="Base_Column_List" />
-      FROM passage
-      WHERE type = #{HomePagePassage.type}
-      ORDER BY publish_time DESC
-      limit 0,#{HomePagePassage.displayNums}
-  </select>
+
 </mapper>

@@ -1,6 +1,5 @@
 package com.huiming.emeng.service;
 
-import com.huiming.emeng.enums.HomePagePassage;
 import com.huiming.emeng.mapper.PassageMapper;
 import com.huiming.emeng.model.Passage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +16,8 @@ public class HomePagePassageService {
     @Autowired
     PassageMapper passageMapper;
 
-    public List<Passage> selectByTypeAndDescendWithTime(HomePagePassage homePagePassage){
-        return passageMapper.selectByTypeAndDescendWithTime(homePagePassage);
+    public List<Passage> selectByTypeAndDescendWithTime(Integer passageType, Integer showPassageNums){
+        return passageMapper.selectByTypeAndDescendWithTime(passageType,showPassageNums);
     }
 
 }
