@@ -40,4 +40,14 @@ public class Navigation {
     public void setLink(String link) {
         this.link = link == null ? null : link.trim();
     }
+
+    @Override
+    public String toString() {
+        return "Navigation{" +
+                "id=" + id +
+                ", position=" + position +
+                ", document='" + document + '\'' +
+                ", link='" + link + '\'' +
+                '}';
+    }
 }

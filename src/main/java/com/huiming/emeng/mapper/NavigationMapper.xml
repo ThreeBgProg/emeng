@@ -79,4 +79,9 @@
       link = #{link,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectAllNavigation" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM navigation
+  </select>
 </mapper>
