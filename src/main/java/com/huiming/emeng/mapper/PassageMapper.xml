@@ -194,7 +194,7 @@
       chapter = #{chapter,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-
+<!-- 
   <select id="selectByTypeAndDescendWithTime" resultType="HomePagePassage" resultMap="BaseResultMap">
       SELECT
     <include refid="Base_Column_List" />
@@ -202,5 +202,5 @@
       WHERE type = #{HomePagePassage.type}
       ORDER BY publish_time DESC
       limit 0,#{HomePagePassage.displayNums}
-  </select>
+  </select> -->
 </mapper>

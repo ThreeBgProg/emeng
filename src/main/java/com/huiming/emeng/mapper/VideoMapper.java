@@ -5,6 +5,7 @@ import com.huiming.emeng.model.Video;
 public interface VideoMapper {
     int deleteByPrimaryKey(Integer id);
 
+    //添加课程视频
     int insert(Video record);
 
     int insertSelective(Video record);
