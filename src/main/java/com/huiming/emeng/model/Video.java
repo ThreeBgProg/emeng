@@ -63,4 +63,12 @@ public class Video {
     public void setChapter(Integer chapter) {
         this.chapter = chapter;
     }
+
+	@Override
+	public String toString() {
+		return "Video [id=" + id + ", name=" + name + ", pic=" + pic + ", link=" + link + ", lesson=" + lesson
+				+ ", chapter=" + chapter + "]";
+	}
+    
+    
 }
