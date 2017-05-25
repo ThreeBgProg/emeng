@@ -42,6 +42,28 @@ public class UserServiceImpl implements UserService {
 		// TODO Auto-generated method stub
 		return applyMapper.deleteByPrimaryKey(id);
 	}
+	@Override
+	public int insertSelective(Apply record) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+	//根据主键查找
+	@Override
+	public Apply selectByPrimaryKey(Integer id) {
+		// TODO Auto-generated method stub
+		return applyMapper.selectByPrimaryKey(id);
+	}
+	//根据user_id进行更新
+	public int updateByPrimaryKeySelective(Apply record) {
+		
+		return applyMapper.updateByPrimaryKeySelective(record);
+	}
+	
+	//根据主键id进行更新
+	public int updateByPrimaryKey(Apply record) {
+		// TODO Auto-generated method stub
+		return applyMapper.updateByPrimaryKey(record);
+	}
 
 	
 }

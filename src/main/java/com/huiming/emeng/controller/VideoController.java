@@ -1,6 +1,7 @@
 package com.huiming.emeng.controller;
 
 import java.io.File;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -46,7 +47,7 @@ public class VideoController {
 	}
 	
 	
-	@RequestMapping("upload")
+   @RequestMapping("upload")
    public String upload(HttpServletRequest request,
 		   @RequestParam("description") String description,
 		   @RequestParam("file") MultipartFile file)throws Exception
@@ -90,14 +91,116 @@ public class VideoController {
 		 return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),    
 	                headers, HttpStatus.CREATED);
 	}
-	
+	/**
+	 * 根据主键查找id
+	 * @param request
+	 * @param id
+	 * @param model
+	 * @return
+	 * @throws Exception
+	 */
 	@RequestMapping("selectvideo")
 	public String selectByPrimaryKey(HttpServletRequest request,
-			@RequestParam("id") Integer id)throws Exception{
+			@RequestParam("id") Integer id,Model model)throws Exception{
 		Video video = videoService.selectByPrimaryKey(id);
+		model.addAttribute("video", video);
 		System.out.println(video);
 		return "userInfo";
 	}
+	/**
+	 * 全部字段更新
+	 * @param video
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("updByPK")
+	public String updateByPrimaryKey(Video video,Model model){
+		
+		int result = videoService.updateByPrimaryKey(video);
+		System.out.println("您更新了"+result+"条视频数据");
+		return null;
+	}
+	/**
+	 * 选择字段更新
+	 * @param video
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("updByPKS")
+	public String updateByPrimaryKeySelective(Video video ,Model model){
+		int result = videoService.updateByPrimaryKeySelective(video);
+		System.out.println("您更新了"+result+"条视频数据");
+		return null;
+	}
+	
+	/**
+	 * 根据课程id查找所有
+	 * @param lesson
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("selectByle")
+	public String selectBylesson(@RequestParam("lesson") Integer lesson,Model model){
+		
+		List<Video> lists = videoService.selectBylesson(lesson);
+		model.addAttribute("lists", lists);
+		
+		return null;
+	}
+	
+	/**
+	 * 根据章节id查找所有
+	 * @param chapter
+	 * @param model
+	 * @return
+	 */
+	@RequestMapping("selectBycha")
+	public String selectBychapter(@RequestParam("lesson") Integer chapter,Model model){
+		
+		List<Video> lists = videoService.selectBylesson(chapter);
+		model.addAttribute("lists", lists);
+		
+		return null;
+	}
+	
+	@RequestMapping("delByPK")
+	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+		
+		int result = videoService.deleteByPrimaryKey(id);
+		System.out.println("您已成功删除"+result+"条视频数据");
+		return null;
+	}
+	
+   @RequestMapping("insSelect")
+   public String insertSelect(HttpServletRequest request,
+		   @RequestParam("description") String description,
+		   @RequestParam("file") MultipartFile file)throws Exception
+   {
+	   System.out.println(description);
+	   if(!file.isEmpty()){
+		   String path = request.getServletContext().getRealPath("/images/");
+		   System.out.println("path:"+path);
+		   String fileName = file.getOriginalFilename();
+		   System.out.println("fileName:"+fileName);
+		   File filepath = new File(path,fileName);
+		   System.out.println("filepath:"+filepath);
+		   if(!filepath.getParentFile().exists()){
+			   filepath.getParentFile().mkdirs();
+		   }
+		   file.transferTo(new File(path+File.separator+fileName));
+		   Video video = new Video();
+		   video.setName(fileName);
+		   video.setLink(path+fileName);
+		   video.setLesson(1);
+		   video.setChapter(1);
+		   video.setPic("picture");
+		   int result = videoService.insertSelective(video);
+		   System.out.println(result);
+		   return "userInfo";
+	   }
+	   return "error";
+   }
+    
 	
 	
 }

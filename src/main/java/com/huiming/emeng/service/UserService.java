@@ -19,4 +19,13 @@ public interface UserService {
 	 * 后台查询报名表的全部信息
 	 */
 	public List<Apply> selectAllApply();
+
+    int insertSelective(Apply record);
+
+	Apply selectByPrimaryKey(Integer id);
+
+	int updateByPrimaryKeySelective(Apply record);
+
+	int updateByPrimaryKey(Apply record);
+
 }
