@@ -39,7 +39,7 @@ public class TestContoller {
 			System.out.println(navigation);
 		}
 		System.out.println(mapper.selectByPrimaryKey(1).getName());
-		return "error";
+		return "fileupload";
 	}
 	
 	

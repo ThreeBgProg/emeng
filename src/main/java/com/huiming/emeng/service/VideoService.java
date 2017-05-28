@@ -1,8 +1,9 @@
-package com.huiming.emeng.mapper;
+package com.huiming.emeng.service;
 
 import com.huiming.emeng.model.Video;
 
-public interface VideoMapper {
+public interface VideoService {
+
     int deleteByPrimaryKey(Integer id);
 
     //添加课程视频

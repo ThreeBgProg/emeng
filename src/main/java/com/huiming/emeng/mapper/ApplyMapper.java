@@ -1,5 +1,7 @@
 package com.huiming.emeng.mapper;
 
+import java.util.List;
+
 import com.huiming.emeng.model.Apply;
 
 public interface ApplyMapper {
@@ -14,4 +16,6 @@ public interface ApplyMapper {
     int updateByPrimaryKeySelective(Apply record);
 
     int updateByPrimaryKey(Apply record);
+    //管理员查询所有报名信息
+    public List<Apply> selectAllApply();
 }

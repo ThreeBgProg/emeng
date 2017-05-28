@@ -5,12 +5,15 @@ public class Video {
 
     private String name;
 
+    //picture
     private String pic;
 
     private String link;
 
+    //所属课程id
     private Integer lesson;
 
+    //章节id（非课程资源则为0）（对应chapter表的id）
     private Integer chapter;
 
     public Integer getId() {
@@ -60,4 +63,12 @@ public class Video {
     public void setChapter(Integer chapter) {
         this.chapter = chapter;
     }
+
+	@Override
+	public String toString() {
+		return "Video [id=" + id + ", name=" + name + ", pic=" + pic + ", link=" + link + ", lesson=" + lesson
+				+ ", chapter=" + chapter + "]";
+	}
+    
+    
 }
