@@ -1,5 +1,7 @@
 package com.huiming.emeng.mapper;
 
+import java.util.List;
+
 import com.huiming.emeng.model.UserRole;
 
 public interface UserRoleMapper {
@@ -14,4 +16,6 @@ public interface UserRoleMapper {
 	int updateByPrimaryKeySelective(UserRole record);
 
 	int updateByPrimaryKey(UserRole record);
+	
+	List<Integer> selectByRoleId(Integer id);
 }
