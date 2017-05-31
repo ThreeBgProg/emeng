@@ -17,5 +17,5 @@ public interface RolePermissionMapper {
 
 	int updateByPrimaryKey(RolePermission record);
 	
-	List<RolePermission> selectAllByRoleId(Integer roleId);
+	List<Integer> selectAllByRoleId(Integer roleId);
 }

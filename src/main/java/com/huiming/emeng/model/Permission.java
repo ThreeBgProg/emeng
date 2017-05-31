@@ -6,6 +6,8 @@ public class Permission {
 	private String mapping;
 
 	private String description;
+	
+	private Byte state;
 
 	public Integer getId() {
 		return id;
@@ -30,4 +32,29 @@ public class Permission {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+
+	public Byte getState() {
+		return state;
+	}
+
+	public void setState(Byte state) {
+		this.state = state;
+	}
+
+	@Override
+	public boolean equals(Object o) {
+		return description.equals(((Permission) o).getDescription()) && mapping.equals(((Permission) o).getMapping());
+	}
+
+	public Permission(Integer id, Byte state) {
+		super();
+		this.id = id;
+		this.state = state;
+	}
+
+	public Permission() {
+		super();
+	}
+
+	
 }

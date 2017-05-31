@@ -2,8 +2,8 @@ package com.huiming.emeng.model;
 
 public class UserRole {
 	private Integer id;
-	private String roleId;
-	private String userId;
+	private Integer roleId;
+	private Integer userId;
 
 	public Integer getId() {
 		return id;
@@ -13,20 +13,21 @@ public class UserRole {
 		this.id = id;
 	}
 
-	public String getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
-	public String getUserId() {
+	public Integer getUserId() {
 		return userId;
 	}
 
-	public void setUserId(String userId) {
+	public void setUserId(Integer userId) {
 		this.userId = userId;
 	}
+
 	
 }

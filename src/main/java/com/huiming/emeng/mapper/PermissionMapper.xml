@@ -1,71 +1,146 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://www.mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.huiming.emeng.mapper.PermissionMapper">
-  <resultMap id="BaseResultMap" type="com.huiming.emeng.model.Permission">
-    <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="mapping" jdbcType="VARCHAR" property="mapping" />
-    <result column="description" jdbcType="VARCHAR" property="description" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    id, mapping, description
-  </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from permission
-    where id = #{id,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from permission
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
-  <insert id="insert" parameterType="com.huiming.emeng.model.Permission">
-    insert into permission (id, mapping, description
-      )
-    values (#{id,jdbcType=INTEGER}, #{mapping,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}
-      )
-  </insert>
-  <insert id="insertSelective" parameterType="com.huiming.emeng.model.Permission">
-    insert into permission
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        id,
-      </if>
-      <if test="permission != null">
-        mapping,
-      </if>
-      <if test="description != null">
-        description,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="id != null">
-        #{id,jdbcType=INTEGER},
-      </if>
-      <if test="permission != null">
-        #{mapping,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        #{description,jdbcType=VARCHAR},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="com.huiming.emeng.model.Permission">
-    update permission
-    <set>
-      <if test="permission != null">
-        mapping = #{mapping,jdbcType=VARCHAR},
-      </if>
-      <if test="description != null">
-        description = #{description,jdbcType=VARCHAR},
-      </if>
-    </set>
-    where id = #{id,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Permission">
-    update permission
-      mapping = #{mapping,jdbcType=VARCHAR},
-      description = #{description,jdbcType=VARCHAR}
-    where id = #{id,jdbcType=INTEGER}
-  </update>
+	<resultMap id="BaseResultMap" type="com.huiming.emeng.model.Permission">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="mapping" jdbcType="VARCHAR" property="mapping" />
+		<result column="description" jdbcType="VARCHAR" property="description" />
+		<result column="state" jdbcType="TINYINT" property="state" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, mapping, description, state
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from permission
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		update from
+		permission state = 0
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<insert id="insert" parameterType="com.huiming.emeng.model.Permission">
+		insert into permission (id,
+		mapping, description,state
+		)
+		values (#{id,jdbcType=INTEGER},
+		#{mapping,jdbcType=VARCHAR},
+		#{description,jdbcType=VARCHAR},
+		#{state,jdbcType=TINYINT}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.huiming.emeng.model.Permission">
+		insert into permission
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="mapping != null">
+				mapping,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="mapping != null">
+				#{mapping,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huiming.emeng.model.Permission">
+		update permission
+		<set>
+			<if test="mapping != null">
+				mapping = #{mapping,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=TINYINT},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Permission">
+		update permission
+		mapping = #{mapping,jdbcType=VARCHAR},
+		description = #{description,jdbcType=VARCHAR},
+		state = #{state,jdbcType=TINYINT}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	
+	<select id="selectSelective" parameterType="com.huiming.emeng.model.Permission"
+		resultMap="BaseResultMap">
+		select 
+		<include refid="Base_Column_List" />
+		from permission
+		<where>
+			<if test="id != null">
+				id = #{id,jdbcType=VARCHAR}
+			</if>
+			<if test="mapping != null">
+				AND mapping = #{mapping,jdbcType=VARCHAR}
+			</if>
+			<if test="description != null">
+				AND description = #{description,jdbcType=VARCHAR}
+			</if>
+			<if test="state != null">
+				AND state = #{state,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+
+	<delete id="deleteSelective" parameterType="com.huiming.emeng.model.Permission">
+		delete from permission
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="mapping != null">
+				mapping,
+			</if>
+			<if test="description != null">
+				description,
+			</if>
+			<if test="state != null">
+				state,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="mapping != null">
+				#{mapping,jdbcType=VARCHAR},
+			</if>
+			<if test="description != null">
+				#{description,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				#{state,jdbcType=TINYINT},
+			</if>
+		</trim>
+	</delete>
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM permission
+	</select>
 </mapper>

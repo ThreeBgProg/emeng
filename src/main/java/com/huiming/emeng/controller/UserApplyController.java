@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.model.Apply;
-import com.huiming.emeng.service.UserService;
+import com.huiming.emeng.service.ApplyService;
 
 /**
  * 用户操作
@@ -21,7 +21,7 @@ import com.huiming.emeng.service.UserService;
 public class UserApplyController {
 
 	@Autowired
-	private UserService userService;
+	private ApplyService applyService;
 
 	/**
 	 * 后台生成报名表
@@ -36,7 +36,7 @@ public class UserApplyController {
 		
 		
 		
-		userService.insert(apply);
+		applyService.insert(apply);
 		return "userApplyForm";
 	}
 	
@@ -47,7 +47,7 @@ public class UserApplyController {
 	 */
 	@RequestMapping("selectAllApply")
 	public String selectAllApply(Model model){
-		List<Apply> lists=userService.selectAllApply();
+		List<Apply> lists=applyService.selectAllApply();
 		model.addAttribute("lists", lists);
 		return null;
 	}
@@ -59,10 +59,10 @@ public class UserApplyController {
 	 */
 	@RequestMapping("deleteByPrimaryKey")
 	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
-		int result = userService.deleteByPrimaryKey(id);
+		int result = applyService.deleteByPrimaryKey(id);
 		System.out.println("您已成功删除"+result+"条信息");
 		
-		List<Apply> lists=userService.selectAllApply();
+		List<Apply> lists=applyService.selectAllApply();
 		model.addAttribute("lists", lists);
 		return null;
 	}
@@ -75,7 +75,7 @@ public class UserApplyController {
 	@ResponseBody
 	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model) {
 		
-		Apply apply = userService.selectByPrimaryKey(id);
+		Apply apply = applyService.selectByPrimaryKey(id);
 		model.addAttribute("apply", apply);
 		return apply;
 	}
@@ -85,10 +85,10 @@ public class UserApplyController {
 	@RequestMapping("updateByPrimaryKeySelective")
 	public String updateByPrimaryKeySelective(Apply record,Model model) {
 		
-			int result = userService.updateByPrimaryKeySelective(record);
+			int result = applyService.updateByPrimaryKeySelective(record);
 			System.out.println("您已经成功更新"+result+"条数据");
 			//查询查找新的数据
-			List<Apply> lists=userService.selectAllApply();
+			List<Apply> lists=applyService.selectAllApply();
 			model.addAttribute("lists", lists);
 		return null;
 		
@@ -98,10 +98,10 @@ public class UserApplyController {
 	@RequestMapping("updateByPrimaryKey")
 	public String updateByPrimaryKey(Apply record,Model model) {
 		
-			int result = userService.updateByPrimaryKey(record);
+			int result = applyService.updateByPrimaryKey(record);
 			System.out.println("您已经成功更新"+result+"条数据");
 			//查询查找新的数据
-			List<Apply> lists=userService.selectAllApply();
+			List<Apply> lists=applyService.selectAllApply();
 			model.addAttribute("lists", lists);
 		return null;
 		
