@@ -15,7 +15,7 @@ public class LinksController {
 	@Autowired
 	private LinksService linksService;
 	
-	@RequestMapping("insert")
+	@RequestMapping("linksinsert")
 	public String insert(Links links,Model model){
 		
 		int result = linksService.insert(links);
@@ -24,7 +24,7 @@ public class LinksController {
 		return null;
 	}
 	
-	@RequestMapping("insertSelect")
+	@RequestMapping("linksinsertSelect")
 	public String insertSelect(Links links,Model model){
 		
 		int result = linksService.insertSelective(links);
@@ -33,7 +33,7 @@ public class LinksController {
 		return null;
 	}
 	
-	@RequestMapping("selectPK")
+	@RequestMapping("linksselectPK")
 	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		Links links = linksService.selectByPrimaryKey(id);
@@ -41,7 +41,7 @@ public class LinksController {
 		return links;
 	}
 	
-	@RequestMapping("deletePK")
+	@RequestMapping("linksdeletePK")
 	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		int result = linksService.deleteByPrimaryKey(id);
@@ -50,7 +50,7 @@ public class LinksController {
 		
 	}
 	
-	@RequestMapping("updPK")
+	@RequestMapping("linksupdPK")
 	public String updateByPrimaryKey(Links links,Model model){
 		
 		int result = linksService.updateByPrimaryKey(links);
@@ -58,7 +58,7 @@ public class LinksController {
 		return null;
 	}
 	
-	@RequestMapping("updPKSelect")
+	@RequestMapping("linksupdPKSelect")
 	public String updateByPrimaryKeySelect(Links links,Model model){
 		
 		int result = linksService.updateByPrimaryKeySelective(links);

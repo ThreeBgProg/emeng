@@ -40,26 +40,23 @@ public class VideoController {
 	 * @throws Exception
 	 */
 	
-	@RequestMapping("fileupload")
+	@RequestMapping("videofileupload")
 	public String fileUpload(){
 		System.out.println("进入");
 		return "fileupload";
 	}
 	
 	
-   @RequestMapping("upload")
+   @RequestMapping("videoupload")
    public String upload(HttpServletRequest request,
 		   @RequestParam("description") String description,
 		   @RequestParam("file") MultipartFile file)throws Exception
    {
 	   System.out.println(description);
 	   if(!file.isEmpty()){
-		   String path = request.getServletContext().getRealPath("/images/");
-		   System.out.println("path:"+path);
+		   String path = request.getServletContext().getRealPath("/videos/");
 		   String fileName = file.getOriginalFilename();
-		   System.out.println("fileName:"+fileName);
 		   File filepath = new File(path,fileName);
-		   System.out.println("filepath:"+filepath);
 		   if(!filepath.getParentFile().exists()){
 			   filepath.getParentFile().mkdirs();
 		   }
@@ -77,7 +74,7 @@ public class VideoController {
 	   return "error";
    }
 
-	@RequestMapping("download")
+	@RequestMapping("videodownload")
 	public ResponseEntity<byte[]> download(HttpServletRequest request,
 			@RequestParam("filename") String filename,
 			Model model)throws Exception
@@ -113,7 +110,7 @@ public class VideoController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("updByPK")
+	@RequestMapping("videoupdByPK")
 	public String updateByPrimaryKey(Video video,Model model){
 		
 		int result = videoService.updateByPrimaryKey(video);
@@ -126,7 +123,7 @@ public class VideoController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("updByPKS")
+	@RequestMapping("videoupdByPKS")
 	public String updateByPrimaryKeySelective(Video video ,Model model){
 		int result = videoService.updateByPrimaryKeySelective(video);
 		System.out.println("您更新了"+result+"条视频数据");
@@ -139,7 +136,7 @@ public class VideoController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("selectByle")
+	@RequestMapping("videoselectByle")
 	public String selectBylesson(@RequestParam("lesson") Integer lesson,Model model){
 		
 		List<Video> lists = videoService.selectBylesson(lesson);
@@ -154,7 +151,7 @@ public class VideoController {
 	 * @param model
 	 * @return
 	 */
-	@RequestMapping("selectBycha")
+	@RequestMapping("videoselectBycha")
 	public String selectBychapter(@RequestParam("lesson") Integer chapter,Model model){
 		
 		List<Video> lists = videoService.selectBylesson(chapter);
@@ -163,7 +160,7 @@ public class VideoController {
 		return null;
 	}
 	
-	@RequestMapping("delByPK")
+	@RequestMapping("videodelByPK")
 	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		int result = videoService.deleteByPrimaryKey(id);
@@ -171,7 +168,7 @@ public class VideoController {
 		return null;
 	}
 	
-   @RequestMapping("insSelect")
+   @RequestMapping("videoinsSelect")
    public String insertSelect(HttpServletRequest request,
 		   @RequestParam("description") String description,
 		   @RequestParam("file") MultipartFile file)throws Exception

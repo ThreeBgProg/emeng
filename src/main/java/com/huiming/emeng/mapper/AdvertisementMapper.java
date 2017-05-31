@@ -3,6 +3,7 @@ package com.huiming.emeng.mapper;
 import com.huiming.emeng.model.Advertisement;
 
 public interface AdvertisementMapper {
+	
     int deleteByPrimaryKey(Integer id);
 
     int insert(Advertisement record);

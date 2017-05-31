@@ -27,7 +27,7 @@ public class FileuploadController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("upload1")
+   @RequestMapping("upload1")
    public String upload(HttpServletRequest request,
 		   @RequestParam("description") String description,
 		   @RequestParam("file") MultipartFile file)throws Exception
