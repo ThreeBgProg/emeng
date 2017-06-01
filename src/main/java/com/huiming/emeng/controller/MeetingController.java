@@ -6,9 +6,14 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.model.Meeting;
 import com.huiming.emeng.service.MeetingService;
-
+/**
+ * 会议模块
+ * @author zhiwei
+ *
+ */
 @Controller
 public class MeetingController {
 
@@ -16,6 +21,7 @@ public class MeetingController {
 	private MeetingService meetingService;
 	
 	@RequestMapping("meetinsert")
+	@MappingDescription("添加会议信息")
 	public String insert(Meeting meeting,Model model){
 		
 		int result = meetingService.insert(meeting);
@@ -24,6 +30,7 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("meetinsertSel")
+	@MappingDescription("添加会议信息")
 	public String meetinginsertSelect(Meeting meeting,Model model){
 		
 		int result = meetingService.insertSelective(meeting);
@@ -32,6 +39,7 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("meetdelPK")
+	@MappingDescription("根据id删除会议信息")
 	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		int result = meetingService.deleteByPrimaryKey(id);
@@ -40,6 +48,7 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("meetupdByPKS")
+	@MappingDescription("根据id更新会议信息")
 	public String updateByPrimaryKeySelective(Meeting meeting,Model model){
 		
 		int result = meetingService.updateByPrimaryKeySelective(meeting);
@@ -56,6 +65,7 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("meetupdByPK")
+	@MappingDescription("根据id更新会议信息")
 	public String updateByPrimaryKey(Meeting meeting ,Model model){
 		
 		int result = meetingService.updateByPrimaryKey(meeting);
@@ -64,6 +74,7 @@ public class MeetingController {
 	}
 	
 	@RequestMapping("meetSelByPK")
+	@MappingDescription("根据id查找会议信息")
 	public String selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		Meeting meeting = meetingService.selectByPrimaryKey(id);

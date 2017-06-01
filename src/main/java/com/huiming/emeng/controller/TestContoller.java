@@ -5,6 +5,7 @@ import com.huiming.emeng.service.NavigationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.common.CustomException;
 import com.huiming.emeng.common.CustomException.UnauthorizedError;
@@ -50,4 +51,11 @@ public class TestContoller {
 	public String testException() {
 		throw CustomException.genException(UnauthorizedError.class, "错误消息");
 	}
+	
+	@RequestMapping("/test1")
+	@ResponseBody
+	public String test1() {
+		return "fileupload";
+	}
+	
 }

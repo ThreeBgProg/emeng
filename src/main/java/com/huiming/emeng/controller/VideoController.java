@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.model.Video;
 import com.huiming.emeng.service.VideoService;
 
@@ -31,14 +32,6 @@ public class VideoController {
 	@Autowired
 	private VideoService videoService;
 	
-	/**
-	 * 文件上传
-	 * @param request
-	 * @param description
-	 * @param file
-	 * @return
-	 * @throws Exception
-	 */
 	
 	@RequestMapping("videofileupload")
 	public String fileUpload(){
@@ -48,6 +41,7 @@ public class VideoController {
 	
 	
    @RequestMapping("videoupload")
+   @MappingDescription("视频上传")
    public String upload(HttpServletRequest request,
 		   @RequestParam("description") String description,
 		   @RequestParam("file") MultipartFile file)throws Exception
@@ -75,6 +69,7 @@ public class VideoController {
    }
 
 	@RequestMapping("videodownload")
+	@MappingDescription("视频下载")
 	public ResponseEntity<byte[]> download(HttpServletRequest request,
 			@RequestParam("filename") String filename,
 			Model model)throws Exception
@@ -88,15 +83,9 @@ public class VideoController {
 		 return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),    
 	                headers, HttpStatus.CREATED);
 	}
-	/**
-	 * 根据主键查找id
-	 * @param request
-	 * @param id
-	 * @param model
-	 * @return
-	 * @throws Exception
-	 */
+
 	@RequestMapping("selectvideo")
+	@MappingDescription("根据主键查找id删除视频")
 	public String selectByPrimaryKey(HttpServletRequest request,
 			@RequestParam("id") Integer id,Model model)throws Exception{
 		Video video = videoService.selectByPrimaryKey(id);
@@ -104,39 +93,27 @@ public class VideoController {
 		System.out.println(video);
 		return "userInfo";
 	}
-	/**
-	 * 全部字段更新
-	 * @param video
-	 * @param model
-	 * @return
-	 */
+
 	@RequestMapping("videoupdByPK")
+	@MappingDescription("全部字段更新")
 	public String updateByPrimaryKey(Video video,Model model){
 		
 		int result = videoService.updateByPrimaryKey(video);
 		System.out.println("您更新了"+result+"条视频数据");
 		return null;
 	}
-	/**
-	 * 选择字段更新
-	 * @param video
-	 * @param model
-	 * @return
-	 */
+
 	@RequestMapping("videoupdByPKS")
+	@MappingDescription("选择字段更新")
 	public String updateByPrimaryKeySelective(Video video ,Model model){
 		int result = videoService.updateByPrimaryKeySelective(video);
 		System.out.println("您更新了"+result+"条视频数据");
 		return null;
 	}
 	
-	/**
-	 * 根据课程id查找所有
-	 * @param lesson
-	 * @param model
-	 * @return
-	 */
+
 	@RequestMapping("videoselectByle")
+	@MappingDescription("根据课程id查找所有")
 	public String selectBylesson(@RequestParam("lesson") Integer lesson,Model model){
 		
 		List<Video> lists = videoService.selectBylesson(lesson);
@@ -145,13 +122,9 @@ public class VideoController {
 		return null;
 	}
 	
-	/**
-	 * 根据章节id查找所有
-	 * @param chapter
-	 * @param model
-	 * @return
-	 */
+
 	@RequestMapping("videoselectBycha")
+	@MappingDescription("根据章节id查找所有")
 	public String selectBychapter(@RequestParam("lesson") Integer chapter,Model model){
 		
 		List<Video> lists = videoService.selectBylesson(chapter);
@@ -161,6 +134,7 @@ public class VideoController {
 	}
 	
 	@RequestMapping("videodelByPK")
+	@MappingDescription("根据id删除视频")
 	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		int result = videoService.deleteByPrimaryKey(id);
@@ -169,6 +143,7 @@ public class VideoController {
 	}
 	
    @RequestMapping("videoinsSelect")
+   @MappingDescription("添加视频")
    public String insertSelect(HttpServletRequest request,
 		   @RequestParam("description") String description,
 		   @RequestParam("file") MultipartFile file)throws Exception
