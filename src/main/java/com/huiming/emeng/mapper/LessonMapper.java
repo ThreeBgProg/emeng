@@ -2,6 +2,8 @@ package com.huiming.emeng.mapper;
 
 import com.huiming.emeng.model.Lesson;
 
+import java.util.List;
+
 public interface LessonMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,7 @@ public interface LessonMapper {
     int updateByPrimaryKeySelective(Lesson record);
 
     int updateByPrimaryKey(Lesson record);
+
+    //返回所有课程
+    List<Lesson> selectAllLesson();
 }

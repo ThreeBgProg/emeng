@@ -1,5 +1,6 @@
 package com.huiming.emeng.controller;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Navigation;
 import com.huiming.emeng.model.Passage;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
+ * 非课程文章显示
  * Created by LeoMs on 2017/5/23 0023.
  */
 @Controller
@@ -46,8 +48,9 @@ public class PassagePageController {
      * @param pageSize
      * @return
      */
-    @RequestMapping("/passage/{passageType}/list")
-    public String passagePageList(ModelMap modelMap, @PathVariable("passageType") Integer passageType,
+    @MappingDescription("非课程文章分页查询")
+    @RequestMapping("/{passageType}/passagelist")
+    public String passagePageList(ModelMap modelMap, @PathVariable("passageType") Byte passageType,
                                   @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                   @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
         //添加导航表模块
@@ -58,7 +61,7 @@ public class PassagePageController {
         List<Passage> recommendList = passageRecommendService.getRecommondPassageList();
 
         modelMap.put("navigationList", navigationList);
-        modelMap.put("pagingResult", passagePage);
+        modelMap.put("passagePage", passagePage);
         modelMap.put("recommendList", recommendList);
         return "passage/list";
     }
@@ -70,8 +73,9 @@ public class PassagePageController {
      * @param passageId
      * @return
      */
-    @RequestMapping("/passage/{passageType}/{passageId}")
-    public String passagePageList(ModelMap modelMap, @PathVariable("passageType") Integer passageType,
+    @MappingDescription("非课程文章正文页面")
+    @RequestMapping("/{passageType}/{passageId}/passage")
+    public String passagePageList(ModelMap modelMap, @PathVariable("passageType") Byte passageType,
                                   @PathVariable("passsageId") Integer passageId){
         //添加导航表模块
         List<Navigation> navigationList = navigationService.selectAllNavigation();

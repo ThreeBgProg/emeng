@@ -9,7 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * 文章正文显示service处理
+ * 非课程文章正文显示service处理
  * Created by LeoMs on 2017/5/28 0028.
  */
 @Service
@@ -18,10 +18,29 @@ public class PassageMainService {
     @Autowired
     private PassageMapper passageMapper;
 
-    public List<Passage> getPassageMainList(Integer passageType, Integer passageId){
+    public List<Passage> getPassageMainList(Byte passageType, Integer passageId){
 
-        List<Passage> passageList = new ArrayList<Passage>();
+        List<Passage> allPassageList = passageMapper.selectAllPassageByPassageType(passageType);
+        Passage passage = passageMapper.selectByPrimaryKey(passageId);
+        List<Passage> threePassage = new ArrayList<Passage>();
+        int i = 0;
+        int allPassageLength = allPassageList.size();
+        for(Passage passage1 : allPassageList){
+            if(passage.equals(passage1)) break;
+            i++;
+        }
+        if(0 == i){
+            threePassage.add(0,null);
+        } else {
+            threePassage.add(0,allPassageList.get(i - 1));
+        }
+        threePassage.add(1,passage);
+        if(i >= allPassageLength-1){
+            threePassage.add(2,null);
+        } else {
+            threePassage.add(2,allPassageList.get(i + 1));
+        }
+        return threePassage;
 
-        return null;
     }
 }

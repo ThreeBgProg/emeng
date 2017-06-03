@@ -1,5 +1,6 @@
 package com.huiming.emeng.service;
 
+import com.huiming.emeng.common.LessonPageInfo;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.PassageMapper;
 import com.huiming.emeng.model.Passage;
@@ -15,12 +16,12 @@ public class PassagePageService {
     @Autowired
     private PassageMapper passageMapper;
 
-    //根据分页信息返回文章分页对象
-    public Pager<Passage> getPassagePage(Integer passageType,Integer pageNum,Integer pageSize){
+    //根据分页信息返回非课程文章分页对象
+    public Pager<Passage> getPassagePage(Byte passageType,Integer pageNum,Integer pageSize){
 
 
         //总记录数
-        Integer totalRecord = passageMapper.selectByPassageType(pageSize);
+        Integer totalRecord = passageMapper.selectByPassageType(passageType);
         //总页数
         Integer totalPage = totalRecord / pageSize;
         if(totalRecord % pageSize != 0){
@@ -36,5 +37,32 @@ public class PassagePageService {
         return pager;
     }
 
+    //根据分页信息返回课程文章分页对象
+    public Pager<Passage> getLessonPassagePage(LessonPageInfo lessonPageInfo){
+
+        Integer pageNum = lessonPageInfo.getPageNum();
+        Integer pageSize = lessonPageInfo.getPageSize();
+        Byte passageType = lessonPageInfo.getPassageType();
+
+        //总记录数
+        Integer totalRecord = passageMapper.selectCountByLessonIdAndChapterIdAndPassageType(
+                lessonPageInfo.getLessonId(),
+                lessonPageInfo.getChapterId(),
+                passageType);
+        //总页数
+        Integer totalPage = totalRecord / pageSize;
+        if(totalRecord % pageSize != 0){
+            totalPage++;
+        }
+        if(pageNum > totalPage){
+            pageNum = totalPage;
+        }
+        //起始索引
+        Integer fromIndex = (pageNum - 1) * pageSize;
+
+        Pager<Passage> pager = new Pager<Passage>(pageSize, pageNum, totalRecord,
+                totalPage, passageMapper.selectLessonPassageWithPagesizeFromFromindex(lessonPageInfo));
+        return pager;
+    }
 
 }

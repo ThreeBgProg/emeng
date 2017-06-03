@@ -5,50 +5,54 @@ package com.huiming.emeng.common;
  */
 public class PassageType {
 
-    public static final Integer OTHER = 0;
+    public static final Byte OTHER = 0;
 
-    public static final Integer ZUIXINZILIAO = 1;
+    public static final Byte ZUIXINZILIAO = 1;
 
-    public static final Integer SIZHENGDONGTAI = 2;
+    public static final Byte SIZHENGDONGTAI = 2;
 
-    public static final Integer MAYUANTOUTIAO = 3;
+    public static final Byte MAYUANTOUTIAO = 3;
 
-    public static final Integer JINGDIANZUOJIA = 4;
+    public static final Byte JINGDIANZUOJIA = 4;
 
-    public static final Integer LINGDAOJIANGHUA = 5;
+    public static final Byte LINGDAOJIANGHUA = 5;
 
-    public static final Integer TINGBUWENJIAN = 6;
+    public static final Byte TINGBUWENJIAN = 6;
 
-    public static final Integer TONGZHIGONGGAO = 7;
+    public static final Byte TONGZHIGONGGAO = 7;
 
-    public static final Integer GAIGEDONGTAI = 8;
+    public static final Byte GAIGEDONGTAI = 8;
 
-    public static final Integer XUEKEJIANSHE = 9;
+    public static final Byte XUEKEJIANSHE = 9;
 
-    public static final Integer PINGGUPAIHANG = 10;
+    public static final Byte PINGGUPAIHANG = 10;
 
-    public static final Integer KEYANQIANYAN = 11;
+    public static final Byte KEYANQIANYAN = 11;
 
-    public static final Integer REDIANTUIJIAN = 12;
+    public static final Byte REDIANTUIJIAN = 12;
 
-    public static final Integer KECHENGJICHU = 13;
+    public static final Byte KECHENGJICHU = 13;
 
-    public static final Integer KECHENGGAILUN = 14;
+    public static final Byte KECHENGGAILUN = 14;
 
-    public static final Integer KECHENGGANGYAO = 15;
+    public static final Byte KECHENGYUANLI = 15;
 
-    public static final Integer LILUNPOUXI = 16;
+    public static final Byte KECHENGGANGYAO = 16;
 
-    public static final Integer CANKAOZILIAO = 17;
+    public static final Byte LILUNPOUXI = 17;
 
-    public static final Integer ANLIZIYUAN = 18;
+    public static final Byte CANKAOZILIAO = 18;
 
-    public static final Integer JIAOANTUIJIAN = 19;
+    public static final Byte ANLIZIYUAN = 19;
 
-    public static final Integer JINGPINKEJIAN = 20;
+    public static final Byte JIAOANTUIJIAN = 20;
 
-    public static final Integer YUEDUSHUMU = 21;
+    public static final Byte JINGPINKEJIAN = 21;
 
-    public static final Integer JINGPINZAIXIAN = 22;
+    public static final Byte SHIPINZIYUAN = 22;
+
+    public static final Byte YUEDUSHUMU = 23;
+
+    public static final Byte JINGPINZAIXIAN = 24;
 
 }

@@ -1,5 +1,6 @@
 package com.huiming.emeng.mapper;
 
+import com.huiming.emeng.common.LessonPageInfo;
 import com.huiming.emeng.model.Passage;
 import org.apache.ibatis.annotations.Param;
 
@@ -7,8 +8,6 @@ import java.util.List;
 
 public interface PassageMapper {
     int deleteByPrimaryKey(Integer id);
-
-    int insert(Passage record);
 
     int insertSelective(Passage record);
 
@@ -22,31 +21,56 @@ public interface PassageMapper {
 
     /**
      *主页显示的文章
-     * @param passageType 文章在文章表里面对应类型
-     * @param showPassageNums 在主页显示条数
-     * @return
      */
-    List<Passage> selectByTypeAndDescendWithTime(@Param("passageType") Integer passageType, @Param("showPassageNums") Integer showPassageNums);
+    List<Passage> selectByTypeAndDescendWithTime(@Param("passageType") Byte passageType, @Param("showPassageNums") Integer showPassageNums);
 
     /**
      * 返回某类文章在数据库中的数目，service调用时需要考虑返回值为null，默认设置为0
-     * @param passageType
-     * @return
      */
-    int selectByPassageType(Integer passageType);
+    int selectByPassageType(Byte passageType);
 
     /**
      * 根据文章类型查询第几页数据
-     * @param passageType 文章的类型
-     * @param fromIndex 从第几条开始
-     * @param pageSize 每页显示个数
-     * @return
      */
-    List<Passage> selectPassageWithPagesizeFromFromindex(@Param("passageType") Integer passageType, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
+    List<Passage> selectPassageWithPagesizeFromFromindex(@Param("passageType") Byte passageType, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
     /**
      * 返回热点推荐文章，默认根据推荐等级正序排列，返回7条数据
-     * @return
      */
     List<Passage> selectRecommendPassageList();
+
+    /**
+     * 返回章节下一级所对应模块，默认显示前7条数据
+     */
+    List<Passage> selectPassageByLessonIdAndChapterIdAndPassageType(
+                                                    @Param("lessonId") Integer lessonId,
+                                                    @Param("chapterId") Integer chapterId,
+                                                    @Param("passageType") Byte passageType);
+
+    /**
+     * 查询某章某分块文章数目
+     */
+    Integer selectCountByLessonIdAndChapterIdAndPassageType(@Param("lessonId") Integer lessonId,
+                                                            @Param("chapterId") Integer chapterId,
+                                                            @Param("passageType") Byte passageType);
+
+    /**
+     * 根据课程分页信息查询课程文章某页
+     */
+    List<Passage> selectLessonPassageWithPagesizeFromFromindex(LessonPageInfo lessonPageInfo);
+
+    /**
+     * 根据文章类型查询该类型所有文章
+     */
+    List<Passage> selectAllPassageByPassageType(Byte passageType);
+
+    /**
+     * 模糊查询课程文章标题
+     */
+    List<Passage> selectLessonPassageByTitle(@Param("title")String title, @Param("lessonId") Integer lessonId);
+
+    /**
+     * 模糊查询非课程文章标题
+     */
+    List<Passage> selectPassageByPassageType(@Param("title")String title, @Param("passageType") Byte passageType);
 }

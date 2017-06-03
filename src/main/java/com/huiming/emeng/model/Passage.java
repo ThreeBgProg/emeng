@@ -1,8 +1,9 @@
 package com.huiming.emeng.model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Passage {
+public class Passage implements Serializable{
     private Integer id;
 
     private String titile;
@@ -121,5 +122,32 @@ public class Passage {
 
     public void setContent(String content) {
         this.content = content == null ? null : content.trim();
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        Passage passage = (Passage) o;
+        if(((Passage) o).getId().intValue() == id.intValue()) return true;
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        int result = id != null ? id.hashCode() : 0;
+        result = 31 * result + (titile != null ? titile.hashCode() : 0);
+        result = 31 * result + (author != null ? author.hashCode() : 0);
+        result = 31 * result + (link != null ? link.hashCode() : 0);
+        result = 31 * result + (publishTime != null ? publishTime.hashCode() : 0);
+        result = 31 * result + (type != null ? type.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (annex != null ? annex.hashCode() : 0);
+        result = 31 * result + (recommend != null ? recommend.hashCode() : 0);
+        result = 31 * result + (lesson != null ? lesson.hashCode() : 0);
+        result = 31 * result + (chapter != null ? chapter.hashCode() : 0);
+        result = 31 * result + (content != null ? content.hashCode() : 0);
+        return result;
     }
 }

@@ -205,7 +205,7 @@ CREATE TABLE `passage` (
   `link` varchar(128) DEFAULT '' COMMENT '文章来源链接（原文链接）',
   `publish_time` datetime NOT NULL COMMENT '发布时间',
   `content` text NOT NULL COMMENT '文章内容',
-  `type` tinyint(5) NOT NULL DEFAULT '0' COMMENT '文章所属类别：\r\n0-其他（未知），\r\n1-最新资料，\r\n2-思政动态，\r\n3-马院头条，\r\n4-经典作家，\r\n5-领导讲话，\r\n6-厅部文件，\r\n7-通知公告，\r\n8-改革动态，\r\n9学科建设，\r\n10-评估排行，\r\n11-科研前沿，\r\n12-热点推荐，\r\n13-课程基础，\r\n14-课程概论，\r\n15-课程纲要，\r\n16-理论剖析，\r\n17-参考资料，\r\n18-案例资源，\r\n19-教案推荐，\r\n20-精品课件，\r\n21-阅读书目，\r\n22-精品在线',
+  `type` tinyint(5) NOT NULL DEFAULT '0' COMMENT '文章所属类别：\r\n0-其他（未知），\r\n1-最新资料，\r\n2-思政动态，\r\n3-马院头条，\r\n4-经典作家，\r\n5-领导讲话，\r\n6-厅部文件，\r\n7-通知公告，\r\n8-改革动态，\r\n9学科建设，\r\n10-评估排行，\r\n11-科研前沿，\r\n12-热点推荐，\r\n13-课程基础，\r\n14-课程概论，\r\n15-课程原理，\r\n16-课程纲要，\r\n17-理论剖析，\r\n18-参考资料，\r\n19-案例资源，\r\n20-教案推荐，\r\n21-精品课件，\r\n22-阅读书目，\r\n23-精品在线',
   `state` tinyint(2) NOT NULL DEFAULT '0' COMMENT '文章状态：0-待审核，1已通过，2-后台发布文章（默认通过），3：保留',
   `annex` varchar(255) DEFAULT '' COMMENT '附件路径',
   `recommend` int(11) DEFAULT '0' COMMENT '推荐（展示按序号从小到大排序）：0-不推荐，1-999-推荐等级',

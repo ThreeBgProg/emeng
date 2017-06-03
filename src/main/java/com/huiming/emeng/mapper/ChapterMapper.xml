@@ -16,6 +16,13 @@
     from chapter
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAllChapterFromLesson" resultMap="Base_Column_List">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM chapter
+    WHERE lesson = #{lessonId,jdbcType=INTEGER}
+    ORDER BY number ASC
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from chapter
     where id = #{id,jdbcType=INTEGER}
