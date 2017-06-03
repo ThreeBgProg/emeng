@@ -2,8 +2,8 @@ package com.huiming.emeng.model;
 
 public class RolePermission {
 	private Integer id;
-	private String roleId;
-	private String permissionId;
+	private Integer roleId;
+	private Integer permissionId;
 
 	public Integer getId() {
 		return id;
@@ -13,19 +13,19 @@ public class RolePermission {
 		this.id = id;
 	}
 
-	public String getRoleId() {
+	public Integer getRoleId() {
 		return roleId;
 	}
 
-	public void setRoleId(String roleId) {
+	public void setRoleId(Integer roleId) {
 		this.roleId = roleId;
 	}
 
-	public String getPermissionId() {
+	public Integer getPermissionId() {
 		return permissionId;
 	}
 
-	public void setPermissionId(String permissionId) {
+	public void setPermissionId(Integer permissionId) {
 		this.permissionId = permissionId;
 	}
 

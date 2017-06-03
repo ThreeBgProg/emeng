@@ -3,7 +3,7 @@
 <mapper namespace="com.huiming.emeng.mapper.MeetingMapper">
   <resultMap id="BaseResultMap" type="com.huiming.emeng.model.Meeting">
     <id column="id" jdbcType="INTEGER" property="id" />
-    <result column="title" jdbcType="VARCHAR" property="title" />
+    <result column="title" jdbcType="VARCHAR" property="title" /> 
     <result column="link" jdbcType="VARCHAR" property="link" />
     <result column="type" jdbcType="BIT" property="type" />
     <result column="release_date" jdbcType="DATE" property="releaseDate" />

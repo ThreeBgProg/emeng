@@ -3,7 +3,8 @@ package com.huiming.emeng.mapper;
 import com.huiming.emeng.model.Meeting;
 
 public interface MeetingMapper {
-    int deleteByPrimaryKey(Integer id);
+    
+	int deleteByPrimaryKey(Integer id);
 
     int insert(Meeting record);
 

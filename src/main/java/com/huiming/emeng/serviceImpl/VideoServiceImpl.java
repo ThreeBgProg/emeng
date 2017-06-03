@@ -1,5 +1,7 @@
 package com.huiming.emeng.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +18,7 @@ public class VideoServiceImpl implements VideoService {
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		// TODO Auto-generated method stub
-		return 0;
+		return videoMapper.deleteByPrimaryKey(id);
 	}
 
 	//上传视屏资源
@@ -25,10 +27,10 @@ public class VideoServiceImpl implements VideoService {
 		return videoMapper.insert(record);
 	}
 
-	@Override
+	//选择字段上传视频
 	public int insertSelective(Video record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return videoMapper.insertSelective(record);
 	}
 
 	@Override
@@ -37,16 +39,30 @@ public class VideoServiceImpl implements VideoService {
 		return videoMapper.selectByPrimaryKey(id);
 	}
 
+	//选择性字段更新
 	@Override
 	public int updateByPrimaryKeySelective(Video record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return videoMapper.updateByPrimaryKeySelective(record);
 	}
 
+	//全部字段更新
 	@Override
 	public int updateByPrimaryKey(Video record) {
 		// TODO Auto-generated method stub
-		return 0;
+		return videoMapper.updateByPrimaryKey(record);
+	}
+
+	//根据课程id查找
+	public List<Video> selectBylesson(Integer lesson) {
+		// TODO Auto-generated method stub
+		return videoMapper.selectBylesson(lesson);
+	}
+
+	//根据章节id查找
+	public List<Video> selectBychapter(Integer chapter) {
+		// TODO Auto-generated method stub
+		return videoMapper.selectBychapter(chapter);
 	}
 	
 	

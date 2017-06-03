@@ -1,7 +1,6 @@
 package config;
 
 import java.nio.charset.Charset;
-import java.security.Provider.Service;
 import java.util.Arrays;
 import java.util.List;
 
@@ -10,6 +9,7 @@ import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
+import org.springframework.context.annotation.ImportResource;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
@@ -24,7 +24,6 @@ import org.springframework.web.servlet.ViewResolver;
 import org.springframework.web.servlet.config.annotation.DefaultServletHandlerConfigurer;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
 /**
@@ -38,6 +37,7 @@ import org.springframework.web.servlet.view.InternalResourceViewResolver;
 @ComponentScan(basePackages={ "com.huiming.emeng.controller"},
 		includeFilters={@Filter(type = FilterType.ANNOTATION, value = Controller.class)})
 @PropertySource("classpath:application.properties")
+@ImportResource("classpath:application.xml")
 public class WebConfig extends WebMvcConfigurerAdapter {
 	
 	/**

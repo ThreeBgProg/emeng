@@ -1,5 +1,7 @@
 package com.huiming.emeng.mapper;
 
+import java.util.List;
+
 import com.huiming.emeng.model.Video;
 
 public interface VideoMapper {
@@ -11,6 +13,10 @@ public interface VideoMapper {
     int insertSelective(Video record);
 
     Video selectByPrimaryKey(Integer id);
+    //课程id
+    List<Video> selectBylesson(Integer lesson);
+    //章节id
+    List<Video> selectBychapter(Integer chapter);
 
     int updateByPrimaryKeySelective(Video record);
 
