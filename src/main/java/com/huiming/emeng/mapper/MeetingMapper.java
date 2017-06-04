@@ -1,5 +1,8 @@
 package com.huiming.emeng.mapper;
 
+import java.util.List;
+import java.util.Map;
+
 import com.huiming.emeng.model.Meeting;
 
 public interface MeetingMapper {
@@ -17,4 +20,6 @@ public interface MeetingMapper {
     int updateByPrimaryKeyWithBLOBs(Meeting record);
 
     int updateByPrimaryKey(Meeting record);
+    
+    public List<Meeting> findMeeting(Map<String, String> map);
 }

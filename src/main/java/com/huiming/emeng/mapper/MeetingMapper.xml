@@ -142,4 +142,9 @@
       annex = #{annex,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findMeeting" parameterType="Map" resultMap="ResultMapWithBLOBs">
+       select * from meeting where title like #{title}
+  </select>
+  
 </mapper>

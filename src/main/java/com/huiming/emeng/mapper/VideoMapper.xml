@@ -116,4 +116,9 @@
       chapter = #{chapter,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findVideo" parameterType="Map" resultMap="BaseResultMap">
+      select * from video where name like #(name,jdbcType=VARCHAR)
+  </select>
+  
 </mapper>

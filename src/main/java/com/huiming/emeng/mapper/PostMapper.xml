@@ -156,5 +156,9 @@
     where id = #{id,jdbcType=INTEGER}
   </update>
   
+  <select id="findPost" parameterType="Map" resultMap="ResultMapWithBLOBs">
+      select * from post where titile like #{titile,jdbcType=VARCHAR}
+  </select>
+  
   
 </mapper>

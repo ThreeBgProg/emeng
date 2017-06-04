@@ -3,11 +3,14 @@ package com.huiming.emeng.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.huiming.emeng.mapper.ApplyMapper;
 import com.huiming.emeng.model.Apply;
 import com.huiming.emeng.service.ApplyService;
 
+
+@Service("applyService")
 public class ApplyServiceImpl implements ApplyService {
 
 	@Autowired

@@ -1,6 +1,7 @@
 package com.huiming.emeng.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.huiming.emeng.model.Teacher;
 
@@ -20,4 +21,6 @@ public interface TeacherMapper {
     int updateByPrimaryKey(Teacher record);
     
     List<Teacher> selectSelective(Teacher record);
+    
+    public List<Teacher> findTeacher(Map<String, String> map);
 }

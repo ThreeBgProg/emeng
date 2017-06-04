@@ -1,6 +1,7 @@
 package com.huiming.emeng.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.huiming.emeng.model.Video;
 
@@ -21,4 +22,6 @@ public interface VideoMapper {
     int updateByPrimaryKeySelective(Video record);
 
     int updateByPrimaryKey(Video record);
+    
+    public List<Video> findVideo(Map<String, String> map);
 }

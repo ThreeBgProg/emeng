@@ -170,5 +170,22 @@
 			</if>
 		</where>
 	</select>
+	
+	<select id="findTeacher" parameterType="Map" resultMap="BaseResultMap">
+	   select * from teacher
+        <trim prefix="where" prefixOverrides="and/or">
+        <!--  第一个前缀，把第一个and或者or替换-->
+	       <if test="name!=null">
+	            name like #{name,jdbcType=VARCHAR}<!-- 这里如果加上and就会报错 -->
+	       </if>
+	       <if test="direction!=null">
+	             or direction like #{direction,jdbcType=VARCHAR}
+	       </if>
+	       <if test="subject!=null">
+	             or subject like #{subject,jdbcType=VARCHAR}
+	       </if>
+	       
+       </trim>
+	</select>
 
 </mapper>

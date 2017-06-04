@@ -4,6 +4,7 @@ import com.huiming.emeng.model.Passage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 public interface PassageMapper {
     int deleteByPrimaryKey(Integer id);
@@ -49,4 +50,6 @@ public interface PassageMapper {
      * @return
      */
     List<Passage> selectRecommendPassageList();
+    
+    public List<Passage> fingPassage(Map<String, String> map);
 }
