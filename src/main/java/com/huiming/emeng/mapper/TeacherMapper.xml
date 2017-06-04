@@ -143,8 +143,6 @@
 		school_id = #{schoolId,jdbcType=INTEGER}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-
-
 	<select id="selectSelective" parameterType="com.huiming.emeng.model.Teacher"
 		resultMap="BaseResultMap">
 		select
