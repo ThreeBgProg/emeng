@@ -2,6 +2,8 @@ package com.huiming.emeng.mapper;
 
 import com.huiming.emeng.model.Chapter;
 
+import java.util.List;
+
 public interface ChapterMapper {
     int deleteByPrimaryKey(Integer id);
 
@@ -14,4 +16,6 @@ public interface ChapterMapper {
     int updateByPrimaryKeySelective(Chapter record);
 
     int updateByPrimaryKey(Chapter record);
+
+    List<Chapter> selectAllChapterFromLesson(Integer lessonId);
 }

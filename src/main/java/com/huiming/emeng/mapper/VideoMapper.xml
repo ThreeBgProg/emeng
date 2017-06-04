@@ -18,6 +18,19 @@
     from video
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectBylesson" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select 
+  <include refid="Base_Column_List" />
+  from video
+  where lesson=#{lesson,jdbcType=INTEGER}
+  </select>
+    <select id="selectBychapter" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+  select 
+  <include refid="Base_Column_List" />
+  from video
+  where chapter=#{chapter,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from video
     where id = #{id,jdbcType=INTEGER}

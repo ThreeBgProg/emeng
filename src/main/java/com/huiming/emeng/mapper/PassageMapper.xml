@@ -36,17 +36,15 @@
     <include refid="Base_Column_List" />
     FROM passage psg
     <where>
-      <if test="passageType != null">
+      <if test="passageType != null and showPassageNums != null" >
         psg.state = 1 OR psg.state = 2 AND psg.type = #{passageType}
-      </if>
-      ORDER BY psg.publish_time DESC
-      <if test="showPassageNums != null">
+        ORDER BY psg.publish_time DESC
         limit 0,#{showPassageNums}
       </if>
     </where>
     
   </select>
-  <select id="selectByPassageType" parameterType="Integer" resultType="Integer">
+  <select id="selectByPassageType" parameterType="Byte" resultType="Integer">
     SELECT count(*)
     FROM passage
     WHERE type = #{passageType}
@@ -67,26 +65,88 @@
     SELECT
     <include refid="Base_Column_List" />
     FROM passage psg
-    WHERE psg.state = 1 OR psg.state = 2 AND psg.type=12 AND psg.recommend>0
+    WHERE
+    psg.state = 1 OR psg.state = 2 AND psg.type=12 AND psg.recommend>0
+
     ORDER BY psg.recommend ASC
     limit 0,7
+  </select>
+  <select id="selectAllPassageByPassageType" parameterType="Byte" resultMap="ResultMapWithBLOBs">
+    select
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from passage psg
+    where psg.type = #{passageType}
+    ORDER BY psg.publish_time DESC
+  </select>
+  <select id="selectPassageByLessonIdAndChapterIdAndPassageType" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM passage psg
+    <where>
+      <if test="lessonId != null and chapterId != null and passageType != null">
+        psg.lesson = #{lessonId} AND psg.chapter = #{chapterId} AND psg.type = #{passageType}
+      </if>
+    </where>
+    limit 0,7
+  </select>
+  <select id="selectCountByLessonIdAndChapterIdAndPassageType" resultType="Integer">
+    SELECT count(*)
+    FROM passage psg
+    <where>
+      <if test="lessonId != null and chapterId != null and passageType != null">
+        psg.lesson = #{lessonId} AND psg.chapter = #{chapterId} AND psg.type = #{passageType}
+      </if>
+    </where>
+  </select>
+  <select id="selectLessonPassageWithPagesizeFromFromindex" parameterType="com.huiming.emeng.common.LessonPageInfo" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM passage psg
+    <where>
+    <if test="lessonId != null and chapterId != null and passageType != null and fromIndex != null and pageSize != null">
+      psg.state = 1
+      OR psg.state = 2
+      AND psg.lesson = #{lessonId}
+      AND psg.chapter = #{chapterId}
+      AND psg.type = #{passageType}
+      limit #{fromIndex},#{pageSize}
+    </if>
+    </where>
+  </select>
+  <select id="selectLessonPassageByTitle" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM passage
+    <where>
+      <if test="lessonId != null">
+        lesson = #{lessonId}
+      </if>
+      <if test="title != null">
+        AND title LIKE concat(concat('%',#{title}),'%')
+      </if>
+    </where>
+    ORDER BY publish_time DESC
+  </select>
+  <select id="selectPassageByPassageType" resultMap="BaseResultMap">
+  SELECT
+  <include refid="Base_Column_List" />
+  FROM passage psg
+  <where>
+    <if test="passageType != null">
+     psg.type  = #{passageType}
+    </if>
+    <if test="title != null">
+      AND title LIKE concat(concat('%',#{title}),'%')
+    </if>
+  </where>
+  ORDER BY publish_time DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from passage
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.huiming.emeng.model.Passage">
-    insert into passage (id, titile, author, 
-      link, publish_time, type, 
-      state, annex, recommend, 
-      lesson, chapter, content
-      )
-    values (#{id,jdbcType=INTEGER}, #{titile,jdbcType=VARCHAR}, #{author,jdbcType=VARCHAR}, 
-      #{link,jdbcType=VARCHAR}, #{publishTime,jdbcType=TIMESTAMP}, #{type,jdbcType=TINYINT}, 
-      #{state,jdbcType=TINYINT}, #{annex,jdbcType=VARCHAR}, #{recommend,jdbcType=INTEGER}, 
-      #{lesson,jdbcType=INTEGER}, #{chapter,jdbcType=INTEGER}, #{content,jdbcType=LONGVARCHAR}
-      )
-  </insert>
   <insert id="insertSelective" parameterType="com.huiming.emeng.model.Passage">
     insert into passage
     <trim prefix="(" suffix=")" suffixOverrides=",">

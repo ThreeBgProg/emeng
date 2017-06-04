@@ -1,5 +1,6 @@
 package com.huiming.emeng.controller;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.common.PassageType;
 import com.huiming.emeng.service.HomePagePassageService;
 import com.huiming.emeng.service.NavigationService;
@@ -29,6 +30,7 @@ public class HomePageController {
      * @param model 存放主页所需要的实例化对象
      * @return 返回主页页面
      */
+    @MappingDescription("主页所有需要用到的对象")
     @RequestMapping("/")
     public String homePage(ModelMap model){
 
@@ -44,7 +46,7 @@ public class HomePageController {
         //其他模块你们看着添加
 
 
-        return "homePage";
+        return "homepage";
     }
 
 
