@@ -7,7 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import com.huiming.emeng.mapper.ApplyMapper;
 import com.huiming.emeng.model.Apply;
 import com.huiming.emeng.service.ApplyService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class ApplyServiceImpl implements ApplyService {
 
 	@Autowired

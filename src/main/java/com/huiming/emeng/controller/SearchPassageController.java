@@ -30,7 +30,7 @@ public class SearchPassageController {
 
     @ResponseBody
     @MappingDescription("模糊查询非课程文章")
-    @RequestMapping("/lessonPassage/search/list")
+    @RequestMapping("/passage/search/list")
     public List<Passage> searchLessonPassage(@RequestParam("passageType") Byte passageType,
                                              @RequestParam("searchInfo") String searchInfo){
         return passageMapper.selectPassageByPassageType(searchInfo,passageType);
