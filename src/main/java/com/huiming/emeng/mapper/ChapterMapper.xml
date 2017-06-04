@@ -16,7 +16,7 @@
     from chapter
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="selectAllChapterFromLesson" resultMap="Base_Column_List">
+  <select id="selectAllChapterFromLesson" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
     FROM chapter
