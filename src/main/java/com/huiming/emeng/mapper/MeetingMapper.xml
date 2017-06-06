@@ -147,4 +147,8 @@
        select * from meeting where title like #{title}
   </select>
   
+  <select id="selectAllMeeting" resultMap="ResultMapWithBLOBs">
+   select * from meeting
+  </select>
+  
 </mapper>

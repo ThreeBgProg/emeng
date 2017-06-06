@@ -1,11 +1,15 @@
 package com.huiming.emeng.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.huiming.emeng.mapper.LinksMapper;
 import com.huiming.emeng.model.Links;
 import com.huiming.emeng.service.LinksService;
+
+import sun.awt.image.ImageWatched.Link;
 
 @Service("linksService")
 public class LinksServiceImpl implements LinksService {
@@ -47,6 +51,12 @@ public class LinksServiceImpl implements LinksService {
 	public int updateByPrimaryKey(Links record) {
 		// TODO Auto-generated method stub
 		return linksMapper.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public List<Link> selectAllLink() {
+		// TODO Auto-generated method stub
+		return linksMapper.selectAllLink();
 	}
 
 }

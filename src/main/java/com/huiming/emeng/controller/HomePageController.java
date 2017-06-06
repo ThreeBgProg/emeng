@@ -1,8 +1,13 @@
 package com.huiming.emeng.controller;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.common.PassageType;
 import com.huiming.emeng.service.HomePagePassageService;
+import com.huiming.emeng.service.LinksService;
+import com.huiming.emeng.service.MeetingService;
 import com.huiming.emeng.service.NavigationService;
+import com.huiming.emeng.service.PostService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -23,12 +28,19 @@ public class HomePageController {
     private NavigationService navigationService;
     @Autowired
     private HomePagePassageService homePagePassageService;
+    @Autowired
+    private LinksService linksService;
+    @Autowired
+    private PostService postService;
+    @Autowired
+    private MeetingService meetingService;
 
     /**
      * 主页
      * @param model 存放主页所需要的实例化对象
      * @return 返回主页页面
      */
+    @MappingDescription("主页所有需要用到的对象")
     @RequestMapping("/")
     public String homePage(ModelMap model){
 
@@ -41,10 +53,16 @@ public class HomePageController {
         model.put("dynamicList",homePagePassageService.selectByTypeAndDescendWithTime(PassageType.SIZHENGDONGTAI,12));
         //添加马院头条模块（马院头条type为3，在主页显示12条）
         model.put("headlineList",homePagePassageService.selectByTypeAndDescendWithTime(PassageType.MAYUANTOUTIAO,12));
+        //友情链接
+        model.put("linkList", linksService.selectAllLink());
+        //我有话说
+        model.put("postList", postService.selectAllPost());
+        //会议论坛
+        model.put("meeting", meetingService.selectAllMeeting());
         //其他模块你们看着添加
 
 
-        return "homePage";
+        return "homepage";
     }
 
 

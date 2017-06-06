@@ -16,6 +16,11 @@
     from lesson
     where id = #{id,jdbcType=INTEGER}
   </select>
+  <select id="selectAllLesson" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM lesson
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from lesson
     where id = #{id,jdbcType=INTEGER}

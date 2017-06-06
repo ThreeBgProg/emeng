@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.service.AdvertisementService;
 
@@ -22,21 +23,22 @@ public class AdvertisementController {
 	private AdvertisementService advertisementService;
 	
 	@RequestMapping("adverinsert")
+	@MappingDescription("添加广告")
 	public String insert(Advertisement advertisement,
-			Model model,
+			Model model, 
 			HttpServletRequest request,
-			@RequestParam("file") MultipartFile file)throws Exception{
+			@RequestParam("pic") MultipartFile pic)throws Exception{
 		
-		if(!file.isEmpty()){
+		if(!pic.isEmpty()){
 			   //上传文件路劲
 			   String path = request.getServletContext().getRealPath("/images/");
-			   String fileName = file.getOriginalFilename();   
+			   String fileName = pic.getOriginalFilename();   
 			   File filepath = new File(path,fileName);
 			   if(!filepath.getParentFile().exists()){
 				   filepath.getParentFile().mkdirs();
 			   }
-			   file.transferTo(new File(path+File.separator+fileName));
-			   advertisement.setPic(path+fileName);
+			   pic.transferTo(new File(path+File.separator+fileName));
+			   advertisement.setPic(path+fileName); 
 
 		}
 		
@@ -47,6 +49,7 @@ public class AdvertisementController {
 	}
 	
 	@RequestMapping("adverdelPK")
+	@MappingDescription("根据id删除广告")
 	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		int result = advertisementService.deleteByPrimaryKey(id);
 		System.out.println("删除啦"+result+"条广告");
@@ -54,19 +57,20 @@ public class AdvertisementController {
 	}
 	
 	@RequestMapping("adverinsertSel")
+	@MappingDescription("添加广告")
 	public String insertSelective(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
-			@RequestParam("file") MultipartFile file)throws Exception{
-		if(!file.isEmpty()){
+			@RequestParam("pic") MultipartFile pic)throws Exception{
+		if(!pic.isEmpty()){
 			   //上传文件路劲
 			   String path = request.getServletContext().getRealPath("/images/");
-			   String fileName = file.getOriginalFilename();   
+			   String fileName = pic.getOriginalFilename();   
 			   File filepath = new File(path,fileName);
 			   if(!filepath.getParentFile().exists()){
 				   filepath.getParentFile().mkdirs();
 			   }
-			   file.transferTo(new File(path+File.separator+fileName));
+			   pic.transferTo(new File(path+File.separator+fileName));
 			   advertisement.setPic(path+fileName);
 
 		}
@@ -78,6 +82,7 @@ public class AdvertisementController {
 	}
 	
 	@RequestMapping("adverselectByPK")
+	@MappingDescription("根据id查找广告")
 	public String selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		Advertisement advertisement = advertisementService.selectByPrimaryKey(id);
@@ -87,6 +92,7 @@ public class AdvertisementController {
 	}
 	
 	@RequestMapping("adverupdateByPKS")
+	@MappingDescription("根据id更新广告")
 	public String updateByPrimaryKeySelective(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
@@ -111,6 +117,7 @@ public class AdvertisementController {
 	}
 	
 	@RequestMapping("adverupdateByPK")
+	@MappingDescription("根据id更新广告")
 	public String updateByPrimaryKey(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,

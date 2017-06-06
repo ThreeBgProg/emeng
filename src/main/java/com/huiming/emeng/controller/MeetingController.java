@@ -1,10 +1,19 @@
 package com.huiming.emeng.controller;
 
+import java.io.File;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.model.Meeting;
@@ -22,8 +31,22 @@ public class MeetingController {
 	
 	@RequestMapping("meetinsert")
 	@MappingDescription("添加会议信息")
-	public String insert(Meeting meeting,Model model){
-		
+	public String insert(HttpServletRequest request,
+			@RequestParam("annex") MultipartFile annex,
+			Meeting meeting,
+			Model model) throws Exception{
+				
+		if(!annex.isEmpty()){
+			String path = request.getServletContext().getRealPath("/meetings/");
+			String fileName=annex.getOriginalFilename();
+			File filepath = new File(path, fileName);
+			if(!filepath.getParentFile().exists()){
+				   filepath.getParentFile().mkdirs();
+			   }
+			annex.transferTo(new File(path+File.separator+fileName)); 
+			meeting.setLink(path+fileName);
+		}
+		meeting.setReleaseDate(new Date());
 		int result = meetingService.insert(meeting);
 		
 		return null;
@@ -31,8 +54,21 @@ public class MeetingController {
 	
 	@RequestMapping("meetinsertSel")
 	@MappingDescription("添加会议信息")
-	public String meetinginsertSelect(Meeting meeting,Model model){
+	public String meetinginsertSelect(HttpServletRequest request,
+			@RequestParam("annex") MultipartFile annex,
+			Meeting meeting,
+			Model model)throws Exception{
 		
+		if(!annex.isEmpty()){
+			String path = request.getServletContext().getRealPath("/meetings/");
+			String fileName=annex.getOriginalFilename();
+			File filepath = new File(path, fileName);
+			if(!filepath.getParentFile().exists()){
+				   filepath.getParentFile().mkdirs();
+			   }
+			annex.transferTo(new File(path+File.separator+fileName)); 
+			meeting.setLink(path+fileName);
+		}
 		int result = meetingService.insertSelective(meeting);
 		
 		return null;
@@ -75,11 +111,23 @@ public class MeetingController {
 	
 	@RequestMapping("meetSelByPK")
 	@MappingDescription("根据id查找会议信息")
-	public String selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	@ResponseBody
+	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
-		Meeting meeting = meetingService.selectByPrimaryKey(id);
+//		Meeting meeting = meetingService.selectByPrimaryKey(id);
 		
-		return null;
+		return meetingService.selectByPrimaryKey(id);
+	}
+	
+	@RequestMapping("meetsousuo")
+	@MappingDescription("搜索会议")
+	@ResponseBody
+	public Object findMeeting(@RequestParam("sousuo") String sousuo,Model model){
+		
+		Map<String, String> map = new HashMap<String, String>();
+		map.put("title", "%"+sousuo+"%");
+				
+		return meetingService.findMeeting(map);
 	}
 	
 }

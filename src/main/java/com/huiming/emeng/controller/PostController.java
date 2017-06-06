@@ -27,6 +27,7 @@ public class PostController {
 	@MappingDescription("插入论坛")
 	public String insert(PostWithBLOBs postWithBLOBs,Model model){
 		
+		postWithBLOBs.setVisit(0);
 		int result = postService.insert(postWithBLOBs);
 		System.out.println("成功插入"+result+"条论坛信息");
 		return null;

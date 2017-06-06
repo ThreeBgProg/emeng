@@ -1,5 +1,7 @@
 package com.huiming.emeng.serviceImpl;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -59,5 +61,12 @@ public class PostServiceImpl implements PostService {
 	public int updateByPrimaryKey(Post record) {
 		// TODO Auto-generated method stub
 		return postMapper.updateByPrimaryKey(record);
+	}
+
+
+	@Override
+	public List<Post> selectAllPost() {
+		// TODO Auto-generated method stub
+		return postMapper.selectAllPost();
 	}
 }

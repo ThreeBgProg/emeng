@@ -16,7 +16,7 @@ public class HomePagePassageService {
     @Autowired
     PassageMapper passageMapper;
 
-    public List<Passage> selectByTypeAndDescendWithTime(Integer passageType, Integer showPassageNums){
+    public List<Passage> selectByTypeAndDescendWithTime(Byte passageType, Integer showPassageNums){
         return passageMapper.selectByTypeAndDescendWithTime(passageType,showPassageNums);
     }
 

@@ -19,7 +19,8 @@
 	</select>
 	<update id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		update from
-		permission state = 0
+		permission
+		state = 0
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<insert id="insert" parameterType="com.huiming.emeng.model.Permission">

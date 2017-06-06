@@ -143,8 +143,7 @@
 		school_id = #{schoolId,jdbcType=INTEGER}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-
-	<select id="selectSelective" parameterMap="com.huiming.emeng.model.Teacher"
+	<select id="selectSelective" parameterType="com.huiming.emeng.model.Teacher"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
@@ -186,6 +185,12 @@
 	       </if>
 	       
        </trim>
+	</select>
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from teacher
 	</select>
 
 </mapper>

@@ -1,5 +1,7 @@
 package com.huiming.emeng.service;
 
+import java.util.List;
+
 import com.huiming.emeng.model.Post;
 import com.huiming.emeng.model.PostWithBLOBs;
 
@@ -23,4 +25,6 @@ public interface PostService {
     int updateByPrimaryKeyWithBLOBs(PostWithBLOBs record);
 
     int updateByPrimaryKey(Post record);
+    
+    public List<Post> selectAllPost();
 }

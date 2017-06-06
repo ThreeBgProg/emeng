@@ -160,5 +160,8 @@
       select * from post where titile like #{titile,jdbcType=VARCHAR}
   </select>
   
-  
+  <select id="selectAllPost" resultMap="ResultMapWithBLOBs">
+      select * from post
+  </select>
+   
 </mapper>

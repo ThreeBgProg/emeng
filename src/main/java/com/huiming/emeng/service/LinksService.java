@@ -1,6 +1,10 @@
 package com.huiming.emeng.service;
 
+import java.util.List;
+
 import com.huiming.emeng.model.Links;
+
+import sun.awt.image.ImageWatched.Link;
 
 public interface LinksService {
  
@@ -15,4 +19,6 @@ public interface LinksService {
     int updateByPrimaryKeySelective(Links record);
 
     int updateByPrimaryKey(Links record);
+    
+    public List<Link> selectAllLink();
 }

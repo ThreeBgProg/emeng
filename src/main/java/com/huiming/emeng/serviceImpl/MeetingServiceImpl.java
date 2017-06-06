@@ -1,5 +1,8 @@
 package com.huiming.emeng.serviceImpl;
 
+import java.util.List;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -54,6 +57,18 @@ public class MeetingServiceImpl implements MeetingService {
 	public int updateByPrimaryKey(Meeting record) {
 		// TODO Auto-generated method stub
 		return meetingMapper.updateByPrimaryKey(record);
+	}
+
+	@Override
+	public List<Meeting> findMeeting(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return meetingMapper.findMeeting(map);
+	}
+
+	@Override
+	public List<Meeting> selectAllMeeting() {
+		// TODO Auto-generated method stub
+		return meetingMapper.selectAllMeeting();
 	}
 
 }

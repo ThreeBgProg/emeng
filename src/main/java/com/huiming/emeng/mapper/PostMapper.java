@@ -23,4 +23,6 @@ public interface PostMapper {
     int updateByPrimaryKey(Post record);
     
     public List<Post> findPost(Map<String, String> map);
+    
+    public List<Post> selectAllPost();
 }

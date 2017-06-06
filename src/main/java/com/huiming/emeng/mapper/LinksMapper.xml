@@ -79,4 +79,9 @@
       order = #{order,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectAllLink" resultMap="BaseResultMap">
+     select * from link
+  </select>
+  
 </mapper>

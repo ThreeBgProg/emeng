@@ -22,4 +22,6 @@ public interface MeetingMapper {
     int updateByPrimaryKey(Meeting record);
     
     public List<Meeting> findMeeting(Map<String, String> map);
+
+	public List<Meeting> selectAllMeeting();
 }
