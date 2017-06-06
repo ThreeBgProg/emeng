@@ -9,7 +9,6 @@ import com.huiming.emeng.mapper.ApplyMapper;
 import com.huiming.emeng.model.Apply;
 import com.huiming.emeng.service.ApplyService;
 
-
 @Service("applyService")
 public class ApplyServiceImpl implements ApplyService {
 
@@ -41,8 +40,8 @@ public class ApplyServiceImpl implements ApplyService {
 	}
 	@Override
 	public int insertSelective(Apply record) {
-		// TODO Auto-generated method stub
-		return 0;
+		// TODO Auto-generated method stub 
+		return 0; 
 	}
 	//根据主键查找
 	@Override

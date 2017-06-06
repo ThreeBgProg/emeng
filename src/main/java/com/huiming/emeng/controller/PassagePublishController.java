@@ -1,12 +1,13 @@
 package com.huiming.emeng.controller;
 
 import com.huiming.emeng.model.Passage;
+import com.huiming.emeng.model.User;
 import com.huiming.emeng.service.PassagePublishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Date;
+import javax.servlet.http.HttpSession;
 
 /**
  * Created by LeoMs on 2017/6/2 0002.
@@ -21,10 +22,10 @@ public class PassagePublishController {
 
     @ResponseBody
     @RequestMapping(value = "/insert/passage", method = RequestMethod.POST)
-    public int insertPassage(@RequestBody Passage passage){
-        passage.setState(new Byte("2"));
-        passage.setPublishTime(new Date());
-        return passagePublishService.insertPassage(passage);
+    public int insertPassage(@RequestBody Passage passage, HttpSession httpSession){
+
+        User user = (User)httpSession.getAttribute("user");
+        return passagePublishService.insertPassage(passage,user);
     }
 
     @ResponseBody

@@ -52,7 +52,7 @@ public class LessonController {
 
 
     @MappingDescription("所有课程")
-    @RequestMapping("/lesson")
+    @RequestMapping({"/lesson","publisher/lesson"})
     public String allLesson(ModelMap modelMap){
 
         //添加导航表模块
@@ -68,7 +68,7 @@ public class LessonController {
     }
 
     @MappingDescription("相应课程章节")
-    @RequestMapping("/{lessonId}/chapter")
+    @RequestMapping({"/{lessonId}/chapter","/publisher/{lessonId}/chapter"})
     public String allChapter(ModelMap modelMap, @PathVariable(value = "lessonId") Integer lessonId){
 
         //添加导航表模块
