@@ -52,8 +52,7 @@ public class Post_likeController {
 			post.setLike(post.getLike()+1);//点赞加一
 			postService.updateByPrimaryKey(post);
 			
-		}
-		
+		}		
 		return null;
 	}
 }

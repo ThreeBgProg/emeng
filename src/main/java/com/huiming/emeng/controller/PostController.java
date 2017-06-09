@@ -44,11 +44,11 @@ public class PostController {
 	@RequestMapping("postsePK")
 	@ResponseBody
 	@MappingDescription("根据id查找论坛")
-	public String selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		PostWithBLOBs postWithBLOBs = postService.selectByPrimaryKey(id);
 		model.addAttribute("postWithBLOBs", postWithBLOBs);
-		return null;
+		return postWithBLOBs;
 	}
 	
 	@RequestMapping("postupPKS")

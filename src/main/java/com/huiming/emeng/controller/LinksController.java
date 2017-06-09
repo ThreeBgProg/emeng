@@ -5,6 +5,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.model.Links;
@@ -25,6 +26,9 @@ public class LinksController {
 	@MappingDescription("插入链接")
 	public String insert(Links links,Model model){
 		
+		links.setLink("1251");
+		links.setName("家杰");
+		links.setOrder(2);
 		int result = linksService.insert(links);
 		System.out.println("您成功插入"+result+"条友情链接");
 		
@@ -43,6 +47,7 @@ public class LinksController {
 	
 	@RequestMapping("linksselectPK")
 	@MappingDescription("根据id查找查找链接")
+	@ResponseBody
 	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		Links links = linksService.selectByPrimaryKey(id);

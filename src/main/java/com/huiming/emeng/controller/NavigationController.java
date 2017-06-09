@@ -24,10 +24,10 @@ public class NavigationController {
 	@RequestMapping("naviselect")
 	@ResponseBody
 	@MappingDescription("查找所有二级菜单")
-	public String selectAllNavigation(Navigation navigation,Model model){
+	public Object selectAllNavigation(Navigation navigation,Model model){
         List<Navigation> navigationlists = navigationService.selectAllNavigation();
         model.addAttribute("navigationlists", navigationlists);
-        return null;
+        return navigationlists;
     }
     
     @RequestMapping("navidelPK")
@@ -58,12 +58,12 @@ public class NavigationController {
     @RequestMapping("naviselPK")
     @ResponseBody
     @MappingDescription("根据id查找")
-    public String selectByPrimaryKey(@RequestParam("id") Integer id,Navigation navigation
+    public Object selectByPrimaryKey(@RequestParam("id") Integer id,Navigation navigation
     		,Model model){
     	
     	navigation = navigationService.selectByPrimaryKey(id);
     	model.addAttribute("navigation", navigation);
-    	return null;
+    	return navigation;
     }
 
     @RequestMapping("naviupdatePKS")

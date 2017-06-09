@@ -22,7 +22,7 @@
   </delete>
   <insert id="insert" parameterType="com.huiming.emeng.model.Links">
     insert into links (id, name, link, 
-      order)
+      links.order)
     values (#{id,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR}, #{link,jdbcType=VARCHAR}, 
       #{order,jdbcType=INTEGER})
   </insert>
@@ -39,7 +39,7 @@
         link,
       </if>
       <if test="order != null">
-        order,
+        links.order,
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
@@ -67,7 +67,7 @@
         link = #{link,jdbcType=VARCHAR},
       </if>
       <if test="order != null">
-        order = #{order,jdbcType=INTEGER},
+        links.order = #{order,jdbcType=INTEGER},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -76,7 +76,7 @@
     update links
     set name = #{name,jdbcType=VARCHAR},
       link = #{link,jdbcType=VARCHAR},
-      order = #{order,jdbcType=INTEGER}
+      links.order = #{order,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   

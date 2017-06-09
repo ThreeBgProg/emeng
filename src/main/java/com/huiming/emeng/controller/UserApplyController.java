@@ -29,8 +29,7 @@ public class UserApplyController {
 	public String userApplyForm(Apply apply){
 		
 		//获取报名的用户的id（邀请码报名默认0）
-		//获取会议id
-	
+		//获取会议id	
 		applyService.insert(apply);
 		return "userApplyForm";
 	}

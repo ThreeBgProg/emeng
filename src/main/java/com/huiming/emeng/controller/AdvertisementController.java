@@ -9,6 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huiming.emeng.annotation.MappingDescription;
@@ -83,12 +84,13 @@ public class AdvertisementController {
 	
 	@RequestMapping("adverselectByPK")
 	@MappingDescription("根据id查找广告")
-	public String selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	@ResponseBody
+	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		Advertisement advertisement = advertisementService.selectByPrimaryKey(id);
 		model.addAttribute("advertisement", advertisement);
 		
-		return null;
+		return advertisement;
 	}
 	
 	@RequestMapping("adverupdateByPKS")

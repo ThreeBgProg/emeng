@@ -8,5 +8,6 @@
 </head>
 <body>
 <h3>文件上传成功</h3>
+${navigationList}
 </body>
 </html>
