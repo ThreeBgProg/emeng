@@ -2,6 +2,8 @@ package com.huiming.emeng.service;
 
 import java.util.List;
 
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Video;
 
 public interface VideoService {
@@ -25,4 +27,11 @@ public interface VideoService {
     int updateByPrimaryKeySelective(Video record);
     //所有字段更新
     int updateByPrimaryKey(Video record);
+    
+    
+    /**
+     * 查询第几页数据
+     */
+    Pager<Video> selectVideoWithPagesizeFromFromindex(Integer fromIndex,Integer pageSize);
+
 }

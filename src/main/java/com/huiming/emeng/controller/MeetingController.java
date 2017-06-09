@@ -10,12 +10,15 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Meeting;
 import com.huiming.emeng.service.MeetingService;
 /**
@@ -46,8 +49,18 @@ public class MeetingController {
 			annex.transferTo(new File(path+File.separator+fileName)); 
 			meeting.setLink(path+fileName);
 		}
-		meeting.setReleaseDate(new Date());
-		int result = meetingService.insert(meeting);
+		
+//		for(int i=0;i<30;i++){
+//			meeting.setCode(""+i+i+i+i);
+//			meeting.setTitle("志伟"+i);
+//			meeting.setContent("黄慧"+i);
+//			meeting.setLink("link"+i);
+//			
+			meeting.setReleaseDate(new Date());//
+			int result = meetingService.insert(meeting);//
+//		}
+		
+
 		
 		return null;
 	}
@@ -129,5 +142,20 @@ public class MeetingController {
 				
 		return meetingService.findMeeting(map);
 	}
+	
+	@ResponseBody 
+	@MappingDescription("会议分页查询")
+    @RequestMapping("meetingPage")
+    public Object meetingPageList(ModelMap modelMap,
+                                  @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+		
+        //添加查询分页结果
+        Pager<Meeting> meetingList= meetingService.selectMeetingWithPagesizeFromFromindex(pageNum, pageSize);
+
+        Map< String, Object> meetingMap = new HashMap<String, Object>();
+        meetingMap.put("meetingList", meetingList);
+        return meetingList;
+    }
 	
 }

@@ -1,5 +1,7 @@
 package com.huiming.emeng.service;
 
+
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Advertisement;
 
 public interface AdvertisementService { 
@@ -15,4 +17,11 @@ public interface AdvertisementService {
     int updateByPrimaryKeySelective(Advertisement record);
 
     int updateByPrimaryKey(Advertisement record);
+    
+    
+    /**
+     * 查询第几页数据
+     */
+    Pager<Advertisement> selectAdvertisementWithPagesizeFromFromindex(Integer fromIndex,Integer pageSize);
+
 }

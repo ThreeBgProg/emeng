@@ -79,4 +79,19 @@
       pic = #{pic,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="selectNumberfromAdvertisement" resultType="Integer">
+   select count(*) from advertisement
+  </select>
+  
+  <select id="selectAdvertisementWithPagesizeFromFromindex" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from advertisement order by id DESC 
+    <if test="fromIndex != null and pageSize != null">
+        limit #{fromIndex},#{pageSize} 
+    </if>
+
+  </select>
+  
 </mapper>

@@ -81,7 +81,23 @@
   </update>
   
   <select id="selectAllLink" resultMap="BaseResultMap">
-     select * from link
+     select * from links
+  </select>
+  
+  <select id="selectNumberfromLink" resultType="Integer">
+     select count(*) from links
+  </select>
+  <select id="selectLinkWithPagesizeFromFromindex" resultMap="BaseResultMap">
+  
+  select * from links order by id desc limit #{fromIndex},#{pageSize}
+   <!-- 
+   select 
+   <include refid="Base_Column_List" />
+   from links
+   <if test="fromIndex != null and pageSize != null">
+        limit #{fromIndex},#{pageSize} 
+    </if>  
+    -->  
   </select>
   
 </mapper>

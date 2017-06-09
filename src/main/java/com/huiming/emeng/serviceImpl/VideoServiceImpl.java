@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.VideoMapper;
+import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Video;
 import com.huiming.emeng.service.VideoService;
 
@@ -63,6 +65,32 @@ public class VideoServiceImpl implements VideoService {
 	public List<Video> selectBychapter(Integer chapter) {
 		// TODO Auto-generated method stub
 		return videoMapper.selectBychapter(chapter);
+	}
+
+	@Override
+	public Pager<Video> selectVideoWithPagesizeFromFromindex(Integer pageNum, Integer pageSize) {
+		// TODO Auto-generated method stub
+		//总记录
+		Integer totalRecord = videoMapper.selectNumberfromVideo();
+		
+		//总页数
+		Integer totalPage = totalRecord/pageSize;
+	
+		if (totalRecord ==0) {
+			return null;
+		}
+		
+		if(totalRecord % pageSize !=0){
+			totalPage++;
+		}
+		if(pageNum > totalPage){
+        pageNum = totalPage;
+		}
+		
+		Integer fromIndex = (pageNum - 1) * pageSize;
+		Pager<Video> pager = new Pager<Video>(pageSize, pageNum, totalRecord, totalPage, 
+				videoMapper.selectVideoWithPagesizeFromFromindex(fromIndex, pageSize));
+		return pager;
 	}
 	
 	

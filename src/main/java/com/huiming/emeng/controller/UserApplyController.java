@@ -1,15 +1,19 @@
 package com.huiming.emeng.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Apply;
 import com.huiming.emeng.service.ApplyService;
 
@@ -29,8 +33,20 @@ public class UserApplyController {
 	public String userApplyForm(Apply apply){
 		
 		//获取报名的用户的id（邀请码报名默认0）
-		//获取会议id	
-		applyService.insert(apply);
+		//获取会议id
+//		
+//		for(int i=0;i<30;i++){
+//			apply.setCompany("黄慧"+i);
+//			apply.setDuty("黄慧"+i);
+//			apply.setJobTitle("黄慧"+i);
+//			apply.setMail("黄慧"+i);
+//			apply.setName("黄慧"+i);
+//			apply.setPhone("黄慧"+i);
+//			apply.setUserId(i);
+//			apply.setMeetingId(i);
+			applyService.insert(apply);
+//		}
+
 		return "userApplyForm";
 	}
 	
@@ -91,6 +107,21 @@ public class UserApplyController {
 		return null;
 		
 	}
+	
+	@ResponseBody 
+	@MappingDescription("报名表分页查询")
+    @RequestMapping("applyPage")
+    public Object advertisementPageList(ModelMap modelMap,
+                                  @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+		
+        //添加查询分页结果
+        Pager<Apply> applyList = applyService.selectApplyWithPagesizeFromFromindex(pageNum, pageSize);
+
+        Map< String, Object> applyMap = new HashMap<String, Object>();
+        applyMap.put("applyList", applyList);
+        return applyMap;
+    }
 
 	
 	

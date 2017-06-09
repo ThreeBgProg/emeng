@@ -121,4 +121,20 @@
       select * from video where name like #(name,jdbcType=VARCHAR)
   </select>
   
+  <select id="selectNumberfromVideo" resultType="Integer">
+     select count(*) from video
+  </select>
+  <select id="selectVideoWithPagesizeFromFromindex" resultMap="BaseResultMap">
+  
+  select * from video order by id desc limit #{fromIndex},#{pageSize}
+   <!-- 
+   select 
+   <include refid="Base_Column_List" />
+   from video
+   <if test="fromIndex != null and pageSize != null">
+        limit #{fromIndex},#{pageSize} 
+    </if>  
+    -->  
+  </select>
+  
 </mapper>

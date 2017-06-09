@@ -1,19 +1,27 @@
 package com.huiming.emeng.controller;
 
 import java.io.File;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Advertisement;
+import com.huiming.emeng.model.Navigation;
+import com.huiming.emeng.model.Passage;
 import com.huiming.emeng.service.AdvertisementService;
 
 
@@ -141,5 +149,20 @@ public class AdvertisementController {
 		System.out.println("更新啦"+result+"条广告");
 		return null;
 	}
+	
+	@ResponseBody 
+	@MappingDescription("广告位分页查询")
+    @RequestMapping("adverPage")
+    public Object advertisementPageList(ModelMap modelMap,
+                                  @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+		
+        //添加查询分页结果
+        Pager<Advertisement> advertisement = advertisementService.selectAdvertisementWithPagesizeFromFromindex(pageNum, pageSize);
+
+        Map< String, Object> advertisementList = new HashMap<String, Object>();
+        advertisementList.put("advertisementList", advertisement);
+        return advertisementList;
+    }
 	
 }

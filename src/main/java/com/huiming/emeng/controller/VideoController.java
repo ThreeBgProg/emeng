@@ -1,7 +1,9 @@
 package com.huiming.emeng.controller;
 
 import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -14,12 +16,15 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Chapter;
 import com.huiming.emeng.model.Lesson;
 import com.huiming.emeng.model.Video;
@@ -173,7 +178,22 @@ public class VideoController {
 		int result = videoService.deleteByPrimaryKey(id);
 		System.out.println("您已成功删除"+result+"条视频数据");
 		return null;
-	}
+	}	
+	
+	@ResponseBody 
+	@MappingDescription("视频资源分页查询")
+    @RequestMapping("videoPage")
+    public Object advertisementPageList(ModelMap modelMap,
+                                  @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+		
+        //添加查询分页结果
+        Pager<Video> videoList = videoService.selectVideoWithPagesizeFromFromindex(pageNum, pageSize);
+
+        Map< String, Object> videoMap = new HashMap<String, Object>();
+        videoMap.put("videoList", videoList);
+        return videoMap;
+    }
 	
   
 	

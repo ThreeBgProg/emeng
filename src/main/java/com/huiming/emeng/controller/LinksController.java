@@ -1,15 +1,23 @@
 package com.huiming.emeng.controller;
 
+import java.util.HashMap;
+import java.util.Map;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Links;
 import com.huiming.emeng.service.LinksService;
+
+import sun.awt.image.ImageWatched.Link;
 
 /**
  * 友情链接模块
@@ -25,13 +33,14 @@ public class LinksController {
 	@RequestMapping("linksinsert")
 	@MappingDescription("插入链接")
 	public String insert(Links links,Model model){
-		
-		links.setLink("1251");
-		links.setName("家杰");
-		links.setOrder(2);
-		int result = linksService.insert(links);
-		System.out.println("您成功插入"+result+"条友情链接");
-		
+		for(int i=0;i<30;i++){
+			links.setLink("nihao"+i);
+			links.setName("黄慧"+i);
+			links.setOrder(i);
+			int result = linksService.insert(links);
+			System.out.println("您成功插入"+result+"条友情链接");
+		}
+	
 		return null;
 	}
 	
@@ -82,6 +91,23 @@ public class LinksController {
 		System.out.println("您成功更新"+result+"条友情链接");
 		return null;
 	}
+	
+	@ResponseBody 
+	@MappingDescription("友情链接分页查询")
+    @RequestMapping("linkPage")
+    public Object linkPageList(ModelMap modelMap,
+                                  @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+		
+		
+		
+        //添加查询分页结果
+        Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
+
+        Map< String, Object> linkMap = new HashMap<String, Object>();
+        linkMap.put("linkList", linkList);
+        return linkMap;
+    }
 	
 	
 }

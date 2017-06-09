@@ -6,7 +6,9 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.MeetingMapper;
+import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Meeting;
 import com.huiming.emeng.service.MeetingService;
 
@@ -69,6 +71,30 @@ public class MeetingServiceImpl implements MeetingService {
 	public List<Meeting> selectAllMeeting() {
 		// TODO Auto-generated method stub
 		return meetingMapper.selectAllMeeting();
+	}
+
+	@Override
+	public Pager<Meeting> selectMeetingWithPagesizeFromFromindex(Integer pageNum, Integer pageSize) {
+		//总记录
+				Integer totalRecord = meetingMapper.selectNumberfromMeeting();
+				
+				//总页数
+				Integer totalPage = totalRecord/pageSize;
+				if (totalRecord ==0) {
+					return null;
+				}
+				{
+					if(totalRecord % pageSize !=0){
+						totalPage++;
+					}
+					if(pageNum > totalPage){
+		            pageNum = totalPage;
+					}
+				}
+				Integer fromIndex = (pageNum - 1) * pageSize;
+				Pager<Meeting> pager = new Pager<Meeting>(pageSize, pageNum, totalRecord, totalPage, 
+						meetingMapper.selectMeetingWithPagesizeFromFromindex(fromIndex, pageSize));
+				return pager;
 	}
 
 }

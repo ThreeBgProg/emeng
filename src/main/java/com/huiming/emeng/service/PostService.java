@@ -2,6 +2,8 @@ package com.huiming.emeng.service;
 
 import java.util.List;
 
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.model.Apply;
 import com.huiming.emeng.model.Post;
 import com.huiming.emeng.model.PostWithBLOBs;
 
@@ -27,4 +29,11 @@ public interface PostService {
     int updateByPrimaryKey(Post record);
     
     public List<Post> selectAllPost();
+    
+
+    /**
+     * 查询第几页数据
+     */
+    Pager<Post> selectPostWithPagesizeFromFromindex(Integer fromIndex,Integer pageSize,Integer states);
+
 }
