@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiming.emeng.mapper.BannerMapper">
+	<resultMap id="BaseResultMap" type="com.huiming.emeng.model.Banner">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="passage_id" jdbcType="INTEGER" property="passageId" />
+		<result column="pic" jdbcType="VARCHAR" property="pic" />
+	</resultMap>
+	<sql id="Base_Column_List">
+		id, passage_id, pic
+	</sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from banner
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+		delete from banner
+		where id = #{id,jdbcType=INTEGER}
+	</delete>
+	<insert id="insert" parameterType="com.huiming.emeng.model.Banner">
+		insert into banner (id, passage_id, pic
+		)
+		values (#{id,jdbcType=INTEGER}, #{passageId,jdbcType=INTEGER},
+		#{pic,jdbcType=VARCHAR}
+		)
+	</insert>
+	<insert id="insertSelective" parameterType="com.huiming.emeng.model.Banner">
+		insert into banner
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="passageId != null">
+				passage_id,
+			</if>
+			<if test="pic != null">
+				pic,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="passageId != null">
+				#{passageId,jdbcType=INTEGER},
+			</if>
+			<if test="pic != null">
+				#{pic,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.huiming.emeng.model.Banner">
+		update banner
+		<set>
+			<if test="passageId != null">
+				passage_id = #{passageId,jdbcType=INTEGER},
+			</if>
+			<if test="pic != null">
+				pic = #{pic,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Banner">
+		update banner
+		set passage_id = #{passageId,jdbcType=INTEGER},
+		pic = #{pic,jdbcType=VARCHAR}
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from banner
+	</select>
+	<delete id="deleteByPassageId" parameterType="java.lang.Integer">
+		delete from banner
+		where passage_id = #{passageId,jdbcType=INTEGER}
+	</delete>
+
+</mapper>

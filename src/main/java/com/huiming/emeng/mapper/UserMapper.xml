@@ -188,4 +188,34 @@
 			</if>
 		</where>
 	</select>
+
+	<select id="findSelective" parameterType="com.huiming.emeng.model.User"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		<where>
+			<if test="username != null">
+				username like #{username,jdbcType=VARCHAR},
+			</if>
+			<if test="jobId != null">
+				AND job_id like #{jobId,jdbcType=VARCHAR},
+			</if>
+			<if test="password != null">
+				AND password like #{password,jdbcType=VARCHAR},
+			</if>
+			<if test="schoolId != null">
+				AND school_id like #{schoolId,jdbcType=INTEGER},
+			</if>
+			<if test="phone != null">
+				AND phone like #{phone,jdbcType=VARCHAR},
+			</if>
+			<if test="mail != null">
+				AND mail like #{mail,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				AND state like #{state,jdbcType=TINYINT},
+			</if>
+		</where>
+	</select>
 </mapper>

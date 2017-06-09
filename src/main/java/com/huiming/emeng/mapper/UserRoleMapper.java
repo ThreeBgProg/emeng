@@ -12,6 +12,8 @@ public interface UserRoleMapper {
 	int insertSelective(UserRole record);
 
 	UserRole selectByPrimaryKey(Integer id);
+	
+	UserRole selectByUserId(Integer id);
 
 	int updateByPrimaryKeySelective(UserRole record);
 
