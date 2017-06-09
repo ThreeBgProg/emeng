@@ -6,6 +6,8 @@ import com.huiming.emeng.model.RolePermission;
 
 public interface RolePermissionMapper {
 	int deleteByPrimaryKey(Integer id);
+	
+	int deleteByPermissionId(Integer id);
 
 	int insert(RolePermission record);
 
@@ -18,4 +20,6 @@ public interface RolePermissionMapper {
 	int updateByPrimaryKey(RolePermission record);
 	
 	List<Integer> selectAllByRoleId(Integer roleId);
+	
+	RolePermission selectSelective(RolePermission record);
 }

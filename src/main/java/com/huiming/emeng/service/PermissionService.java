@@ -23,5 +23,9 @@ public interface PermissionService {
 
 	public Permission selectSelective(Permission record);
 
+	/**
+	 * 获取全部有效权限
+	 * @return
+	 */
 	public List<Permission> selectAll();
 }

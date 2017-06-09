@@ -6,21 +6,22 @@ import java.util.Map;
 import com.huiming.emeng.model.Teacher;
 
 public interface TeacherMapper {
-    int deleteByPrimaryKey(Integer id);
 
-    int insert(Teacher record);
+	int deleteByPrimaryKey(Integer id);
 
-    int insertSelective(Teacher record);
+	int insert(Teacher record);
 
-    Teacher selectByPrimaryKey(Integer id);
+	int insertSelective(Teacher record);
 
-    int updateByPrimaryKeySelective(Teacher record);
+	Teacher selectByPrimaryKey(Integer id);
 
-    int updateByPrimaryKeyWithBLOBs(Teacher record);
+	int updateByPrimaryKeySelective(Teacher record);
 
-    int updateByPrimaryKey(Teacher record);
-    
-    List<Teacher> selectSelective(Teacher record);
-    
-    public List<Teacher> findTeacher(Map<String, String> map);
+	int updateByPrimaryKeyWithBLOBs(Teacher record);
+
+	int updateByPrimaryKey(Teacher record);
+
+	List<Teacher> selectSelective(Teacher record);
+
+	public List<Teacher> findTeacher(Map<String, String> map);
 }

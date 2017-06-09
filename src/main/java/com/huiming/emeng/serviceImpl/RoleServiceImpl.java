@@ -23,7 +23,7 @@ public class RoleServiceImpl implements RoleService {
 	private PermissionMapper permissionMapper;
 	@Autowired
 	private RolePermissionMapper rolePermissionMapper;
-	
+
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		return roleMapper.deleteByPrimaryKey(id);
@@ -56,13 +56,13 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public List<Role> selectAll() {
-		Role role= new Role();
+		Role role = new Role();
 		role.setState((byte) 1);
 		return roleMapper.selectSelective(role);
 	}
 
 	@Override
-	public int insertRolePermission(Integer roleId,Integer permissionId) {
+	public int insertRolePermission(Integer roleId, Integer permissionId) {
 		RolePermission rp = new RolePermission();
 		rp.setPermissionId(permissionId);
 		rp.setRoleId(roleId);
@@ -71,7 +71,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public List<Permission> selectPermissionByRoleId(Integer id) {
-		List<Integer> permissionIds =  rolePermissionMapper.selectAllByRoleId(id);
+		List<Integer> permissionIds = rolePermissionMapper.selectAllByRoleId(id);
 		List<Permission> list = new ArrayList<Permission>();
 		for (Integer permissionId : permissionIds) {
 			list.add(permissionMapper.selectByPrimaryKey(permissionId));
@@ -81,10 +81,15 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public int deleteRolePermission(RolePermission record) {
-		// TODO Auto-generated method stub
-		return 0;
+		return rolePermissionMapper.deleteByPrimaryKey(record.getId());
 	}
 
-	
+	public boolean selectByAll(Integer roleId, Integer permissionId) {
+		return rolePermissionMapper.selectSelective(new RolePermission(roleId, permissionId)) == null;
+	}
+
+	public Role selectRole(Role record){
+		return roleMapper.selectSelective(record).get(0);
+	}
 	
 }
