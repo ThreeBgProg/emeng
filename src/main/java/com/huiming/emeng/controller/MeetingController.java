@@ -34,7 +34,8 @@ public class MeetingController {
 	
 	@RequestMapping("meetinsert")
 	@MappingDescription("添加会议信息")
-	public String insert(HttpServletRequest request,
+	@ResponseBody
+	public Object insert(HttpServletRequest request,
 			@RequestParam("annex") MultipartFile annex,
 			Meeting meeting,
 			Model model) throws Exception{
@@ -62,7 +63,10 @@ public class MeetingController {
 		
 
 		
-		return null;
+			Map<String, String> meetingmap=new HashMap<>();
+			meetingmap.put("success", "添加成功");
+			
+			return meetingmap;
 	}
 	
 	@RequestMapping("meetinsertSel")
@@ -89,20 +93,28 @@ public class MeetingController {
 	
 	@RequestMapping("meetdelPK")
 	@MappingDescription("根据id删除会议信息")
-	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	@ResponseBody
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		int result = meetingService.deleteByPrimaryKey(id);
 		
-		return null;
+		Map<String, String> meetingmap=new HashMap<>();
+		meetingmap.put("success", "成功删除一条信息");
+		
+		return meetingmap;
 	}
 	
 	@RequestMapping("meetupdByPKS")
 	@MappingDescription("根据id更新会议信息")
-	public String updateByPrimaryKeySelective(Meeting meeting,Model model){
+	@ResponseBody
+	public Object updateByPrimaryKeySelective(Meeting meeting,Model model){
 		
 		int result = meetingService.updateByPrimaryKeySelective(meeting);
 		
-		return null;
+		Map<String, String> meetingmap=new HashMap<>();
+		meetingmap.put("success", "成功更新一条信息");
+		
+		return meetingmap;
 	}
 	
 	@RequestMapping("meetupdByPKWB")
@@ -127,9 +139,9 @@ public class MeetingController {
 	@ResponseBody
 	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
-//		Meeting meeting = meetingService.selectByPrimaryKey(id);
+		Meeting meeting = meetingService.selectByPrimaryKey(id);
 		
-		return meetingService.selectByPrimaryKey(id);
+		return meeting;
 	}
 	
 	@RequestMapping("meetsousuo")

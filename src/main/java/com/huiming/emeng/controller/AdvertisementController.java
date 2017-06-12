@@ -33,7 +33,8 @@ public class AdvertisementController {
 	
 	@RequestMapping("adverinsert")
 	@MappingDescription("添加广告")
-	public String insert(Advertisement advertisement,
+	@ResponseBody
+	public Object insert(Advertisement advertisement,
 			Model model, 
 			HttpServletRequest request,
 			@RequestParam("pic") MultipartFile pic)throws Exception{
@@ -52,9 +53,10 @@ public class AdvertisementController {
 		}
 		
 		int result = advertisementService.insert(advertisement);
-		System.out.println("插入啦"+result+"条广告");
+		Map<String, String> adverInsertmap=new HashMap<>();
+		adverInsertmap.put("success", "添加成功");
 		
-		return null;
+		return adverInsertmap;
 	}
 	
 	@RequestMapping("adverdelPK")
@@ -128,7 +130,8 @@ public class AdvertisementController {
 	
 	@RequestMapping("adverupdateByPK")
 	@MappingDescription("根据id更新广告")
-	public String updateByPrimaryKey(Advertisement advertisement,
+	@ResponseBody
+	public Object updateByPrimaryKey(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
 			@RequestParam("file") MultipartFile file)throws Exception{
@@ -146,8 +149,10 @@ public class AdvertisementController {
 
 		int result = advertisementService.updateByPrimaryKeySelective(advertisement);
 		
-		System.out.println("更新啦"+result+"条广告");
-		return null;
+		Map<String, String> adverInsertmap=new HashMap<>();
+		adverInsertmap.put("success", "添加成功");
+		
+		return adverInsertmap;
 	}
 	
 	@ResponseBody 

@@ -32,16 +32,15 @@ public class LinksController {
 	
 	@RequestMapping("linksinsert")
 	@MappingDescription("插入链接")
-	public String insert(Links links,Model model){
-		for(int i=0;i<30;i++){
-			links.setLink("nihao"+i);
-			links.setName("黄慧"+i);
-			links.setOrder(i);
+	@ResponseBody
+	public Object insert(Links links,Model model){
+
 			int result = linksService.insert(links);
-			System.out.println("您成功插入"+result+"条友情链接");
-		}
 	
-		return null;
+		Map<String, String> linkInsertmap=new HashMap<>();
+		linkInsertmap.put("success", "添加成功");
+		
+		return linkInsertmap;
 	}
 	
 	@RequestMapping("linksinsertSelect")
@@ -66,21 +65,30 @@ public class LinksController {
 	
 	@RequestMapping("linksdeletePK")
 	@MappingDescription("根据id删除链接")
-	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	@ResponseBody
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		int result = linksService.deleteByPrimaryKey(id);
 		System.out.println("您成功删除"+result+"条友情链接");
-		return null;
+		Map<String, String> linkDemap=new HashMap<>();
+		linkDemap.put("success", "添加成功");
+		
+		return linkDemap;
 		
 	}
 	
 	@RequestMapping("linksupdPK")
 	@MappingDescription("更新链接")
-	public String updateByPrimaryKey(Links links,Model model){
+	@ResponseBody
+	public Object updateByPrimaryKey(Links links,Model model){
 		
 		int result = linksService.updateByPrimaryKey(links);
 		System.out.println("您成功更新"+result+"条友情链接");
-		return null;
+		
+		Map<String, String> linkUpmap=new HashMap<>();
+		linkUpmap.put("success", "添加成功");
+		
+		return linkUpmap;
 	}
 	
 	@RequestMapping("linksupdPKSelect")

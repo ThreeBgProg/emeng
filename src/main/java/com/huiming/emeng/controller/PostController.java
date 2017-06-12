@@ -32,31 +32,39 @@ public class PostController {
 	
 	@RequestMapping("postinsert")
 	@MappingDescription("插入论坛")
-	public String insert(PostWithBLOBs postWithBLOBs,Model model){
+	@ResponseBody
+	public Object insert(PostWithBLOBs postWithBLOBs,Model model){
 		
-		for(int i=0;i<30;i++){
-			postWithBLOBs.setContent("黄慧"+i);
-			postWithBLOBs.setLike(0);
-			postWithBLOBs.setReleaseTime(new Date());
-			postWithBLOBs.setReply("黄慧"+i);
-			postWithBLOBs.setUsername("黄慧"+i);
-			postWithBLOBs.setUserId(i);
-			postWithBLOBs.setTitile("黄慧"+i);
-			
-			postWithBLOBs.setVisit(0);
+//		for(int i=0;i<30;i++){
+//			postWithBLOBs.setContent("黄慧"+i);
+//			postWithBLOBs.setLike(0);
+//			postWithBLOBs.setReleaseTime(new Date());
+//			postWithBLOBs.setReply("黄慧"+i);
+//			postWithBLOBs.setUsername("黄慧"+i);
+//			postWithBLOBs.setUserId(i);
+//			postWithBLOBs.setTitile("黄慧"+i);
+//			
+//			postWithBLOBs.setVisit(0);
 			int result = postService.insert(postWithBLOBs);
-			System.out.println("成功插入"+result+"条论坛信息");
-		}
+//			System.out.println("成功插入"+result+"条论坛信息");
+//		}
 		
-		return null;
+		Map<String, String> postmap=new HashMap<>();
+		postmap.put("success", "成功插入一条信息");
+		
+		return postmap;
 	}
 	
 	@RequestMapping("postdePK")
 	@MappingDescription("根据id删除论坛")
-	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	@ResponseBody
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		int result = postService.deleteByPrimaryKey(id);
-		System.out.println("成功删除"+result+"条论坛信息");
-		return null;
+		
+		Map<String, String> postmap=new HashMap<>();
+		postmap.put("success", "成功删除一条信息");
+		
+		return postmap;
 	}
 	
 	@RequestMapping("postsePK")

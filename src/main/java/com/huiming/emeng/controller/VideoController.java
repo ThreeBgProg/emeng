@@ -70,7 +70,8 @@ public class VideoController {
 	
    @RequestMapping("videoinsert")
    @MappingDescription("视频上传")
-   public String videoInsert(HttpServletRequest request,
+   @ResponseBody
+   public Object videoInsert(HttpServletRequest request,
 		   @RequestParam("link") MultipartFile link,
 		   @RequestParam("pic") MultipartFile pic,
 		   Video video,
@@ -102,7 +103,11 @@ public class VideoController {
 	  
 	   int result = videoService.insert(video);
 	   System.out.println(result);
-	   return "userInfo";
+	   
+	   Map<String, String> videomap=new HashMap<>();
+	   videomap.put("success", "成功添加一条信息");
+		
+		return videomap;
 
    }
 
@@ -124,21 +129,27 @@ public class VideoController {
 
 	@RequestMapping("videoselectPK")
 	@MappingDescription("根据主键查找id删除视频")
-	public String selectByPrimaryKey(HttpServletRequest request,
+	@ResponseBody
+	public Object selectByPrimaryKey(HttpServletRequest request,
 			@RequestParam("id") Integer id,Model model)throws Exception{
 		Video video = videoService.selectByPrimaryKey(id);
 		model.addAttribute("video", video);
 		System.out.println(video);
-		return "userInfo";
+		return video;
 	}
 
 	@RequestMapping("videoupdByPK")
 	@MappingDescription("全部字段更新")
-	public String updateByPrimaryKey(Video video,Model model){
+	@ResponseBody
+	public Object updateByPrimaryKey(Video video,Model model){
 		
 		int result = videoService.updateByPrimaryKey(video);
 		System.out.println("您更新了"+result+"条视频数据");
-		return null;
+		
+		Map<String, String> videomap=new HashMap<>();
+		   videomap.put("success", "成功更新一条信息");
+			
+			return videomap;
 	}
 
 	@RequestMapping("videoupdByPKS")
@@ -152,32 +163,38 @@ public class VideoController {
 
 	@RequestMapping("videoselectByle")
 	@MappingDescription("根据课程id查找所有")
-	public String selectBylesson(@RequestParam("lesson") Integer lesson,Model model){
+	@ResponseBody
+	public Object selectBylesson(@RequestParam("lesson") Integer lesson,Model model){
 		
-		List<Video> lists = videoService.selectBylesson(lesson);
-		model.addAttribute("lists", lists);
+		List<Video> videolists = videoService.selectBylesson(lesson);
+		model.addAttribute("videolists", videolists);
 		
-		return null;
+		return videolists;
 	}
 	
 
 	@RequestMapping("videoselectBycha")
 	@MappingDescription("根据章节id查找所有")
-	public String selectBychapter(@RequestParam("lesson") Integer chapter,Model model){
+	@ResponseBody
+	public Object selectBychapter(@RequestParam("chapter") Integer chapter,Model model){
 		
-		List<Video> lists = videoService.selectBylesson(chapter);
-		model.addAttribute("lists", lists);
+		List<Video> videolists = videoService.selectBylesson(chapter);
+		model.addAttribute("videolists", videolists);
 		
-		return null;
+		return videolists;
 	}
 	
 	@RequestMapping("videodelByPK")
 	@MappingDescription("根据id删除视频")
-	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	@ResponseBody
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		int result = videoService.deleteByPrimaryKey(id);
 		System.out.println("您已成功删除"+result+"条视频数据");
-		return null;
+		Map<String, String> videomap=new HashMap<>();
+		videomap.put("success", "成功更新一条信息");
+			
+	   return videomap;
 	}	
 	
 	@ResponseBody 

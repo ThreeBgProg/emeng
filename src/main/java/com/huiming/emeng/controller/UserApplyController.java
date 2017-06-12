@@ -53,22 +53,24 @@ public class UserApplyController {
 
 	@RequestMapping("selectAllApply")
 	@MappingDescription("管理员查看所有报名信息")
-	public String selectAllApply(Model model){
-		List<Apply> lists=applyService.selectAllApply();
-		model.addAttribute("lists", lists);
-		return null;
+	@ResponseBody
+	public Object selectAllApply(Model model){
+		List<Apply> applylists=applyService.selectAllApply();
+		model.addAttribute("applylists", applylists);
+		return applylists;
 	}
 
 
 	@RequestMapping("deleteByPrimaryKey")
 	@MappingDescription("根据主键删除报名信息")
-	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	@ResponseBody
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		int result = applyService.deleteByPrimaryKey(id);
 		System.out.println("您已成功删除"+result+"条信息");
 		
-		List<Apply> lists=applyService.selectAllApply();
-		model.addAttribute("lists", lists);
-		return null;
+		List<Apply> applylists=applyService.selectAllApply();
+		model.addAttribute("applylists", applylists);
+		return applylists;
 	}
 
 	@RequestMapping("selectByPrimaryKey")
@@ -82,29 +84,38 @@ public class UserApplyController {
 	}
 	
 	
-	@RequestMapping("updateByPrimaryKeySelective")
+	@RequestMapping("upByPKS")
 	@MappingDescription("根据user_id进行更新")
-	public String updateByPrimaryKeySelective(Apply record,Model model) {
+	@ResponseBody
+	public Object updateByPrimaryKeySelective(Apply record,Model model) {
 		
 			int result = applyService.updateByPrimaryKeySelective(record);
 			System.out.println("您已经成功更新"+result+"条数据");
 			//查询查找新的数据
 			List<Apply> lists=applyService.selectAllApply();
 			model.addAttribute("lists", lists);
-		return null;
+			
+			Map<String, String> applymap=new HashMap<>();
+			applymap.put("success", "成功更新一条信息");
+			
+			return applymap;
 		
 	}
 	
-	@RequestMapping("updateByPrimaryKey")
+	@RequestMapping("upByPK")
 	@MappingDescription("根据user_id进行更新")
-	public String updateByPrimaryKey(Apply record,Model model) {
+	@ResponseBody
+	public Object updateByPrimaryKey(Apply record,Model model) {
 		
 			int result = applyService.updateByPrimaryKey(record);
 			System.out.println("您已经成功更新"+result+"条数据");
 			//查询查找新的数据
 			List<Apply> lists=applyService.selectAllApply();
 			model.addAttribute("lists", lists);
-		return null;
+			Map<String, String> applymap=new HashMap<>();
+			applymap.put("success", "成功更新一条信息");
+			
+			return applymap;
 		
 	}
 	
