@@ -1,6 +1,10 @@
 package com.huiming.emeng.controller;
 
 import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -13,7 +17,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import com.huiming.emeng.annotation.MappingDescription;
 
 @Controller
 public class FileuploadController {
@@ -27,34 +34,45 @@ public class FileuploadController {
 	 * @return
 	 * @throws Exception
 	 */
-   @RequestMapping("upload1")
-   public String upload(HttpServletRequest request,
-		   @RequestParam("description") String description,
-		   @RequestParam("file") MultipartFile file)throws Exception
+   @RequestMapping("picupload")
+   @MappingDescription("文件上传接口")
+   @ResponseBody
+   public Object upload(HttpServletRequest request,
+		   @RequestParam("files") MultipartFile[] files)throws Exception
    {
-	   System.out.println(description);
-	   //如果文件不为空，写入上传路劲
-	   if(!file.isEmpty()){
-		   //上传文件路劲
-		   String path = request.getServletContext().getRealPath("/images/");
-		   System.out.println("path:"+path);
-		   String fileName = file.getOriginalFilename();
-		   
-		   request.setAttribute("filename", fileName);
-		   
-		   System.out.println("fileName:"+fileName);
-		   File filepath = new File(path,fileName);
-		   System.out.println("filepath:"+filepath);
-		   //判断路劲是否存在，如果不存在就新建一个
-		   if(!filepath.getParentFile().exists()){
-			   filepath.getParentFile().mkdirs();
-		   }
-		   //将文件存到一个目标文件当中
-		   file.transferTo(new File(path+File.separator+fileName));
+	   
 
-		   return "userInfo";
+	   List respondate = new ArrayList();
+
+	   if(files.length>0){
+		   
+		   
+		   for(int i=0;i<files.length;i++){
+			   String path = request.getServletContext().getRealPath("/wangEditor_images/");
+			 //如果文件不为空，写入上传路劲
+			   if(!files[i].isEmpty()){
+				   //上传文件路劲
+				   System.out.println("path:"+path);
+				   String fileName = files[i].getOriginalFilename();
+				   
+				   request.setAttribute("filename", fileName);
+				   
+				   System.out.println("fileName:"+fileName);
+				   File filepath = new File(path,fileName);
+				   System.out.println("filepath:"+filepath);
+				   //判断路劲是否存在，如果不存在就新建一个
+				   if(!filepath.getParentFile().exists()){
+					   filepath.getParentFile().mkdirs();
+				   }
+				   //将文件存到一个目标文件当中
+				   files[i].transferTo(new File(path+File.separator+fileName));
+				   respondate.add(i, filepath+fileName);
+			   }
+		   }
 	   }
-	   return "error";
+	   
+	      
+	   return respondate;
    }
 	/**
 	 * 文件下载

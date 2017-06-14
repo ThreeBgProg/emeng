@@ -51,27 +51,19 @@ public class MeetingController {
 			meeting.setLink(path+fileName);
 		}
 		
-//		for(int i=0;i<30;i++){
-//			meeting.setCode(""+i+i+i+i);
-//			meeting.setTitle("志伟"+i);
-//			meeting.setContent("黄慧"+i);
-//			meeting.setLink("link"+i);
-//			
-			meeting.setReleaseDate(new Date());//
-			int result = meetingService.insert(meeting);//
-//		}
-		
+//			meeting.setReleaseDate(new Date());
+			int result = meetingService.insert(meeting);
 
-		
-			Map<String, String> meetingmap=new HashMap<>();
-			meetingmap.put("success", "添加成功");
+			Map<String, String> respondate=new HashMap<>();
+			respondate.put("message", "添加成功");
 			
-			return meetingmap;
+			return respondate;
 	}
 	
 	@RequestMapping("meetinsertSel")
 	@MappingDescription("添加会议信息")
-	public String meetinginsertSelect(HttpServletRequest request,
+	@ResponseBody
+	public Object meetinginsertSelect(HttpServletRequest request,
 			@RequestParam("annex") MultipartFile annex,
 			Meeting meeting,
 			Model model)throws Exception{
@@ -88,50 +80,90 @@ public class MeetingController {
 		}
 		int result = meetingService.insertSelective(meeting);
 		
-		return null;
+		Map<String, String> respondate=new HashMap<>();
+		respondate.put("message", "添加成功");
+		
+		return respondate;
 	}
 	
 	@RequestMapping("meetdelPK")
 	@MappingDescription("根据id删除会议信息")
 	@ResponseBody
-	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,
+			 @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+             Model model){
 		
 		int result = meetingService.deleteByPrimaryKey(id);
 		
-		Map<String, String> meetingmap=new HashMap<>();
-		meetingmap.put("success", "成功删除一条信息");
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "成功删除一条信息");
+		 //添加查询分页结果
+        Pager<Meeting> meetingList= meetingService.selectMeetingWithPagesizeFromFromindex(pageNum, pageSize);
+
+        respondate.put("meetingList", meetingList);
 		
-		return meetingmap;
+		return respondate;
 	}
 	
 	@RequestMapping("meetupdByPKS")
 	@MappingDescription("根据id更新会议信息")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Meeting meeting,Model model){
+	public Object updateByPrimaryKeySelective(Meeting meeting,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
 		
 		int result = meetingService.updateByPrimaryKeySelective(meeting);
 		
-		Map<String, String> meetingmap=new HashMap<>();
-		meetingmap.put("success", "成功更新一条信息");
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "成功更新一条信息");
+		 //添加查询分页结果
+        Pager<Meeting> meetingList= meetingService.selectMeetingWithPagesizeFromFromindex(pageNum, pageSize);
+
+        respondate.put("meetingList", meetingList);
 		
-		return meetingmap;
+		return respondate;
 	}
 	
 	@RequestMapping("meetupdByPKWB")
-	public String updateByPrimaryKeyWithBLOBs(Meeting record,Model model){
+	@MappingDescription("根据id更新会议(包含会议内容）")
+	@ResponseBody
+	public Object updateByPrimaryKeyWithBLOBs(Meeting record,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
 		
 		int result = meetingService.updateByPrimaryKeyWithBLOBs(record);
 		
-		return null;
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "成功更新一条信息");
+		 //添加查询分页结果
+        Pager<Meeting> meetingList= meetingService.selectMeetingWithPagesizeFromFromindex(pageNum, pageSize);
+
+        respondate.put("meetingList", meetingList);
+		
+		return respondate;
 	}
 	
 	@RequestMapping("meetupdByPK")
-	@MappingDescription("根据id更新会议信息")
-	public String updateByPrimaryKey(Meeting meeting ,Model model){
+	@MappingDescription("根据id更新会议信息(不包含会议内容）")
+	@ResponseBody
+	public Object updateByPrimaryKey(Meeting meeting ,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
 		
 		int result = meetingService.updateByPrimaryKey(meeting);
 		 
-		return null;
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "成功更新一条信息");
+		 //添加查询分页结果
+        Pager<Meeting> meetingList= meetingService.selectMeetingWithPagesizeFromFromindex(pageNum, pageSize);
+
+        respondate.put("meetingList", meetingList);
+		
+		return respondate;
 	}
 	
 	@RequestMapping("meetSelByPK")
@@ -165,9 +197,9 @@ public class MeetingController {
         //添加查询分页结果
         Pager<Meeting> meetingList= meetingService.selectMeetingWithPagesizeFromFromindex(pageNum, pageSize);
 
-        Map< String, Object> meetingMap = new HashMap<String, Object>();
-        meetingMap.put("meetingList", meetingList);
-        return meetingList;
+        Map< String, Object> respondate = new HashMap<String, Object>();
+        respondate.put("meetingList", meetingList);
+        return respondate;
     }
 	
 }

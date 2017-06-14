@@ -1,6 +1,8 @@
 package com.huiming.emeng.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -26,33 +28,37 @@ public class NavigationController {
 	@MappingDescription("查找所有二级菜单")
 	public Object selectAllNavigation(Navigation navigation,Model model){
         List<Navigation> navigationlists = navigationService.selectAllNavigation();
-        model.addAttribute("navigationlists", navigationlists);
         return navigationlists;
     }
     
     @RequestMapping("navidelPK")
     @MappingDescription("删除")
-    public String deleteByPrimaryKey(@RequestParam("id") Integer id,Navigation navigation
+    @ResponseBody
+    public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Navigation navigation
     		,Model model){
     	int result = navigationService.deleteByPrimaryKey(id);
-    	System.out.println("成功删除"+result+"信息");
-    	return null;
+    	List<Navigation> navigationlists = navigationService.selectAllNavigation();
+        return navigationlists;
     }
     
     @RequestMapping("naviInsert")
     @MappingDescription("添加")
-    public String  insert(Navigation record,Model model){
+    @ResponseBody
+    public Object  insert(Navigation record,Model model){
     	int result = navigationService.insert(record);
-    	System.out.println("成功添加"+result+"信息");
-    	return null;
+    	Map<String, String> respondate = new HashMap<String, String>();
+    	respondate.put("message", "添加成功");
+    	return respondate;
     }
  
     @RequestMapping("naviInsertS")
     @MappingDescription("添加")
-    public String insertSelective(Navigation record,Model model){
+    @ResponseBody
+    public Object insertSelective(Navigation record,Model model){
     	int result = navigationService.insertSelective(record);
-    	System.out.println("成功添加"+result+"信息");
-    	return null;
+    	Map<String, String> respondate = new HashMap<String, String>();
+    	respondate.put("message", "添加成功");
+    	return respondate;
     }
 
     @RequestMapping("naviselPK")
@@ -68,20 +74,21 @@ public class NavigationController {
 
     @RequestMapping("naviupdatePKS")
     @MappingDescription("根据id更新")
-    public String updateByPrimaryKeySelective(Navigation record,Model model){
+    @ResponseBody
+    public Object updateByPrimaryKeySelective(Navigation record,Model model){
     	
     	int result =  navigationService.updateByPrimaryKeySelective(record);
-    	System.out.println("成功更新"+result+"信息");
-    	
-    	return null;
+    	List<Navigation> navigationlists = navigationService.selectAllNavigation();
+        return navigationlists;
     }
 
     @RequestMapping("naviupPK")
-    @MappingDescription("根据id更新s")
-    public String updateByPrimaryKey(Navigation record,Model model){
+    @MappingDescription("根据id更新")
+    @ResponseBody
+    public Object updateByPrimaryKey(Navigation record,Model model){
     	int result = navigationService.updateByPrimaryKey(record);
-    	System.out.println("成功更新"+result+"信息");
-    	return null;
+    	List<Navigation> navigationlists = navigationService.selectAllNavigation();
+        return navigationlists;
     }
     
 	

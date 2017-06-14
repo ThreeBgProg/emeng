@@ -53,23 +53,33 @@ public class AdvertisementController {
 		}
 		
 		int result = advertisementService.insert(advertisement);
-		Map<String, String> adverInsertmap=new HashMap<>();
-		adverInsertmap.put("success", "添加成功");
+		Map<String, String> respondate=new HashMap<>();
+		respondate.put("message", "添加成功");
 		
-		return adverInsertmap;
+		return respondate;
 	}
 	
 	@RequestMapping("adverdelPK")
 	@MappingDescription("根据id删除广告")
-	public String deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	@ResponseBody
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
 		int result = advertisementService.deleteByPrimaryKey(id);
-		System.out.println("删除啦"+result+"条广告");
-		return null;
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "删除成功");
+		 //添加查询分页结果
+        Pager<Advertisement> advertisement = advertisementService.selectAdvertisementWithPagesizeFromFromindex(pageNum, pageSize);
+        respondate.put("advertisementList", advertisement);
+		
+		return respondate;
 	}
 	
 	@RequestMapping("adverinsertSel")
 	@MappingDescription("添加广告")
-	public String insertSelective(Advertisement advertisement,
+	@ResponseBody
+	public Object insertSelective(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
 			@RequestParam("pic") MultipartFile pic)throws Exception{
@@ -87,9 +97,9 @@ public class AdvertisementController {
 		}
 
 		int result = advertisementService.insert(advertisement);
-		System.out.println("插入啦"+result+"条广告");
-		
-		return null;
+		Map<String, String> respondate=new HashMap<>();
+		respondate.put("message", "添加成功");
+		return respondate;
 	}
 	
 	@RequestMapping("adverselectByPK")
@@ -98,17 +108,21 @@ public class AdvertisementController {
 	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		Advertisement advertisement = advertisementService.selectByPrimaryKey(id);
-		model.addAttribute("advertisement", advertisement);
 		
 		return advertisement;
 	}
 	
 	@RequestMapping("adverupdateByPKS")
 	@MappingDescription("根据id更新广告")
-	public String updateByPrimaryKeySelective(Advertisement advertisement,
+	@ResponseBody
+	public Object updateByPrimaryKeySelective(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
-			@RequestParam("file") MultipartFile file)throws Exception{
+			@RequestParam("file") MultipartFile file,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize
+            )throws Exception{
+		
 		if(!file.isEmpty()){
 			   //上传文件路劲
 			   String path = request.getServletContext().getRealPath("/images/");
@@ -124,8 +138,13 @@ public class AdvertisementController {
 
 		int result = advertisementService.updateByPrimaryKeySelective(advertisement);
 		
-		System.out.println("更新啦"+result+"条广告");
-		return null;
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "更新成功");
+		//添加查询分页结果
+        Pager<Advertisement> advertisementList = advertisementService.selectAdvertisementWithPagesizeFromFromindex(pageNum, pageSize);
+
+		respondate.put("advertisementList", advertisementList);
+		return respondate;
 	}
 	
 	@RequestMapping("adverupdateByPK")
@@ -134,7 +153,9 @@ public class AdvertisementController {
 	public Object updateByPrimaryKey(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
-			@RequestParam("file") MultipartFile file)throws Exception{
+			@RequestParam("file") MultipartFile file,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize)throws Exception{
 		if(!file.isEmpty()){
 			   //上传文件路劲
 			   String path = request.getServletContext().getRealPath("/images/");
@@ -149,10 +170,15 @@ public class AdvertisementController {
 
 		int result = advertisementService.updateByPrimaryKeySelective(advertisement);
 		
-		Map<String, String> adverInsertmap=new HashMap<>();
-		adverInsertmap.put("success", "添加成功");
-		
-		return adverInsertmap;
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "更新成功");
+		//添加查询分页结果
+        Pager<Advertisement> advertisementList = 
+        		advertisementService.selectAdvertisementWithPagesizeFromFromindex(
+        				pageNum, pageSize);
+
+		respondate.put("advertisementList", advertisementList);
+		return respondate;
 	}
 	
 	@ResponseBody 

@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Links;
 import com.huiming.emeng.service.LinksService;
 
@@ -35,22 +34,22 @@ public class LinksController {
 	@ResponseBody
 	public Object insert(Links links,Model model){
 
-			int result = linksService.insert(links);
-	
-		Map<String, String> linkInsertmap=new HashMap<>();
-		linkInsertmap.put("success", "添加成功");
-		
-		return linkInsertmap;
+		Map<String, String> respondate = new HashMap<>();
+		int result = linksService.insert(links);			
+		respondate.put("message", "添加成功");
+
+		return respondate;
 	}
 	
 	@RequestMapping("linksinsertSelect")
 	@MappingDescription("插入链接")
-	public String insertSelect(Links links,Model model){
-		
+	@ResponseBody
+	public Object insertSelect(Links links,Model model){
+		Map<String, String> respondate = new HashMap<>();
 		int result = linksService.insertSelective(links);
-		System.out.println("您成功插入"+result+"条友情链接");
+		respondate.put("message", "添加成功");
 		
-		return null;
+		return respondate;
 	}
 	
 	@RequestMapping("linksselectPK")
@@ -59,45 +58,62 @@ public class LinksController {
 	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		Links links = linksService.selectByPrimaryKey(id);
-		model.addAttribute("links", links);
+
 		return links;
 	}
 	
 	@RequestMapping("linksdeletePK")
 	@MappingDescription("根据id删除链接")
 	@ResponseBody
-	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
 		
 		int result = linksService.deleteByPrimaryKey(id);
-		System.out.println("您成功删除"+result+"条友情链接");
-		Map<String, String> linkDemap=new HashMap<>();
-		linkDemap.put("success", "添加成功");
-		
-		return linkDemap;
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "删除成功");
+		//添加查询分页结果
+        Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
+        respondate.put("linkList", linkList);
+		return respondate;
 		
 	}
 	
 	@RequestMapping("linksupdPK")
 	@MappingDescription("更新链接")
 	@ResponseBody
-	public Object updateByPrimaryKey(Links links,Model model){
+	public Object updateByPrimaryKey(Links links,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
 		
 		int result = linksService.updateByPrimaryKey(links);
-		System.out.println("您成功更新"+result+"条友情链接");
 		
-		Map<String, String> linkUpmap=new HashMap<>();
-		linkUpmap.put("success", "添加成功");
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "更新成功");
+		//添加查询分页结果
+        Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
+        respondate.put("linkList", linkList);
 		
-		return linkUpmap;
+		return respondate;
 	}
 	
 	@RequestMapping("linksupdPKSelect")
 	@MappingDescription("更新链接")
-	public String updateByPrimaryKeySelect(Links links,Model model){
+	@ResponseBody
+	public Object updateByPrimaryKeySelect(Links links,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
 		
+		Map<Object, Object> respondate=new HashMap<>();
 		int result = linksService.updateByPrimaryKeySelective(links);
-		System.out.println("您成功更新"+result+"条友情链接");
-		return null;
+		respondate.put("message", "更新成功");
+		//添加查询分页结果
+        Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
+        respondate.put("linkList", linkList);
+		return respondate;
 	}
 	
 	@ResponseBody 
@@ -110,11 +126,11 @@ public class LinksController {
 		
 		
         //添加查询分页结果
-        Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
+        Pager<Link> linkLists = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
 
-        Map< String, Object> linkMap = new HashMap<String, Object>();
-        linkMap.put("linkList", linkList);
-        return linkMap;
+        Map< String, Object> linkList = new HashMap<String, Object>();
+        linkList.put("linkList", linkLists);
+        return linkList;
     }
 	
 	

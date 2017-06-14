@@ -8,7 +8,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
-import org.omg.CORBA.PRIVATE_MEMBER;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -24,7 +23,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Chapter;
 import com.huiming.emeng.model.Lesson;
 import com.huiming.emeng.model.Video;
@@ -52,11 +50,13 @@ public class VideoController {
 	
 	@RequestMapping("addvideo")
 	@MappingDescription("进入视频管理添加页面")
-	public String fileUpload(Model model){
+	@ResponseBody
+	public Object fileUpload(Model model){
 		
 		List<Lesson> lessionlist= LessonService.selectAllLesson();
-		model.addAttribute("lessionlist", lessionlist);
-		return "addvideo";
+        Map<Object, Object> respondate = new HashMap<>();
+        respondate.put("lessionlist", lessionlist);
+		return respondate;
 	}
 	
 	@RequestMapping("selectlession")
@@ -64,7 +64,9 @@ public class VideoController {
 	@ResponseBody
      public Object selectAllChapterFromLesson(Integer lessonId){
 		List<Chapter> chapters = chapterService.selectAllChapterFromLesson(lessonId);
-		return chapters;
+		Map<Object, Object> respondate = new HashMap<>();
+        respondate.put("chapters", chapters);
+		return respondate;
 	}
 	
 	
@@ -102,12 +104,10 @@ public class VideoController {
 	   }
 	  
 	   int result = videoService.insert(video);
-	   System.out.println(result);
-	   
-	   Map<String, String> videomap=new HashMap<>();
-	   videomap.put("success", "成功添加一条信息");
-		
-		return videomap;
+	  
+	   Map<Object, Object> respondate = new HashMap<>();
+       respondate.put("message", "添加成功");
+	   return respondate;
 
    }
 
@@ -128,28 +128,32 @@ public class VideoController {
 	}
 
 	@RequestMapping("videoselectPK")
-	@MappingDescription("根据主键查找id删除视频")
+	@MappingDescription("根据主键查找视频")
 	@ResponseBody
 	public Object selectByPrimaryKey(HttpServletRequest request,
-			@RequestParam("id") Integer id,Model model)throws Exception{
+			@RequestParam("id") Integer id
+             )throws Exception{
 		Video video = videoService.selectByPrimaryKey(id);
-		model.addAttribute("video", video);
-		System.out.println(video);
+		
 		return video;
 	}
 
 	@RequestMapping("videoupdByPK")
 	@MappingDescription("全部字段更新")
 	@ResponseBody
-	public Object updateByPrimaryKey(Video video,Model model){
+	public Object updateByPrimaryKey(Video video,
+			 @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+             Model model){
 		
 		int result = videoService.updateByPrimaryKey(video);
-		System.out.println("您更新了"+result+"条视频数据");
-		
-		Map<String, String> videomap=new HashMap<>();
-		   videomap.put("success", "成功更新一条信息");
-			
-			return videomap;
+		  //添加查询分页结果
+        Pager<Video> videoList = videoService.selectVideoWithPagesizeFromFromindex(pageNum, pageSize);
+
+        Map<Object, Object> respondate = new HashMap<>();
+        respondate.put("message", "添加成功");
+        respondate.put("videoList", videoList);
+ 	   return respondate;
 	}
 
 	@RequestMapping("videoupdByPKS")
@@ -166,35 +170,41 @@ public class VideoController {
 	@ResponseBody
 	public Object selectBylesson(@RequestParam("lesson") Integer lesson,Model model){
 		
-		List<Video> videolists = videoService.selectBylesson(lesson);
-		model.addAttribute("videolists", videolists);
+		List<Video> videoList = videoService.selectBylesson(lesson);
 		
-		return videolists;
-	}
+		Map<Object, Object> respondate = new HashMap<>();
+        respondate.put("videoList", videoList);
+ 	   return respondate;
+		}
 	
-
 	@RequestMapping("videoselectBycha")
 	@MappingDescription("根据章节id查找所有")
 	@ResponseBody
 	public Object selectBychapter(@RequestParam("chapter") Integer chapter,Model model){
 		
-		List<Video> videolists = videoService.selectBylesson(chapter);
-		model.addAttribute("videolists", videolists);
+		List<Video> videoList = videoService.selectBylesson(chapter);
 		
-		return videolists;
+		Map<Object, Object> respondate = new HashMap<>();
+        respondate.put("videoList", videoList);
+ 	   return respondate;
 	}
 	
 	@RequestMapping("videodelByPK")
 	@MappingDescription("根据id删除视频")
 	@ResponseBody
-	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
 		
 		int result = videoService.deleteByPrimaryKey(id);
-		System.out.println("您已成功删除"+result+"条视频数据");
-		Map<String, String> videomap=new HashMap<>();
-		videomap.put("success", "成功更新一条信息");
-			
-	   return videomap;
+		  //添加查询分页结果
+        Pager<Video> videoList = videoService.selectVideoWithPagesizeFromFromindex(pageNum, pageSize);
+
+        Map<Object, Object> respondate = new HashMap<>();
+        respondate.put("message", "添加成功");
+        respondate.put("videoList", videoList);
+ 	   return respondate;
 	}	
 	
 	@ResponseBody 
@@ -204,12 +214,13 @@ public class VideoController {
                                   @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                   @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
 		
-        //添加查询分页结果
+		  //添加查询分页结果
         Pager<Video> videoList = videoService.selectVideoWithPagesizeFromFromindex(pageNum, pageSize);
 
-        Map< String, Object> videoMap = new HashMap<String, Object>();
-        videoMap.put("videoList", videoList);
-        return videoMap;
+        Map<Object, Object> respondate = new HashMap<>();
+        respondate.put("message", "添加成功");
+        respondate.put("videoList", videoList);
+ 	   return respondate;
     }
 	
   

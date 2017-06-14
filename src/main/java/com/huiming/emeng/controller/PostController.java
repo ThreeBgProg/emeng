@@ -4,6 +4,10 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,6 +21,7 @@ import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Apply;
 import com.huiming.emeng.model.Post;
 import com.huiming.emeng.model.PostWithBLOBs;
+import com.huiming.emeng.model.User;
 import com.huiming.emeng.service.PostService;
 
 /**
@@ -33,38 +38,41 @@ public class PostController {
 	@RequestMapping("postinsert")
 	@MappingDescription("插入论坛")
 	@ResponseBody
-	public Object insert(PostWithBLOBs postWithBLOBs,Model model){
+	public Object insert(HttpServletRequest request,PostWithBLOBs postWithBLOBs,Model model){
 		
-//		for(int i=0;i<30;i++){
-//			postWithBLOBs.setContent("黄慧"+i);
-//			postWithBLOBs.setLike(0);
-//			postWithBLOBs.setReleaseTime(new Date());
-//			postWithBLOBs.setReply("黄慧"+i);
-//			postWithBLOBs.setUsername("黄慧"+i);
-//			postWithBLOBs.setUserId(i);
-//			postWithBLOBs.setTitile("黄慧"+i);
-//			
-//			postWithBLOBs.setVisit(0);
-			int result = postService.insert(postWithBLOBs);
-//			System.out.println("成功插入"+result+"条论坛信息");
-//		}
+		//获取发帖者信息
+		HttpSession session = request.getSession();
+		User user = (User) session.getAttribute("user");
+		postWithBLOBs.setUserId(user.getId());
+		postWithBLOBs.setUsername(user.getUsername());
+		postWithBLOBs.setReleaseTime(new Date());
 		
-		Map<String, String> postmap=new HashMap<>();
-		postmap.put("success", "成功插入一条信息");
 		
-		return postmap;
+		int result = postService.insert(postWithBLOBs);
+		
+		Map<String, String> respondate=new HashMap<>();
+		respondate.put("message", "添加成功");
+		
+		return respondate;
 	}
 	
 	@RequestMapping("postdePK")
 	@MappingDescription("根据id删除论坛")
 	@ResponseBody
-	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+            Model model){
+		
 		int result = postService.deleteByPrimaryKey(id);
+		//已经通过审核的
+		Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
 		
-		Map<String, String> postmap=new HashMap<>();
-		postmap.put("success", "成功删除一条信息");
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "删除成功");
+		respondate.put("postList", postList);
 		
-		return postmap;
+		return respondate;
 	}
 	
 	@RequestMapping("postsePK")
@@ -79,31 +87,58 @@ public class PostController {
 	
 	@RequestMapping("postupPKS")
 	@MappingDescription("更新")
-	public String updateByPrimaryKeySelective(PostWithBLOBs record) {
-		// TODO Auto-generated method stub
-		 int result = postService.updateByPrimaryKeySelective(record);
-		 System.out.println("成功更新"+result+"条论坛信息");
-		 return null;
+	@ResponseBody
+	public Object updateByPrimaryKeySelective(PostWithBLOBs record,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize) {
+			// TODO Auto-generated method stub
+			 int result = postService.updateByPrimaryKeySelective(record);
+			//已经通过审核的
+			Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
+			
+			Map<Object, Object> respondate=new HashMap<>();
+			respondate.put("message", "更新成功");
+			respondate.put("postList", postList);
+			
+			return respondate;
 	}
 
 
 	@RequestMapping("postupPKW")
 	@MappingDescription("更新")
-	public String updateByPrimaryKeyWithBLOBs(PostWithBLOBs record) {
+	@ResponseBody
+	public Object updateByPrimaryKeyWithBLOBs(PostWithBLOBs record,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize) {
 		// TODO Auto-generated method stub
 		int result = postService.updateByPrimaryKeyWithBLOBs(record);
-		System.out.println("成功更新"+result+"条论坛信息");
-		return null;
+		//已经通过审核的
+		Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
+		
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "更新成功");
+		respondate.put("postList", postList);
+		
+		return respondate;
 	}
 
 
 	@RequestMapping("postupPK")
 	@MappingDescription("更新")
-	public String updateByPrimaryKey(Post record) { 
+	@ResponseBody
+	public Object updateByPrimaryKey(Post record,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize) { 
 		// TODO Auto-generated method stub
 		int result = postService.updateByPrimaryKey(record);
-		System.out.println("成功更新"+result+"条论坛信息");
-		return null;
+		//已经通过审核的
+		Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
+		
+		Map<Object, Object> respondate=new HashMap<>();
+		respondate.put("message", "更新成功");
+		respondate.put("postList", postList);
+		
+		return respondate;
 	}
 	
 	@ResponseBody 
@@ -113,22 +148,36 @@ public class PostController {
                                   @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                   @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
                                   @RequestParam(value="states",defaultValue="-2") Integer states ){
-		Map< String, Object> postMap = new HashMap<String, Object>();
+		Map< String, Object> respondate = new HashMap<String, Object>();
 		//刚开始进入页面，三个都要查询
 		if(states==-2){
 			Pager<Post> postList0 = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,0);
 			Pager<Post> postList1 = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
 			Pager<Post> postList2 = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,-1);
-			postMap.put("postList0", postList0);
-			postMap.put("postList1", postList1);
-			postMap.put("postList2", postList2);
+			respondate.put("postList0", postList0);
+			respondate.put("postList1", postList1);
+			respondate.put("postList2", postList2);
 		}
 		else{
 			 //添加查询分页结果
-	        Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,0);
-	        postMap.put("postList", postList);
+	        Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,states);
+	        respondate.put("postList", postList);
 		}
    
-        return postMap;
+        return respondate;
+    }
+	
+	@ResponseBody 
+	@MappingDescription("论坛分页查询")
+    @RequestMapping("userpostPage")
+    public Object userpostPageList(ModelMap modelMap,
+                                  @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+		    Map< String, Object> respondate = new HashMap<String, Object>();
+
+			Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);	
+			respondate.put("postList", postList);
+   
+        return respondate;
     }
 }

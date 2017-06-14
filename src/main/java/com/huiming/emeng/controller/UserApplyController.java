@@ -4,6 +4,9 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -15,7 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Apply;
+import com.huiming.emeng.model.Meeting;
+import com.huiming.emeng.model.User;
 import com.huiming.emeng.service.ApplyService;
+import com.huiming.emeng.service.MeetingService;
 
 /**
  * 用户报名表操作
@@ -27,28 +33,55 @@ public class UserApplyController {
 
 	@Autowired
 	private ApplyService applyService;
+	@Autowired
+	private MeetingService meetingService;
+	
 
-	@RequestMapping("userApplyform")
-	@MappingDescription("后台生成报名表")
-	public String userApplyForm(Apply apply){
+	@RequestMapping("userApplyformCode")
+	@MappingDescription("后台生成报名表(邀请码方式报名)")
+	@ResponseBody
+	public Object userApplyFormCode(HttpServletRequest request,
+			Apply apply,
+			@RequestParam("meetingId") Integer meetingId,
+			@RequestParam("code") String code){
 		
 		//获取报名的用户的id（邀请码报名默认0）
 		//获取会议id
-//		
-//		for(int i=0;i<30;i++){
-//			apply.setCompany("黄慧"+i);
-//			apply.setDuty("黄慧"+i);
-//			apply.setJobTitle("黄慧"+i);
-//			apply.setMail("黄慧"+i);
-//			apply.setName("黄慧"+i);
-//			apply.setPhone("黄慧"+i);
-//			apply.setUserId(i);
-//			apply.setMeetingId(i);
-			applyService.insert(apply);
-//		}
+		    Meeting meeting = meetingService.selectByPrimaryKey(meetingId);
+		    Map<String, String> respondate = new HashMap<>();
+		    if (meeting.getCode().equals(code)) {
+				apply.setUserId(0);
+				apply.setMeetingId(meetingId);
+				applyService.insert(apply);
+				respondate.put("message", "报名成功");
+			}else{
+				respondate.put("message", "邀请码不正确,请重新填写");
+			}
 
-		return "userApplyForm";
+		return respondate;
 	}
+	
+	@RequestMapping("userApplyform")
+	@MappingDescription("后台生成报名表(普通方式报名)")
+	@ResponseBody
+	public Object userApplyForm(HttpServletRequest request,
+			Apply apply,
+			@RequestParam("meetingId") Integer meetingId){
+		
+			//获取报名的用户的id（邀请码报名默认0）
+			//获取会议id
+		    
+			HttpSession session = request.getSession();
+			User user =(User) session.getAttribute("user");
+			apply.setUserId(user.getId());
+			apply.setMeetingId(meetingId);
+			applyService.insert(apply);
+			Map<String, String> respondate = new HashMap<>();
+			respondate.put("message", "报名成功");
+
+		return respondate;
+	}
+	
 	
 
 	@RequestMapping("selectAllApply")
@@ -56,21 +89,30 @@ public class UserApplyController {
 	@ResponseBody
 	public Object selectAllApply(Model model){
 		List<Apply> applylists=applyService.selectAllApply();
-		model.addAttribute("applylists", applylists);
-		return applylists;
+		Map<Object, Object> respondate = new HashMap<>();
+		respondate.put("applylists", applylists);
+		return respondate;
 	}
 
 
 	@RequestMapping("deleteByPrimaryKey")
 	@MappingDescription("根据主键删除报名信息")
 	@ResponseBody
-	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,Model model){
-		int result = applyService.deleteByPrimaryKey(id);
-		System.out.println("您已成功删除"+result+"条信息");
+	public Object deleteByPrimaryKey(@RequestParam("id") Integer id,
+			 @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize
+             ,Model model){
 		
-		List<Apply> applylists=applyService.selectAllApply();
-		model.addAttribute("applylists", applylists);
-		return applylists;
+		int result = applyService.deleteByPrimaryKey(id);
+		
+		 //添加查询分页结果
+        Pager<Apply> applyList = applyService.selectApplyWithPagesizeFromFromindex(pageNum, pageSize);
+
+        Map< String, Object> respondate = new HashMap<String, Object>();
+        respondate.put("applyList", applyList);
+        respondate.put("message", "删除成功");
+        
+        return respondate;
 	}
 
 	@RequestMapping("selectByPrimaryKey")
@@ -87,35 +129,38 @@ public class UserApplyController {
 	@RequestMapping("upByPKS")
 	@MappingDescription("根据user_id进行更新")
 	@ResponseBody
-	public Object updateByPrimaryKeySelective(Apply record,Model model) {
+	public Object updateByPrimaryKeySelective(Apply record,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize
+            ,Model model) {
 		
-			int result = applyService.updateByPrimaryKeySelective(record);
-			System.out.println("您已经成功更新"+result+"条数据");
-			//查询查找新的数据
-			List<Apply> lists=applyService.selectAllApply();
-			model.addAttribute("lists", lists);
-			
-			Map<String, String> applymap=new HashMap<>();
-			applymap.put("success", "成功更新一条信息");
-			
-			return applymap;
-		
+			int result = applyService.updateByPrimaryKeySelective(record);			
+			 //添加查询分页结果
+	        Pager<Apply> applyList = applyService.selectApplyWithPagesizeFromFromindex(pageNum, pageSize);
+
+	        Map< String, Object> respondate = new HashMap<String, Object>();
+	        respondate.put("applyList", applyList);
+	        respondate.put("message", "更新成功");
+	        return respondate;
+					
 	}
 	
 	@RequestMapping("upByPK")
 	@MappingDescription("根据user_id进行更新")
 	@ResponseBody
-	public Object updateByPrimaryKey(Apply record,Model model) {
+	public Object updateByPrimaryKey(Apply record,
+			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+            @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize
+            ,Model model) {
 		
 			int result = applyService.updateByPrimaryKey(record);
-			System.out.println("您已经成功更新"+result+"条数据");
-			//查询查找新的数据
-			List<Apply> lists=applyService.selectAllApply();
-			model.addAttribute("lists", lists);
-			Map<String, String> applymap=new HashMap<>();
-			applymap.put("success", "成功更新一条信息");
-			
-			return applymap;
+			 //添加查询分页结果
+	        Pager<Apply> applyList = applyService.selectApplyWithPagesizeFromFromindex(pageNum, pageSize);
+
+	        Map< String, Object> respondate = new HashMap<String, Object>();
+	        respondate.put("applyList", applyList);
+	        respondate.put("message", "更新成功");
+	        return respondate;
 		
 	}
 	
