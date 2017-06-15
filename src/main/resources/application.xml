@@ -16,12 +16,13 @@
         http://www.springframework.org/schema/mvc 
         http://www.springframework.org/schema/mvc/spring-mvc-4.0.xsd">
         
-        
+      <!--
         <mvc:interceptors>
         	<mvc:interceptor>
         		<mvc:mapping path="/**"/>
         		<bean class="com.huiming.emeng.interceptor.PermissionInterceptor"></bean>
         	</mvc:interceptor>
         </mvc:interceptors>
-        
+       -->
+
       </beans>

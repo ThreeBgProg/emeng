@@ -13,7 +13,6 @@ import javax.servlet.http.HttpSession;
  * Created by LeoMs on 2017/6/2 0002.
  */
 @Controller
-@RequestMapping("/publisher")
 public class PassagePublishController {
 
     @Autowired

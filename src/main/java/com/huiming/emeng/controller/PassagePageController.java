@@ -1,5 +1,6 @@
 package com.huiming.emeng.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Navigation;
@@ -9,11 +10,10 @@ import com.huiming.emeng.service.PassageMainService;
 import com.huiming.emeng.service.PassagePageService;
 import com.huiming.emeng.service.PassageRecommendService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
@@ -21,7 +21,7 @@ import java.util.List;
  * 非课程文章显示
  * Created by LeoMs on 2017/5/23 0023.
  */
-@Controller
+@RestController
 public class PassagePageController {
 
     //导航模块
@@ -49,8 +49,8 @@ public class PassagePageController {
      * @return
      */
     @MappingDescription("非课程文章分页查询")
-    @RequestMapping("/{passageType}/passagelist")
-    public String passagePageList(ModelMap modelMap, @PathVariable("passageType") Byte passageType,
+    @RequestMapping("/passage/passagelist")
+    public Object passagePageList(ModelMap modelMap, @RequestParam("passageType") Byte passageType,
                                   @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                   @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
         //添加导航表模块
@@ -63,7 +63,9 @@ public class PassagePageController {
         modelMap.put("navigationList", navigationList);
         modelMap.put("passagePage", passagePage);
         modelMap.put("recommendList", recommendList);
-        return "passage/list";
+        Object object = JSON.toJSON(modelMap);
+//        System.out.println(object);
+        return object;
     }
 
     /**
@@ -74,9 +76,9 @@ public class PassagePageController {
      * @return
      */
     @MappingDescription("非课程文章正文页面")
-    @RequestMapping("/{passageType}/{passageId}/passage")
-    public String passagePageList(ModelMap modelMap, @PathVariable("passageType") Byte passageType,
-                                  @PathVariable("passsageId") Integer passageId){
+    @RequestMapping("/passage/main")
+    public Object passagePageList(ModelMap modelMap, @RequestParam("passageType") Byte passageType,
+                                  @RequestParam("passsageId") Integer passageId){
         //添加导航表模块
         List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加热点推荐模块
@@ -87,7 +89,8 @@ public class PassagePageController {
         modelMap.put("navigationList", navigationList);
         modelMap.put("recommendList", recommendList);
         modelMap.put("passageMainList", passageMainList);
-        return "passage/main";
+        Object object = JSON.toJSON(modelMap);
+        return object;
     }
 
 }
