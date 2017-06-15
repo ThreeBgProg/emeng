@@ -18,7 +18,7 @@ public class PermissionController {
 	@RequestMapping("/updatePermission")
 	@MappingDescription("修改权限信息")
 	public String updatePermission(Permission permission){
-		//只允许修改权限描述
+		//只允许修改权限功能描述
 		permissionService.updateByPrimaryKey(permission);
 		return "";
 	}

@@ -1,7 +1,11 @@
 package com.huiming.emeng.mapper;
 
 import java.util.List;
+import java.util.Map;
 
+import org.apache.ibatis.annotations.Param;
+
+import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Video;
 
 public interface VideoMapper {
@@ -21,4 +25,17 @@ public interface VideoMapper {
     int updateByPrimaryKeySelective(Video record);
 
     int updateByPrimaryKey(Video record);
+    
+    public List<Video> findVideo(Map<String, String> map);
+    
+    /**
+     * 返回广告在数据库中的数目，service调用时需要考虑返回值为null，默认设置为0
+     */
+    int selectNumberfromVideo();
+    
+    /**
+     * 查询第几页数据
+     */
+    List<Video> selectVideoWithPagesizeFromFromindex(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
+
 }

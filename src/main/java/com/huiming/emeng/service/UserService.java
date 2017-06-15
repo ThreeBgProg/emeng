@@ -3,7 +3,6 @@ package com.huiming.emeng.service;
 
 import java.util.List;
 
-import com.huiming.emeng.model.Apply;
 import com.huiming.emeng.model.Role;
 import com.huiming.emeng.model.User;
 
@@ -55,4 +54,11 @@ public interface UserService {
 	 * @return
 	 */
 	public List<User> selectAllSelective(User user);
+	
+	/**
+	 * 查詢
+	 * @param record
+	 * @return
+	 */
+	public List<User> findSelective(User record);
 }

@@ -14,6 +14,7 @@ import com.huiming.emeng.model.User;
 @Service
 public class PermissionInterceptor extends HandlerInterceptorAdapter {
 
+	/*
 	/**
 	 * 判断用户是否拥有请求资源的权限，没有则返回至登录页面，或者主页，或者没有权限页面
 	 */
@@ -47,5 +48,4 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 		}
 		return super.preHandle(request, response, handler);
 	}
-
 }

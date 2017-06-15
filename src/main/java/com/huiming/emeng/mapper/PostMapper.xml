@@ -34,7 +34,7 @@
   </delete>
   <insert id="insert" parameterType="com.huiming.emeng.model.PostWithBLOBs">
     insert into post (id, titile, user_id, 
-      release_time, like, visit, 
+      release_time, post.like, post.visit, 
       username, content, reply
       )
     values (#{id,jdbcType=INTEGER}, #{titile,jdbcType=VARCHAR}, #{userId,jdbcType=INTEGER}, 
@@ -58,10 +58,10 @@
         release_time,
       </if>
       <if test="like != null">
-        like,
+        post.like,
       </if>
       <if test="visit != null">
-        visit,
+        post.visit,
       </if>
       <if test="username != null">
         username,
@@ -116,10 +116,10 @@
         release_time = #{releaseTime,jdbcType=TIMESTAMP},
       </if>
       <if test="like != null">
-        like = #{like,jdbcType=INTEGER},
+        post.like = #{like,jdbcType=INTEGER},
       </if>
       <if test="visit != null">
-        visit = #{visit,jdbcType=INTEGER},
+        post.visit = #{visit,jdbcType=INTEGER},
       </if>
       <if test="username != null">
         username = #{username,jdbcType=VARCHAR},
@@ -138,8 +138,8 @@
     set titile = #{titile,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
       release_time = #{releaseTime,jdbcType=TIMESTAMP},
-      like = #{like,jdbcType=INTEGER},
-      visit = #{visit,jdbcType=INTEGER},
+      post.like = #{like,jdbcType=INTEGER},
+      post.visit = #{visit,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR},
       content = #{content,jdbcType=LONGVARCHAR},
       reply = #{reply,jdbcType=LONGVARCHAR}
@@ -150,9 +150,41 @@
     set titile = #{titile,jdbcType=VARCHAR},
       user_id = #{userId,jdbcType=INTEGER},
       release_time = #{releaseTime,jdbcType=TIMESTAMP},
-      like = #{like,jdbcType=INTEGER},
-      visit = #{visit,jdbcType=INTEGER},
+      post.like = #{like,jdbcType=INTEGER},
+      post.visit = #{visit,jdbcType=INTEGER},
       username = #{username,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findPost" parameterType="Map" resultMap="ResultMapWithBLOBs">
+      select * from post where titile like #{titile,jdbcType=VARCHAR}
+  </select>
+  
+  <select id="selectAllPost" resultMap="ResultMapWithBLOBs">
+      select * from post
+  </select>
+  
+    <select id="selectNumberfromPost" parameterType="com.huiming.emeng.model.States" resultType="Integer">
+   select count(*) from post 
+   <if test="states==0 or states==-1">
+      where visit=#{states}
+   </if>
+   <if test="states !=0 and states!=-1">
+      where visit > 0
+   </if>
+
+  </select>
+  
+  <select id="selectPostWithPagesizeFromFromindex" resultMap="BaseResultMap">
+   select * from post where visit>0 order by id DESC limit #{fromIndex},#{pageSize}
+  </select>
+  
+   <select id="selectPostWithPagesizeFromFromindex1" resultMap="BaseResultMap">
+   select * from post where visit=0 order by id DESC limit #{fromIndex},#{pageSize}
+  </select>
+  
+   <select id="selectPostWithPagesizeFromFromindex2" resultMap="BaseResultMap">
+   select * from post where visit=-1 order by id DESC limit #{fromIndex},#{pageSize}
+  </select>
+   
 </mapper>

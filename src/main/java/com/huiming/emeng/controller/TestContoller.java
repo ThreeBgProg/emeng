@@ -2,8 +2,11 @@ package com.huiming.emeng.controller;
 
 import com.huiming.emeng.model.Navigation;
 import com.huiming.emeng.service.NavigationService;
+import com.mysql.fabric.xmlrpc.base.Array;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -11,6 +14,7 @@ import com.huiming.emeng.common.CustomException;
 import com.huiming.emeng.common.CustomException.UnauthorizedError;
 import com.huiming.emeng.mapper.LessonMapper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -33,14 +37,19 @@ public class TestContoller {
 	 * @return
 	 */
 	@RequestMapping("/test")
-	public String test() {
+	
+	public String test(ModelMap map) {
 
-		List<Navigation> navigationList = navigationService.selectAllNavigation();
-		for (Navigation navigation : navigationList){
-			System.out.println(navigation);
+		//List<Navigation> navigationList = navigationService.selectAllNavigation();
+		List<Navigation> navigationList = new ArrayList<Navigation>(); 
+//		for (Navigation navigation : navigationList){
+//			System.out.println(navigation);
+//		}
+		for(int i=0;i<5;i++){
+			navigationList.add(new Navigation());
 		}
-		System.out.println(mapper.selectByPrimaryKey(1).getName());
-		return "fileupload";
+		map.put("navigationList", navigationList);
+		return "success";
 	}
 	
 	

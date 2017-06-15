@@ -47,4 +47,19 @@ public interface RoleService {
 	 */
 	public int deleteRolePermission(RolePermission record);
 	
+	/**
+	 * 判断某种角色是否存在某种权限
+	 * @param roleId
+	 * @param permissionId
+	 * @return
+	 */
+	public boolean selectByAll(Integer roleId,Integer permissionId);
+	
+	/**
+	 * 获取角色信息
+	 * @param record
+	 * @return
+	 */
+	public Role selectRole(Role record);
+	
 }

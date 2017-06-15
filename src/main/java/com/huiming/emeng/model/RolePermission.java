@@ -5,6 +5,19 @@ public class RolePermission {
 	private Integer roleId;
 	private Integer permissionId;
 
+	
+	
+	
+	public RolePermission() {
+		super();
+	}
+
+	public RolePermission(Integer roleId, Integer permissionId) {
+		super();
+		this.roleId = roleId;
+		this.permissionId = permissionId;
+	}
+
 	public Integer getId() {
 		return id;
 	}

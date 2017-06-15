@@ -22,4 +22,6 @@ public interface UserMapper {
     List<User> selectAll();
     
     List<User> selectAllSelective(User record);
+    
+    List<User> findSelective(User record);
 }

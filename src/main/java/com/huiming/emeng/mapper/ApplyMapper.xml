@@ -138,4 +138,20 @@
       job_title = #{jobTitle,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  
+  <select id="selectNumberfromApply" resultType="Integer">
+   select count(*) from apply
+  </select>
+  
+  <select id="selectApplyWithPagesizeFromFromindex" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from apply order by id DESC 
+    <if test="fromIndex != null and pageSize != null">
+        limit #{fromIndex},#{pageSize} 
+    </if>
+
+  </select>
+  
 </mapper>

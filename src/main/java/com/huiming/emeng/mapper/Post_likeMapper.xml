@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.huiming.emeng.mapper.Post_likeMapper">
+    <resultMap id="BaseResultMap" type="com.huiming.emeng.model.Post_like">
+         <id column="id" jdbcType="INTEGER" property="id" />
+         <result column="post_id" jdbcType="INTEGER" property="post_id" />
+         <result column="user_id" jdbcType="INTEGER" property="user_id" />
+    </resultMap>
+    <sql id="Base_Column_List">
+      id,post_id,user_id
+    </sql>
+     
+    <select id="isLiked" parameterType="com.huiming.emeng.model.Post_like" resultMap="BaseResultMap">
+       select * from post_like 
+       where post_id=#{post_id,jdbcType=INTEGER} and user_id=#{user_id,jdbcType=INTEGER} 
+    </select>
+    
+    <insert id="insert" parameterType="com.huiming.emeng.model.Post_like">
+       insert into post_like ( id, post_id, user_id) 
+       values(#{id,jdbcType=INTEGER},#{post_id,jdbcType=INTEGER},#{user_id,jdbcType=INTEGER})
+    </insert>
+    
+    <delete id="deleteLiked" parameterType="com.huiming.emeng.model.Post_like">
+       delete from post_like 
+       where post_id=#{post_id,jdbcType=INTEGER} and user_id=#{user_id,jdbcType=INTEGER} 
+    </delete>
+    
+
+</mapper>

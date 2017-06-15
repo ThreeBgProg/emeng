@@ -3,13 +3,15 @@ package com.huiming.emeng.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-
-import com.huiming.emeng.mapper.ApplyMapper;
-import com.huiming.emeng.model.Apply;
-import com.huiming.emeng.service.ApplyService;
 import org.springframework.stereotype.Service;
 
-@Service
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.mapper.ApplyMapper;
+import com.huiming.emeng.model.Advertisement;
+import com.huiming.emeng.model.Apply;
+import com.huiming.emeng.service.ApplyService;
+
+@Service("applyService")
 public class ApplyServiceImpl implements ApplyService {
 
 	@Autowired
@@ -40,8 +42,8 @@ public class ApplyServiceImpl implements ApplyService {
 	}
 	@Override
 	public int insertSelective(Apply record) {
-		// TODO Auto-generated method stub
-		return 0;
+		// TODO Auto-generated method stub 
+		return 0; 
 	}
 	//根据主键查找
 	@Override
@@ -59,5 +61,29 @@ public class ApplyServiceImpl implements ApplyService {
 	public int updateByPrimaryKey(Apply record) {
 		// TODO Auto-generated method stub
 		return applyMapper.updateByPrimaryKey(record);
+	}
+	@Override
+	public Pager<Apply> selectApplyWithPagesizeFromFromindex(Integer pageNum, Integer pageSize) {
+		//总记录
+		Integer totalRecord = applyMapper.selectNumberfromApply();
+		
+		//总页数
+		Integer totalPage = totalRecord/pageSize;
+	
+		if (totalRecord ==0) {
+			return null;
+		}
+		
+		if(totalRecord % pageSize !=0){
+			totalPage++;
+		}
+		if(pageNum > totalPage){
+        pageNum = totalPage;
+		}
+		
+		Integer fromIndex = (pageNum - 1) * pageSize;
+		Pager<Apply> pager = new Pager<Apply>(pageSize, pageNum, totalRecord, totalPage, 
+				applyMapper.selectApplyWithPagesizeFromFromindex(fromIndex, pageSize));
+		return pager;
 	}
 }

@@ -142,4 +142,27 @@
       annex = #{annex,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  
+  <select id="findMeeting" parameterType="Map" resultMap="ResultMapWithBLOBs">
+       select * from meeting where title like #{title}
+  </select>
+  
+  <select id="selectAllMeeting" resultMap="ResultMapWithBLOBs">
+   select * from meeting
+  </select>
+  
+    <select id="selectNumberfromMeeting" resultType="Integer">
+   select count(*) from meeting
+  </select>
+  
+  <select id="selectMeetingWithPagesizeFromFromindex" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from meeting order by id DESC 
+    <if test="fromIndex != null and pageSize != null">
+        limit #{fromIndex},#{pageSize} 
+    </if>
+
+  </select>
+  
 </mapper>

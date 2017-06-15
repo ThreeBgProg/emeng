@@ -14,10 +14,8 @@ import com.huiming.emeng.model.User;
 import com.huiming.emeng.model.UserRole;
 import com.huiming.emeng.service.UserService;
 
-
 @Service("userService")
 public class UserServiceImpl implements UserService {
-
 
 	@Autowired
 	private UserMapper userMapper;
@@ -27,8 +25,6 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private RoleMapper roleMapper;
-
-	
 
 	@Override
 	public User selectSelective(User user) {
@@ -48,9 +44,8 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Role getUserRole(Integer id) {
-		UserRole userRole = userRoleMapping.selectByPrimaryKey(id);
+		UserRole userRole = userRoleMapping.selectByUserId(id);
 		return roleMapper.selectByPrimaryKey(userRole.getRoleId());
-
 	}
 
 	@Override
@@ -67,9 +62,13 @@ public class UserServiceImpl implements UserService {
 	public int insertUser(User user) {
 		return userMapper.insert(user);
 	}
-	
+
 	@Override
 	public int updateUser(User user) {
 		return userMapper.updateByPrimaryKeySelective(user);
+	}
+	
+	public List<User> findSelective(User record){
+		return userMapper.findSelective(record);
 	}
 }
