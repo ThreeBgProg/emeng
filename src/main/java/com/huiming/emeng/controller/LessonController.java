@@ -1,5 +1,6 @@
 package com.huiming.emeng.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.common.LessonPageInfo;
 import com.huiming.emeng.common.PassageType;
@@ -16,13 +17,14 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
 /**
  * Created by LeoMs on 2017/5/29 0029.
  */
-@Controller
+@RestController
 public class LessonController {
 
     @Autowired
@@ -52,8 +54,8 @@ public class LessonController {
 
 
     @MappingDescription("所有课程")
-    @RequestMapping({"/lesson","publisher/lesson"})
-    public String allLesson(ModelMap modelMap){
+    @RequestMapping({"/lesson"})
+    public Object allLesson(ModelMap modelMap){
 
         //添加导航表模块
         List<Navigation> navigationList = navigationService.selectAllNavigation();
@@ -63,13 +65,16 @@ public class LessonController {
         modelMap.put("lessonList", lessonService.selectAllLesson());
         modelMap.put("navigationList", navigationList);
         modelMap.put("recommendList", recommendList);
+        Object object = JSON.toJSON(modelMap);
+//        System.out.println(object);
+//        System.out.println("ok");
+        return object;
 
-        return "lesson/list";
     }
 
     @MappingDescription("相应课程章节")
-    @RequestMapping({"/{lessonId}/chapter","/publisher/{lessonId}/chapter"})
-    public String allChapter(ModelMap modelMap, @PathVariable(value = "lessonId") Integer lessonId){
+    @RequestMapping({"/{lessonId}/chapter"})
+    public Object allChapter(ModelMap modelMap, @PathVariable("lessonId") Integer lessonId){
 
         //添加导航表模块
         List<Navigation> navigationList = navigationService.selectAllNavigation();
@@ -84,13 +89,16 @@ public class LessonController {
         modelMap.put("navigationList", navigationList);
         modelMap.put("readPassageList", readPassageList);
         modelMap.put("qualityOnlinePassageList", qualityOnlinePassageList);
-
-        return "lesson/chapter/list";
+        Object object = JSON.toJSON(modelMap);
+//        System.out.println(object);
+        return object;
     }
 
     @MappingDescription("章节下的分块")
-    @RequestMapping("/{lessonId}/{chapterId}/block")
-    public String allBlock(@PathVariable("lessonId") Integer lessonId, @PathVariable("chapterId") Integer chaptId, ModelMap modelMap){
+    @RequestMapping("/{lessonId}/{chapter}/block")
+    public Object allBlock(@PathVariable("lessonId") Integer lessonId,
+                           @PathVariable("chapterId") Integer chaptId,
+                           ModelMap modelMap){
 
         //添加导航表模块
         List<Navigation> navigationList = navigationService.selectAllNavigation();
@@ -121,17 +129,19 @@ public class LessonController {
         modelMap.put("recommendResourcesList", recommendResourcesList);
         modelMap.put("PPTSourcesList", PPTSourcesList);
         modelMap.put("onlineVedioList", onlineVedioList);
-        return "lesoon/chapter/block";
+        Object object = JSON.toJSON(modelMap);
+//        System.out.println(object);
+        return object;
     }
 
     @MappingDescription("章节下分块的具体文章(或其他资源)数组")
-    @RequestMapping("/{lessonId}/{chapterId}/{passageType}/blockpassagelist")
-    public String blockPassages(
+    @RequestMapping("/{lessonId}/{chapterId}/blockpassagelist")
+    public Object blockPassages(
             @PathVariable("lessonId") Integer lessonId,
             @PathVariable("chapterId") Integer chaptId,
-            @PathVariable("passageType")Byte passageType,
+            @RequestParam("passageType")Byte passageType,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-            @RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize,
+            @RequestParam(value = "pageSxize", defaultValue = "15") Integer pageSize,
             ModelMap modelMap){
 
         //添加导航表模块
@@ -144,12 +154,12 @@ public class LessonController {
         modelMap.put("navigationList", navigationList);
         modelMap.put("pagingResult", lessonPassagePage);
         modelMap.put("recommendList", recommendList);
-        return "leson/chapter/block/list";
+        return JSON.toJSON(modelMap);
     }
 
     @MappingDescription("课程文章正文页面")
-    @RequestMapping("/lesson/chapter/{passageId}/lessonpassage")
-    public String passagePageList(ModelMap modelMap, @PathVariable("passsageId") Integer passageId) {
+    @RequestMapping("/lesson/chapter/lessonpassage")
+    public Object passagePageList(ModelMap modelMap, @RequestParam("passsageId") Integer passageId) {
         //添加导航表模块
         List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加热点推荐模块
@@ -162,7 +172,8 @@ public class LessonController {
         modelMap.put("recommendList", recommendList);
         modelMap.put("passage", passage);
 
-        return "lesson/chapter/block/passage";
+        Object object = JSON.toJSON(modelMap);
+        return object;
 
     }
 }

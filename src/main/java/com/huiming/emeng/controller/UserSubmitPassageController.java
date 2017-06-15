@@ -32,7 +32,7 @@ public class UserSubmitPassageController {
 
     @MappingDescription("用户投稿提交")
     @ResponseBody
-    @RequestMapping(value = "/submit/passage", method = RequestMethod.PUT)
+    @RequestMapping(value = "/submit/passage", method = RequestMethod.POST)
     public int submitPassage(@RequestBody Passage passage, HttpSession httpSession){
 
         User user = (User) httpSession.getAttribute("user");

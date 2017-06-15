@@ -33,7 +33,7 @@ public class PassagePageService {
         //起始索引
         Integer fromIndex = (pageNum - 1) * pageSize;
 
-        Pager<Passage> pager = new Pager<Passage>(pageSize, pageNum, totalRecord, totalPage, passageMapper.selectPassageWithPagesizeFromFromindex(passageType, fromIndex, pageSize));
+        Pager<Passage> pager = new Pager<Passage>(pageSize, pageNum, totalRecord, totalPage, passageMapper.selectPassageWithPagesizeFromFromindex(passageType,fromIndex,pageSize));
         return pager;
     }
 

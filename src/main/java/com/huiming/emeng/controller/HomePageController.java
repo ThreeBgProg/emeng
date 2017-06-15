@@ -1,24 +1,21 @@
 package com.huiming.emeng.controller;
 
+import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.common.PassageType;
-import com.huiming.emeng.service.HomePagePassageService;
-import com.huiming.emeng.service.LinksService;
-import com.huiming.emeng.service.MeetingService;
-import com.huiming.emeng.service.NavigationService;
-import com.huiming.emeng.service.PostService;
-
+import com.huiming.emeng.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 /**
  * 主页controller，由我们三个共同开发
  * 负责向前端传我们各自负责的模块对应的参数
  * Created by LeoMs on 2017/5/17 0017.
  */
-@Controller
+@RestController
 public class HomePageController {
 
     /**
@@ -42,7 +39,7 @@ public class HomePageController {
      */
     @MappingDescription("主页所有需要用到的对象")
     @RequestMapping("/")
-    public String homePage(ModelMap model){
+    public Object homePage(ModelMap model){
 
 
         //添加导航表模块
@@ -59,10 +56,12 @@ public class HomePageController {
         model.put("postList", postService.selectAllPost());
         //会议论坛
         model.put("meeting", meetingService.selectAllMeeting());
+        //头条新闻
+        model.put("headlineList",homePagePassageService.selectByTypeAndDescendWithTime(PassageType.MAYUANTOUTIAO,12));
         //其他模块你们看着添加
 
-
-        return "homepage";
+        Object object = JSON.toJSON(model);
+        return object;
     }
 
 

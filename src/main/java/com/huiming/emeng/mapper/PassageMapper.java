@@ -5,7 +5,6 @@ import com.huiming.emeng.model.Passage;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
-import java.util.Map;
 
 public interface PassageMapper {
     int deleteByPrimaryKey(Integer id);
@@ -40,8 +39,6 @@ public interface PassageMapper {
      */
     List<Passage> selectRecommendPassageList();
 
-
-
     /**
      * 返回章节下一级所对应模块，默认显示前7条数据
      */
@@ -70,12 +67,30 @@ public interface PassageMapper {
     /**
      * 模糊查询课程文章标题
      */
-    List<Passage> selectLessonPassageByTitle(@Param("title")String title, @Param("lessonId") Integer lessonId);
+    List<Passage> selectLessonPassageByTitleWithPagesizeFromFromindex(@Param("title")String title,
+                                                                      @Param("lessonId") Integer lessonId,
+                                                                      @Param("pageSize") Integer pageSize,
+                                                                      @Param("fromIndex") Integer fromIndex);
+    /**
+     * 模糊查询文章标题
+     */
+    List<Passage> selectPassageByTitle(@Param("title")String title,
+                                       @Param("fromIndex") Integer fromIndex,
+                                       @Param("pageSize") Integer pageSize);
 
     /**
-     * 模糊查询非课程文章标题
+     * 返回模糊查询文章个数
+     * @param title
+     * @return
      */
-    List<Passage> selectPassageByPassageType(@Param("title")String title, @Param("passageType") Byte passageType);
+    int selectCountByTitle(@Param("title") String title);
 
-    public List<Passage> fingPassage(Map<String, String> map);
+    /**
+     * 返回模糊查询课程文章个数
+     * @param lessonId
+     * @param title
+     * @return
+     */
+    int selectCountOfLessonPassageByTitle(@Param("lessonId") Integer lessonId,
+                                          @Param("title") String title);
 }

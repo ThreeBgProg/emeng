@@ -115,9 +115,44 @@
     </if>
     </where>
   </select>
-  <select id="selectLessonPassageByTitle" resultMap="BaseResultMap">
+  <select id="selectLessonPassageByTitleWithPagesizeFromFromindex" resultMap="BaseResultMap">
     SELECT
     <include refid="Base_Column_List" />
+    FROM passage
+    <where>
+      <if test="lessonId != null">
+        lesson = #{lessonId}
+      </if>
+      <if test="title != null">
+        AND title LIKE concat(concat('%',#{title}),'%') OR
+      </if>
+    </where>
+    ORDER BY publish_time DESC
+    limit #{fromIndex},#{pageSize}
+  </select>
+  <select id="selectPassageByTitle" resultMap="BaseResultMap">
+  SELECT
+  <include refid="Base_Column_List" />
+  FROM passage psg
+  <where>
+    <if test="title != null">
+      title LIKE concat(concat('%',#{title}),'%')
+    </if>
+  </where>
+    ORDER BY publish_time DESC
+    limit #{fromIndex},#{pageSize}
+  </select>
+  <select id="selectCountByTitle" parameterType="String" resultMap="Integer">
+    SELECT count(*)
+    FROM passage
+    <where>
+      <if test="title != null">
+        title LIKE concat(concat('%',#{title}),'%')
+      </if>
+    </where>
+  </select>
+  <select id="selectCountOfLessonPassageByTitle" resultType="Integer">
+    SELECT count(*)
     FROM passage
     <where>
       <if test="lessonId != null">
@@ -127,21 +162,6 @@
         AND title LIKE concat(concat('%',#{title}),'%')
       </if>
     </where>
-    ORDER BY publish_time DESC
-  </select>
-  <select id="selectPassageByPassageType" resultMap="BaseResultMap">
-  SELECT
-  <include refid="Base_Column_List" />
-  FROM passage psg
-  <where>
-    <if test="passageType != null">
-     psg.type  = #{passageType}
-    </if>
-    <if test="title != null">
-      AND title LIKE concat(concat('%',#{title}),'%')
-    </if>
-  </where>
-  ORDER BY publish_time DESC
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from passage
