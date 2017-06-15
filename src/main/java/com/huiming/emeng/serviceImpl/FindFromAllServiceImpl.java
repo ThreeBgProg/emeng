@@ -37,10 +37,6 @@ public class FindFromAllServiceImpl implements FindFromAllService{
 		return meetingMapper.findMeeting(map);
 	}
 
-	public List<Passage> findPassage(Map<String, String> map) {
-		return passageMapper.fingPassage(map);
-	}
-
 	public List<Post> findPost(Map<String, String> map) {
 		return postMapper.findPost(map);
 	}
@@ -51,6 +47,12 @@ public class FindFromAllServiceImpl implements FindFromAllService{
 
 	public List<Video> findVideo(Map<String, String> map) {
 		return videoMapper.findVideo(map);
+	}
+
+	@Override
+	public List<Passage> findPassage(Map<String, String> map) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

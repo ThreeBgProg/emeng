@@ -44,7 +44,7 @@
     </where>
     
   </select>
-  <select id="selectByPassageType" parameterType="Byte" resultType="Integer">
+  <select id="selectByPassageType" parameterType="Byte" resultType="java.lang.Integer">
     SELECT count(*)
     FROM passage
     WHERE type = #{passageType}
@@ -91,7 +91,7 @@
     </where>
     limit 0,7
   </select>
-  <select id="selectCountByLessonIdAndChapterIdAndPassageType" resultType="Integer">
+  <select id="selectCountByLessonIdAndChapterIdAndPassageType" resultType="java.lang.Integer">
     SELECT count(*)
     FROM passage psg
     <where>
@@ -142,7 +142,7 @@
     ORDER BY publish_time DESC
     limit #{fromIndex},#{pageSize}
   </select>
-  <select id="selectCountByTitle" parameterType="String" resultMap="Integer">
+  <select id="selectCountByTitle" parameterType="String" resultType="java.lang.Integer">
     SELECT count(*)
     FROM passage
     <where>
@@ -151,7 +151,7 @@
       </if>
     </where>
   </select>
-  <select id="selectCountOfLessonPassageByTitle" resultType="Integer">
+  <select id="selectCountOfLessonPassageByTitle" resultType="java.lang.Integer">
     SELECT count(*)
     FROM passage
     <where>
@@ -325,7 +325,7 @@
       WHERE type = #{HomePagePassage.type}
       ORDER BY publish_time DESC
       limit 0,#{HomePagePassage.displayNums}
-  </select> -->
+  </select> 
 
   <select id="fingPassage" parameterType="Map" resultMap="BaseResultMap">
      select * from passage where 
@@ -333,5 +333,5 @@
      or author like #{author,jdbcType=VARCHAR}
   </select>
 
-
+-->
 </mapper>
