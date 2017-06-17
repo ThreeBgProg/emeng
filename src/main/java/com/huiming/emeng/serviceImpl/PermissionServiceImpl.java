@@ -67,15 +67,15 @@ public class PermissionServiceImpl implements PermissionService {
 	}
 
 	@Override
-	public List<Permission> selectAll() {
-		return permissionMapper.selectAll();
+	public List<Permission> selectAllEffective() {
+		return permissionMapper.selectAllEffective();
 	}
 
 	@Override
 	public List<Permission> selectByRole(Integer id) {
 		List<Permission> list = new ArrayList<>();
 		if (id.equals(env.getRequiredProperty("role.adminId"))) {
-			return permissionMapper.selectAll();
+			return permissionMapper.selectAllEffective();
 		} else {
 			for (Integer permissionId : rolePermissionMapper.selectAllByRoleId(id)) {
 				list.add(permissionMapper.selectSelective(new Permission(permissionId, (byte) 1)));
@@ -84,4 +84,7 @@ public class PermissionServiceImpl implements PermissionService {
 		return list;
 	}
 
+	public List<Permission> selectAll(){
+		return permissionMapper.selectAll();
+	}
 }

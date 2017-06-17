@@ -26,7 +26,7 @@ public class PermissionController {
 	@RequestMapping("/getAllPermission")
 	@MappingDescription("超级管理员获取所有权限信息")
 	public String getAllPermission(Permission permission,ModelMap modelMap){
-		modelMap.put("permissions",permissionService.selectAll());
+		modelMap.put("permissions",permissionService.selectAllEffective());
 		return "";
 	}
 }

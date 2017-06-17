@@ -2,7 +2,7 @@ package com.huiming.emeng.model;
 
 public class Role {
 	private Integer id;
-	private String role;
+	private String rolename;
 	private Byte state;
 
 	public Integer getId() {
@@ -13,12 +13,12 @@ public class Role {
 		this.id = id;
 	}
 
-	public String getRole() {
-		return role;
+	public String getRolename() {
+		return rolename;
 	}
 
-	public void setRole(String role) {
-		this.role = role;
+	public void setRolename(String rolename) {
+		this.rolename = rolename;
 	}
 
 	public Byte getState() {

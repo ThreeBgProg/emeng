@@ -61,4 +61,11 @@ public interface UserService {
 	 * @return
 	 */
 	public List<User> findSelective(User record);
+	
+	/**
+	 * 修改用户角色
+	 * @return
+	 */
+	public int updateUserRole(Integer roleId,Integer userId);
+
 }

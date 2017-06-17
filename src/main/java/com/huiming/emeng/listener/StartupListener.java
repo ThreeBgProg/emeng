@@ -27,7 +27,6 @@ public class StartupListener {
 	public void initMethod() throws Exception {
 
 		List<Permission> permissionList = permissionMapper.selectAll();
-
 		List<Method> methods = getMethodsNameInClass("com.huiming.emeng.controller");
 
 		for (Method m : methods) {
