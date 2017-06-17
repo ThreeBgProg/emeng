@@ -102,13 +102,13 @@ public class UserController {
 		return "";
 	}
 
-	@RequestMapping("/getAllUser")
-	@MappingDescription("获取所有用户以及角色")
+	@RequestMapping("/updateByPrimaryKey")
+	@MappingDescription("更改用户以及角色")
 	public String updateByPrimaryKey(User user, Role role, ModelMap modelMap) {
 		userService.updateUser(user);
 		Role temp = userService.getUserRole(user.getId());
 		if(!temp.equals(role)){
-			
+			userService.updateUserRole(temp.getId(), user.getId());
 		}
 		return "";
 	}
@@ -116,10 +116,13 @@ public class UserController {
 	public List<UserWithRole> getUserWithRole(List<User> users) {
 		List<UserWithRole> userList = new ArrayList<>();
 		for (User user : users) {
+			System.out.println("getUserWithRole");
 			UserWithRole temp = new UserWithRole();
 			temp.setUser(user);
 			temp.setRole(userService.getUserRole(user.getId()));
+			userList.add(temp);
 		}
+		System.out.println(userList);
 		return userList;
 	}
 }
