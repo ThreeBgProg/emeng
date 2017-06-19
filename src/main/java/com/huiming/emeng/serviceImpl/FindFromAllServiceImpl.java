@@ -24,15 +24,14 @@ public class FindFromAllServiceImpl implements FindFromAllService{
 	@Autowired
 	private MeetingMapper meetingMapper;
 	@Autowired
-	private PassageMapper passageMapper;
+	private PassageMapper passageMapper; 
 	@Autowired
 	private TeacherMapper teacherMapper;
 	@Autowired
 	private VideoMapper videoMapper;
 	@Autowired
 	private PostMapper postMapper;
-	
-	
+		
 	public List<Meeting> findMeeting(Map<String, String> map) {
 		return meetingMapper.findMeeting(map);
 	}

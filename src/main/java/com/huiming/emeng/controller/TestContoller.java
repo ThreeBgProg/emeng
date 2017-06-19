@@ -49,7 +49,8 @@ public class TestContoller {
 			navigationList.add(new Navigation());
 		}
 		map.put("navigationList", navigationList);
-		return "success";
+//		return "success";
+		return "WEB-INF/thinkEM/indexEM.html";
 	}
 	
 	

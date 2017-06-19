@@ -1,7 +1,6 @@
 package com.huiming.emeng.controller;
 
 import java.io.File;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +17,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Meeting;
 import com.huiming.emeng.service.MeetingService;
 /**

@@ -2,6 +2,7 @@ package com.huiming.emeng.controller;
 
 import java.io.File;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -9,6 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
+import org.eclipse.jdt.internal.compiler.ast.FakedTrackingVariable;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -65,8 +67,16 @@ public class FileuploadController {
 					   filepath.getParentFile().mkdirs();
 				   }
 				   //将文件存到一个目标文件当中
-				   files[i].transferTo(new File(path+File.separator+fileName));
-				   respondate.add(i, filepath+fileName);
+				   
+				   long str2 = Date.parse((new Date()).toString());
+				   
+				   String[] fStrings = fileName.split("\\.");
+				   
+				   String str = fStrings[0]+str2+"."+fStrings[1];
+				   
+				   files[i].transferTo(new File(path+File.separator+str));
+				   System.out.println(str);
+				   respondate.add(i, path+str);
 			   }
 		   }
 	   }
