@@ -62,4 +62,6 @@ public interface RoleService {
 	 */
 	public Role selectRole(Role record);
 	
+	
+	
 }

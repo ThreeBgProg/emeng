@@ -27,5 +27,11 @@ public interface PermissionService {
 	 * 获取全部有效权限
 	 * @return
 	 */
-	public List<Permission> selectAll();
+	public List<Permission> selectAllEffective();
+	
+	/**
+     * 获取所有的权限，包括无效的     
+     * @return
+     */
+    public List<Permission> selectAll();
 }

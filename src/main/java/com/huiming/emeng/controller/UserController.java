@@ -1,5 +1,6 @@
 package com.huiming.emeng.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.bo.UserWithRole;
 import com.huiming.emeng.model.Permission;
 import com.huiming.emeng.model.Role;
 import com.huiming.emeng.model.User;
@@ -82,15 +84,45 @@ public class UserController {
 	@MappingDescription("获取某种角色的所有用户")
 	public String getUserByRole(Role role, ModelMap modelMap) {
 		// 从user_role表获取关于相关role的用户id，在获取用户
-		modelMap.put("users", userService.getUserByRole(role.getId()));
+		modelMap.put("userList", userService.getUserByRole(role.getId()));
 		return "";
 	}
 
 	@RequestMapping("/findUser")
 	@MappingDescription("根据信息查询用户")
 	public String findUser(User user, ModelMap modelMap) {
-		modelMap.put("users", userService.findSelective(user));
+		modelMap.put("userList", getUserWithRole(userService.findSelective(user)));
 		return "";
 	}
 
+	@RequestMapping("/getAllUser")
+	@MappingDescription("获取所有用户以及角色")
+	public String getAllUser(ModelMap modelMap) {
+		modelMap.put("userList", getUserWithRole(userService.selectAllUser()));
+		return "";
+	}
+
+	@RequestMapping("/updateByPrimaryKey")
+	@MappingDescription("更改用户以及角色")
+	public String updateByPrimaryKey(User user, Role role, ModelMap modelMap) {
+		userService.updateUser(user);
+		Role temp = userService.getUserRole(user.getId());
+		if(!temp.equals(role)){
+			userService.updateUserRole(temp.getId(), user.getId());
+		}
+		return "";
+	}
+
+	public List<UserWithRole> getUserWithRole(List<User> users) {
+		List<UserWithRole> userList = new ArrayList<>();
+		for (User user : users) {
+			System.out.println("getUserWithRole");
+			UserWithRole temp = new UserWithRole();
+			temp.setUser(user);
+			temp.setRole(userService.getUserRole(user.getId()));
+			userList.add(temp);
+		}
+		System.out.println(userList);
+		return userList;
+	}
 }

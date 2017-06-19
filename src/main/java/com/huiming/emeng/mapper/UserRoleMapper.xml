@@ -78,4 +78,9 @@
 		role_id = #{roleId,jdbcType=INTEGER}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	<update id="updateUserRole" parameterType="com.huiming.emeng.model.UserRole">
+		update user_role
+		role_id = #{roleId,jdbcType=INTEGER}
+		where user_id = #{userId,jdbcType=INTEGER}
+	</update>
 </mapper>

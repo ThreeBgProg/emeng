@@ -46,6 +46,16 @@ public interface PermissionMapper {
     
     int deleteSelective(Permission record);
     
+    /**
+     * 获取所有有效的权限
+     * @return
+     */
+    List<Permission> selectAllEffective();
+    
+    /**
+     * 获取所有的权限，包括无效的     
+     * @return
+     */
     List<Permission> selectAll();
     
 }

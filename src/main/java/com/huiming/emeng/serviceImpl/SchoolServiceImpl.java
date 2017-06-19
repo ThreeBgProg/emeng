@@ -3,11 +3,13 @@ package com.huiming.emeng.serviceImpl;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.huiming.emeng.mapper.SchoolMapper;
 import com.huiming.emeng.model.School;
 import com.huiming.emeng.service.SchoolService;
 
+@Service("schoolService")
 public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired

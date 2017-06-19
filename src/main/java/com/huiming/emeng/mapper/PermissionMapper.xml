@@ -121,7 +121,7 @@
 				AND function = #{function,jdbcType=VARCHAR}
 			</if>
 			<if test="state != null">
-				AND state = #{state,jdbcType=VARCHAR}
+				AND state = #{state,jdbcType=TINYINT}
 			</if>
 		</where>
 	</select>
@@ -163,10 +163,16 @@
 			</if>
 		</trim>
 	</delete>
-	<select id="selectAll" resultMap="BaseResultMap">
+	<select id="selectAllEffective" resultMap="BaseResultMap">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM permission
 		where state = 1
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM permission
 	</select>
 </mapper>

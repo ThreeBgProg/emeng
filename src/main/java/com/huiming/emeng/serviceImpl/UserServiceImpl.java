@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 	private UserMapper userMapper;
 
 	@Autowired
-	private UserRoleMapper userRoleMapping;
+	private UserRoleMapper userRoleMapper;
 
 	@Autowired
 	private RoleMapper roleMapper;
@@ -44,13 +44,13 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public Role getUserRole(Integer id) {
-		UserRole userRole = userRoleMapping.selectByUserId(id);
+		UserRole userRole = userRoleMapper.selectByUserId(id);
 		return roleMapper.selectByPrimaryKey(userRole.getRoleId());
 	}
 
 	@Override
 	public List<User> getUserByRole(Integer id) {
-		List<Integer> userIds = userRoleMapping.selectByRoleId(id);
+		List<Integer> userIds = userRoleMapper.selectByRoleId(id);
 		List<User> list = new ArrayList<>();
 		for (Integer userId : userIds) {
 			list.add(userMapper.selectByPrimaryKey(userId));
@@ -70,5 +70,16 @@ public class UserServiceImpl implements UserService {
 	
 	public List<User> findSelective(User record){
 		return userMapper.findSelective(record);
+	}
+	
+	/**
+	 * 修改用户角色
+	 * @return
+	 */
+	public int updateUserRole(Integer roleId,Integer userId){
+		UserRole userRole = new UserRole();
+		userRole.setRoleId(roleId);
+		userRole.setUserId(userId);
+		return userRoleMapper.updateUserRole(userRole);
 	}
 }
