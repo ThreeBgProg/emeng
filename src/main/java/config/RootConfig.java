@@ -26,15 +26,11 @@ import com.huiming.emeng.interceptor.PermissionInterceptor;
 @EnableScheduling
 public class RootConfig {
 	
+//	
+//	@Bean(initMethod="initMethod")
+//	public StartupListener startupListener() {
+//		return new StartupListener();
+//	}
 	
-	@Bean(initMethod="initMethod")
-	public StartupListener startupListener() {
-		return new StartupListener();
-	}
-	
-	@Bean
-	public PermissionInterceptor permissionInterceptor() {
-		return new PermissionInterceptor();
-	}
 	
 }

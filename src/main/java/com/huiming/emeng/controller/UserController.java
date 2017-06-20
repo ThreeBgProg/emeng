@@ -11,7 +11,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.bo.UserWithRole;
 import com.huiming.emeng.model.Permission;
@@ -23,6 +25,9 @@ import com.huiming.emeng.service.UserService;
 @Controller
 public class UserController {
 
+	private String SUCCESS = "操作成功";
+	private String FAIL = "操作失败";
+
 	@Autowired
 	private UserService userService;
 	@Autowired
@@ -31,7 +36,7 @@ public class UserController {
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	@MappingDescription("用户登录")
 	public String login(HttpServletRequest request, User user) {
-		System.out.println("login方法");
+		System.out.println("/login");
 		user = userService.selectSelective(user);
 		if (user != null) {
 			HttpSession session = request.getSession();
@@ -44,9 +49,9 @@ public class UserController {
 			session.setAttribute("permissionList", permissions);
 
 		} else {
-			return "login";
+			return "用户名或密码错误";
 		}
-		return "";
+		return "index";
 	}
 
 	@RequestMapping("/logout")
@@ -56,73 +61,84 @@ public class UserController {
 		session.removeAttribute("user");
 		session.removeAttribute("permissionList");
 		session.removeAttribute("role");
-		return "";
+		return "login";
 	}
 
 	@RequestMapping("/addUser")
 	@MappingDescription("添加用户/用户注册")
-	public String addUser(User user) {
-		System.out.println("--------------addUser-----------------");
-		if (userService.selectSelective(user) == null) {
+	public String addUser(User user, String school) {
+		User temp = new User();
+		user.setUsername(user.getUsername());
+		if (userService.selectSelective(temp) == null) {
+			temp = null;
 			userService.insertUser(user);
 		} else {
-
+			return FAIL + "用户已存在";
 		}
-		return "用户已存在";
+		return SUCCESS;
 	}
 
 	@RequestMapping("/deleteUser")
 	@MappingDescription("删除用户")
+	@ResponseBody
 	public String deleteUser(User user) {
+		System.out.println("/deleteUser");
 		// 改为---->修改用户的state为0
 		user.setState((byte) 0);
-		userService.updateUser(user);
-		return "";
+		if (userService.updateUser(user) != 0) {
+			return SUCCESS;
+		} else {
+			return FAIL;
+		}
 	}
 
 	@RequestMapping("/getUserByRole")
 	@MappingDescription("获取某种角色的所有用户")
-	public String getUserByRole(Role role, ModelMap modelMap) {
+	@ResponseBody
+	public List<User> getUserByRole(Role role, ModelMap modelMap, Integer currentPage, Integer pageSize) {
 		// 从user_role表获取关于相关role的用户id，在获取用户
-		modelMap.put("userList", userService.getUserByRole(role.getId()));
-		return "";
+		return userService.getUserByRole(role.getId());
 	}
 
 	@RequestMapping("/findUser")
 	@MappingDescription("根据信息查询用户")
-	public String findUser(User user, ModelMap modelMap) {
+	@ResponseBody
+	public Object findUser(User user, ModelMap modelMap, Integer currentPage, Integer pageSize) {
 		modelMap.put("userList", getUserWithRole(userService.findSelective(user)));
-		return "";
+		return JSON.toJSON(modelMap);
 	}
 
 	@RequestMapping("/getAllUser")
 	@MappingDescription("获取所有用户以及角色")
-	public String getAllUser(ModelMap modelMap) {
+	@ResponseBody
+	public Object getAllUser(ModelMap modelMap, Integer currentPage, Integer pageSize) {
 		modelMap.put("userList", getUserWithRole(userService.selectAllUser()));
-		return "";
+		return JSON.toJSON(modelMap);
 	}
 
 	@RequestMapping("/updateByPrimaryKey")
 	@MappingDescription("更改用户以及角色")
+	@ResponseBody
 	public String updateByPrimaryKey(User user, Role role, ModelMap modelMap) {
-		userService.updateUser(user);
-		Role temp = userService.getUserRole(user.getId());
-		if(!temp.equals(role)){
-			userService.updateUserRole(temp.getId(), user.getId());
+		if (userService.updateUser(user) != 0) {
+			Role temp = userService.getUserRole(user.getId());
+			if (!temp.equals(role)) {
+				userService.updateUserRole(temp.getId(), user.getId());
+			}
+			return SUCCESS;
+		} else {
+			return FAIL;
 		}
-		return "";
 	}
 
 	public List<UserWithRole> getUserWithRole(List<User> users) {
 		List<UserWithRole> userList = new ArrayList<>();
 		for (User user : users) {
-			System.out.println("getUserWithRole");
 			UserWithRole temp = new UserWithRole();
 			temp.setUser(user);
 			temp.setRole(userService.getUserRole(user.getId()));
 			userList.add(temp);
 		}
-		System.out.println(userList);
 		return userList;
 	}
 }

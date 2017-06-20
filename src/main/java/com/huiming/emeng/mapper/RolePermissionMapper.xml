@@ -17,7 +17,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</select>
 
-	<select id="selectAllByRoleId" parameterType="java.lang.Integer">
+	<select id="selectAllByRoleId" parameterType="java.lang.Integer" resultType="java.lang.Integer">
 		select
 		permission_id
 		from role_permission
