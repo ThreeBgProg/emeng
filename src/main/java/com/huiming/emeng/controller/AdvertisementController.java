@@ -1,8 +1,8 @@
 package com.huiming.emeng.controller;
 
 import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -11,17 +11,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Advertisement;
-import com.huiming.emeng.model.Navigation;
-import com.huiming.emeng.model.Passage;
 import com.huiming.emeng.service.AdvertisementService;
 
 
@@ -47,16 +45,22 @@ public class AdvertisementController {
 			   if(!filepath.getParentFile().exists()){
 				   filepath.getParentFile().mkdirs();
 			   }
-			   pic.transferTo(new File(path+File.separator+fileName));
-			   advertisement.setPic(path+fileName); 
+			   
+			   @SuppressWarnings("deprecation")
+			   long str2 = Date.parse((new Date()).toString());
+			   String[] fStrings = fileName.split("\\.");			   
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			   pic.transferTo(new File(path+File.separator+str));
+			   advertisement.setPic(path+str); 
 
 		}
 		
 		int result = advertisementService.insert(advertisement);
 		Map<String, String> respondate=new HashMap<>();
 		respondate.put("message", "添加成功");
-		
-		return respondate;
+		Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("adverdelPK")
@@ -72,8 +76,8 @@ public class AdvertisementController {
 		 //添加查询分页结果
         Pager<Advertisement> advertisement = advertisementService.selectAdvertisementWithPagesizeFromFromindex(pageNum, pageSize);
         respondate.put("advertisementList", advertisement);
-		
-		return respondate;
+		Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("adverinsertSel")
@@ -91,15 +95,20 @@ public class AdvertisementController {
 			   if(!filepath.getParentFile().exists()){
 				   filepath.getParentFile().mkdirs();
 			   }
-			   pic.transferTo(new File(path+File.separator+fileName));
-			   advertisement.setPic(path+fileName);
+			   @SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			   String[] fStrings = fileName.split("\\.");
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   pic.transferTo(new File(path+File.separator+str));
+			   advertisement.setPic(path+str);
 
 		}
 
 		int result = advertisementService.insert(advertisement);
 		Map<String, String> respondate=new HashMap<>();
 		respondate.put("message", "添加成功");
-		return respondate;
+		Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("adverselectByPK")
@@ -108,8 +117,8 @@ public class AdvertisementController {
 	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		Advertisement advertisement = advertisementService.selectByPrimaryKey(id);
-		
-		return advertisement;
+		Object object = JSON.toJSON(advertisement);
+		return object;
 	}
 	
 	@RequestMapping("adverupdateByPKS")
@@ -131,8 +140,12 @@ public class AdvertisementController {
 			   if(!filepath.getParentFile().exists()){
 				   filepath.getParentFile().mkdirs();
 			   }
-			   file.transferTo(new File(path+File.separator+fileName));
-			   advertisement.setPic(path+fileName);
+			   @SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			   String[] fStrings = fileName.split("\\.");
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   file.transferTo(new File(path+File.separator+str));
+			   advertisement.setPic(path+str);
 
 		}
 
@@ -144,7 +157,9 @@ public class AdvertisementController {
         Pager<Advertisement> advertisementList = advertisementService.selectAdvertisementWithPagesizeFromFromindex(pageNum, pageSize);
 
 		respondate.put("advertisementList", advertisementList);
-		return respondate;
+		
+		Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("adverupdateByPK")
@@ -164,8 +179,14 @@ public class AdvertisementController {
 			   if(!filepath.getParentFile().exists()){
 				   filepath.getParentFile().mkdirs();
 			   }
-			   file.transferTo(new File(path+File.separator+fileName));
-			   advertisement.setPic(path+fileName);
+			   
+			   @SuppressWarnings("deprecation")
+			   long str2 = Date.parse((new Date()).toString());
+			   String[] fStrings = fileName.split("\\.");
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			   file.transferTo(new File(path+File.separator+str));
+			   advertisement.setPic(path+str);
 		}
 
 		int result = advertisementService.updateByPrimaryKeySelective(advertisement);
@@ -178,7 +199,9 @@ public class AdvertisementController {
         				pageNum, pageSize);
 
 		respondate.put("advertisementList", advertisementList);
-		return respondate;
+		
+		Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@ResponseBody 
@@ -193,7 +216,9 @@ public class AdvertisementController {
 
         Map< String, Object> advertisementList = new HashMap<String, Object>();
         advertisementList.put("advertisementList", advertisement);
-        return advertisementList;
+        
+        Object object = JSON.toJSON(advertisementList);
+        return object;
     }
 	
 }

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.VideoMapper;
-import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Video;
 import com.huiming.emeng.service.VideoService;
 

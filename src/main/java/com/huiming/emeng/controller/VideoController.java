@@ -1,6 +1,7 @@
 package com.huiming.emeng.controller;
 
 import java.io.File;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -86,10 +87,16 @@ public class VideoController {
 		   if(!linkpath.getParentFile().exists()){
 			   linkpath.getParentFile().mkdirs();
 		   }
-		   link.transferTo(new File(path+File.separator+linkName));
+		   
+		   @SuppressWarnings("deprecation")
+		  long str2 = Date.parse((new Date()).toString());
+		   String[] fStrings = linkName.split("\\.");   
+		   String str = fStrings[0]+str2+"."+fStrings[1];
+		   
+		   link.transferTo(new File(path+File.separator+str));
 
 		   video.setName(linkName);
-		   video.setLink(path+linkName);
+		   video.setLink(path+str);
 	   }
 	   
 	   if(!pic.isEmpty()){
@@ -99,8 +106,13 @@ public class VideoController {
 		   if(!picpath.getParentFile().exists()){
 			   picpath.getParentFile().mkdirs();
 		   }
-		   link.transferTo(new File(path+File.separator+picName));
-		   video.setPic(path+picName);
+		   @SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			String[] fStrings = picName.split("\\.");   
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+		   link.transferTo(new File(path+File.separator+str));
+		   video.setPic(path+str);
 	   }
 	  
 	   int result = videoService.insert(video);
@@ -141,24 +153,100 @@ public class VideoController {
 	@RequestMapping("videoupdByPK")
 	@MappingDescription("全部字段更新")
 	@ResponseBody
-	public Object updateByPrimaryKey(Video video,
+	public Object updateByPrimaryKey(HttpServletRequest request,
+			Video video,
+			@RequestParam("link") MultipartFile link,
+			 @RequestParam("pic") MultipartFile pic,
 			 @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
              @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
-             Model model){
+             Model model)throws Exception{
+		
+		  if(!link.isEmpty()){
+			   String path = request.getServletContext().getRealPath("/videos/");
+			   String linkName = link.getOriginalFilename();
+			   File linkpath = new File(path,linkName);
+			   if(!linkpath.getParentFile().exists()){
+				   linkpath.getParentFile().mkdirs();
+			   }
+			   
+			   @SuppressWarnings("deprecation")
+			  long str2 = Date.parse((new Date()).toString());
+			   String[] fStrings = linkName.split("\\.");   
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			   link.transferTo(new File(path+File.separator+str));
+
+			   video.setName(linkName);
+			   video.setLink(path+str);
+		   }
+		   
+		   if(!pic.isEmpty()){
+			   String path = request.getServletContext().getRealPath("/images/");
+			   String picName = pic.getOriginalFilename();
+			   File picpath = new File(path,picName);
+			   if(!picpath.getParentFile().exists()){
+				   picpath.getParentFile().mkdirs();
+			   }
+			   @SuppressWarnings("deprecation")
+				long str2 = Date.parse((new Date()).toString());
+				String[] fStrings = picName.split("\\.");   
+				   String str = fStrings[0]+str2+"."+fStrings[1];
+				   
+			   link.transferTo(new File(path+File.separator+str));
+			   video.setPic(path+str);
+		   }
 		
 		int result = videoService.updateByPrimaryKey(video);
 		  //添加查询分页结果
         Pager<Video> videoList = videoService.selectVideoWithPagesizeFromFromindex(pageNum, pageSize);
 
         Map<Object, Object> respondate = new HashMap<>();
-        respondate.put("message", "添加成功");
+        respondate.put("message", "更新成功");
         respondate.put("videoList", videoList);
  	   return respondate;
 	}
 
 	@RequestMapping("videoupdByPKS")
 	@MappingDescription("选择字段更新")
-	public String updateByPrimaryKeySelective(Video video ,Model model){
+	public String updateByPrimaryKeySelective(HttpServletRequest request,
+			Video video,
+			@RequestParam("link") MultipartFile link,
+			 @RequestParam("pic") MultipartFile pic ,
+			 Model model)throws Exception{
+		if(!link.isEmpty()){
+			   String path = request.getServletContext().getRealPath("/videos/");
+			   String linkName = link.getOriginalFilename();
+			   File linkpath = new File(path,linkName);
+			   if(!linkpath.getParentFile().exists()){
+				   linkpath.getParentFile().mkdirs();
+			   }
+			   
+			   @SuppressWarnings("deprecation")
+			  long str2 = Date.parse((new Date()).toString());
+			   String[] fStrings = linkName.split("\\.");   
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			   link.transferTo(new File(path+File.separator+str));
+
+			   video.setName(linkName);
+			   video.setLink(path+str);
+		   }
+		   
+		   if(!pic.isEmpty()){
+			   String path = request.getServletContext().getRealPath("/images/");
+			   String picName = pic.getOriginalFilename();
+			   File picpath = new File(path,picName);
+			   if(!picpath.getParentFile().exists()){
+				   picpath.getParentFile().mkdirs();
+			   }
+			   @SuppressWarnings("deprecation")
+				long str2 = Date.parse((new Date()).toString());
+				String[] fStrings = picName.split("\\.");   
+				   String str = fStrings[0]+str2+"."+fStrings[1];
+				   
+			   link.transferTo(new File(path+File.separator+str));
+			   video.setPic(path+str);
+		   }
 		int result = videoService.updateByPrimaryKeySelective(video);
 		System.out.println("您更新了"+result+"条视频数据");
 		return null;

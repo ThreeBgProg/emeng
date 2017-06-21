@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 
 @Controller
@@ -81,8 +82,8 @@ public class FileuploadController {
 		   }
 	   }
 	   
-	      
-	   return respondate;
+	      Object object = JSON.toJSON(respondate);
+	   return object;
    }
 	/**
 	 * 文件下载

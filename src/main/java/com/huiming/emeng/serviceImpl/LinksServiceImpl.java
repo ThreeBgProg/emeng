@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.LinksMapper;
-import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Links;
 import com.huiming.emeng.service.LinksService;
 

@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.PostMapper;
-import com.huiming.emeng.model.Meeting;
 import com.huiming.emeng.model.Post;
 import com.huiming.emeng.model.PostWithBLOBs;
 import com.huiming.emeng.model.States;

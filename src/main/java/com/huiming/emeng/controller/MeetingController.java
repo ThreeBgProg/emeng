@@ -1,6 +1,8 @@
 package com.huiming.emeng.controller;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Meeting;
@@ -45,8 +48,14 @@ public class MeetingController {
 			if(!filepath.getParentFile().exists()){
 				   filepath.getParentFile().mkdirs();
 			   }
-			annex.transferTo(new File(path+File.separator+fileName)); 
-			meeting.setLink(path+fileName);
+			
+			@SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			String[] fStrings = fileName.split("\\.");   
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			annex.transferTo(new File(path+File.separator+str)); 
+			meeting.setLink(path+str);
 		}
 		
 //			meeting.setReleaseDate(new Date());
@@ -55,7 +64,8 @@ public class MeetingController {
 			Map<String, String> respondate=new HashMap<>();
 			respondate.put("message", "添加成功");
 			
-			return respondate;
+			Object object = JSON.toJSON(respondate);
+			return object;
 	}
 	
 	@RequestMapping("meetinsertSel")
@@ -73,15 +83,22 @@ public class MeetingController {
 			if(!filepath.getParentFile().exists()){
 				   filepath.getParentFile().mkdirs();
 			   }
-			annex.transferTo(new File(path+File.separator+fileName)); 
-			meeting.setLink(path+fileName);
+			
+			@SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			String[] fStrings = fileName.split("\\.");   
+			String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			annex.transferTo(new File(path+File.separator+str)); 
+			meeting.setLink(path+str);
 		}
 		int result = meetingService.insertSelective(meeting);
 		
 		Map<String, String> respondate=new HashMap<>();
 		respondate.put("message", "添加成功");
 		
-		return respondate;
+		Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("meetdelPK")
@@ -101,16 +118,36 @@ public class MeetingController {
 
         respondate.put("meetingList", meetingList);
 		
-		return respondate;
+        Object object=JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("meetupdByPKS")
 	@MappingDescription("根据id更新会议信息")
 	@ResponseBody
 	public Object updateByPrimaryKeySelective(Meeting meeting,
+			HttpServletRequest request,
+			@RequestParam("annex") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
-            Model model){
+            Model model) throws Exception{
+		
+		if(!annex.isEmpty()){
+			String path = request.getServletContext().getRealPath("/meetings/");
+			String fileName=annex.getOriginalFilename();
+			File filepath = new File(path, fileName);
+			if(!filepath.getParentFile().exists()){
+				   filepath.getParentFile().mkdirs();
+			   }
+			
+			@SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			String[] fStrings = fileName.split("\\.");   
+			String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			annex.transferTo(new File(path+File.separator+str)); 
+			meeting.setLink(path+str);
+		}
 		
 		int result = meetingService.updateByPrimaryKeySelective(meeting);
 		
@@ -121,17 +158,35 @@ public class MeetingController {
 
         respondate.put("meetingList", meetingList);
 		
-		return respondate;
+        Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("meetupdByPKWB")
 	@MappingDescription("根据id更新会议(包含会议内容）")
 	@ResponseBody
 	public Object updateByPrimaryKeyWithBLOBs(Meeting record,
+			HttpServletRequest request,
+			@RequestParam("annex") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
-            Model model){
-		
+            Model model)throws Exception{
+		if(!annex.isEmpty()){
+			String path = request.getServletContext().getRealPath("/meetings/");
+			String fileName=annex.getOriginalFilename();
+			File filepath = new File(path, fileName);
+			if(!filepath.getParentFile().exists()){
+				   filepath.getParentFile().mkdirs();
+			   }
+			
+			@SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			String[] fStrings = fileName.split("\\.");   
+			String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			annex.transferTo(new File(path+File.separator+str)); 
+			record.setLink(path+str);
+		}
 		int result = meetingService.updateByPrimaryKeyWithBLOBs(record);
 		
 		Map<Object, Object> respondate=new HashMap<>();
@@ -141,17 +196,35 @@ public class MeetingController {
 
         respondate.put("meetingList", meetingList);
 		
-		return respondate;
+        Object object=JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("meetupdByPK")
 	@MappingDescription("根据id更新会议信息(不包含会议内容）")
 	@ResponseBody
 	public Object updateByPrimaryKey(Meeting meeting ,
+			HttpServletRequest request,
+			@RequestParam("annex") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
-            Model model){
-		
+            Model model)throws Exception{
+		if(!annex.isEmpty()){
+			String path = request.getServletContext().getRealPath("/meetings/");
+			String fileName=annex.getOriginalFilename();
+			File filepath = new File(path, fileName);
+			if(!filepath.getParentFile().exists()){
+				   filepath.getParentFile().mkdirs();
+			   }
+			
+			@SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			String[] fStrings = fileName.split("\\.");   
+			String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			annex.transferTo(new File(path+File.separator+str)); 
+			meeting.setLink(path+str);
+		}
 		int result = meetingService.updateByPrimaryKey(meeting);
 		 
 		Map<Object, Object> respondate=new HashMap<>();

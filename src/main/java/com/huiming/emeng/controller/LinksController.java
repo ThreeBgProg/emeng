@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Links;
@@ -38,7 +39,8 @@ public class LinksController {
 		int result = linksService.insert(links);			
 		respondate.put("message", "添加成功");
 
-		return respondate;
+		Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("linksinsertSelect")
@@ -49,7 +51,8 @@ public class LinksController {
 		int result = linksService.insertSelective(links);
 		respondate.put("message", "添加成功");
 		
-		return respondate;
+		Object object=JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("linksselectPK")
@@ -76,7 +79,9 @@ public class LinksController {
 		//添加查询分页结果
         Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
         respondate.put("linkList", linkList);
-		return respondate;
+        
+        Object object=JSON.toJSON(respondate);
+		return object;
 		
 	}
 	
@@ -96,7 +101,8 @@ public class LinksController {
         Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
         respondate.put("linkList", linkList);
 		
-		return respondate;
+        Object object = JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@RequestMapping("linksupdPKSelect")
@@ -113,7 +119,9 @@ public class LinksController {
 		//添加查询分页结果
         Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);
         respondate.put("linkList", linkList);
-		return respondate;
+        
+        Object object=JSON.toJSON(respondate);
+		return object;
 	}
 	
 	@ResponseBody 
@@ -130,7 +138,9 @@ public class LinksController {
 
         Map< String, Object> linkList = new HashMap<String, Object>();
         linkList.put("linkList", linkLists);
-        return linkList;
+        
+        Object object = JSON.toJSON(linkList);
+        return object;
     }
 	
 	
