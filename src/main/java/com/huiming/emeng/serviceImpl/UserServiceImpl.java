@@ -68,6 +68,7 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateByPrimaryKeySelective(user);
 	}
 	
+	@Override
 	public List<User> findSelective(User record){
 		return userMapper.findSelective(record);
 	}
@@ -76,6 +77,7 @@ public class UserServiceImpl implements UserService {
 	 * 修改用户角色
 	 * @return
 	 */
+	@Override
 	public int updateUserRole(Integer roleId,Integer userId){
 		UserRole userRole = new UserRole();
 		userRole.setRoleId(roleId);

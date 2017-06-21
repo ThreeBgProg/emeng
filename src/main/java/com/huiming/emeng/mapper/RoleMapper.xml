@@ -68,9 +68,9 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Role">
 		update role
+		set
 		rolename = #{rolename,jdbcType=VARCHAR},
-		state =
-		#{state,jdbcType=TINYINT}
+		state = #{state,jdbcType=TINYINT}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
