@@ -33,6 +33,7 @@ public class SearchPassageController {
                                       @RequestParam(value = "pageNum",defaultValue = "1") Integer pageNum){
             Pager<Passage> pager = searchPassageService.searchLessonPassage(lessonId,pageNum,pageSize,searchInfo);
             Object object = JSON.toJSON(pager);
+        System.out.println(object);
             return object;
     }
 

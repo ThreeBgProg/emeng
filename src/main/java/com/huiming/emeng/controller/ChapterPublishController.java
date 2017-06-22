@@ -36,14 +36,14 @@ public class ChapterPublishController {
 
     //删除章节
     @MappingDescription("删除章节")
-    @RequestMapping(value = "/delete/chapter",method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/chapter",method = RequestMethod.POST)
     public int deleteChapter(@RequestParam("chapterId") Integer chapterId){
         return chapterMapper.deleteByPrimaryKey(chapterId);
     }
 
     //更新章节
     @MappingDescription("更新章节")
-    @RequestMapping(value = "/update/chapter",method = RequestMethod.PUT)
+    @RequestMapping(value = "/update/chapter",method = RequestMethod.POST)
     public int deleteChapter(@RequestBody Chapter chapter){
         System.out.println(chapter);
         return chapterMapper.updateByPrimaryKeySelective(chapter);

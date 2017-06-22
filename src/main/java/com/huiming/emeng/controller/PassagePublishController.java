@@ -28,7 +28,7 @@ public class PassagePublishController {
     }
 
     @ResponseBody
-    @RequestMapping(value = "/update/passage",method = RequestMethod.PUT)
+    @RequestMapping(value = "/update/passage",method = RequestMethod.POST)
     public int updatePassage(@RequestBody Passage passage){
 
         return passagePublishService.updatePassage(passage);

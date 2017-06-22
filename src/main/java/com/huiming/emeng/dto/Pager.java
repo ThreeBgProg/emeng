@@ -41,7 +41,7 @@ public class Pager<T> implements Serializable {
 			this.totalPage = totalRecord / pageSize + 1;
 		}
 		int fromIndex = (currentPage - 1) * pageSize;
-		int toIndex = currentPage * pageSize < totalRecord - 1 ? currentPage * pageSize : totalRecord - 1;
+		int toIndex = currentPage * pageSize < totalRecord ? currentPage * pageSize : totalRecord;
 		this.dataList = dataList.subList(fromIndex, toIndex);
 	}
 

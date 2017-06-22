@@ -95,7 +95,7 @@ public class LessonController {
     }
 
     @MappingDescription("章节下的分块")
-    @RequestMapping("/{lessonId}/{chapter}/block")
+    @RequestMapping("/{lessonId}/{chapterId}/block")
     public Object allBlock(@PathVariable("lessonId") Integer lessonId,
                            @PathVariable("chapterId") Integer chaptId,
                            ModelMap modelMap){
@@ -141,7 +141,7 @@ public class LessonController {
             @PathVariable("chapterId") Integer chaptId,
             @RequestParam("passageType")Byte passageType,
             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
-            @RequestParam(value = "pageSxize", defaultValue = "15") Integer pageSize,
+            @RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize,
             ModelMap modelMap){
 
         //添加导航表模块

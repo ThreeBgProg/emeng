@@ -32,7 +32,9 @@ public interface PassageMapper {
     /**
      * 根据文章类型查询第几页数据
      */
-    List<Passage> selectPassageWithPagesizeFromFromindex(@Param("passageType") Byte passageType, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
+    List<Passage> selectPassageWithPagesizeFromFromindex(@Param("passageType") Byte passageType,
+                                                         @Param("fromIndex") Integer fromIndex,
+                                                         @Param("pageSize") Integer pageSize);
 
     /**
      * 返回热点推荐文章，默认根据推荐等级正序排列，返回7条数据
@@ -65,19 +67,30 @@ public interface PassageMapper {
     List<Passage> selectAllPassageByPassageType(Byte passageType);
 
     /**
-     * 模糊查询课程文章标题
+     * 根据课程文章标题模糊查询文章
      */
     List<Passage> selectLessonPassageByTitleWithPagesizeFromFromindex(@Param("title")String title,
                                                                       @Param("lessonId") Integer lessonId,
                                                                       @Param("pageSize") Integer pageSize,
                                                                       @Param("fromIndex") Integer fromIndex);
     /**
-     * 模糊查询文章标题
+     * 根据文章标题非课程文章
      */
     List<Passage> selectPassageByTitle(@Param("title")String title,
                                        @Param("fromIndex") Integer fromIndex,
                                        @Param("pageSize") Integer pageSize);
 
+    /**
+     * 根据老师名字查询文章
+     */
+    List<Passage> selectPassageByAuthor(@Param("author")String author,
+                                       @Param("fromIndex") Integer fromIndex,
+                                       @Param("pageSize") Integer pageSize);
+
+    /**
+     * 返回对应老师的文章数
+     */
+    int selectCountByAuthor(@Param("author") String author);
     /**
      * 返回模糊查询文章个数
      * @param title
@@ -93,4 +106,17 @@ public interface PassageMapper {
      */
     int selectCountOfLessonPassageByTitle(@Param("lessonId") Integer lessonId,
                                           @Param("title") String title);
+
+    /**
+     * 返回对应课程阅读书目分页
+     * @param passageType
+     * @param fromIndex
+     * @param pageSize
+     * @param lessonId
+     * @return
+     */
+    List<Passage> selectReadPassageWithPagesizeFromFromindex(@Param("passageType") Byte passageType,
+                                                             @Param("fromIndex") Integer fromIndex,
+                                                             @Param("pageSize") Integer pageSize,
+                                                             @Param("lessonId") Integer lessonId);
 }

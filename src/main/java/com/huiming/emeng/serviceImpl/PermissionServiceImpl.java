@@ -74,7 +74,7 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public List<Permission> selectByRole(Integer id) {
 		List<Permission> list = new ArrayList<>();
-		if (id.equals(env.getRequiredProperty("role.adminId"))) {
+		if (id==Integer.parseInt(env.getRequiredProperty("role.adminId"))) {
 			return permissionMapper.selectAllEffective();
 		} else {
 			for (Integer permissionId : rolePermissionMapper.selectAllByRoleId(id)) {

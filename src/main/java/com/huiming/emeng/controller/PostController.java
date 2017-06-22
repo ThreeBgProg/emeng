@@ -7,6 +7,12 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.model.Post;
+import com.huiming.emeng.model.PostWithBLOBs;
+import com.huiming.emeng.model.User;
+import com.huiming.emeng.service.PostService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,13 +20,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.huiming.emeng.annotation.MappingDescription;
-import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Post;
-import com.huiming.emeng.model.PostWithBLOBs;
-import com.huiming.emeng.model.User;
-import com.huiming.emeng.service.PostService;
 
 /**
  * 
@@ -83,8 +82,8 @@ public class PostController {
 		return postWithBLOBs;
 	}
 	
-	@RequestMapping("postupPKS")
-	@MappingDescription("更新")
+	@RequestMapping("postupPKS") 
+	@MappingDescription("更新") 
 	@ResponseBody
 	public Object updateByPrimaryKeySelective(PostWithBLOBs record,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,

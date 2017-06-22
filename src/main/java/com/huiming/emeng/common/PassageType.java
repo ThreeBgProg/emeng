@@ -55,4 +55,6 @@ public class PassageType {
 
     public static final Byte JINGPINZAIXIAN = 24;
 
+    public static final Byte MINGSHIZUOPIN = 25;
+
 }

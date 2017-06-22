@@ -37,6 +37,43 @@ public class PassagePageService {
         return pager;
     }
 
+    //根据分页信息返回阅读书目文章分页对象
+    public Pager<Passage> getReadPassagePage(Byte passageType,Integer pageNum,Integer pageSize, Integer lessonId){
+        //总记录数
+        Integer totalRecord = passageMapper.selectByPassageType(passageType);
+        //总页数
+        Integer totalPage = totalRecord / pageSize;
+        if(totalRecord % pageSize != 0){
+            totalPage++;
+        }
+        if(pageNum > totalPage){
+            pageNum = totalPage;
+        }
+        //起始索引
+        Integer fromIndex = (pageNum - 1) * pageSize;
+        Pager<Passage> pager = new Pager<>(pageSize, pageNum, totalRecord, totalPage,
+                passageMapper.selectReadPassageWithPagesizeFromFromindex(passageType,fromIndex,pageSize,lessonId));
+        return pager;
+    }
+
+    //根据分页信息返回名师文章分页
+    public Pager<Passage> getTeacherPassagePage(String author,Integer pageNum,Integer pageSize){
+        //总记录数
+        Integer totalRecord = passageMapper.selectCountByAuthor(author);
+        //总页数
+        Integer totalPage = totalRecord / pageSize;
+        if(totalRecord % pageSize != 0){
+            totalPage++;
+        }
+        if(pageNum > totalPage){
+            pageNum = totalPage;
+        }
+        //起始索引
+        Integer fromIndex = (pageNum - 1) * pageSize;
+        Pager<Passage> pager = new Pager<>(pageSize, pageNum, totalRecord, totalPage,
+                passageMapper.selectPassageByAuthor(author,fromIndex,pageSize));
+        return pager;
+    }
     //根据分页信息返回课程文章分页对象
     public Pager<Passage> getLessonPassagePage(LessonPageInfo lessonPageInfo){
 
