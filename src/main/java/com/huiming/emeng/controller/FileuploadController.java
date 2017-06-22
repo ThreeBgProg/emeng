@@ -10,7 +10,6 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.jdt.internal.compiler.ast.FakedTrackingVariable;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
-import com.huiming.emeng.model.Meeting;
 import com.huiming.emeng.serviceImpl.FileuploadServiceImpl;
 
 @Controller

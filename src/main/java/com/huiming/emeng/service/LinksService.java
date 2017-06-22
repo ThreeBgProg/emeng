@@ -3,7 +3,6 @@ package com.huiming.emeng.service;
 import java.util.List;
 
 import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Links;
 
 import sun.awt.image.ImageWatched.Link;

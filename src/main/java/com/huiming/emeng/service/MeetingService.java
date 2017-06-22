@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.Map;
 
 import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Meeting;
 
 public interface MeetingService {
