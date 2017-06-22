@@ -3,9 +3,7 @@ package com.huiming.emeng.controller;
 import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Navigation;
 import com.huiming.emeng.model.Passage;
-import com.huiming.emeng.service.NavigationService;
 import com.huiming.emeng.service.PassageMainService;
 import com.huiming.emeng.service.PassagePageService;
 import com.huiming.emeng.service.PassageRecommendService;
@@ -24,9 +22,9 @@ import java.util.List;
 @RestController
 public class PassagePageController {
 
-    //导航模块
-    @Autowired
-    private NavigationService navigationService;
+//    //导航模块
+//    @Autowired
+//    private NavigationService navigationService;
 
     //分页查询模块
     @Autowired
@@ -52,20 +50,41 @@ public class PassagePageController {
     @RequestMapping("/passage/passagelist")
     public Object passagePageList(ModelMap modelMap, @RequestParam("passageType") Byte passageType,
                                   @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
-                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
+                                  @RequestParam(value = "lessonId", required = false) Integer lessonId){
         //添加导航表模块
-        List<Navigation> navigationList = navigationService.selectAllNavigation();
+//        List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加查询分页结果
-        Pager<Passage> passagePage = passagePageService.getPassagePage(passageType, pageNum, pageSize);
+        Pager<Passage> passagePage = null;
+        if(null == lessonId){
+            passagePage = passagePageService.getPassagePage(passageType, pageNum, pageSize);
+        } else {
+            passagePage = passagePageService.getReadPassagePage(passageType,pageNum,pageSize,lessonId);
+        }
+
         //添加热点推荐模块
         List<Passage> recommendList = passageRecommendService.getRecommondPassageList();
 
-        modelMap.put("navigationList", navigationList);
+//        modelMap.put("navigationList", navigationList);
         modelMap.put("passagePage", passagePage);
         modelMap.put("recommendList", recommendList);
         Object object = JSON.toJSON(modelMap);
 //        System.out.println(object);
         return object;
+    }
+
+    @MappingDescription("返回名师文章分页")
+    @RequestMapping("/teacher/passagelist")
+    public Object teacherPassagePageList(ModelMap modelMap, @RequestParam("author") String author,
+                                         @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                         @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+
+        List<Passage> recommendList = passageRecommendService.getRecommondPassageList();
+        Pager<Passage> passagePage = passagePageService.getTeacherPassagePage(author,pageNum,pageSize);
+        modelMap.put("passagePage", passagePage);
+        modelMap.put("recommendList", recommendList);
+        return JSON.toJSON(modelMap);
+
     }
 
     /**
@@ -80,13 +99,13 @@ public class PassagePageController {
     public Object passagePageList(ModelMap modelMap, @RequestParam("passageType") Byte passageType,
                                   @RequestParam("passsageId") Integer passageId){
         //添加导航表模块
-        List<Navigation> navigationList = navigationService.selectAllNavigation();
+//        List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加热点推荐模块
         List<Passage> recommendList = passageRecommendService.getRecommondPassageList();
         //添加文章正文模块，显示文章正文的是数组下标为1的对象
         List<Passage> passageMainList = passageMainService.getPassageMainList(passageType, passageId);
 
-        modelMap.put("navigationList", navigationList);
+//        modelMap.put("navigationList", navigationList);
         modelMap.put("recommendList", recommendList);
         modelMap.put("passageMainList", passageMainList);
         Object object = JSON.toJSON(modelMap);
