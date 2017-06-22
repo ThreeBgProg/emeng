@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.ibatis.annotations.Param;
 
 import com.huiming.emeng.model.Links;
-import com.huiming.emeng.model.Passage;
 
 import sun.awt.image.ImageWatched.Link;
 

@@ -14,7 +14,7 @@
     <result column="content" jdbcType="LONGVARCHAR" property="content" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, title, link, type, release_date, code, annex
+    id, title, link, type, release_date, code, annex ,content
   </sql>
   <sql id="Blob_Column_List">
     content
@@ -155,12 +155,12 @@
    select count(*) from meeting
   </select>
   
-  <select id="selectMeetingWithPagesizeFromFromindex" resultMap="BaseResultMap">
+  <select id="selectMeetingWithPagesizeFromFromindex" resultMap="ResultMapWithBLOBs">
     select
     <include refid="Base_Column_List" />
     from meeting order by id DESC 
     <if test="fromIndex != null and pageSize != null">
-        limit #{fromIndex},#{pageSize} 
+        limit #{fromIndex},#{pageSize}
     </if>
 
   </select>

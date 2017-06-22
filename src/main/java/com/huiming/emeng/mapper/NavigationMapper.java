@@ -2,6 +2,7 @@ package com.huiming.emeng.mapper;
 
 import com.huiming.emeng.model.Navigation;
 
+
 import java.util.List;
 
 public interface NavigationMapper {
@@ -19,4 +20,6 @@ public interface NavigationMapper {
     int updateByPrimaryKey(Navigation record);
 
     List<Navigation> selectAllNavigation();
+    
+ 
 }

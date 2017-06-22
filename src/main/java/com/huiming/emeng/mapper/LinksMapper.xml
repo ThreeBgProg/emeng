@@ -11,8 +11,8 @@
     id, name, link, order
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
+    select links.id,links.name,links.link,links.order
+   <!--<include refid="Base_Column_List" />    -->
     from links
     where id = #{id,jdbcType=INTEGER}
   </select>

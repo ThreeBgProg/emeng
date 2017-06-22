@@ -35,7 +35,7 @@ public class AdvertisementController {
 	public Object insert(Advertisement advertisement,
 			Model model, 
 			HttpServletRequest request,
-			@RequestParam("pic") MultipartFile pic)throws Exception{
+			@RequestParam("picpic") MultipartFile pic)throws Exception{
 		
 		if(!pic.isEmpty()){
 			   //上传文件路劲
@@ -86,7 +86,7 @@ public class AdvertisementController {
 	public Object insertSelective(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
-			@RequestParam("pic") MultipartFile pic)throws Exception{
+			@RequestParam("picpic") MultipartFile pic)throws Exception{
 		if(!pic.isEmpty()){
 			   //上传文件路劲
 			   String path = request.getServletContext().getRealPath("/images/");
@@ -127,7 +127,7 @@ public class AdvertisementController {
 	public Object updateByPrimaryKeySelective(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
-			@RequestParam("file") MultipartFile file,
+			@RequestParam("picpic") MultipartFile file,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize
             )throws Exception{
@@ -168,7 +168,7 @@ public class AdvertisementController {
 	public Object updateByPrimaryKey(Advertisement advertisement,
 			Model model,
 			HttpServletRequest request,
-			@RequestParam("file") MultipartFile file,
+			@RequestParam("picpic") MultipartFile file,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize)throws Exception{
 		if(!file.isEmpty()){

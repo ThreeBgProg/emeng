@@ -1,8 +1,5 @@
 package com.huiming.emeng.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -15,7 +12,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
@@ -37,26 +33,26 @@ public class MeetingController {
 	@MappingDescription("添加会议信息")
 	@ResponseBody
 	public Object insert(HttpServletRequest request,
-			@RequestParam("annex") MultipartFile annex,
+//			@RequestParam("annex1") MultipartFile annex,
 			Meeting meeting,
 			Model model) throws Exception{
 				
-		if(!annex.isEmpty()){
-			String path = request.getServletContext().getRealPath("/meetings/");
-			String fileName=annex.getOriginalFilename();
-			File filepath = new File(path, fileName);
-			if(!filepath.getParentFile().exists()){
-				   filepath.getParentFile().mkdirs();
-			   }
-			
-			@SuppressWarnings("deprecation")
-			long str2 = Date.parse((new Date()).toString());
-			String[] fStrings = fileName.split("\\.");   
-			   String str = fStrings[0]+str2+"."+fStrings[1];
-			   
-			annex.transferTo(new File(path+File.separator+str)); 
-			meeting.setLink(path+str);
-		}
+//		if(!annex.isEmpty()){
+//			String path = request.getServletContext().getRealPath("/meetings/");
+//			String fileName=annex.getOriginalFilename();
+//			File filepath = new File(path, fileName);
+//			if(!filepath.getParentFile().exists()){
+//				   filepath.getParentFile().mkdirs();
+//			   }
+//			
+//			@SuppressWarnings("deprecation")
+//			long str2 = Date.parse((new Date()).toString());
+//			String[] fStrings = fileName.split("\\.");   
+//			   String str = fStrings[0]+str2+"."+fStrings[1];
+//			   
+//			annex.transferTo(new File(path+File.separator+str)); 
+//			meeting.setLink(path+str);
+//		}
 		
 //			meeting.setReleaseDate(new Date());
 			int result = meetingService.insert(meeting);
@@ -72,26 +68,26 @@ public class MeetingController {
 	@MappingDescription("添加会议信息")
 	@ResponseBody
 	public Object meetinginsertSelect(HttpServletRequest request,
-			@RequestParam("annex") MultipartFile annex,
+//			@RequestParam("annex1") MultipartFile annex,
 			Meeting meeting,
 			Model model)throws Exception{
 		
-		if(!annex.isEmpty()){
-			String path = request.getServletContext().getRealPath("/meetings/");
-			String fileName=annex.getOriginalFilename();
-			File filepath = new File(path, fileName);
-			if(!filepath.getParentFile().exists()){
-				   filepath.getParentFile().mkdirs();
-			   }
-			
-			@SuppressWarnings("deprecation")
-			long str2 = Date.parse((new Date()).toString());
-			String[] fStrings = fileName.split("\\.");   
-			String str = fStrings[0]+str2+"."+fStrings[1];
-			   
-			annex.transferTo(new File(path+File.separator+str)); 
-			meeting.setLink(path+str);
-		}
+//		if(!annex.isEmpty()){
+//			String path = request.getServletContext().getRealPath("/meetings/");
+//			String fileName=annex.getOriginalFilename();
+//			File filepath = new File(path, fileName);
+//			if(!filepath.getParentFile().exists()){
+//				   filepath.getParentFile().mkdirs();
+//			   }
+//			
+//			@SuppressWarnings("deprecation")
+//			long str2 = Date.parse((new Date()).toString());
+//			String[] fStrings = fileName.split("\\.");   
+//			String str = fStrings[0]+str2+"."+fStrings[1];
+//			   
+//			annex.transferTo(new File(path+File.separator+str)); 
+//			meeting.setLink(path+str);
+//		}
 		int result = meetingService.insertSelective(meeting);
 		
 		Map<String, String> respondate=new HashMap<>();
@@ -127,27 +123,27 @@ public class MeetingController {
 	@ResponseBody
 	public Object updateByPrimaryKeySelective(Meeting meeting,
 			HttpServletRequest request,
-			@RequestParam("annex") MultipartFile annex,
+//			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             Model model) throws Exception{
 		
-		if(!annex.isEmpty()){
-			String path = request.getServletContext().getRealPath("/meetings/");
-			String fileName=annex.getOriginalFilename();
-			File filepath = new File(path, fileName);
-			if(!filepath.getParentFile().exists()){
-				   filepath.getParentFile().mkdirs();
-			   }
-			
-			@SuppressWarnings("deprecation")
-			long str2 = Date.parse((new Date()).toString());
-			String[] fStrings = fileName.split("\\.");   
-			String str = fStrings[0]+str2+"."+fStrings[1];
-			   
-			annex.transferTo(new File(path+File.separator+str)); 
-			meeting.setLink(path+str);
-		}
+//		if(!annex.isEmpty()){
+//			String path = request.getServletContext().getRealPath("/meetings/");
+//			String fileName=annex.getOriginalFilename();
+//			File filepath = new File(path, fileName);
+//			if(!filepath.getParentFile().exists()){
+//				   filepath.getParentFile().mkdirs();
+//			   }
+//			
+//			@SuppressWarnings("deprecation")
+//			long str2 = Date.parse((new Date()).toString());
+//			String[] fStrings = fileName.split("\\.");   
+//			String str = fStrings[0]+str2+"."+fStrings[1];
+//			   
+//			annex.transferTo(new File(path+File.separator+str)); 
+//			meeting.setLink(path+str);
+//		}
 		
 		int result = meetingService.updateByPrimaryKeySelective(meeting);
 		
@@ -167,26 +163,26 @@ public class MeetingController {
 	@ResponseBody
 	public Object updateByPrimaryKeyWithBLOBs(Meeting record,
 			HttpServletRequest request,
-			@RequestParam("annex") MultipartFile annex,
+//			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             Model model)throws Exception{
-		if(!annex.isEmpty()){
-			String path = request.getServletContext().getRealPath("/meetings/");
-			String fileName=annex.getOriginalFilename();
-			File filepath = new File(path, fileName);
-			if(!filepath.getParentFile().exists()){
-				   filepath.getParentFile().mkdirs();
-			   }
-			
-			@SuppressWarnings("deprecation")
-			long str2 = Date.parse((new Date()).toString());
-			String[] fStrings = fileName.split("\\.");   
-			String str = fStrings[0]+str2+"."+fStrings[1];
-			   
-			annex.transferTo(new File(path+File.separator+str)); 
-			record.setLink(path+str);
-		}
+//		if(!annex.isEmpty()){
+//			String path = request.getServletContext().getRealPath("/meetings/");
+//			String fileName=annex.getOriginalFilename();
+//			File filepath = new File(path, fileName);
+//			if(!filepath.getParentFile().exists()){
+//				   filepath.getParentFile().mkdirs();
+//			   }
+//			
+//			@SuppressWarnings("deprecation")
+//			long str2 = Date.parse((new Date()).toString());
+//			String[] fStrings = fileName.split("\\.");   
+//			String str = fStrings[0]+str2+"."+fStrings[1];
+//			   
+//			annex.transferTo(new File(path+File.separator+str)); 
+//			record.setLink(path+str);
+//		}
 		int result = meetingService.updateByPrimaryKeyWithBLOBs(record);
 		
 		Map<Object, Object> respondate=new HashMap<>();
@@ -205,26 +201,26 @@ public class MeetingController {
 	@ResponseBody
 	public Object updateByPrimaryKey(Meeting meeting ,
 			HttpServletRequest request,
-			@RequestParam("annex") MultipartFile annex,
+//			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             Model model)throws Exception{
-		if(!annex.isEmpty()){
-			String path = request.getServletContext().getRealPath("/meetings/");
-			String fileName=annex.getOriginalFilename();
-			File filepath = new File(path, fileName);
-			if(!filepath.getParentFile().exists()){
-				   filepath.getParentFile().mkdirs();
-			   }
-			
-			@SuppressWarnings("deprecation")
-			long str2 = Date.parse((new Date()).toString());
-			String[] fStrings = fileName.split("\\.");   
-			String str = fStrings[0]+str2+"."+fStrings[1];
-			   
-			annex.transferTo(new File(path+File.separator+str)); 
-			meeting.setLink(path+str);
-		}
+//		if(!annex.isEmpty()){
+//			String path = request.getServletContext().getRealPath("/meetings/");
+//			String fileName=annex.getOriginalFilename();
+//			File filepath = new File(path, fileName);
+//			if(!filepath.getParentFile().exists()){
+//				   filepath.getParentFile().mkdirs();
+//			   }
+//			
+//			@SuppressWarnings("deprecation")
+//			long str2 = Date.parse((new Date()).toString());
+//			String[] fStrings = fileName.split("\\.");   
+//			String str = fStrings[0]+str2+"."+fStrings[1];
+//			   
+//			annex.transferTo(new File(path+File.separator+str)); 
+//			meeting.setLink(path+str);
+//		}
 		int result = meetingService.updateByPrimaryKey(meeting);
 		 
 		Map<Object, Object> respondate=new HashMap<>();

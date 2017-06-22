@@ -84,4 +84,5 @@
     <include refid="Base_Column_List" />
     FROM navigation
   </select>
+  
 </mapper>

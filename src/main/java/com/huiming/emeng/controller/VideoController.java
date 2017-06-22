@@ -75,8 +75,8 @@ public class VideoController {
    @MappingDescription("视频上传")
    @ResponseBody
    public Object videoInsert(HttpServletRequest request,
-		   @RequestParam("link") MultipartFile link,
-		   @RequestParam("pic") MultipartFile pic,
+		   @RequestParam("linklink") MultipartFile link,
+		   @RequestParam("picpic") MultipartFile pic,
 		   Video video,
 		   Model model)throws Exception
    {
@@ -89,7 +89,7 @@ public class VideoController {
 		   }
 		   
 		   @SuppressWarnings("deprecation")
-		  long str2 = Date.parse((new Date()).toString());
+		   long str2 = Date.parse((new Date()).toString());
 		   String[] fStrings = linkName.split("\\.");   
 		   String str = fStrings[0]+str2+"."+fStrings[1];
 		   
@@ -155,8 +155,8 @@ public class VideoController {
 	@ResponseBody
 	public Object updateByPrimaryKey(HttpServletRequest request,
 			Video video,
-			@RequestParam("link") MultipartFile link,
-			 @RequestParam("pic") MultipartFile pic,
+			@RequestParam("linklink") MultipartFile link,
+			 @RequestParam("picpic") MultipartFile pic,
 			 @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
              @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
              Model model)throws Exception{
@@ -210,8 +210,8 @@ public class VideoController {
 	@MappingDescription("选择字段更新")
 	public String updateByPrimaryKeySelective(HttpServletRequest request,
 			Video video,
-			@RequestParam("link") MultipartFile link,
-			 @RequestParam("pic") MultipartFile pic ,
+			@RequestParam("linklink") MultipartFile link,
+			 @RequestParam("picpic") MultipartFile pic ,
 			 Model model)throws Exception{
 		if(!link.isEmpty()){
 			   String path = request.getServletContext().getRealPath("/videos/");

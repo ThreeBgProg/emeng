@@ -15,18 +15,13 @@
     <result column="reply" jdbcType="LONGVARCHAR" property="reply" />
   </resultMap>
   <sql id="Base_Column_List">
-    id, titile, user_id, release_time, like, visit, username
+    id, titile, user_id, release_time, like, visit, username, content, reply
   </sql>
   <sql id="Blob_Column_List">
     content, reply
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="ResultMapWithBLOBs">
-    select 
-    <include refid="Base_Column_List" />
-    ,
-    <include refid="Blob_Column_List" />
-    from post
-    where id = #{id,jdbcType=INTEGER}
+    select * from post where id = #{id,jdbcType=INTEGER}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from post
@@ -175,15 +170,15 @@
 
   </select>
   
-  <select id="selectPostWithPagesizeFromFromindex" resultMap="BaseResultMap">
+  <select id="selectPostWithPagesizeFromFromindex" resultMap="ResultMapWithBLOBs">
    select * from post where visit>0 order by id DESC limit #{fromIndex},#{pageSize}
   </select>
   
-   <select id="selectPostWithPagesizeFromFromindex1" resultMap="BaseResultMap">
+   <select id="selectPostWithPagesizeFromFromindex1" resultMap="ResultMapWithBLOBs">
    select * from post where visit=0 order by id DESC limit #{fromIndex},#{pageSize}
   </select>
   
-   <select id="selectPostWithPagesizeFromFromindex2" resultMap="BaseResultMap">
+   <select id="selectPostWithPagesizeFromFromindex2" resultMap="ResultMapWithBLOBs">
    select * from post where visit=-1 order by id DESC limit #{fromIndex},#{pageSize}
   </select>
    

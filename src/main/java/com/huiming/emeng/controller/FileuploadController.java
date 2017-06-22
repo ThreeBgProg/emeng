@@ -24,13 +24,14 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.model.Meeting;
 
 @Controller
 public class FileuploadController {
 	
 	
 	/**
-	 * 文件上传
+	 * 照片文件上传
 	 * @param request
 	 * @param description
 	 * @param file
@@ -114,5 +115,33 @@ public class FileuploadController {
 	                headers, HttpStatus.CREATED);
 	}
 	
+	@RequestMapping("meetingupload")
+	@MappingDescription("添加会议附件")
+	@ResponseBody
+	public Object insert(HttpServletRequest request,
+			@RequestParam("annex1") MultipartFile annex) throws Exception{
+				
+		Map<String, String> respondate=new HashMap<>();
+		
+		if(!annex.isEmpty()){
+			String path = request.getServletContext().getRealPath("/meetings/");
+			String fileName=annex.getOriginalFilename();
+			File filepath = new File(path, fileName);
+			if(!filepath.getParentFile().exists()){
+				   filepath.getParentFile().mkdirs();
+			   }
+			@SuppressWarnings("deprecation")
+			long str2 = Date.parse((new Date()).toString());
+			String[] fStrings = fileName.split("\\.");   
+			   String str = fStrings[0]+str2+"."+fStrings[1];
+			   
+			annex.transferTo(new File(path+File.separator+str)); 
+			
+			respondate.put("annex",path+str);
+		}
+		
+		Object object = JSON.toJSON(respondate);
+		return object;
+	}
 	
 }

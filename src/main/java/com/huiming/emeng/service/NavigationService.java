@@ -46,7 +46,4 @@ public class NavigationService {
     	return navigationMapper.updateByPrimaryKey(record);
     }
     
-    
-    
-    
 }
