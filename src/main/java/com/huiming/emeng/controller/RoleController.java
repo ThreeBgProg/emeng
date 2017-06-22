@@ -10,16 +10,21 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Permission;
 import com.huiming.emeng.model.Role;
 import com.huiming.emeng.service.PermissionService;
 import com.huiming.emeng.service.RoleService;
+import com.huiming.emeng.service.UserService;
 
 @Controller
 public class RoleController {
 
 	private String SUCCESS = "操作成功";
 	private String FAIL = "操作失败";
+
+	@Autowired
+	private UserService userService;
 
 	@Autowired
 	private RoleService roleService;
@@ -46,16 +51,17 @@ public class RoleController {
 	@ResponseBody
 	@RequestMapping("/getAllRole")
 	@MappingDescription("超级管理员获取所有角色")
-	public List<Role> getAllRole(ModelMap modelMap) {
+	public Pager<Role> getAllRole(ModelMap modelMap, Integer currentPage, Integer pageSize) {
 		List<Role> roles = new ArrayList<>();
 		roles = roleService.selectAll();
-		return roles;
+		return new Pager<>(pageSize, currentPage, roles);
 	}
 
 	@RequestMapping("/updateRole")
 	@MappingDescription("修改角色")
 	@ResponseBody
 	public String updateRole(Role role) {
+		role.setState((byte) 1);
 		if (roleService.updateByPrimaryKey(role) != 0) {
 			return SUCCESS;
 		} else {
@@ -90,6 +96,20 @@ public class RoleController {
 	@MappingDescription("获取角色权限")
 	@ResponseBody
 	public List<Permission> getPermissionsByRole(Role role, ModelMap modelMap) {
-		return  permissionService.selectByRole(role.getId());
+		return permissionService.selectByRole(role.getId());
+	}
+
+	@RequestMapping("/deleteRole")
+	@MappingDescription("删除角色")
+	@ResponseBody
+	public String deleteRole(Role role, ModelMap modelMap) {
+		if (userService.getUserByRole(role.getId()) == null) {
+			if (roleService.deleteByPrimaryKey(role.getId()) != 0) {
+				return SUCCESS;
+			} else
+				return FAIL;
+		}else{
+			return "存在用户为该角色，请先对用户角色进行修改";
+		}
 	}
 }

@@ -23,12 +23,15 @@ public class SchoolController {
 
 	@RequestMapping("/getSchools")
 	@MappingDescription("获取学校信息")
+	@ResponseBody
 	public List<School> getSchools() {
+		System.out.println("获取学校信息");
 		return schoolService.selectAll();
 	}
 
 	@RequestMapping("/getSchool")
 	@MappingDescription("获取学校信息")
+	@ResponseBody
 	public Pager<School> getSchoolPager(Integer currentPage, Integer pageSize) {
 		List<School> schoolList = schoolService.selectAll();
 		return new Pager<>(pageSize, currentPage, schoolList);
@@ -56,6 +59,7 @@ public class SchoolController {
 
 	@RequestMapping("/deleteSchool")
 	@MappingDescription("删除学校信息")
+	@ResponseBody
 	public String deleteSchool(School school) {
 		if (schoolService.deleteByPrimaryKey(school.getId()) >= 1) {
 			return SUCCESS;

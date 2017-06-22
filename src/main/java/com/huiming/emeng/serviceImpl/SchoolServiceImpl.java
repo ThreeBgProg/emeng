@@ -42,12 +42,12 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Override
 	public int updateByPrimaryKey(School record) {
-		return updateByPrimaryKey(record);
+		return schoolmapper.updateByPrimaryKey(record);
 	}
 
 	@Override
 	public List<School> selectAll() {
-		return null;
+		return schoolmapper.selectAll();
 	}
 
 }

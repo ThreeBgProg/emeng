@@ -1,5 +1,7 @@
 package com.huiming.emeng.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -7,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Permission;
 import com.huiming.emeng.service.PermissionService;
 
@@ -30,11 +33,17 @@ public class PermissionController {
 			return FAIL;
 	}
 
+	@RequestMapping("/getAllPermissionPage")
+	@MappingDescription("超级管理员获取所有权限信息分页")
+	@ResponseBody
+	public Pager<Permission> getAllPermissionPage(Permission permission, ModelMap modelMap,Integer currentPage, Integer pageSize) {
+		return new Pager<>(pageSize, currentPage, permissionService.selectAllEffective());
+	}
+	
 	@RequestMapping("/getAllPermission")
 	@MappingDescription("超级管理员获取所有权限信息")
 	@ResponseBody
-	public ModelMap getAllPermission(Permission permission, ModelMap modelMap) {
-		modelMap.put("permissions", permissionService.selectAllEffective());
-		return modelMap;
+	public List<Permission> getAllPermission(Permission permission, ModelMap modelMap) {
+		return permissionService.selectAllEffective();
 	}
 }
