@@ -1,5 +1,6 @@
 package com.huiming.emeng.controller;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.dto.StringToDate;
 import com.huiming.emeng.model.Meeting;
 import com.huiming.emeng.service.MeetingService;
 /**
@@ -34,8 +36,8 @@ public class MeetingController {
 	@ResponseBody
 	public Object insert(HttpServletRequest request,
 //			@RequestParam("annex1") MultipartFile annex,
-			Meeting meeting,
-			Model model) throws Exception{
+			@RequestParam("date")  String date,
+			Meeting meeting) throws Exception{
 				
 //		if(!annex.isEmpty()){
 //			String path = request.getServletContext().getRealPath("/meetings/");
@@ -54,9 +56,8 @@ public class MeetingController {
 //			meeting.setLink(path+str);
 //		}
 		
-//			meeting.setReleaseDate(new Date());
-			int result = meetingService.insert(meeting);
-
+			meeting.setReleaseDate(StringToDate.StringToDate(date));		    
+			meetingService.insert(meeting);
 			Map<String, String> respondate=new HashMap<>();
 			respondate.put("message", "添加成功");
 			
@@ -69,8 +70,8 @@ public class MeetingController {
 	@ResponseBody
 	public Object meetinginsertSelect(HttpServletRequest request,
 //			@RequestParam("annex1") MultipartFile annex,
-			Meeting meeting,
-			Model model)throws Exception{
+			@RequestParam(value="date",defaultValue="")  String date,
+			Meeting meeting)throws Exception{
 		
 //		if(!annex.isEmpty()){
 //			String path = request.getServletContext().getRealPath("/meetings/");
@@ -88,7 +89,12 @@ public class MeetingController {
 //			annex.transferTo(new File(path+File.separator+str)); 
 //			meeting.setLink(path+str);
 //		}
-		int result = meetingService.insertSelective(meeting);
+		if (date.equals("")) {
+			meeting.setReleaseDate(new Date());
+		}
+		meeting.setReleaseDate(StringToDate.StringToDate(date));
+		
+		meetingService.insertSelective(meeting);
 		
 		Map<String, String> respondate=new HashMap<>();
 		respondate.put("message", "添加成功");
@@ -105,7 +111,7 @@ public class MeetingController {
              @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
              Model model){
 		
-		int result = meetingService.deleteByPrimaryKey(id);
+		meetingService.deleteByPrimaryKey(id);
 		
 		Map<Object, Object> respondate=new HashMap<>();
 		respondate.put("message", "成功删除一条信息");
@@ -126,7 +132,7 @@ public class MeetingController {
 //			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
-            Model model) throws Exception{
+            @RequestParam(value="date",defaultValue="") String date) throws Exception{
 		
 //		if(!annex.isEmpty()){
 //			String path = request.getServletContext().getRealPath("/meetings/");
@@ -144,8 +150,10 @@ public class MeetingController {
 //			annex.transferTo(new File(path+File.separator+str)); 
 //			meeting.setLink(path+str);
 //		}
-		
-		int result = meetingService.updateByPrimaryKeySelective(meeting);
+		if (!date.equals("")) {
+			meeting.setReleaseDate(StringToDate.StringToDate(date));
+		}
+		meetingService.updateByPrimaryKeySelective(meeting);
 		
 		Map<Object, Object> respondate=new HashMap<>();
 		respondate.put("message", "成功更新一条信息");
@@ -166,7 +174,7 @@ public class MeetingController {
 //			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
-            Model model)throws Exception{
+            @RequestParam(value="date",defaultValue="") String date)throws Exception{
 //		if(!annex.isEmpty()){
 //			String path = request.getServletContext().getRealPath("/meetings/");
 //			String fileName=annex.getOriginalFilename();
@@ -183,7 +191,11 @@ public class MeetingController {
 //			annex.transferTo(new File(path+File.separator+str)); 
 //			record.setLink(path+str);
 //		}
-		int result = meetingService.updateByPrimaryKeyWithBLOBs(record);
+		
+		if (!date.equals("")) {
+			record.setReleaseDate(StringToDate.StringToDate(date));
+		}
+		meetingService.updateByPrimaryKeyWithBLOBs(record);
 		
 		Map<Object, Object> respondate=new HashMap<>();
 		respondate.put("message", "成功更新一条信息");
@@ -204,7 +216,7 @@ public class MeetingController {
 //			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
-            Model model)throws Exception{
+            @RequestParam(value="date",defaultValue="") String date)throws Exception{
 //		if(!annex.isEmpty()){
 //			String path = request.getServletContext().getRealPath("/meetings/");
 //			String fileName=annex.getOriginalFilename();
@@ -221,7 +233,10 @@ public class MeetingController {
 //			annex.transferTo(new File(path+File.separator+str)); 
 //			meeting.setLink(path+str);
 //		}
-		int result = meetingService.updateByPrimaryKey(meeting);
+		if (!date.equals("")) {
+			meeting.setReleaseDate(StringToDate.StringToDate(date));
+		}
+		meetingService.updateByPrimaryKey(meeting);
 		 
 		Map<Object, Object> respondate=new HashMap<>();
 		respondate.put("message", "成功更新一条信息");
