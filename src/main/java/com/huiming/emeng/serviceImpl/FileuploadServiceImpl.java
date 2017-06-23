@@ -16,6 +16,7 @@ import org.springframework.web.multipart.MultipartFile;
 public class FileuploadServiceImpl {
 
 	
+	@SuppressWarnings({ "rawtypes", "deprecation", "unchecked" })
 	public List<?> upload(HttpServletRequest request,
 			             MultipartFile[] files)throws Exception
 	   {
@@ -104,7 +105,6 @@ public class FileuploadServiceImpl {
 			   string = path+str;
 		   }
 		   return string;
-
 	   }
 	
 	

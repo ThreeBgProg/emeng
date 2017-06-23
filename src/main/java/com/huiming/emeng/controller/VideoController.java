@@ -19,7 +19,6 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.dto.Pager;
@@ -29,7 +28,6 @@ import com.huiming.emeng.model.Video;
 import com.huiming.emeng.service.ChapterService;
 import com.huiming.emeng.service.LessonService;
 import com.huiming.emeng.service.VideoService;
-import com.huiming.emeng.serviceImpl.FileuploadServiceImpl;
 
 /**
  * 视屏处理
@@ -47,10 +45,6 @@ public class VideoController {
 	
 	@Autowired
 	private ChapterService chapterService;
-	
-	@Autowired
-	private FileuploadServiceImpl fileuploadServiceImpl;
-	
 	
 	@RequestMapping("addvideo")
 	@MappingDescription("进入视频管理添加页面")
@@ -77,49 +71,9 @@ public class VideoController {
    @RequestMapping("videoinsert")
    @MappingDescription("视频上传")
    @ResponseBody
-   public Object videoInsert(HttpServletRequest request,
-		   @RequestParam("linklink") MultipartFile link,
-		   @RequestParam("picpic") MultipartFile pic,
-		   Video video,
-		   Model model)throws Exception
+   public Object videoInsert(Video video)throws Exception
    {
-	   if(!link.isEmpty()){
-		   /*
-		   String path = request.getServletContext().getRealPath("/videos/");
-		   String linkName = link.getOriginalFilename();
-		   File linkpath = new File(path,linkName);
-		   if(!linkpath.getParentFile().exists()){
-			   linkpath.getParentFile().mkdirs();
-		   }
-		   @SuppressWarnings("deprecation")
-		   long str2 = Date.parse((new Date()).toString());
-		   String[] fStrings = linkName.split("\\.");   
-		   String str = fStrings[0]+str2+"."+fStrings[1];
-		   link.transferTo(new File(path+File.separator+str));
-		   */
-
-		   video.setName(fileuploadServiceImpl.addVideoLink(request, link).get("linkName"));
-		   video.setLink(fileuploadServiceImpl.addVideoLink(request, link).get("link"));
-	   }
-	   
-	   if(!pic.isEmpty()){
-		   /*
-		   String path = request.getServletContext().getRealPath("/images/");
-		   String picName = pic.getOriginalFilename();
-		   File picpath = new File(path,picName);
-		   if(!picpath.getParentFile().exists()){
-			   picpath.getParentFile().mkdirs();
-		   }
-		   @SuppressWarnings("deprecation")
-			long str2 = Date.parse((new Date()).toString());
-			String[] fStrings = picName.split("\\.");   
-			   String str = fStrings[0]+str2+"."+fStrings[1];
-		   link.transferTo(new File(path+File.separator+str));
-		   */
-		   video.setPic(fileuploadServiceImpl.addVideoPic(request, pic));
-		   
-	   }
-	  
+	 
 	   videoService.insert(video);
 	  
 	   Map<Object, Object> respondate = new HashMap<>();
@@ -158,27 +112,11 @@ public class VideoController {
 	@RequestMapping("videoupdByPK")
 	@MappingDescription("全部字段更新")
 	@ResponseBody
-	public Object updateByPrimaryKey(HttpServletRequest request,
-			Video video,
-			@RequestParam("linklink") MultipartFile link,
-			 @RequestParam("picpic") MultipartFile pic,
+	public Object updateByPrimaryKey(Video video,
 			 @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
-             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
-             Model model)throws Exception{
+             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize)throws Exception{
 		
-		  if(!link.isEmpty()){
-			  
-			  video.setName(fileuploadServiceImpl.addVideoLink(request, link).get("linkName"));
-			  video.setLink(fileuploadServiceImpl.addVideoLink(request, link).get("link"));
-		 
-		  }
-		   
-		   if(!pic.isEmpty()){
-			   
-			  video.setPic(fileuploadServiceImpl.addVideoPic(request, pic));
-		   }
-		
-		int result = videoService.updateByPrimaryKey(video);
+         videoService.updateByPrimaryKey(video);
 		  //添加查询分页结果
         Pager<Video> videoList = videoService.selectVideoWithPagesizeFromFromindex(pageNum, pageSize);
 
@@ -190,23 +128,8 @@ public class VideoController {
 
 	@RequestMapping("videoupdByPKS")
 	@MappingDescription("选择字段更新")
-	public String updateByPrimaryKeySelective(HttpServletRequest request,
-			Video video,
-			@RequestParam("linklink") MultipartFile link,
-			 @RequestParam("picpic") MultipartFile pic ,
-			 Model model)throws Exception{
-		if(!link.isEmpty()){
-			  
-			  video.setName(fileuploadServiceImpl.addVideoLink(request, link).get("linkName"));
-			  video.setLink(fileuploadServiceImpl.addVideoLink(request, link).get("link"));
-		 
-		   }
-		   
-		   if(!pic.isEmpty()){
-			   
-			   video.setPic(fileuploadServiceImpl.addVideoPic(request, pic));
-			   
-		   }
+	public String updateByPrimaryKeySelective(Video video)throws Exception{
+	
 		videoService.updateByPrimaryKeySelective(video);
 		return null;
 	}
