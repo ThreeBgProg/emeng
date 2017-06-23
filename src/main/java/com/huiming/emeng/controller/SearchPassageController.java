@@ -41,8 +41,8 @@ public class SearchPassageController {
     @MappingDescription("模糊查询文章")
     @RequestMapping("/passage/search/list")
     public Object searchLessonPassage(@RequestParam("searchInfo") String searchInfo,
-                                       @RequestParam("pageSize")Integer pageSize,
-                                       @RequestParam("pageNum") Integer pageNum){
+                                       @RequestParam(value = "pageSize",defaultValue = "15")Integer pageSize,
+                                       @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum){
 
             Pager<Passage> pager = searchPassageService.searchPassage(pageNum,pageSize,searchInfo);
             Object object = JSON.toJSON(pager);

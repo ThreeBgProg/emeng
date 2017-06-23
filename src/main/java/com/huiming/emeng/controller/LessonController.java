@@ -58,12 +58,12 @@ public class LessonController {
     public Object allLesson(ModelMap modelMap){
 
         //添加导航表模块
-        List<Navigation> navigationList = navigationService.selectAllNavigation();
+//        List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加热点推荐模块
         List<Passage> recommendList = passageRecommendService.getRecommondPassageList();
 
         modelMap.put("lessonList", lessonService.selectAllLesson());
-        modelMap.put("navigationList", navigationList);
+//        modelMap.put("navigationList", navigationList);
         modelMap.put("recommendList", recommendList);
         Object object = JSON.toJSON(modelMap);
 //        System.out.println(object);
@@ -77,7 +77,7 @@ public class LessonController {
     public Object allChapter(ModelMap modelMap, @PathVariable("lessonId") Integer lessonId){
 
         //添加导航表模块
-        List<Navigation> navigationList = navigationService.selectAllNavigation();
+//        List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加阅读书目模块(显示15条)
         List<Passage> readPassageList = passageMapper.selectByTypeAndDescendWithTime(PassageType.YUEDUSHUMU, 15);
         //添加精品在线模块(显示10条)
@@ -86,7 +86,7 @@ public class LessonController {
         List<Chapter> chapterList = chapterMapper.selectAllChapterFromLesson(lessonId);
 
         modelMap.put("chapterList", chapterList);
-        modelMap.put("navigationList", navigationList);
+//        modelMap.put("navigationList", navigationList);
         modelMap.put("readPassageList", readPassageList);
         modelMap.put("qualityOnlinePassageList", qualityOnlinePassageList);
         Object object = JSON.toJSON(modelMap);
@@ -101,7 +101,7 @@ public class LessonController {
                            ModelMap modelMap){
 
         //添加导航表模块
-        List<Navigation> navigationList = navigationService.selectAllNavigation();
+//        List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加理论剖析模块
         List<Passage> theoryAnalyseList = passageMapper.selectPassageByLessonIdAndChapterIdAndPassageType(
                 lessonId,chaptId,PassageType.LILUNPOUXI);
@@ -122,7 +122,7 @@ public class LessonController {
                 lessonId,chaptId,PassageType.SHIPINZIYUAN);
 
 
-        modelMap.put("navigationList", navigationList);
+//        modelMap.put("navigationList", navigationList);
         modelMap.put("theoryAnalyseList", theoryAnalyseList);
         modelMap.put("referenceResourcesList", referenceResourcesList);
         modelMap.put("caseResourceList", caseResourceList);
@@ -145,13 +145,13 @@ public class LessonController {
             ModelMap modelMap){
 
         //添加导航表模块
-        List<Navigation> navigationList = navigationService.selectAllNavigation();
+//        List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加查询分页结果
         Pager<Passage> lessonPassagePage = passagePageService.getLessonPassagePage(new LessonPageInfo(lessonId,chaptId,pageNum,pageSize,passageType));
         //添加热点推荐模块
         List<Passage> recommendList = passageRecommendService.getRecommondPassageList();
 
-        modelMap.put("navigationList", navigationList);
+//        modelMap.put("navigationList", navigationList);
         modelMap.put("pagingResult", lessonPassagePage);
         modelMap.put("recommendList", recommendList);
         return JSON.toJSON(modelMap);
@@ -159,16 +159,16 @@ public class LessonController {
 
     @MappingDescription("课程文章正文页面")
     @RequestMapping("/lesson/chapter/lessonpassage")
-    public Object passagePageList(ModelMap modelMap, @RequestParam("passsageId") Integer passageId) {
+    public Object passagePageList(ModelMap modelMap, @RequestParam("passageId") Integer passageId) {
         //添加导航表模块
-        List<Navigation> navigationList = navigationService.selectAllNavigation();
+//        List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加热点推荐模块
         List<Passage> recommendList = passageRecommendService.getRecommondPassageList();
 
         Passage passage = passageMapper.selectByPrimaryKey(passageId);
 
 
-        modelMap.put("navigationList", navigationList);
+//        modelMap.put("navigationList", navigationList);
         modelMap.put("recommendList", recommendList);
         modelMap.put("passage", passage);
 

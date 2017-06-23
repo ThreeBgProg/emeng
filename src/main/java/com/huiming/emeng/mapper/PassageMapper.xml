@@ -123,7 +123,7 @@
         lesson = #{lessonId}
       </if>
       <if test="title != null">
-        AND title LIKE concat(concat('%',#{title}),'%')
+        AND titile LIKE concat(concat('%',#{title}),'%')
       </if>
     </where>
     ORDER BY publish_time DESC
@@ -135,7 +135,7 @@
   FROM passage psg
   <where>
     <if test="title != null">
-      title LIKE concat(concat('%',#{title}),'%')
+      titile LIKE concat(concat('%',#{title}),'%')
     </if>
   </where>
     ORDER BY publish_time DESC
@@ -146,7 +146,7 @@
     FROM passage
     <where>
       <if test="title != null">
-        title LIKE concat(concat('%',#{title}),'%')
+        titile LIKE concat(concat('%',#{title}),'%')
       </if>
     </where>
   </select>
@@ -158,7 +158,7 @@
         lesson = #{lessonId}
       </if>
       <if test="title != null">
-        AND title LIKE concat(concat('%',#{title}),'%')
+        AND titile LIKE concat(concat('%',#{title}),'%')
       </if>
     </where>
   </select>
@@ -168,7 +168,7 @@
     FROM passage
     <where>
       <if test="passageType != null and fromIndex != null and pageSize != null and lessonId != null">
-        (psg.state = 1 OR psg.state = 2) AND psg.type = #{passageType} AND lesson = #{lessonId}
+        psg.type = #{passageType} AND lesson = #{lessonId}
         ORDER BY psg.publish_time DESC
         limit #{fromIndex},#{pageSize}
       </if>
@@ -180,7 +180,7 @@
     FROM passage psg
     <where>
       <if test="author != null">
-        author = #{author} and psg.type = 25
+        author = #{author}
       </if>
     </where>
     ORDER BY publish_time DESC
