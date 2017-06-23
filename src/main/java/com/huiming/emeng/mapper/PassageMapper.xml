@@ -38,7 +38,7 @@
     FROM passage psg
     <where>
       <if test="passageType != null and showPassageNums != null" >
-        (psg.state = 1 OR psg.state = 2) AND psg.type = #{passageType}
+        psg.type = #{passageType}
         ORDER BY psg.publish_time DESC
         limit 0,#{showPassageNums}
       </if>
@@ -56,7 +56,7 @@
     FROM passage psg
     <where>
       <if test="passageType != null and fromIndex != null and pageSize != null">
-        (psg.state = 1 OR psg.state = 2) AND psg.type = #{passageType}
+        psg.type = #{passageType}
         ORDER BY psg.publish_time DESC
         limit #{fromIndex},#{pageSize}
       </if>
@@ -67,7 +67,7 @@
     <include refid="Base_Column_List" />
     FROM passage psg
     WHERE
-    (psg.state = 1 OR psg.state = 2) AND psg.type=12 AND psg.recommend>0
+    psg.type=12 AND psg.recommend>0
 
     ORDER BY psg.recommend ASC
     limit 0,7
@@ -194,6 +194,18 @@
         author = #{author}
       </if>
     </where>
+  </select>
+  <select id="selectTeacherPassageShowInTeacherPage" resultMap="BaseResultMap">
+    SELECT
+    <include refid="Base_Column_List" />
+    FROM passage psg
+    <where>
+      <if test="author != null">
+        psg.author = #{author}
+      </if>
+    </where>
+    ORDER BY publish_time DESC
+    limit 0,7
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from passage

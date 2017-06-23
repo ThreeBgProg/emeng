@@ -13,7 +13,6 @@ import java.util.List;
  * Created by LeoMs on 2017/6/3 0003.
  */
 @RestController
-@RequestMapping("/publisher")
 public class ChapterPublishController {
 
     @Autowired
@@ -28,7 +27,7 @@ public class ChapterPublishController {
 //    //新增章节
     @MappingDescription("增加章节")
     @RequestMapping(value = "/insert/chapter",method = RequestMethod.POST)
-    public int insertChapter(@RequestBody Chapter chapter){
+    public int insertChapter(Chapter chapter){
 
 //        System.out.println(chapter);
         return chapterMapper.insertSelective(chapter);
@@ -44,7 +43,7 @@ public class ChapterPublishController {
     //更新章节
     @MappingDescription("更新章节")
     @RequestMapping(value = "/update/chapter",method = RequestMethod.POST)
-    public int deleteChapter(@RequestBody Chapter chapter){
+    public int deleteChapter(Chapter chapter){
         System.out.println(chapter);
         return chapterMapper.updateByPrimaryKeySelective(chapter);
     }

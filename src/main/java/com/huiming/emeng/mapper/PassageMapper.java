@@ -119,4 +119,6 @@ public interface PassageMapper {
                                                              @Param("fromIndex") Integer fromIndex,
                                                              @Param("pageSize") Integer pageSize,
                                                              @Param("lessonId") Integer lessonId);
+
+    List<Passage> selectTeacherPassageShowInTeacherPage(@Param("author")String author);
 }

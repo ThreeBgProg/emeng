@@ -15,6 +15,8 @@ public class LessonPageInfo {
 
     private Byte passageType;
 
+    private Integer fromIndex;
+
     public LessonPageInfo() {
     }
 
@@ -24,6 +26,23 @@ public class LessonPageInfo {
         this.pageNum = pageNum;
         this.pageSize = pageSize;
         this.passageType = passageType;
+    }
+
+    public LessonPageInfo(Integer lessonId, Integer chapterId, Integer pageNum, Integer pageSize, Byte passageType, Integer fromIndex) {
+        this.lessonId = lessonId;
+        this.chapterId = chapterId;
+        this.pageNum = pageNum;
+        this.pageSize = pageSize;
+        this.passageType = passageType;
+        this.fromIndex = fromIndex;
+    }
+
+    public Integer getFromIndex() {
+        return fromIndex;
+    }
+
+    public void setFromIndex(Integer fromIndex) {
+        this.fromIndex = fromIndex;
     }
 
     public Integer getLessonId() {

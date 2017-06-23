@@ -1,13 +1,10 @@
 package com.huiming.emeng.controller;
 
 import com.huiming.emeng.model.Passage;
-import com.huiming.emeng.model.User;
 import com.huiming.emeng.service.PassagePublishService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-
-import javax.servlet.http.HttpSession;
 
 /**
  * Created by LeoMs on 2017/6/2 0002.
@@ -21,21 +18,20 @@ public class PassagePublishController {
 
     @ResponseBody
     @RequestMapping(value = "/insert/passage", method = RequestMethod.POST)
-    public int insertPassage(@RequestBody Passage passage, HttpSession httpSession){
+    public int insertPassage(Passage passage){
 
-        User user = (User)httpSession.getAttribute("user");
-        return passagePublishService.insertPassage(passage,user);
+        return passagePublishService.insertPassage(passage);
     }
 
     @ResponseBody
     @RequestMapping(value = "/update/passage",method = RequestMethod.POST)
-    public int updatePassage(@RequestBody Passage passage){
+    public int updatePassage(Passage passage){
 
         return passagePublishService.updatePassage(passage);
     }
 
     @ResponseBody
-    @RequestMapping(value = "/delete/passage", method = RequestMethod.DELETE)
+    @RequestMapping(value = "/delete/passage", method = RequestMethod.POST)
     public int deletePassage(@RequestParam("passageId") Integer passageId){
 
         return passagePublishService.deletePassage(passageId);

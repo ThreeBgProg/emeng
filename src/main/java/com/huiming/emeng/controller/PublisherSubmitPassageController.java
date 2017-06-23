@@ -57,7 +57,7 @@ public class PublisherSubmitPassageController {
      */
     @MappingDescription("通过审核")
     @RequestMapping("/pass/submission")
-    public int passSubmission(@RequestBody Passage passage){
+    public int passSubmission(Passage passage){
         passage.setState(new Byte("1"));
         passage.setPublishTime(new Date());
         return passageMapper.updateByPrimaryKeySelective(passage);

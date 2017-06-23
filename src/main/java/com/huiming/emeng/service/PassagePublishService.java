@@ -18,9 +18,9 @@ public class PassagePublishService {
     private PassageMapper passageMapper;
 
     //发布文章
-    public int insertPassage(Passage passage, User user){
+    public int insertPassage(Passage passage){
 
-        passage.setAuthor(user.getUsername());
+       // passage.setAuthor(user.getUsername());
         passage.setPublishTime(new Date());
         passage.setState(new Byte("2"));
         return passageMapper.insertSelective(passage);

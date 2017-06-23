@@ -75,7 +75,9 @@ public class PassagePageService {
         return pager;
     }
     //根据分页信息返回课程文章分页对象
-    public Pager<Passage> getLessonPassagePage(LessonPageInfo lessonPageInfo){
+    public Pager<Passage>
+
+    getLessonPassagePage(LessonPageInfo lessonPageInfo){
 
         Integer pageNum = lessonPageInfo.getPageNum();
         Integer pageSize = lessonPageInfo.getPageSize();
@@ -96,6 +98,7 @@ public class PassagePageService {
         }
         //起始索引
         Integer fromIndex = (pageNum - 1) * pageSize;
+        lessonPageInfo.setFromIndex(fromIndex);
 
         Pager<Passage> pager = new Pager<Passage>(pageSize, pageNum, totalRecord,
                 totalPage, passageMapper.selectLessonPassageWithPagesizeFromFromindex(lessonPageInfo));
