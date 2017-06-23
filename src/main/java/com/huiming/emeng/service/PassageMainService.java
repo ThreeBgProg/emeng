@@ -18,10 +18,11 @@ public class PassageMainService {
     @Autowired
     private PassageMapper passageMapper;
 
-    public List<Passage> getPassageMainList(Byte passageType, Integer passageId){
-
-        List<Passage> allPassageList = passageMapper.selectAllPassageByPassageType(passageType);
+    public List<Passage> getPassageMainList(Integer passageId){
         Passage passage = passageMapper.selectByPrimaryKey(passageId);
+        Byte passageType = passage.getType();
+        List<Passage> allPassageList = passageMapper.selectAllPassageByPassageType(passageType);
+
         List<Passage> threePassage = new ArrayList<Passage>();
         int i = 0;
         int allPassageLength = allPassageList.size();

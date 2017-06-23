@@ -96,14 +96,13 @@ public class PassagePageController {
      */
     @MappingDescription("非课程文章正文页面")
     @RequestMapping("/passage/main")
-    public Object passagePageList(ModelMap modelMap, @RequestParam("passageType") Byte passageType,
-                                  @RequestParam("passsageId") Integer passageId){
+    public Object passagePageList(ModelMap modelMap, @RequestParam("passageId") Integer passageId){
         //添加导航表模块
 //        List<Navigation> navigationList = navigationService.selectAllNavigation();
         //添加热点推荐模块
         List<Passage> recommendList = passageRecommendService.getRecommondPassageList();
         //添加文章正文模块，显示文章正文的是数组下标为1的对象
-        List<Passage> passageMainList = passageMainService.getPassageMainList(passageType, passageId);
+        List<Passage> passageMainList = passageMainService.getPassageMainList(passageId);
 
 //        modelMap.put("navigationList", navigationList);
         modelMap.put("recommendList", recommendList);

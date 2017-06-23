@@ -31,8 +31,8 @@ public class LessonController {
     private LessonService lessonService;
 
     //导航模块
-    @Autowired
-    private NavigationService navigationService;
+//    @Autowired
+//    private NavigationService navigationService;
 
     //热点推荐模块
     @Autowired
