@@ -1,7 +1,6 @@
 package com.huiming.emeng.service;
 
-import java.util.List;
-
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Teacher;
 
 public interface TeacherService {
@@ -11,9 +10,24 @@ public interface TeacherService {
 
 	public Teacher selectByPrimaryKey(Teacher teacher);
 
-	public List<Teacher> selectAllTeacher();
+	/**
+	 * 分页查找所有名师
+	 * 
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	public Pager<Teacher> selectAllTeacher(Integer currentPage, Integer pageSize);
 
 	public int insertTeacher(Teacher teacher);
 
-	public List<Teacher> selectAllSelective(Teacher teacher);
+	/**
+	 * 分页查询名师信息
+	 * 
+	 * @param teacher
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	public Pager<Teacher> selectAllSelective(Teacher teacher, Integer currentPage, Integer pageSize);
 }

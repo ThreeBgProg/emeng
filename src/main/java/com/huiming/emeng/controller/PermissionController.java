@@ -33,15 +33,15 @@ public class PermissionController {
 			return FAIL;
 	}
 
-	@RequestMapping("/getAllPermissionPage")
-	@MappingDescription("超级管理员获取所有权限信息分页")
+	@RequestMapping("/getAllPermissionByPage")
+	@MappingDescription("分页获取权限信息")
 	@ResponseBody
 	public Pager<Permission> getAllPermissionPage(Permission permission, ModelMap modelMap,Integer currentPage, Integer pageSize) {
-		return new Pager<>(pageSize, currentPage, permissionService.selectAllEffective());
+		return permissionService.selectAllEffectiveByPage(currentPage, pageSize);
 	}
 	
 	@RequestMapping("/getAllPermission")
-	@MappingDescription("超级管理员获取所有权限信息")
+	@MappingDescription("获取所有权限信息")
 	@ResponseBody
 	public List<Permission> getAllPermission(Permission permission, ModelMap modelMap) {
 		return permissionService.selectAllEffective();

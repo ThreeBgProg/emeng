@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.bo.PassageWithBanner;
 import com.huiming.emeng.model.Banner;
 import com.huiming.emeng.service.BannerService;
 
@@ -24,7 +25,8 @@ public class BannerController {
 	@ResponseBody
 	@RequestMapping("/getAllBanner")
 	@MappingDescription("查看所有的轮播文章")
-	public List<Banner> getAllBanner() {
+	public List<PassageWithBanner> getAllBanner() {
+		System.out.println("getAllBanner");
 		return bannerService.selectAll();
 	}
 
@@ -46,22 +48,34 @@ public class BannerController {
 	@RequestMapping("/deleteBannerByPassageId")
 	@ResponseBody
 	@MappingDescription("根据文章id删除轮播")
-	public int deleteBannerByPassageId(Integer passageId) {
-		return bannerService.deleteByPassageId(passageId);
+	public String deleteBannerByPassageId(Integer passageId) {
+		if (bannerService.deleteByPassageId(passageId) != 0) {
+			return SUCCESS;
+		} else {
+			return FAIL;
+		}
 	}
 
 	@RequestMapping("/deleteBannerPrimaryKey")
 	@ResponseBody
 	@MappingDescription("根据id删除轮播")
-	public int deleteBannerPrimaryKey(Integer id) {
-		return bannerService.deleteByPrimaryKey(id);
+	public String deleteBannerPrimaryKey(Integer id) {
+		if (bannerService.deleteByPrimaryKey(id) != 0) {
+			return SUCCESS;
+		} else {
+			return FAIL;
+		}
 	}
 
 	@RequestMapping("/updateBanner")
 	@ResponseBody
 	@MappingDescription("更新轮播")
-	public int updateBanner(Banner banner) {
-		return bannerService.updateByPrimaryKeySelective(banner);
+	public String updateBanner(Banner banner) {
+		if (bannerService.updateByPrimaryKeySelective(banner) != 0) {
+			return SUCCESS;
+		} else {
+			return FAIL;
+		}
 	}
 
 }

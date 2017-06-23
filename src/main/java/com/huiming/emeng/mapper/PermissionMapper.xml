@@ -169,10 +169,23 @@
 		FROM permission
 		where state = 1
 	</select>
+	<select id="selectAllEffectiveByPage" resultMap="BaseResultMap">
+		SELECT
+		<include refid="Base_Column_List" />
+		FROM permission
+		where state = 1
+		limit #{fromIndex},#{pageSize}
+	</select>
 	
 	<select id="selectAll" resultMap="BaseResultMap">
 		SELECT
 		<include refid="Base_Column_List" />
 		FROM permission
 	</select>
+	<select id="selectCount" resultType="java.lang.Integer">
+		SELECT count(*)
+		FROM permission
+	</select>
+	
+	
 </mapper>

@@ -32,6 +32,8 @@ public class FileuploadController {
 	@Autowired
 	private FileuploadServiceImpl fileuplaodservice;
 	
+	@Autowired
+	private FileuploadServiceImpl fileuploadServiceImpl;
 	/**
 	 * 照片文件上传
 	 * @param request
@@ -40,19 +42,22 @@ public class FileuploadController {
 	 * @return
 	 * @throws Exception
 	 */
-   @RequestMapping("picupload")
+   @SuppressWarnings("rawtypes")
+@RequestMapping("picupload")
    @MappingDescription("文件上传接口")
    @ResponseBody
    public Object upload(HttpServletRequest request,
 		   @RequestParam("files") MultipartFile[] files)throws Exception
    {
 	   
-	   List respondate = new ArrayList();
+	    List src = new ArrayList();
 
-	     respondate = fileuplaodservice.upload(request, files);
-	      Object object = JSON.toJSON(respondate);
-	   
-	   
+	     src = fileuplaodservice.upload(request, files);
+	     Map<Object, Object>  map = new HashMap<>();
+	     map.put("respondate", src);
+	     map.put("code", "0");
+	     map.put("msg", "上传成功");
+	     Object object = JSON.toJSON(src);
 	   return object;
    }
 	/**
@@ -113,8 +118,37 @@ public class FileuploadController {
 		return object;
 	}
 	
-	
-	
+	   @RequestMapping("addVideoLink")
+	   @MappingDescription("视频上传")
+	   @ResponseBody
+	   public Object addVideoLink(HttpServletRequest request,
+			   @RequestParam("linklink") MultipartFile link)throws Exception
+	   {   
+		   if(!link.isEmpty()){
+		       Map<String, String> respondate=new HashMap<>();
+			   respondate.put("linkName",fileuploadServiceImpl.addVideoLink(request, link).get("linkName"));
+			   respondate.put("link",fileuploadServiceImpl.addVideoLink(request, link).get("link"));
+		       return respondate;
+		   }
+		    return null;
+		  
+
+	   }
+
+	   @RequestMapping("addpic")
+	   @MappingDescription("视频照片上传")
+	   @ResponseBody
+	   public Object addVideopic(HttpServletRequest request,
+			   @RequestParam("picpic") MultipartFile pic)throws Exception
+	   {   
+		   if(!pic.isEmpty()){
+			 Map< String, String> respondate = new HashMap<>();
+			   respondate.put("pic",fileuploadServiceImpl.addVideoPic(request, pic));
+			   return respondate;
+		   }
+		  return null;
+
+	   }
 	
 	
 }
