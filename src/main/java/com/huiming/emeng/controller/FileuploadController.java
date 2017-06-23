@@ -10,7 +10,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.commons.io.FileUtils;
-import org.eclipse.jdt.internal.compiler.ast.FakedTrackingVariable;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -24,11 +24,13 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
-import com.huiming.emeng.model.Meeting;
+import com.huiming.emeng.serviceImpl.FileuploadServiceImpl;
 
 @Controller
 public class FileuploadController {
 	
+	@Autowired
+	private FileuploadServiceImpl fileuplaodservice;
 	
 	/**
 	 * 照片文件上传
@@ -45,45 +47,12 @@ public class FileuploadController {
 		   @RequestParam("files") MultipartFile[] files)throws Exception
    {
 	   
-
 	   List respondate = new ArrayList();
 
-	   if(files.length>0){
-		   
-		   
-		   for(int i=0;i<files.length;i++){
-			   String path = request.getServletContext().getRealPath("/wangEditor_images/");
-			 //如果文件不为空，写入上传路劲
-			   if(!files[i].isEmpty()){
-				   //上传文件路劲
-				   System.out.println("path:"+path);
-				   String fileName = files[i].getOriginalFilename();
-				   
-				   request.setAttribute("filename", fileName);
-				   
-				   System.out.println("fileName:"+fileName);
-				   File filepath = new File(path,fileName);
-				   System.out.println("filepath:"+filepath);
-				   //判断路劲是否存在，如果不存在就新建一个
-				   if(!filepath.getParentFile().exists()){
-					   filepath.getParentFile().mkdirs();
-				   }
-				   //将文件存到一个目标文件当中
-				   
-				   long str2 = Date.parse((new Date()).toString());
-				   
-				   String[] fStrings = fileName.split("\\.");
-				   
-				   String str = fStrings[0]+str2+"."+fStrings[1];
-				   
-				   files[i].transferTo(new File(path+File.separator+str));
-				   System.out.println(str);
-				   respondate.add(i, path+str);
-			   }
-		   }
-	   }
-	   
+	     respondate = fileuplaodservice.upload(request, files);
 	      Object object = JSON.toJSON(respondate);
+	   
+	   
 	   return object;
    }
 	/**
@@ -143,5 +112,9 @@ public class FileuploadController {
 		Object object = JSON.toJSON(respondate);
 		return object;
 	}
+	
+	
+	
+	
 	
 }

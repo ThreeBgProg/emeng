@@ -1,14 +1,18 @@
 package com.huiming.emeng.controller;
 
-import com.alibaba.fastjson.JSON;
-import com.huiming.emeng.annotation.MappingDescription;
-import com.huiming.emeng.common.PassageType;
-import com.huiming.emeng.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import com.alibaba.fastjson.JSON;
+import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.common.PassageType;
+import com.huiming.emeng.service.HomePagePassageService;
+import com.huiming.emeng.service.LinksService;
+import com.huiming.emeng.service.MeetingService;
+import com.huiming.emeng.service.NavigationService;
+import com.huiming.emeng.service.PostService;
 
 /**
  * 主页controller，由我们三个共同开发

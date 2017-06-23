@@ -1,13 +1,15 @@
 package com.huiming.emeng.controller;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RestController;
+
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.mapper.ChapterMapper;
 import com.huiming.emeng.model.Chapter;
-import com.huiming.emeng.model.Passage;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 /**
  * Created by LeoMs on 2017/6/3 0003.
