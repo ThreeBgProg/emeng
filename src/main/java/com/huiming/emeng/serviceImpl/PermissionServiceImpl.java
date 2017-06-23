@@ -8,6 +8,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.PermissionMapper;
 import com.huiming.emeng.mapper.RolePermissionMapper;
 import com.huiming.emeng.model.Permission;
@@ -74,7 +75,7 @@ public class PermissionServiceImpl implements PermissionService {
 	@Override
 	public List<Permission> selectByRole(Integer id) {
 		List<Permission> list = new ArrayList<>();
-		if (id==Integer.parseInt(env.getRequiredProperty("role.adminId"))) {
+		if (id == Integer.parseInt(env.getRequiredProperty("role.adminId"))) {
 			return permissionMapper.selectAllEffective();
 		} else {
 			for (Integer permissionId : rolePermissionMapper.selectAllByRoleId(id)) {
@@ -84,7 +85,18 @@ public class PermissionServiceImpl implements PermissionService {
 		return list;
 	}
 
-	public List<Permission> selectAll(){
+	@Override
+	public List<Permission> selectAll() {
 		return permissionMapper.selectAll();
 	}
+
+	@Override
+	public Pager<Permission> selectAllEffectiveByPage(Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = permissionMapper.selectCount();
+		Pager<Permission> permissionPage = new Pager<>(pageSize, currentPage, totalRecord,
+				permissionMapper.selectAllEffectiveByPage(fromIndex, pageSize));
+		return permissionPage;
+	}
+
 }

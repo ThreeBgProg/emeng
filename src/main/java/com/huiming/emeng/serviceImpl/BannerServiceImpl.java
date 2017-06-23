@@ -1,11 +1,14 @@
 package com.huiming.emeng.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.bo.PassageWithBanner;
 import com.huiming.emeng.mapper.BannerMapper;
+import com.huiming.emeng.mapper.PassageMapper;
 import com.huiming.emeng.model.Banner;
 import com.huiming.emeng.service.BannerService;
 
@@ -15,9 +18,19 @@ public class BannerServiceImpl implements BannerService {
 	@Autowired
 	private BannerMapper bannerMapper;
 	
+	@Autowired
+	private PassageMapper passageMapper;
+	
 	@Override
-	public List<Banner> selectAll() {
-		return bannerMapper.selectAll();
+	public List<PassageWithBanner> selectAll() {
+		List<Banner> temp = bannerMapper.selectAll();
+		List<PassageWithBanner> list = new ArrayList<>();
+		for (Banner banner : temp) {
+			PassageWithBanner passageWithBanner = new PassageWithBanner(banner);
+			passageWithBanner.setPassage(passageMapper.selectByPrimaryKey(banner.getPassageId()));
+			list.add(passageWithBanner);
+		}
+		return list;
 	}
 
 	@Override

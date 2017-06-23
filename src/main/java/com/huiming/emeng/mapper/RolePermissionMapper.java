@@ -8,6 +8,8 @@ public interface RolePermissionMapper {
 	int deleteByPrimaryKey(Integer id);
 	
 	int deleteByPermissionId(Integer id);
+	
+	int deleteByRoleId(Integer id);
 
 	int insert(RolePermission record);
 

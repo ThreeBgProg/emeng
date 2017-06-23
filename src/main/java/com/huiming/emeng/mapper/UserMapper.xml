@@ -15,12 +15,43 @@
 		id, username, job_id, password, school_id, phone, mail,
 		state
 	</sql>
+	<select id="countSelective" parameterType="com.huiming.emeng.model.User"
+		resultType="java.lang.Integer">
+		SELECT count(*)
+		FROM user
+		<where>
+			<if test="username != null">
+				username = #{username,jdbcType=VARCHAR}
+			</if>
+			<if test="jobId != null">
+				AND job_id = #{jobId,jdbcType=VARCHAR}
+			</if>
+			<if test="password != null">
+				AND password = #{password,jdbcType=VARCHAR}
+			</if>
+			<if test="schoolId != null">
+				AND school_id = #{schoolId,jdbcType=INTEGER}
+			</if>
+			<if test="phone != null">
+				AND phone = #{phone,jdbcType=VARCHAR}
+			</if>
+			<if test="mail != null">
+				AND mail = #{mail,jdbcType=VARCHAR}
+			</if>
+			<if test="state != null">
+				AND state = #{state,jdbcType=TINYINT}
+			</if>
+		</where>
+
+	</select>
 	<select id="selectByPrimaryKey" parameterType="java.lang.Integer"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from user
-		where id = #{id,jdbcType=INTEGER}
+		<where>
+			id = #{id,jdbcType=INTEGER}
+		</where>
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from user
@@ -136,8 +167,7 @@
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<select id="selectSelective" parameterType="com.huiming.emeng.model.User"
-		resultMap="BaseResultMap">
+	<select id="selectSelective" resultMap="BaseResultMap">
 		select *
 		from user
 		<where>
@@ -151,12 +181,16 @@
 				AND state = #{state,jdbcType=VARCHAR}
 			</if>
 		</where>
+		limit #{fromIndex},#{pageSize}
 	</select>
-	<select id="selectAll" resultMap="BaseResultMap">
+	<select id="selectPagerUser" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from user
-		where state = 1
+		<where>
+			state = 1
+		</where>
+		limit #{fromIndex},#{pageSize}
 	</select>
 
 	<select id="selectAllSelective" parameterType="com.huiming.emeng.model.User"
@@ -217,5 +251,9 @@
 				AND state like #{state,jdbcType=TINYINT}
 			</if>
 		</where>
+	</select>
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(*)
+		from user
 	</select>
 </mapper>

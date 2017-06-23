@@ -2,6 +2,7 @@ package com.huiming.emeng.service;
 
 import java.util.List;
 
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Permission;
 
 public interface PermissionService {
@@ -22,12 +23,20 @@ public interface PermissionService {
 	public int updateByPrimaryKey(Permission record);
 
 	public Permission selectSelective(Permission record);
-
+	
+	
 	/**
 	 * 获取全部有效权限
 	 * @return
 	 */
 	public List<Permission> selectAllEffective();
+	
+	/**
+	 * 分页获取全部有效权限
+	 * @return
+	 */
+	public Pager<Permission> selectAllEffectiveByPage(Integer currentPage, Integer pageSize);
+	
 	
 	/**
      * 获取所有的权限，包括无效的     

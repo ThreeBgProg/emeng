@@ -168,11 +168,42 @@
 				AND school_id = #{school_id,jdbcType=VARCHAR}
 			</if>
 		</where>
+		limit #{fromIndex},#{pageSize}
 	</select>
 
 	<select id="selectAll" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
+		from teacher
+		limit #{fromIndex},#{pageSize}
+	</select>
+	<select id="selectCountSelective" parameterType="com.huiming.emeng.model.Teacher"
+		resultType="java.lang.Integer">
+		select count(*)
+		from teacher
+		<where>
+			<if test="id != null">
+				id = #{id,jdbcType=INTEGER}
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="direction != null">
+				AND direction = #{direction,jdbcType=VARCHAR}
+			</if>
+			<if test="subject != null">
+				AND subject = #{subject,jdbcType=VARCHAR}
+			</if>
+			<if test="pic != null">
+				AND pic = #{pic,jdbcType=VARCHAR}
+			</if>
+			<if test="school_id != null">
+				AND school_id = #{school_id,jdbcType=VARCHAR}
+			</if>
+		</where>
+	</select>
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(*)
 		from teacher
 	</select>
 

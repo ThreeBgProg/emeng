@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.SchoolMapper;
 import com.huiming.emeng.model.School;
 import com.huiming.emeng.service.SchoolService;
@@ -46,8 +47,16 @@ public class SchoolServiceImpl implements SchoolService {
 	}
 
 	@Override
+	public Pager<School> selectAllByPage(Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = schoolmapper.selectCount();
+		Pager<School> schoolPage = new Pager<>(pageSize, currentPage, totalRecord,
+				schoolmapper.selectAllByPage(fromIndex, pageSize));
+		return schoolPage;
+	}
+	
+	@Override
 	public List<School> selectAll() {
 		return schoolmapper.selectAll();
 	}
-
 }

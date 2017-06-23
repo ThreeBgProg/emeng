@@ -23,19 +23,33 @@
 		from user_role
 		where user_id = #{userId,jdbcType=INTEGER}
 	</select>
-	<select id="selectByRoleId" parameterType="java.lang.Integer"
-		resultType="java.lang.Integer">
+	<select id="selectByRoleId" resultType="java.lang.Integer">
 		select
 		user_id
 		from user_role
-		where role_id = #{roleId,jdbcType=INTEGER}
+		<where>
+			role_id = #{roleId,jdbcType=INTEGER}
+		</where>
+		limit #{fromIndex},#{pageSize}
 	</select>
+
+	<select id="selectCountByRoleId" parameterType="java.lang.Integer"
+		resultType="java.lang.Integer">
+		select count(*)
+		from user_role
+		<where>
+			role_id = #{roleId,jdbcType=INTEGER}
+		</where>
+	</select>
+
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-		delete from user_role
+		delete from
+		user_role
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
 	<insert id="insert" parameterType="com.huiming.emeng.model.UserRole">
-		insert into user_role (id, user_id, role_id
+		insert into user_role (id,
+		user_id, role_id
 		)
 		values (#{id,jdbcType=INTEGER},
 		#{userId,jdbcType=INTEGER}
@@ -81,14 +95,20 @@
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.UserRole">
 		update user_role
-		user_id = #{userId,jdbcType=INTEGER}
-		role_id = #{roleId,jdbcType=INTEGER}
+		<set>
+			user_id = #{userId,jdbcType=INTEGER}
+			role_id =
+			#{roleId,jdbcType=INTEGER}
+		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateUserRole" parameterType="com.huiming.emeng.model.UserRole">
 		update user_role
-		set
-		role_id = #{roleId,jdbcType=INTEGER}
-		where user_id = #{userId,jdbcType=INTEGER}
+		<set>
+			role_id = #{roleId,jdbcType=INTEGER}
+		</set>
+		<where>
+			user_id = #{userId,jdbcType=INTEGER}
+		</where>
 	</update>
 </mapper>

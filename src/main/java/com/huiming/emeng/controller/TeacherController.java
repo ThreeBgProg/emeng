@@ -1,7 +1,5 @@
 package com.huiming.emeng.controller;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,44 +14,58 @@ import com.huiming.emeng.service.TeacherService;
 @RequestMapping("/teacher")
 public class TeacherController {
 
+
+	private String SUCCESS = "操作成功";
+	private String FAIL = "操作失败";
+	
 	@Autowired
 	private TeacherService teacherService;
 
-	@RequestMapping("/getAllTeacher")
+	@RequestMapping("/getAllTeacherByPage")
 	@MappingDescription("获取名师信息")
 	@ResponseBody
 	public Pager<Teacher> getAllTeacher(Integer currentPage, Integer pageSize) {
-		List<Teacher> teachers = teacherService.selectAllTeacher();
-		return new Pager<Teacher>(pageSize, currentPage, teachers);
+		return teacherService.selectAllTeacher(currentPage,pageSize);
 	}
 
 	@RequestMapping("/addTeacher")
-	@MappingDescription
+	@MappingDescription("添加名师")
 	@ResponseBody
-	public int addTeacher(Teacher teacher) {
-		return teacherService.insertTeacher(teacher);
+	public String addTeacher(Teacher teacher) {
+		if(teacherService.insertTeacher(teacher)!=0){
+			return SUCCESS;
+		}else{
+			return FAIL;
+		}
 	}
 
 	@RequestMapping("/updateTeacher")
-	@MappingDescription
+	@MappingDescription("更新名师信息")
 	@ResponseBody
-	public int updateTeacher(Teacher teacher) {
-		return teacherService.updateTeacher(teacher);
+	public String updateTeacher(Teacher teacher) {
+		if(teacherService.updateTeacher(teacher)!=0){
+			return SUCCESS;
+		}else{
+			return FAIL;
+		}
 	}
 
 	@RequestMapping("/deleteTeacher")
-	@MappingDescription
+	@MappingDescription("删除名师")
 	@ResponseBody
-	public int deleteTeacher(Integer id) {
-		return teacherService.deleteByPrimaryKey(id);
+	public String deleteTeacher(Integer id) {
+		if(teacherService.deleteByPrimaryKey(id)!=0){
+			return SUCCESS;
+		}else{
+			return FAIL;
+		}
 	}
 
 	@RequestMapping("/selectAllSelective")
-	@MappingDescription("查找名师信息")
+	@MappingDescription("分页查找名师信息")
 	@ResponseBody
 	public Pager<Teacher> selectAllSelective(Integer currentPage, Integer pageSize, Teacher teacher) {
-		List<Teacher> teachers = teacherService.selectAllSelective(teacher);
-		return new Pager<Teacher>(pageSize, currentPage, teachers);
+		return teacherService.selectAllSelective(teacher, currentPage, pageSize);
 	}
 
 	@RequestMapping("/selectByPrimaryKey")

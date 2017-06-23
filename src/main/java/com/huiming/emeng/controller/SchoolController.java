@@ -29,19 +29,18 @@ public class SchoolController {
 		return schoolService.selectAll();
 	}
 
-	@RequestMapping("/getSchool")
-	@MappingDescription("获取学校信息")
+	@RequestMapping("/getSchoolPage")
+	@MappingDescription("分页获取学校信息")
 	@ResponseBody
 	public Pager<School> getSchoolPager(Integer currentPage, Integer pageSize) {
-		List<School> schoolList = schoolService.selectAll();
-		return new Pager<>(pageSize, currentPage, schoolList);
+		return schoolService.selectAllByPage(currentPage, pageSize);
 	}
 
 	@RequestMapping("/insertSchool")
 	@MappingDescription("添加学校信息")
 	@ResponseBody
 	public String insertSchool(School school) {
-		if (schoolService.insert(school) >= 1) {
+		if (schoolService.insert(school) != 0) {
 			return SUCCESS;
 		}
 		return FAIL;
@@ -51,7 +50,7 @@ public class SchoolController {
 	@MappingDescription("修改学校信息")
 	@ResponseBody
 	public String updateSchool(School school) {
-		if (schoolService.updateByPrimaryKey(school) >= 1) {
+		if (schoolService.updateByPrimaryKey(school) != 0) {
 			return SUCCESS;
 		}
 		return FAIL;
@@ -61,7 +60,7 @@ public class SchoolController {
 	@MappingDescription("删除学校信息")
 	@ResponseBody
 	public String deleteSchool(School school) {
-		if (schoolService.deleteByPrimaryKey(school.getId()) >= 1) {
+		if (schoolService.deleteByPrimaryKey(school.getId()) != 0) {
 			return SUCCESS;
 		}
 		return FAIL;

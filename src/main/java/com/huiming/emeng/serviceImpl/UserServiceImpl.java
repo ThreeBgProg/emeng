@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.RoleMapper;
 import com.huiming.emeng.mapper.UserMapper;
 import com.huiming.emeng.mapper.UserRoleMapper;
@@ -33,13 +34,21 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> selectAllSelective(User user) {
-		return userMapper.selectAllSelective(user);
+	public Pager<User> selectAllSelective(User user,Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = userMapper.countSelective(user);
+		Pager<User> userPage = new Pager<>(pageSize, currentPage, totalRecord,
+				userMapper.selectPagerUserSelective(user,fromIndex, pageSize));
+		return userPage;
 	}
 
 	@Override
-	public List<User> selectAllUser() {
-		return userMapper.selectAll();
+	public Pager<User> selectAllUser(Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = userMapper.selectCount();
+		Pager<User> userPage = new Pager<>(pageSize, currentPage, totalRecord,
+				userMapper.selectPagerUser(fromIndex, pageSize));
+		return userPage;
 	}
 
 	@Override
@@ -49,13 +58,17 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUserByRole(Integer id) {
-		List<Integer> userIds = userRoleMapper.selectByRoleId(id);
+	public Pager<User> getUserByRole(Integer id,Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = userRoleMapper.selectCountByRoleId(id);
+		List<Integer> userIds = userRoleMapper.selectByRoleId(id, fromIndex, pageSize);
 		List<User> list = new ArrayList<>();
 		for (Integer userId : userIds) {
 			list.add(userMapper.selectByPrimaryKey(userId));
 		}
-		return list;
+		Pager<User> userPage = new Pager<>(pageSize, currentPage, totalRecord,
+				list);
+		return userPage;
 	}
 
 	@Override
@@ -68,9 +81,14 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateByPrimaryKeySelective(user);
 	}
 	
+	//有问题，这个方法不知道有没有用到
 	@Override
-	public List<User> findSelective(User record){
-		return userMapper.findSelective(record);
+	public Pager<User> findSelective(User record,Integer currentPage, Integer pageSize){
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = userMapper.selectCount();
+		Pager<User> userPage = new Pager<>(pageSize, currentPage, totalRecord,
+				userMapper.selectPagerUserSelective(record,fromIndex, pageSize));
+		return userPage;
 	}
 	
 	/**
@@ -83,5 +101,13 @@ public class UserServiceImpl implements UserService {
 		userRole.setRoleId(roleId);
 		userRole.setUserId(userId);
 		return userRoleMapper.updateUserRole(userRole);
+	}
+	
+	@Override
+	public int insertUserRole(Integer roleId,Integer userId){
+		UserRole userRole = new UserRole();
+		userRole.setRoleId(roleId);
+		userRole.setUserId(userId);
+		return userRoleMapper.insert(userRole);
 	}
 }

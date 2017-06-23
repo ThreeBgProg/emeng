@@ -5,13 +5,15 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.TeacherMapper;
+import com.huiming.emeng.model.School;
 import com.huiming.emeng.model.Teacher;
 import com.huiming.emeng.service.TeacherService;
 
 @Service("teacherService")
 public class TeacherServiceImpl implements TeacherService {
-	
+
 	@Autowired
 	private TeacherMapper teacherMapper;
 
@@ -44,17 +46,21 @@ public class TeacherServiceImpl implements TeacherService {
 	}
 
 	/**
-	 * 获取所有有效用户
+	 * 获取所有有效名师
 	 * 
 	 * @return
 	 */
-	public List<Teacher> selectAllTeacher() {
-		return teacherMapper.selectSelective(new Teacher());
+	public Pager<Teacher> selectAllTeacher(Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = teacherMapper.selectCount();
+		Pager<Teacher> teacherPage = new Pager<>(pageSize, currentPage, totalRecord,
+				teacherMapper.selectAll(fromIndex, pageSize));
+		return teacherPage;
 
 	}
 
 	/**
-	 * 添加用户
+	 * 添加名师
 	 * 
 	 * @return
 	 */
@@ -69,8 +75,12 @@ public class TeacherServiceImpl implements TeacherService {
 	 * @param user
 	 * @return
 	 */
-	public List<Teacher> selectAllSelective(Teacher teacher) {
-		return teacherMapper.selectSelective(teacher);
+	public Pager<Teacher> selectAllSelective(Teacher teacher, Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = teacherMapper.selectCount();
+		Pager<Teacher> teacherPage = new Pager<>(pageSize, currentPage, totalRecord,
+				teacherMapper.selectSelective(teacher, fromIndex, pageSize));
+		return teacherPage;
 
 	}
 }

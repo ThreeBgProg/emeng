@@ -70,26 +70,40 @@
 		update role
 		set
 		rolename = #{rolename,jdbcType=VARCHAR},
-		state = #{state,jdbcType=TINYINT}
+		state =
+		#{state,jdbcType=TINYINT}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 
-	<select id="selectSelective" parameterType="com.huiming.emeng.model.Role"
-		resultMap="BaseResultMap">
+	<select id="selectByRolename" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from role
 		<where>
-			<if test="id != null">
-				id = #{id,jdbcType=INTEGER}
-			</if>
 			<if test="rolename != null">
 				AND rolename = #{rolename,jdbcType=VARCHAR}
 			</if>
-			<if test="state != null">
-				AND state = #{state,jdbcType=TINYINT}
-			</if>
+		</where>
+		limit #{fromIndex},#{pageSize}
+	</select>
+	
+	<select id="selectCount" resultType="java.lang.Integer">
+		select count(*)
+		from role
+	</select>
+	
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role
+	</select>
+	
+	<select id="selectRole" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from role
+		<where>
+			rolename = #{rolename,,jdbcType=VARCHAR}
 		</where>
 	</select>
-
 </mapper>

@@ -53,9 +53,21 @@ public interface PermissionMapper {
     List<Permission> selectAllEffective();
     
     /**
+     * 分页获取所有有效的权限
+     * @return
+     */
+    List<Permission> selectAllEffectiveByPage(Integer fromIndex, Integer pageSize);
+    
+    /**
      * 获取所有的权限，包括无效的     
      * @return
      */
     List<Permission> selectAll();
+    
+    /**
+     * 计数
+     * @return
+     */
+    int selectCount();
     
 }

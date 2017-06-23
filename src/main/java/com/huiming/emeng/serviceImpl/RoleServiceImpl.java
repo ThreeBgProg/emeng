@@ -6,6 +6,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.PermissionMapper;
 import com.huiming.emeng.mapper.RoleMapper;
 import com.huiming.emeng.mapper.RolePermissionMapper;
@@ -26,6 +27,7 @@ public class RoleServiceImpl implements RoleService {
 
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
+		rolePermissionMapper.deleteByRoleId(id);
 		return roleMapper.deleteByPrimaryKey(id);
 	}
 
@@ -55,10 +57,19 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public List<Role> selectAll() {
+	public Pager<Role> selectAllByPage(Integer currentPage, Integer pageSize) {
 		Role role = new Role();
 		role.setState((byte) 1);
-		return roleMapper.selectSelective(role);
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = roleMapper.selectCount();
+		Pager<Role> rolePage = new Pager<>(pageSize, currentPage, totalRecord,
+				roleMapper.selectByRolename(role.getRolename(), fromIndex, pageSize));
+		return rolePage;
+	}
+	
+	@Override
+	public List<Role> selectAll() {
+		return roleMapper.selectAll();
 	}
 
 	@Override
@@ -84,12 +95,14 @@ public class RoleServiceImpl implements RoleService {
 		return rolePermissionMapper.deleteByPrimaryKey(record.getId());
 	}
 
-	public boolean selectByAll(Integer roleId, Integer permissionId) {
+	@Override
+	public boolean havePermission(Integer roleId, Integer permissionId) {
 		return rolePermissionMapper.selectSelective(new RolePermission(roleId, permissionId)) == null;
 	}
 
-	public Role selectRole(Role record){
-		return roleMapper.selectSelective(record).get(0);
+	@Override
+	public Role selectRole(String rolename) {
+		return roleMapper.selectRole(rolename);
 	}
-	
+
 }
