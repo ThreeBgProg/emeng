@@ -105,9 +105,7 @@
     FROM passage psg
     <where>
     <if test="lessonId != null and chapterId != null and passageType != null and fromIndex != null and pageSize != null">
-      (psg.state = 1
-      OR psg.state = 2)
-      AND psg.lesson = #{lessonId}
+      psg.lesson = #{lessonId}
       AND psg.chapter = #{chapterId}
       AND psg.type = #{passageType}
       limit #{fromIndex},#{pageSize}

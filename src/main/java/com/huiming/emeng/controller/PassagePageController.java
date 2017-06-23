@@ -90,7 +90,7 @@ public class PassagePageController {
     /**
      * 文章正文页面
      * @param modelMap
-     * @param passageType
+     *
      * @param passageId
      * @return
      */

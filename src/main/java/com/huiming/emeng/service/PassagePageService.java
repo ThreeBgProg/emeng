@@ -7,6 +7,8 @@ import com.huiming.emeng.model.Passage;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * Created by LeoMs on 2017/5/25 0025.
  */
@@ -32,6 +34,10 @@ public class PassagePageService {
         }
         //起始索引
         Integer fromIndex = (pageNum - 1) * pageSize;
+        //如果fromIndex为负数，则设为0
+        if(fromIndex < 0) {
+            fromIndex = 0;
+        }
 
         Pager<Passage> pager = new Pager<Passage>(pageSize, pageNum, totalRecord, totalPage, passageMapper.selectPassageWithPagesizeFromFromindex(passageType,fromIndex,pageSize));
         return pager;
@@ -51,6 +57,11 @@ public class PassagePageService {
         }
         //起始索引
         Integer fromIndex = (pageNum - 1) * pageSize;
+
+        //如果fromIndex为负数，则设为0
+        if(fromIndex < 0) {
+            fromIndex = 0;
+        }
         Pager<Passage> pager = new Pager<>(pageSize, pageNum, totalRecord, totalPage,
                 passageMapper.selectReadPassageWithPagesizeFromFromindex(passageType,fromIndex,pageSize,lessonId));
         return pager;
@@ -70,14 +81,17 @@ public class PassagePageService {
         }
         //起始索引
         Integer fromIndex = (pageNum - 1) * pageSize;
+
+        //如果fromIndex为负数，则设为0
+        if(fromIndex < 0) {
+            fromIndex = 0;
+        }
         Pager<Passage> pager = new Pager<>(pageSize, pageNum, totalRecord, totalPage,
                 passageMapper.selectPassageByAuthor(author,fromIndex,pageSize));
         return pager;
     }
     //根据分页信息返回课程文章分页对象
-    public Pager<Passage>
-
-    getLessonPassagePage(LessonPageInfo lessonPageInfo){
+    public Pager<Passage> getLessonPassagePage(LessonPageInfo lessonPageInfo){
 
         Integer pageNum = lessonPageInfo.getPageNum();
         Integer pageSize = lessonPageInfo.getPageSize();
@@ -98,10 +112,15 @@ public class PassagePageService {
         }
         //起始索引
         Integer fromIndex = (pageNum - 1) * pageSize;
+        //如果fromIndex为负数，则设为0
+        if(fromIndex < 0) {
+            fromIndex = 0;
+        }
         lessonPageInfo.setFromIndex(fromIndex);
 
+        List<Passage> passageList = passageMapper.selectLessonPassageWithPagesizeFromFromindex(lessonPageInfo);
         Pager<Passage> pager = new Pager<Passage>(pageSize, pageNum, totalRecord,
-                totalPage, passageMapper.selectLessonPassageWithPagesizeFromFromindex(lessonPageInfo));
+                totalPage, passageList);
         return pager;
     }
 

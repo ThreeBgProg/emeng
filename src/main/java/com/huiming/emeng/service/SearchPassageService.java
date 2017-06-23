@@ -40,6 +40,11 @@ public class SearchPassageService {
         }
         //起始索引
         Integer fromIndex = (pageNum - 1) * pageSize;
+
+        //如果fromIndex为负数，则设为0
+        if(fromIndex < 0) {
+            fromIndex = 0;
+        }
         Pager<Passage> pager = new Pager<Passage>(pageSize, pageNum, totalRecord,
                 totalPage, passageMapper.selectLessonPassageByTitleWithPagesizeFromFromindex(title,lessonId,pageSize,fromIndex));;
         return pager;
@@ -60,6 +65,11 @@ public class SearchPassageService {
         }
         //起始索引
         Integer fromIndex = (pageNum - 1) * pageSize;
+
+        //如果fromIndex为负数，则设为0
+        if(fromIndex < 0) {
+            fromIndex = 0;
+        }
         Pager<Passage> pager = new Pager<Passage>(pageSize, pageNum, totalRecord,
                 totalPage, passageMapper.selectPassageByTitle(title,fromIndex,pageSize));;
         return pager;
