@@ -112,4 +112,30 @@ public class PostServiceImpl implements PostService {
 		
 	    return pager;
 	}
+	
+	@Override
+	public Pager<Post> selectPostByVist(Integer pageNum, Integer pageSize,Integer status) {
+		//总记录
+		Integer totalRecord = postMapper.selectNumberfromPost(new States(status));
+		
+		//总页数
+		Integer totalPage = totalRecord/pageSize;
+		if (totalRecord ==0) {
+			return null;
+		}
+		{
+			if(totalRecord % pageSize !=0){
+				totalPage++;
+			}
+			if(pageNum > totalPage){
+            pageNum = totalPage;
+			}
+		}
+		Integer fromIndex = (pageNum - 1) * pageSize;
+		Pager<Post> pager = null;
+
+		pager = new Pager<Post>(pageSize, pageNum, totalRecord, totalPage, 
+					postMapper.selectPostByVist(fromIndex, pageSize));
+	    return pager;
+	}
 }

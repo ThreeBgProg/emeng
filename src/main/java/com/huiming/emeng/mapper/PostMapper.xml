@@ -181,5 +181,9 @@
    <select id="selectPostWithPagesizeFromFromindex2" resultMap="ResultMapWithBLOBs">
    select * from post where visit=-1 order by id DESC limit #{fromIndex},#{pageSize}
   </select>
+  
+   <select id="selectPostByVist" resultMap="ResultMapWithBLOBs">
+   select * from post where visit>0 order by visit DESC limit #{fromIndex},#{pageSize}
+  </select>
    
 </mapper>
