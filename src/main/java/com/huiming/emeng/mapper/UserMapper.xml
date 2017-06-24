@@ -181,7 +181,6 @@
 				AND state = #{state,jdbcType=VARCHAR}
 			</if>
 		</where>
-		limit #{fromIndex},#{pageSize}
 	</select>
 	<select id="selectPagerUser" resultMap="BaseResultMap">
 		select
@@ -255,5 +254,6 @@
 	<select id="selectCount" resultType="java.lang.Integer">
 		select count(*)
 		from user
+		where state = 1
 	</select>
 </mapper>

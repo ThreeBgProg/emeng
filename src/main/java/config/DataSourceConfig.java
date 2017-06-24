@@ -14,6 +14,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
 
 /**
@@ -73,6 +74,7 @@ public class DataSourceConfig implements EnvironmentAware{
 			throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);  
+        //sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("classpath:mybaitsconfig.xml"));
         return sqlSessionFactoryBean.getObject();
 	}
 	
