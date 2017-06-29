@@ -2,6 +2,7 @@ package com.huiming.emeng.service;
 
 import java.util.List;
 
+import com.huiming.emeng.bo.SchoolWithLocation;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.School;
 
@@ -18,8 +19,8 @@ public interface SchoolService {
 
 	public int updateByPrimaryKey(School record);
 
-	public Pager<School> selectAllByPage(Integer currentPage, Integer pageSize);
+	public Pager<SchoolWithLocation> selectAllByPage(Integer currentPage, Integer pageSize);
 
-	public List<School> selectAll();
+	public List<SchoolWithLocation> selectAll();
 
 }

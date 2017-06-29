@@ -28,6 +28,12 @@ public class UserServiceImpl implements UserService {
 	private RoleMapper roleMapper;
 
 	@Override
+	public User selectByPrimaryKey(User user) {
+		user.setState((byte) 1);
+		return userMapper.selectByPrimaryKey(user.getId());
+	}
+	
+	@Override
 	public User selectSelective(User user) {
 		user.setState((byte) 1);
 		return userMapper.selectSelective(user);

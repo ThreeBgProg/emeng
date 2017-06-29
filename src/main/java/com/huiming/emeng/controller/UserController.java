@@ -123,7 +123,7 @@ public class UserController {
 	public Object findUser(User user, ModelMap modelMap) {
 		System.out.println(user.getId());
 		UserWithRole temp = new UserWithRole();
-		temp.setUser(userService.selectSelective(user));
+		temp.setUser(userService.selectByPrimaryKey(user));
 		temp.setRole(userService.getUserRole(user.getId()));
 		temp.setSchool(schoolService.selectByPrimaryKey(user.getSchoolId()));
 		return JSON.toJSON(temp);

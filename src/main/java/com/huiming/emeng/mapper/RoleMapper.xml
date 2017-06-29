@@ -26,7 +26,7 @@
 		)
 		values (#{id,jdbcType=INTEGER},
 		#{rolename,jdbcType=VARCHAR},
-		#{state,jdbcType=TINYINT}
+		1
 		)
 	</insert>
 	<insert id="insertSelective" parameterType="com.huiming.emeng.model.Role">
@@ -103,7 +103,7 @@
 		<include refid="Base_Column_List" />
 		from role
 		<where>
-			rolename = #{rolename,,jdbcType=VARCHAR}
+			rolename = #{rolename,jdbcType=VARCHAR}
 		</where>
 	</select>
 </mapper>
