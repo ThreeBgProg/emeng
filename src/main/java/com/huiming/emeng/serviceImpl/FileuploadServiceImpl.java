@@ -52,7 +52,7 @@ public class FileuploadServiceImpl {
 					   
 					   files[i].transferTo(new File(path+File.separator+str));
 					   System.out.println(str);
-					   respondate.add(i, path+str);
+					   respondate.add(i, "http://localhost:8080/emeng/wangEditor_images/"+str);
 				   }
 			   }
 		   }
@@ -78,7 +78,7 @@ public class FileuploadServiceImpl {
 			   link.transferTo(new File(path+File.separator+str));
 			   
 			   map.put("linkName", linkName);
-			   map.put("link", path+str);
+			   map.put("link", "http://localhost:8080/emeng/videos/"+str);
 		   }
 		   return map;
 
@@ -102,7 +102,7 @@ public class FileuploadServiceImpl {
 				   String str = fStrings[0]+str2+"."+fStrings[1];
 				   
 			   pic.transferTo(new File(path+File.separator+str));
-			   string = path+str;
+			   string = "http://localhost:8080/emeng/images/"+str;
 		   }
 		   return string;
 	   }

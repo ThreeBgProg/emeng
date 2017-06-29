@@ -6,7 +6,6 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -119,7 +118,7 @@ public class AdvertisementController {
 	@ResponseBody 
 	@MappingDescription("广告位分页查询")
     @RequestMapping("adverPage")
-    public Object advertisementPageList(ModelMap modelMap,
+    public Object advertisementPageList(
                                   @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                   @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
 		

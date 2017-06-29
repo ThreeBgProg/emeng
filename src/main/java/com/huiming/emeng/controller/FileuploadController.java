@@ -111,7 +111,7 @@ public class FileuploadController {
 			   
 			annex.transferTo(new File(path+File.separator+str)); 
 			
-			respondate.put("annex",path+str);
+			respondate.put("annex","http://localhost:8080/emeng/meeting/"+str);
 		}
 		
 		Object object = JSON.toJSON(respondate);
