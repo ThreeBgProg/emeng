@@ -74,5 +74,12 @@ public interface UserService {
 	 * @return
 	 */
 	int insertUserRole(Integer roleId, Integer userId);
+	
+	/**
+	 * 根据id查找用户
+	 * @param user
+	 * @return
+	 */
+	public User selectByPrimaryKey(User user);
 
 }

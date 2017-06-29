@@ -27,7 +27,7 @@ public class PermissionController {
 	@ResponseBody
 	public String updatePermission(Permission permission) {
 		// 只允许修改权限功能描述
-		if (permissionService.updateByPrimaryKey(permission) != 0) {
+		if (permissionService.updateByPrimaryKeySelective(permission) != 0) {
 			return SUCCESS;
 		} else
 			return FAIL;
