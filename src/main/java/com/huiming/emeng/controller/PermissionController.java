@@ -43,7 +43,7 @@ public class PermissionController {
 	@RequestMapping("/getAllPermission")
 	@MappingDescription("获取所有权限信息")
 	@ResponseBody
-	public List<Permission> getAllPermission(Permission permission, ModelMap modelMap) {
+	public List<Permission> getAllPermission(ModelMap modelMap) {
 		return permissionService.selectAllEffective();
 	}
 }

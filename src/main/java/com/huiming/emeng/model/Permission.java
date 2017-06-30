@@ -1,6 +1,11 @@
 package com.huiming.emeng.model;
 
 public class Permission {
+	@Override
+	public String toString() {
+		return "Permission [id=" + id + ", mapping=" + mapping + "]";
+	}
+
 	private Integer id;
 
 	private String mapping;

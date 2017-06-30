@@ -11,8 +11,10 @@ import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.bo.SchoolWithLocation;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.School;
+import com.huiming.emeng.model.User;
 import com.huiming.emeng.service.LocationService;
 import com.huiming.emeng.service.SchoolService;
+import com.huiming.emeng.service.UserService;
 
 @Controller
 public class SchoolController {
@@ -21,8 +23,11 @@ public class SchoolController {
 	private String SUCCESS = "操作成功";
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private SchoolService schoolService;
-	
+
 	@Autowired
 	private LocationService locationService;
 
@@ -64,8 +69,12 @@ public class SchoolController {
 	@MappingDescription("删除学校信息")
 	@ResponseBody
 	public String deleteSchool(School school) {
-		if (schoolService.deleteByPrimaryKey(school.getId()) != 0) {
-			return SUCCESS;
+		User user = new User();
+		user.setSchoolId(school.getId());
+		if (userService.selectSelective(user) == null) {
+			if (schoolService.deleteByPrimaryKey(school.getId()) != 0) {
+				return SUCCESS;
+			}
 		}
 		return FAIL;
 	}
