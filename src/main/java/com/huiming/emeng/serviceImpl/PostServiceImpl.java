@@ -96,7 +96,7 @@ public class PostServiceImpl implements PostService {
 		//审核通过
 		if(status>0){
 			pager = new Pager<Post>(pageSize, pageNum, totalRecord, totalPage, 
-					postMapper.selectPostWithPagesizeFromFromindex(fromIndex, pageSize));
+					postMapper.selectPostindex(fromIndex, pageSize));
 
 		}
 		//待审核
@@ -104,7 +104,7 @@ public class PostServiceImpl implements PostService {
 			pager = new Pager<Post>(pageSize, pageNum, totalRecord, totalPage, 
 					postMapper.selectPostWithPagesizeFromFromindex1(fromIndex, pageSize));
 
-		}else{
+		}else if(status==-1){
 			//审核不通过
 			pager = new Pager<Post>(pageSize, pageNum, totalRecord, totalPage, 
 					postMapper.selectPostWithPagesizeFromFromindex2(fromIndex, pageSize));

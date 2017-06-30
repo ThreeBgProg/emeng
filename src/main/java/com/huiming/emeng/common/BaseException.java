@@ -16,6 +16,10 @@ import java.lang.annotation.Target;
 public class BaseException extends RuntimeException {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -5272118220235896687L;
+	/**
 	 * 异常对应返回的Http状态码，默认为500
 	 */
 	private int respCode = 500;

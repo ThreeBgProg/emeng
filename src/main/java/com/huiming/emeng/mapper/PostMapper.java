@@ -37,7 +37,7 @@ public interface PostMapper {
     /**
      * 查询第几页数据
      */
-    List<Post> selectPostWithPagesizeFromFromindex(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
+    List<Post> selectPostindex(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
     /**
      * 查询第几页数据

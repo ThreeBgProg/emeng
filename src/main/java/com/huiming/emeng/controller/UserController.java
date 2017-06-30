@@ -35,7 +35,7 @@ public class UserController {
 	private SchoolService schoolService;
 	@Autowired
 	private RoleService roleService;
-	@Autowired
+	@Autowired	
 	private UserService userService;
 	@Autowired
 	private PermissionService permissionService;
