@@ -79,7 +79,10 @@ public class PermissionServiceImpl implements PermissionService {
 			return permissionMapper.selectAllEffective();
 		} else {
 			for (Integer permissionId : rolePermissionMapper.selectAllByRoleId(id)) {
-				list.add(permissionMapper.selectSelective(new Permission(permissionId, (byte) 1)));
+				Permission permission = permissionMapper.selectSelective(new Permission(permissionId, (byte) 1));
+				if (permission != null) {
+					list.add(permission);
+				}
 			}
 		}
 		return list;
