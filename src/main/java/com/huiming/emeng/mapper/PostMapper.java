@@ -5,7 +5,6 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 
-import com.huiming.emeng.model.Advertisement;
 import com.huiming.emeng.model.Post;
 import com.huiming.emeng.model.PostWithBLOBs;
 import com.huiming.emeng.model.States;
@@ -38,7 +37,7 @@ public interface PostMapper {
     /**
      * 查询第几页数据
      */
-    List<Post> selectPostWithPagesizeFromFromindex(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
+    List<Post> selectPostindex(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
     /**
      * 查询第几页数据
@@ -49,5 +48,13 @@ public interface PostMapper {
      * 查询第几页数据
      */
     List<Post> selectPostWithPagesizeFromFromindex2(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
+    
+    /**
+     * 按照热度查询
+     * @param fromIndex
+     * @param pageSize
+     * @return
+     */
+    List<Post> selectPostByVist(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
 }

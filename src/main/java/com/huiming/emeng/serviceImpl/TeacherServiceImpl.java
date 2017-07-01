@@ -1,13 +1,10 @@
 package com.huiming.emeng.serviceImpl;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.mapper.TeacherMapper;
-import com.huiming.emeng.model.School;
 import com.huiming.emeng.model.Teacher;
 import com.huiming.emeng.service.TeacherService;
 

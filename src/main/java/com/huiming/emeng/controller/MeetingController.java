@@ -35,26 +35,9 @@ public class MeetingController {
 	@MappingDescription("添加会议信息")
 	@ResponseBody
 	public Object insert(HttpServletRequest request,
-//			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam("date")  String date,
 			Meeting meeting) throws Exception{
-				
-//		if(!annex.isEmpty()){
-//			String path = request.getServletContext().getRealPath("/meetings/");
-//			String fileName=annex.getOriginalFilename();
-//			File filepath = new File(path, fileName);
-//			if(!filepath.getParentFile().exists()){
-//				   filepath.getParentFile().mkdirs();
-//			   }
-//			
-//			@SuppressWarnings("deprecation")
-//			long str2 = Date.parse((new Date()).toString());
-//			String[] fStrings = fileName.split("\\.");   
-//			   String str = fStrings[0]+str2+"."+fStrings[1];
-//			   
-//			annex.transferTo(new File(path+File.separator+str)); 
-//			meeting.setLink(path+str);
-//		}
+
 		
 			meeting.setReleaseDate(StringToDate.StringToDate(date));		    
 			meetingService.insert(meeting);
@@ -69,26 +52,9 @@ public class MeetingController {
 	@MappingDescription("添加会议信息")
 	@ResponseBody
 	public Object meetinginsertSelect(HttpServletRequest request,
-//			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="date",defaultValue="")  String date,
 			Meeting meeting)throws Exception{
 		
-//		if(!annex.isEmpty()){
-//			String path = request.getServletContext().getRealPath("/meetings/");
-//			String fileName=annex.getOriginalFilename();
-//			File filepath = new File(path, fileName);
-//			if(!filepath.getParentFile().exists()){
-//				   filepath.getParentFile().mkdirs();
-//			   }
-//			
-//			@SuppressWarnings("deprecation")
-//			long str2 = Date.parse((new Date()).toString());
-//			String[] fStrings = fileName.split("\\.");   
-//			String str = fStrings[0]+str2+"."+fStrings[1];
-//			   
-//			annex.transferTo(new File(path+File.separator+str)); 
-//			meeting.setLink(path+str);
-//		}
 		if (date.equals("")) {
 			meeting.setReleaseDate(new Date());
 		}
@@ -129,27 +95,11 @@ public class MeetingController {
 	@ResponseBody
 	public Object updateByPrimaryKeySelective(Meeting meeting,
 			HttpServletRequest request,
-//			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             @RequestParam(value="date",defaultValue="") String date) throws Exception{
 		
-//		if(!annex.isEmpty()){
-//			String path = request.getServletContext().getRealPath("/meetings/");
-//			String fileName=annex.getOriginalFilename();
-//			File filepath = new File(path, fileName);
-//			if(!filepath.getParentFile().exists()){
-//				   filepath.getParentFile().mkdirs();
-//			   }
-//			
-//			@SuppressWarnings("deprecation")
-//			long str2 = Date.parse((new Date()).toString());
-//			String[] fStrings = fileName.split("\\.");   
-//			String str = fStrings[0]+str2+"."+fStrings[1];
-//			   
-//			annex.transferTo(new File(path+File.separator+str)); 
-//			meeting.setLink(path+str);
-//		}
+
 		if (!date.equals("")) {
 			meeting.setReleaseDate(StringToDate.StringToDate(date));
 		}
@@ -171,26 +121,10 @@ public class MeetingController {
 	@ResponseBody
 	public Object updateByPrimaryKeyWithBLOBs(Meeting record,
 			HttpServletRequest request,
-//			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             @RequestParam(value="date",defaultValue="") String date)throws Exception{
-//		if(!annex.isEmpty()){
-//			String path = request.getServletContext().getRealPath("/meetings/");
-//			String fileName=annex.getOriginalFilename();
-//			File filepath = new File(path, fileName);
-//			if(!filepath.getParentFile().exists()){
-//				   filepath.getParentFile().mkdirs();
-//			   }
-//			
-//			@SuppressWarnings("deprecation")
-//			long str2 = Date.parse((new Date()).toString());
-//			String[] fStrings = fileName.split("\\.");   
-//			String str = fStrings[0]+str2+"."+fStrings[1];
-//			   
-//			annex.transferTo(new File(path+File.separator+str)); 
-//			record.setLink(path+str);
-//		}
+
 		
 		if (!date.equals("")) {
 			record.setReleaseDate(StringToDate.StringToDate(date));
@@ -213,26 +147,10 @@ public class MeetingController {
 	@ResponseBody
 	public Object updateByPrimaryKey(Meeting meeting ,
 			HttpServletRequest request,
-//			@RequestParam("annex1") MultipartFile annex,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             @RequestParam(value="date",defaultValue="") String date)throws Exception{
-//		if(!annex.isEmpty()){
-//			String path = request.getServletContext().getRealPath("/meetings/");
-//			String fileName=annex.getOriginalFilename();
-//			File filepath = new File(path, fileName);
-//			if(!filepath.getParentFile().exists()){
-//				   filepath.getParentFile().mkdirs();
-//			   }
-//			
-//			@SuppressWarnings("deprecation")
-//			long str2 = Date.parse((new Date()).toString());
-//			String[] fStrings = fileName.split("\\.");   
-//			String str = fStrings[0]+str2+"."+fStrings[1];
-//			   
-//			annex.transferTo(new File(path+File.separator+str)); 
-//			meeting.setLink(path+str);
-//		}
+
 		if (!date.equals("")) {
 			meeting.setReleaseDate(StringToDate.StringToDate(date));
 		}

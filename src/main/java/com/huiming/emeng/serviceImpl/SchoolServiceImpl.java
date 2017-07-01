@@ -1,11 +1,14 @@
 package com.huiming.emeng.serviceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.huiming.emeng.bo.SchoolWithLocation;
 import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.mapper.LocationMapper;
 import com.huiming.emeng.mapper.SchoolMapper;
 import com.huiming.emeng.model.School;
 import com.huiming.emeng.service.SchoolService;
@@ -15,6 +18,9 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
 	private SchoolMapper schoolmapper;
+	
+	@Autowired
+	private LocationMapper locationMapper;
 	
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
@@ -47,16 +53,30 @@ public class SchoolServiceImpl implements SchoolService {
 	}
 
 	@Override
-	public Pager<School> selectAllByPage(Integer currentPage, Integer pageSize) {
+	public Pager<SchoolWithLocation> selectAllByPage(Integer currentPage, Integer pageSize) {
 		int fromIndex = (currentPage - 1) * pageSize;
 		int totalRecord = schoolmapper.selectCount();
-		Pager<School> schoolPage = new Pager<>(pageSize, currentPage, totalRecord,
-				schoolmapper.selectAllByPage(fromIndex, pageSize));
+		List<School> schools = schoolmapper.selectAllByPage(fromIndex, pageSize);
+		List<SchoolWithLocation> schoolList = new ArrayList<>();
+		for (School school : schools) {
+			SchoolWithLocation schoolWithLocation = new SchoolWithLocation(school);
+			schoolWithLocation.setLocation(locationMapper.selectByPrimaryKey(school.getProvinceId()));
+			schoolList.add(schoolWithLocation);
+		}
+		Pager<SchoolWithLocation> schoolPage = new Pager<>(pageSize, currentPage, totalRecord,
+				schoolList);
 		return schoolPage;
 	}
 	
 	@Override
-	public List<School> selectAll() {
-		return schoolmapper.selectAll();
+	public List<SchoolWithLocation> selectAll() {
+		List<School> schools = schoolmapper.selectAll();
+		List<SchoolWithLocation> schoolList = new ArrayList<>();
+		for (School school : schools) {
+			SchoolWithLocation schoolWithLocation = new SchoolWithLocation(school);
+			schoolWithLocation.setLocation(locationMapper.selectByPrimaryKey(school.getProvinceId()));
+			schoolList.add(schoolWithLocation);
+		}
+		return schoolList;
 	}
 }

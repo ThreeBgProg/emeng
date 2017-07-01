@@ -28,7 +28,7 @@ public interface TeacherMapper {
 	 * @param record
 	 * @return
 	 */
-	List<Teacher> selectSelective(Teacher record,@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+	List<Teacher> selectSelective(@Param("teacher")Teacher teacher,@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
 	
 	/**
 	 * 分页所有查找名师

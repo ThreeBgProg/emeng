@@ -1,11 +1,14 @@
 package com.huiming.emeng.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
@@ -34,8 +37,9 @@ public class RoleController {
 	@RequestMapping("/addRole")
 	@MappingDescription("增加角色")
 	@ResponseBody
-	public String addRole(Role role, List<Integer> permissionList) {
-		if (roleService.selectRole(role.getRolename()) != null) {
+	public String addRole(Role role, @RequestParam("permissionList[]")List<Integer> permissionList) {
+		System.out.println(permissionList);
+		if (roleService.selectRole(role.getRolename()) == null) {
 			if (roleService.insert(role) != 0) {
 				role = roleService.selectRole(role.getRolename());
 				Integer roleId = role.getId();
@@ -79,7 +83,8 @@ public class RoleController {
 	@RequestMapping("/updateRolePermission")
 	@MappingDescription("修改角色权限")
 	@ResponseBody
-	public String updateRolePermission(Role role, ModelMap modelMap, List<Integer> permissionList) {
+	public String updateRolePermission(Role role, ModelMap modelMap, @RequestParam("permissionList[]")List<Integer> permissionList) {
+		roleService.updateByPrimaryKey(role);
 		List<Permission> list = roleService.selectPermissionByRoleId(role.getId());
 		for (Permission permission : list) {
 			// 数据库中该角色已经存在该权限
@@ -102,8 +107,14 @@ public class RoleController {
 	@RequestMapping("/getPermissionsByRole")
 	@MappingDescription("获取角色权限")
 	@ResponseBody
-	public List<Permission> getPermissionsByRole(Role role, ModelMap modelMap) {
-		return permissionService.selectByRole(role.getId());
+	public Map<String, List<Permission>> getPermissionsByRole(Role role, ModelMap modelMap) {
+		List<Permission> havedPermissionList = permissionService.selectByRole(role.getId());
+		List<Permission> unHavedPermissionList = permissionService.selectAll();
+		unHavedPermissionList.removeAll(havedPermissionList);
+		Map<String, List<Permission>> list = new HashMap<String, List<Permission>>();
+		list.put("havedPermissionList", havedPermissionList);
+		list.put("unHavedPermissionList", unHavedPermissionList);
+        return list;
 	}
 
 	@RequestMapping("/deleteRole")

@@ -17,10 +17,10 @@ public class BannerServiceImpl implements BannerService {
 
 	@Autowired
 	private BannerMapper bannerMapper;
-	
+
 	@Autowired
 	private PassageMapper passageMapper;
-	
+
 	@Override
 	public List<PassageWithBanner> selectAll() {
 		List<Banner> temp = bannerMapper.selectAll();
@@ -63,4 +63,13 @@ public class BannerServiceImpl implements BannerService {
 		return bannerMapper.updateByPrimaryKey(record);
 	}
 
+	@Override
+	public Banner selectByPrimaryKey(Integer id) {
+		return bannerMapper.selectByPrimaryKey(id);
+	}
+
+	@Override
+	public Banner selectByPassageId(Integer id) {
+		return bannerMapper.selectByPassageId(id);
+	}
 }

@@ -35,4 +35,6 @@ public interface PostService {
      */
     Pager<Post> selectPostWithPagesizeFromFromindex(Integer fromIndex,Integer pageSize,Integer states);
 
+	Pager<Post> selectPostByVist(Integer fromIndex, Integer pageSize, Integer status);
+
 }

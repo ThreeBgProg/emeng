@@ -27,7 +27,7 @@ import com.huiming.emeng.service.UserService;
 
 @Controller
 public class UserController {
-	
+
 	private String SUCCESS = "操作成功";
 	private String FAIL = "操作失败";
 
@@ -35,7 +35,7 @@ public class UserController {
 	private SchoolService schoolService;
 	@Autowired
 	private RoleService roleService;
-	@Autowired
+	@Autowired	
 	private UserService userService;
 	@Autowired
 	private PermissionService permissionService;
@@ -75,11 +75,10 @@ public class UserController {
 	@RequestMapping("/addUser")
 	@MappingDescription("添加用户/用户注册")
 	@ResponseBody
-	public String addUser(User user,Integer roleId) {
+	public String addUser(User user, Integer roleId) {
 		User temp = new User();
 		temp.setUsername(user.getUsername());
-		if (userService.selectSelective(temp) == null) {
-			userService.insertUser(user);
+		if (userService.selectSelective(temp) == null && userService.insertUser(user) != 0) {
 			temp = userService.selectSelective(user);
 			userService.insertUserRole(roleId, temp.getId());
 		} else {
@@ -119,17 +118,22 @@ public class UserController {
 	}
 
 	@RequestMapping("/findUser")
-	@MappingDescription("根据信息查询用户")
+	@MappingDescription("根据id查询用户")
 	@ResponseBody
-	public Pager<UserWithRole> findUser(User user, ModelMap modelMap, Integer currentPage, Integer pageSize) {
-		return getUserWithRole(userService.selectAllSelective(user, currentPage, pageSize));
+	public Object findUser(User user, ModelMap modelMap) {
+		System.out.println(user.getId());
+		UserWithRole temp = new UserWithRole();
+		temp.setUser(userService.selectByPrimaryKey(user));
+		temp.setRole(userService.getUserRole(user.getId()));
+		temp.setSchool(schoolService.selectByPrimaryKey(user.getSchoolId()));
+		return JSON.toJSON(temp);
 	}
 
 	@RequestMapping("/getAllUser")
 	@MappingDescription("分页获取用户信息以及角色")
 	@ResponseBody
 	public Object getAllUser(ModelMap modelMap, Integer currentPage, Integer pageSize) {
-		modelMap.put("userList", getUserWithRole(userService.selectAllUser(currentPage,pageSize)));
+		modelMap.put("userList", getUserWithRole(userService.selectAllUser(currentPage, pageSize)));
 		return JSON.toJSON(modelMap);
 	}
 
@@ -140,8 +144,7 @@ public class UserController {
 		if (userService.updateUser(user) != 0) {
 			Role temp = userService.getUserRole(user.getId());
 			if (!roleId.equals(temp.getId())) {
-				// 修改有问题
-				System.out.println(userService.updateUserRole(temp.getId(), user.getId()));
+				userService.updateUserRole(roleId, user.getId());
 			}
 			return SUCCESS;
 		} else {
@@ -158,6 +161,6 @@ public class UserController {
 			temp.setSchool(schoolService.selectByPrimaryKey(user.getSchoolId()));
 			userList.add(temp);
 		}
-		return new Pager<UserWithRole>(users.getPageSize(), users.getCurrentPage(), users.getTotalPage(), userList);
+		return new Pager<UserWithRole>(users.getPageSize(), users.getCurrentPage(), users.getTotalRecord(), userList);
 	}
 }

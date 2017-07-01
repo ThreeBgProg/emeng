@@ -8,9 +8,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.bo.SchoolWithLocation;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.School;
+import com.huiming.emeng.model.User;
+import com.huiming.emeng.service.LocationService;
 import com.huiming.emeng.service.SchoolService;
+import com.huiming.emeng.service.UserService;
 
 @Controller
 public class SchoolController {
@@ -19,20 +23,25 @@ public class SchoolController {
 	private String SUCCESS = "操作成功";
 
 	@Autowired
+	private UserService userService;
+
+	@Autowired
 	private SchoolService schoolService;
+
+	@Autowired
+	private LocationService locationService;
 
 	@RequestMapping("/getSchools")
 	@MappingDescription("获取学校信息")
 	@ResponseBody
-	public List<School> getSchools() {
-		System.out.println("获取学校信息");
+	public List<SchoolWithLocation> getSchools() {
 		return schoolService.selectAll();
 	}
 
 	@RequestMapping("/getSchoolPage")
 	@MappingDescription("分页获取学校信息")
 	@ResponseBody
-	public Pager<School> getSchoolPager(Integer currentPage, Integer pageSize) {
+	public Pager<SchoolWithLocation> getSchoolPager(Integer currentPage, Integer pageSize) {
 		return schoolService.selectAllByPage(currentPage, pageSize);
 	}
 
@@ -60,10 +69,24 @@ public class SchoolController {
 	@MappingDescription("删除学校信息")
 	@ResponseBody
 	public String deleteSchool(School school) {
-		if (schoolService.deleteByPrimaryKey(school.getId()) != 0) {
-			return SUCCESS;
+		User user = new User();
+		user.setSchoolId(school.getId());
+		if (userService.selectSelective(user) == null) {
+			if (schoolService.deleteByPrimaryKey(school.getId()) != 0) {
+				return SUCCESS;
+			}
 		}
 		return FAIL;
 	}
 
+	@RequestMapping("/selectSchoolByPrimaryKey")
+	@MappingDescription("根据id获取学校信息")
+	@ResponseBody
+	public SchoolWithLocation selectBySchoolPrimaryKey(Integer id) {
+		SchoolWithLocation schoolWithLocation = new SchoolWithLocation();
+		School school = schoolService.selectByPrimaryKey(id);
+		schoolWithLocation.setSchool(school);
+		schoolWithLocation.setLocation(locationService.selectByPrimaryKey(school.getProvinceId()));
+		return schoolWithLocation;
+	}
 }

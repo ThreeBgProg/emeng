@@ -143,29 +143,29 @@
 		school_id = #{schoolId,jdbcType=INTEGER}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<select id="selectSelective" parameterType="com.huiming.emeng.model.Teacher"
+	<select id="selectSelective"
 		resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from teacher
 		<where>
-			<if test="id != null">
-				id = #{id,jdbcType=INTEGER}
+			<if test="teacher.id != null">
+				id = #{teacher.id,jdbcType=INTEGER}
 			</if>
 			<if test="name != null">
-				name = #{name,jdbcType=VARCHAR}
+				AND name = #{teacher.name,jdbcType=VARCHAR}
 			</if>
 			<if test="direction != null">
-				AND direction = #{direction,jdbcType=VARCHAR}
+				AND direction = #{teacher.direction,jdbcType=VARCHAR}
 			</if>
 			<if test="subject != null">
-				AND subject = #{subject,jdbcType=VARCHAR}
+				AND subject = #{teacher.subject,jdbcType=VARCHAR}
 			</if>
 			<if test="pic != null">
-				AND pic = #{pic,jdbcType=VARCHAR}
+				AND pic = #{teacher.pic,jdbcType=VARCHAR}
 			</if>
 			<if test="school_id != null">
-				AND school_id = #{school_id,jdbcType=VARCHAR}
+				AND school_id = #{teacher.school_id,jdbcType=VARCHAR}
 			</if>
 		</where>
 		limit #{fromIndex},#{pageSize}

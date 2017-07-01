@@ -96,7 +96,7 @@ public class PostServiceImpl implements PostService {
 		//审核通过
 		if(status>0){
 			pager = new Pager<Post>(pageSize, pageNum, totalRecord, totalPage, 
-					postMapper.selectPostWithPagesizeFromFromindex(fromIndex, pageSize));
+					postMapper.selectPostindex(fromIndex, pageSize));
 
 		}
 		//待审核
@@ -104,12 +104,38 @@ public class PostServiceImpl implements PostService {
 			pager = new Pager<Post>(pageSize, pageNum, totalRecord, totalPage, 
 					postMapper.selectPostWithPagesizeFromFromindex1(fromIndex, pageSize));
 
-		}else{
+		}else if(status==-1){
 			//审核不通过
 			pager = new Pager<Post>(pageSize, pageNum, totalRecord, totalPage, 
 					postMapper.selectPostWithPagesizeFromFromindex2(fromIndex, pageSize));
 		}
 		
+	    return pager;
+	}
+	
+	@Override
+	public Pager<Post> selectPostByVist(Integer pageNum, Integer pageSize,Integer status) {
+		//总记录
+		Integer totalRecord = postMapper.selectNumberfromPost(new States(status));
+		
+		//总页数
+		Integer totalPage = totalRecord/pageSize;
+		if (totalRecord ==0) {
+			return null;
+		}
+		{
+			if(totalRecord % pageSize !=0){
+				totalPage++;
+			}
+			if(pageNum > totalPage){
+            pageNum = totalPage;
+			}
+		}
+		Integer fromIndex = (pageNum - 1) * pageSize;
+		Pager<Post> pager = null;
+
+		pager = new Pager<Post>(pageSize, pageNum, totalRecord, totalPage, 
+					postMapper.selectPostByVist(fromIndex, pageSize));
 	    return pager;
 	}
 }

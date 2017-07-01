@@ -47,17 +47,19 @@ public class FileuploadController {
    @MappingDescription("文件上传接口")
    @ResponseBody
    public Object upload(HttpServletRequest request,
-		   @RequestParam("files") MultipartFile[] files)throws Exception
+		   @RequestParam("file") MultipartFile[] files)throws Exception
    {
 	   
 	    List src = new ArrayList();
 
 	     src = fileuplaodservice.upload(request, files);
 	     Map<Object, Object>  map = new HashMap<>();
-	     map.put("respondate", src);
+	     Map<Object, Object>  map1 = new HashMap<>();
+	     map1.put("src", src.get(0));
+	     map.put("data", map1);
 	     map.put("code", "0");
 	     map.put("msg", "上传成功");
-	     Object object = JSON.toJSON(src);
+	     Object object = JSON.toJSON(map);
 	   return object;
    }
 	/**
@@ -111,7 +113,7 @@ public class FileuploadController {
 			   
 			annex.transferTo(new File(path+File.separator+str)); 
 			
-			respondate.put("annex",path+str);
+			respondate.put("annex","http://localhost:8080/emeng/meeting/"+str);
 		}
 		
 		Object object = JSON.toJSON(respondate);

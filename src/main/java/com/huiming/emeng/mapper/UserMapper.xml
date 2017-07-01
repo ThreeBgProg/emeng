@@ -49,9 +49,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from user
-		<where>
-			id = #{id,jdbcType=INTEGER}
-		</where>
+		where id = #{id,jdbcType=INTEGER} and state = 1 
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from user
@@ -181,7 +179,6 @@
 				AND state = #{state,jdbcType=VARCHAR}
 			</if>
 		</where>
-		limit #{fromIndex},#{pageSize}
 	</select>
 	<select id="selectPagerUser" resultMap="BaseResultMap">
 		select
@@ -255,5 +252,6 @@
 	<select id="selectCount" resultType="java.lang.Integer">
 		select count(*)
 		from user
+		where state = 1
 	</select>
 </mapper>
