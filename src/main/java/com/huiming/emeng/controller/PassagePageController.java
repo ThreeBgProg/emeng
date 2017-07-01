@@ -48,7 +48,7 @@ public class PassagePageController {
      */
     @MappingDescription("非课程文章分页查询")
     @RequestMapping("/passage/passagelist")
-    public Object passagePageList(ModelMap modelMap, @RequestParam("passageType") Byte passageType,
+        public Object passagePageList(ModelMap modelMap, @RequestParam("passageType") Byte passageType,
                                   @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
                                   @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
                                   @RequestParam(value = "lessonId", required = false) Integer lessonId){

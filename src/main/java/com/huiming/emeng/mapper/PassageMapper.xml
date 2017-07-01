@@ -134,6 +134,7 @@
   <where>
     <if test="title != null">
       titile LIKE concat(concat('%',#{title}),'%')
+      AND psg.type &gt; 0 AND (psg.type &gt;= 25 OR psg.type &lt;= 12)
     </if>
   </where>
     ORDER BY publish_time DESC
@@ -141,10 +142,11 @@
   </select>
   <select id="selectCountByTitle" parameterType="String" resultType="java.lang.Integer">
     SELECT count(*)
-    FROM passage
+    FROM passage psg
     <where>
       <if test="title != null">
         titile LIKE concat(concat('%',#{title}),'%')
+        AND psg.type &gt; 0 AND (psg.type &gt;= 25 OR psg.type &lt;= 12)
       </if>
     </where>
   </select>
