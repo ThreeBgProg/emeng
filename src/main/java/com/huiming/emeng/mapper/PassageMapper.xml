@@ -133,7 +133,7 @@
   FROM passage psg
   <where>
     <if test="title != null">
-      titile LIKE concat(concat('%',#{title}),'%')
+      (titile LIKE concat(concat('%',#{title}),'%') OR author LIKE concat(concat('%',#{title}),'%'))
       AND psg.type &gt; 0 AND (psg.type &gt;= 25 OR psg.type &lt;= 12)
     </if>
   </where>
@@ -145,7 +145,7 @@
     FROM passage psg
     <where>
       <if test="title != null">
-        titile LIKE concat(concat('%',#{title}),'%')
+        (titile LIKE concat(concat('%',#{title}),'%') OR author LIKE concat(concat('%',#{title}),'%'))
         AND psg.type &gt; 0 AND (psg.type &gt;= 25 OR psg.type &lt;= 12)
       </if>
     </where>
