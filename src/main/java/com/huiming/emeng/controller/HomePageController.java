@@ -3,6 +3,7 @@ package com.huiming.emeng.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.alibaba.fastjson.JSON;
@@ -43,6 +44,7 @@ public class HomePageController {
      */
     @MappingDescription("主页所有需要用到的对象")
     @RequestMapping("/")
+    @ResponseBody
     public Object homePage(ModelMap model){
 
 
@@ -57,9 +59,9 @@ public class HomePageController {
         //友情链接
         model.put("linkList", linksService.selectAllLink());
         //我有话说
-        model.put("postList", postService.selectAllPost());
+        model.put("postList", postService.selectPostByVist(1,10,1));//按热度
         //会议论坛
-        model.put("meeting", meetingService.selectAllMeeting());
+        model.put("meeting", meetingService.selectMeetingWithPagesizeFromFromindex(1,10));
         //头条新闻
         model.put("headlineList",homePagePassageService.selectByTypeAndDescendWithTime(PassageType.MAYUANTOUTIAO,12));
         //其他模块你们看着添加

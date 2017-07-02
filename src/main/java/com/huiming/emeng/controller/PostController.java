@@ -45,7 +45,7 @@ public class PostController {
 		postWithBLOBs.setReleaseTime(new Date());
 		
 		
-		int result = postService.insert(postWithBLOBs);
+		postService.insert(postWithBLOBs);
 		
 		Map<String, String> respondate=new HashMap<>();
 		respondate.put("message", "添加成功");
@@ -61,7 +61,7 @@ public class PostController {
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             Model model){
 		
-		int result = postService.deleteByPrimaryKey(id);
+		postService.deleteByPrimaryKey(id);
 		//已经通过审核的
 		Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
 		
@@ -74,13 +74,26 @@ public class PostController {
 	
 	@RequestMapping("postsePK")
 	@ResponseBody
-	@MappingDescription("根据id查找论坛")
+	@MappingDescription("管理员根据id查找论坛")
 	public Object selectByPrimaryKey(@RequestParam("id") Integer id,Model model){
 		
 		PostWithBLOBs postWithBLOBs = postService.selectByPrimaryKey(id);
-		model.addAttribute("postWithBLOBs", postWithBLOBs);
 		return postWithBLOBs;
 	}
+	
+	@RequestMapping("userpostsePK")
+	@ResponseBody
+	@MappingDescription("普通用户根据id查找论坛")
+	public Object userselectByPrimaryKey(@RequestParam("id") Integer id,Model model){
+		
+		PostWithBLOBs postWithBLOBs = postService.selectByPrimaryKey(id);
+		//访问量添加1
+		postWithBLOBs.setVisit(postWithBLOBs.getVisit()+1);
+		postService.updateByPrimaryKeySelective(postWithBLOBs);
+		
+		return postWithBLOBs;
+	}	
+	
 	
 	@RequestMapping("postupPKS") 
 	@MappingDescription("更新") 
@@ -89,7 +102,7 @@ public class PostController {
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize) {
 			// TODO Auto-generated method stub
-			 int result = postService.updateByPrimaryKeySelective(record);
+			 postService.updateByPrimaryKeySelective(record);
 			//已经通过审核的
 			Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
 			
@@ -107,8 +120,7 @@ public class PostController {
 	public Object updateByPrimaryKeyWithBLOBs(PostWithBLOBs record,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize) {
-		// TODO Auto-generated method stub
-		int result = postService.updateByPrimaryKeyWithBLOBs(record);
+		postService.updateByPrimaryKeyWithBLOBs(record);
 		//已经通过审核的
 		Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
 		
@@ -126,8 +138,7 @@ public class PostController {
 	public Object updateByPrimaryKey(Post record,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize) { 
-		// TODO Auto-generated method stub
-		int result = postService.updateByPrimaryKey(record);
+		postService.updateByPrimaryKey(record);
 		//已经通过审核的
 		Pager<Post> postList = postService.selectPostWithPagesizeFromFromindex(pageNum, pageSize,1);
 		
@@ -165,7 +176,7 @@ public class PostController {
     }
 	
 	@ResponseBody 
-	@MappingDescription("论坛分页查询")
+	@MappingDescription("论坛分页查询（按最新")
     @RequestMapping("userpostPage")
     public Object userpostPageList(ModelMap modelMap,
                                   @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
@@ -177,4 +188,20 @@ public class PostController {
    
         return respondate;
     }
+	
+	
+	@ResponseBody 
+	@MappingDescription("论坛分页查询（按热度）")
+    @RequestMapping("userpostPageVist")
+    public Object userpostPageListVist(
+                                  @RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
+                                  @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize){
+		    Map< String, Object> respondate = new HashMap<String, Object>();
+
+			Pager<Post> postList = postService.selectPostByVist(pageNum, pageSize,1);	
+			respondate.put("postList", postList);
+   
+        return respondate;
+    }
+	
 }

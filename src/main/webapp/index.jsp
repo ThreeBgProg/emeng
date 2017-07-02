@@ -13,11 +13,11 @@
        	<table>
        		<tr>
        			<td>请选择文件1</td>
-       			<td><input type="file" name="files"></td>
+       			<td><input type="file" name="file"></td>
        		</tr>
        		<tr>
        			<td>请选择文件2</td>
-       			<td><input type="file" name="files"></td>
+       			<td><input type="file" name="file"></td>
        		</tr>
        		<tr>
        			<td><input type="submit" value="上传"></td>
