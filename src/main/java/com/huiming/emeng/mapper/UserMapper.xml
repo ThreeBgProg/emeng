@@ -176,16 +176,36 @@
 				AND password = #{password,jdbcType=VARCHAR}
 			</if>
 			<if test="state != null">
-				AND state = #{state,jdbcType=VARCHAR}
+				AND state = #{state,jdbcType=TINYINT}
 			</if>
 		</where>
 	</select>
-	<select id="selectPagerUser" resultMap="BaseResultMap">
+	<select id="selectPagerUserSelective" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from user
 		<where>
-			state = 1
+			<if test="user.username != null">
+				username = #{user.username,jdbcType=VARCHAR}
+			</if>
+			<if test="user.jobId != null">
+				AND job_id = #{user.jobId,jdbcType=VARCHAR}
+			</if>
+			<if test="user.password != null">
+				AND password = #{user.password,jdbcType=VARCHAR}
+			</if>
+			<if test="user.schoolId != null">
+				AND school_id = #{user.schoolId,jdbcType=INTEGER}
+			</if>
+			<if test="user.phone != null">
+				AND phone = #{user.phone,jdbcType=VARCHAR}
+			</if>
+			<if test="user.mail != null">
+				AND mail = #{user.mail,jdbcType=VARCHAR}
+			</if>
+			<if test="user.state != null">
+				AND state = #{user.state,jdbcType=TINYINT}
+			</if>
 		</where>
 		limit #{fromIndex},#{pageSize}
 	</select>
@@ -226,28 +246,36 @@
 		<include refid="Base_Column_List" />
 		from user
 		<where>
-			<if test="username != null">
-				username like #{username,jdbcType=VARCHAR}
+			<if test="user.username != null">
+				username like #{user.username,jdbcType=VARCHAR}
 			</if>
-			<if test="jobId != null">
-				AND job_id like #{jobId,jdbcType=VARCHAR}
+			<if test="user.jobId != null">
+				AND job_id like #{user.jobId,jdbcType=VARCHAR}
 			</if>
-			<if test="password != null">
-				AND password like #{password,jdbcType=VARCHAR}
+			<if test="user.password != null">
+				AND password like #{user.password,jdbcType=VARCHAR}
 			</if>
-			<if test="schoolId != null">
-				AND school_id like #{schoolId,jdbcType=INTEGER}
+			<if test="user.schoolId != null">
+				AND school_id like #{user.schoolId,jdbcType=INTEGER}
 			</if>
-			<if test="phone != null">
-				AND phone like #{phone,jdbcType=VARCHAR}
+			<if test="user.phone != null">
+				AND phone like #{user.phone,jdbcType=VARCHAR}
 			</if>
-			<if test="mail != null">
-				AND mail like #{mail,jdbcType=VARCHAR}
+			<if test="user.mail != null">
+				AND mail like #{user.mail,jdbcType=VARCHAR}
 			</if>
-			<if test="state != null">
-				AND state like #{state,jdbcType=TINYINT}
+			<if test="user.state != null">
+				AND state like #{user.state,jdbcType=TINYINT}
 			</if>
 		</where>
+		limit #{fromIndex},#{pageSize}
+		</select>
+	<select id="selectByJobId" parameterType="java.lang.String">
+		select 
+		<include refid="Base_Column_List" />
+		from user
+		where job_id = #{jobId,jdbcType=VARCHAR}
+	
 	</select>
 	<select id="selectCount" resultType="java.lang.Integer">
 		select count(*)

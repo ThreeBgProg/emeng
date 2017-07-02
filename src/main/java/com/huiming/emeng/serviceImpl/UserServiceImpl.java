@@ -100,6 +100,11 @@ public class UserServiceImpl implements UserService {
 		return userPage;
 	}
 
+	public Boolean selectByJobId(String jobId){
+		return userMapper.selctByJobId(jobId)==null;
+	}
+	
+	
 	/**
 	 * 修改用户角色
 	 * 

@@ -14,8 +14,18 @@ public class Teacher {
     private Integer schoolId;
 
     private String introduction;
+    
+    private byte type;
 
-    public Integer getId() {
+    public byte getType() {
+		return type;
+	}
+
+	public void setType(byte type) {
+		this.type = type;
+	}
+
+	public Integer getId() {
         return id;
     }
 

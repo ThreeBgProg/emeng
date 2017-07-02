@@ -10,7 +10,6 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
 
 import com.huiming.emeng.listener.StartupListener;
-import com.huiming.emeng.interceptor.PermissionInterceptor;
 
 
 /**
@@ -25,12 +24,11 @@ import com.huiming.emeng.interceptor.PermissionInterceptor;
 @Import(DataSourceConfig.class)
 @EnableScheduling
 public class RootConfig {
-	
-//	
-//	@Bean(initMethod="initMethod")
-//	public StartupListener startupListener() {
-//		return new StartupListener();
-//	}
+
+	@Bean(initMethod="initMethod")
+	public StartupListener startupListener() {
+		return new StartupListener();
+	}
 	
 	
 }

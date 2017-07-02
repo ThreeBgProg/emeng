@@ -68,6 +68,10 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolPage;
 	}
 	
+	public List<School> selectByProvince(Integer provinceId){
+		return schoolmapper.selectByProvince(provinceId);
+	}
+	
 	@Override
 	public List<SchoolWithLocation> selectAll() {
 		List<School> schools = schoolmapper.selectAll();

@@ -22,6 +22,8 @@ public interface SchoolMapper {
 	List<School> selectAllByPage(@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
 
 	List<School> selectAll();
+	
+	List<School> selectByProvince(Integer provinceId);
 
 	int selectCount();
 }

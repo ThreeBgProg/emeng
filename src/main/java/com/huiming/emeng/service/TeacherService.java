@@ -17,7 +17,7 @@ public interface TeacherService {
 	 * @param pageSize
 	 * @return
 	 */
-	public Pager<Teacher> selectAllTeacher(Integer currentPage, Integer pageSize);
+	public Pager<Teacher> selectAllTeacher(Byte type,Integer currentPage, Integer pageSize);
 
 	public int insertTeacher(Teacher teacher);
 
@@ -30,4 +30,13 @@ public interface TeacherService {
 	 * @return
 	 */
 	public Pager<Teacher> selectAllSelective(Teacher teacher, Integer currentPage, Integer pageSize);
+	
+	 /** 分页模糊查询名师信息
+	 * 
+	 * @param teacher
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	public Pager<Teacher> selectByTeacherSelective(Teacher teacher, Integer currentPage, Integer pageSize);
 }

@@ -81,5 +81,14 @@ public interface UserService {
 	 * @return
 	 */
 	public User selectByPrimaryKey(User user);
+	
+	
+	/**
+	 * 判断是否存在工号用户
+	 * 存在-false,不存在-true
+	 * @param jobId
+	 * @return
+	 */
+	public Boolean selectByJobId(String jobId);
 
 }

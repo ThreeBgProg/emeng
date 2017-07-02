@@ -70,7 +70,7 @@ public class Permission {
 	public boolean equals(Object arg0) {
 		if (arg0 != null && arg0 instanceof Permission) {
 			Permission permission = (Permission) arg0;
-			return mapping.equals(permission.getMapping()) && description.equals(permission.getDescription());
+			return mapping.equals(permission.getMapping());
 		} else
 			return false;
 
