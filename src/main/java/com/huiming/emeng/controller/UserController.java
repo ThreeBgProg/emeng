@@ -35,7 +35,7 @@ public class UserController {
 	private SchoolService schoolService;
 	@Autowired
 	private RoleService roleService;
-	@Autowired	
+	@Autowired
 	private UserService userService;
 	@Autowired
 	private PermissionService permissionService;
@@ -66,7 +66,7 @@ public class UserController {
 		}
 		return "index";
 	}
-	
+
 	@RequestMapping(value = "/getUserMessage")
 	@MappingDescription("用户登录")
 	@ResponseBody
@@ -192,15 +192,19 @@ public class UserController {
 	@MappingDescription("更改用户以及角色")
 	@ResponseBody
 	public String updateByPrimaryKey(User user, Integer roleId, ModelMap modelMap) {
-		if (userService.updateUser(user) != 0) {
-			Role temp = userService.getUserRole(user.getId());
-			if (!roleId.equals(temp.getId())) {
-				userService.updateUserRole(roleId, user.getId());
+		User temp = new User();
+		temp.setId(user.getId());
+		temp.setUsername(user.getUsername());
+		if (userService.selectSelective(temp) == null) {
+			if (userService.updateUser(user) != 0) {
+				Role roletemp = userService.getUserRole(user.getId());
+				if (roleId != null && !roleId.equals(roletemp.getId())) {
+					userService.updateUserRole(roleId, user.getId());
+				}
+				return SUCCESS;
 			}
-			return SUCCESS;
-		} else {
-			return FAIL;
 		}
+		return FAIL;
 	}
 
 	public Pager<UserWithRole> getUserWithRole(Pager<User> users) {

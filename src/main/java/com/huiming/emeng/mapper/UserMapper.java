@@ -61,6 +61,6 @@ public interface UserMapper {
     */
    int selectCount();
    
-   User selctByJobId(String jobId);
+   User selectByJobId(String jobId);
 
 }

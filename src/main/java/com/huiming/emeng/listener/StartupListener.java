@@ -37,11 +37,8 @@ public class StartupListener {
 			// 与数据库进行对比
 			if (permissionList.contains(permission)) {
 				// 权限存在数据库,但无效
-				 
-				if (permissionMapper.selectSelective(permission).getState() == 0) {
-					permission.setState((byte) 1);
-					permissionMapper.updateByMapping(permission);
-				}
+				permission.setState((byte) 1);
+				permissionMapper.updateByMapping(permission);
 				permissionList.remove(permission);
 			} else {
 				// 插入新权限

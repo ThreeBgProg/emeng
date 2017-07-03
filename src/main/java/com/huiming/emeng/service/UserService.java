@@ -90,5 +90,8 @@ public interface UserService {
 	 * @return
 	 */
 	public Boolean selectByJobId(String jobId);
+	
+
+	
 
 }

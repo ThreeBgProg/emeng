@@ -31,7 +31,7 @@ public class TeacherServiceImpl implements TeacherService {
 	 * @return
 	 */
 	public int updateTeacher(Teacher teacher) {
-		return teacherMapper.updateByPrimaryKey(teacher);
+		return teacherMapper.updateByPrimaryKeySelective(teacher);
 
 	}
 

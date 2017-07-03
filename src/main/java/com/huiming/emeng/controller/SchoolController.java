@@ -100,4 +100,17 @@ public class SchoolController {
 		List<School> list = schoolService.selectByProvince(id);
 		return list;
 	}
+	
+	
+//	@RequestMapping("/selectSchoolsByType")
+//	@MappingDescription("根据类型获取学校信息")
+//	@ResponseBody
+//	public List<School> selectSchoolsByType(Byte type) {
+//	}
+//	
+//	@RequestMapping("/selectSchoolsByTypeAndProvinceId")
+//	@MappingDescription("根据类型跟省份获取学校信息")
+//	@ResponseBody
+//	public List<School> selectSchoolsByTypeAndProvinceId(Byte type,Integer provinceId) {
+//	}
 }

@@ -29,7 +29,6 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User selectByPrimaryKey(User user) {
-		user.setState((byte) 1);
 		return userMapper.selectByPrimaryKey(user.getId());
 	}
 	
@@ -101,10 +100,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	public Boolean selectByJobId(String jobId){
-		return userMapper.selctByJobId(jobId)==null;
+		return userMapper.selectByJobId(jobId)==null;
 	}
-	
-	
 	/**
 	 * 修改用户角色
 	 * 

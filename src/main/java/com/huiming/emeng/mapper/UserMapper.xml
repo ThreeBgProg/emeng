@@ -49,7 +49,7 @@
 		select
 		<include refid="Base_Column_List" />
 		from user
-		where id = #{id,jdbcType=INTEGER} and state = 1 
+		where id = #{id,jdbcType=INTEGER}
 	</select>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from user
@@ -178,6 +178,9 @@
 			<if test="state != null">
 				AND state = #{state,jdbcType=TINYINT}
 			</if>
+			<if test="id != null">
+				AND id = #{id,jdbcType=INTEGER}
+			</if>
 		</where>
 	</select>
 	<select id="selectPagerUserSelective" resultMap="BaseResultMap">
@@ -207,6 +210,14 @@
 				AND state = #{user.state,jdbcType=TINYINT}
 			</if>
 		</where>
+		limit #{fromIndex},#{pageSize}
+	</select>
+
+	<select id="selectPagerUser" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where state = 1
 		limit #{fromIndex},#{pageSize}
 	</select>
 
@@ -275,7 +286,6 @@
 		<include refid="Base_Column_List" />
 		from user
 		where job_id = #{jobId,jdbcType=VARCHAR}
-	
 	</select>
 	<select id="selectCount" resultType="java.lang.Integer">
 		select count(*)
