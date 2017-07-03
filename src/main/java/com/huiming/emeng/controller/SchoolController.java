@@ -73,7 +73,7 @@ public class SchoolController {
 	public String deleteSchool(School school) {
 		User user = new User();
 		user.setSchoolId(school.getId());
-		if (userService.selectSelective(user) == null) {
+		if (userService.selectAllSelective(user, 1, 1).getTotalRecord() == 0) {
 			if (schoolService.deleteByPrimaryKey(school.getId()) != 0) {
 				return SUCCESS;
 			}
@@ -102,11 +102,12 @@ public class SchoolController {
 	}
 	
 	
-//	@RequestMapping("/selectSchoolsByType")
-//	@MappingDescription("根据类型获取学校信息")
-//	@ResponseBody
-//	public List<School> selectSchoolsByType(Byte type) {
-//	}
+	@RequestMapping("/selectSchoolsByType")
+	@MappingDescription("根据类型获取学校信息")
+	@ResponseBody
+	public List<School> selectSchoolsByType(Byte type) {
+		return schoolService.selectSchoolsByType(type);
+	}
 //	
 //	@RequestMapping("/selectSchoolsByTypeAndProvinceId")
 //	@MappingDescription("根据类型跟省份获取学校信息")

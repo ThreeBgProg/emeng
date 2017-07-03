@@ -18,10 +18,10 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
 	private SchoolMapper schoolmapper;
-	
+
 	@Autowired
 	private LocationMapper locationMapper;
-	
+
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		return schoolmapper.deleteByPrimaryKey(id);
@@ -63,15 +63,14 @@ public class SchoolServiceImpl implements SchoolService {
 			schoolWithLocation.setLocation(locationMapper.selectByPrimaryKey(school.getProvinceId()));
 			schoolList.add(schoolWithLocation);
 		}
-		Pager<SchoolWithLocation> schoolPage = new Pager<>(pageSize, currentPage, totalRecord,
-				schoolList);
+		Pager<SchoolWithLocation> schoolPage = new Pager<>(pageSize, currentPage, totalRecord, schoolList);
 		return schoolPage;
 	}
-	
-	public List<School> selectByProvince(Integer provinceId){
+
+	public List<School> selectByProvince(Integer provinceId) {
 		return schoolmapper.selectByProvince(provinceId);
 	}
-	
+
 	@Override
 	public List<SchoolWithLocation> selectAll() {
 		List<School> schools = schoolmapper.selectAll();
@@ -82,5 +81,15 @@ public class SchoolServiceImpl implements SchoolService {
 			schoolList.add(schoolWithLocation);
 		}
 		return schoolList;
+	}
+
+	@Override
+	public List<School> selectSchoolsByTypeAndProvinceId(Integer provinceId, Byte type) {
+		return schoolmapper.selectSchoolsByTypeAndProvinceId(provinceId, type);
+	}
+
+	@Override
+	public List<School> selectSchoolsByType(Byte type) {
+		return schoolmapper.selectSchoolsByType(type);
 	}
 }

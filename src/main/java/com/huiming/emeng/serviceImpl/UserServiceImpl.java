@@ -34,7 +34,6 @@ public class UserServiceImpl implements UserService {
 	
 	@Override
 	public User selectSelective(User user) {
-		user.setState((byte) 1);
 		return userMapper.selectSelective(user);
 	}
 

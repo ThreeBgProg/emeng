@@ -193,9 +193,9 @@ public class UserController {
 	@ResponseBody
 	public String updateByPrimaryKey(User user, Integer roleId, ModelMap modelMap) {
 		User temp = new User();
-		temp.setId(user.getId());
 		temp.setUsername(user.getUsername());
-		if (userService.selectSelective(temp) == null) {
+		temp = userService.selectSelective(temp);
+		if (temp==null||temp.getId()==user.getId()) {
 			if (userService.updateUser(user) != 0) {
 				Role roletemp = userService.getUserRole(user.getId());
 				if (roleId != null && !roleId.equals(roletemp.getId())) {

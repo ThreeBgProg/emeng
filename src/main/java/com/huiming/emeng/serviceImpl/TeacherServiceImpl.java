@@ -66,7 +66,7 @@ public class TeacherServiceImpl implements TeacherService {
 	 * @return
 	 */
 	public int insertTeacher(Teacher teacher) {
-		return teacherMapper.insert(teacher);
+		return teacherMapper.insertSelective(teacher);
 
 	}
 
