@@ -7,6 +7,11 @@ import com.huiming.emeng.model.User;
 
 public interface UserService {
 
+	/**
+	 * 用户真删除
+	 * @return
+	 */
+	public int deleteReal(Integer id);
 	
 	/**
 	 * 用户信息更新

@@ -23,10 +23,7 @@ public interface SchoolService {
 
 	public List<SchoolWithLocation> selectAll();
 
-	public List<School> selectByProvince(Integer provinceId);
-
-	public List<School> selectSchoolsByTypeAndProvinceId(Integer provinceId, Byte type);
-
-	public List<School> selectSchoolsByType(Byte type);
-
+	public Pager<SchoolWithLocation> selectSchoolSelectivePage(School school,Integer currentPage, Integer pageSize);
+	
+	public List<SchoolWithLocation> selectSchoolSelective(School school);
 }

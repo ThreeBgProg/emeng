@@ -88,6 +88,8 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateByPrimaryKeySelective(user);
 	}
 
+	
+	
 	// 有问题，这个方法不知道有没有用到
 	@Override
 	public Pager<User> findSelective(User record, Integer currentPage, Integer pageSize) {
@@ -120,5 +122,10 @@ public class UserServiceImpl implements UserService {
 		userRole.setRoleId(roleId);
 		userRole.setUserId(userId);
 		return userRoleMapper.insert(userRole);
+	}
+
+	@Override
+	public int deleteReal(Integer id) {
+		return userMapper.deleteByPrimaryKey(id);
 	}
 }
