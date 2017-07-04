@@ -23,4 +23,10 @@ public interface SchoolService {
 
 	public List<SchoolWithLocation> selectAll();
 
+	public List<School> selectByProvince(Integer provinceId);
+
+	public List<School> selectSchoolsByTypeAndProvinceId(Integer provinceId, Byte type);
+
+	public List<School> selectSchoolsByType(Byte type);
+
 }

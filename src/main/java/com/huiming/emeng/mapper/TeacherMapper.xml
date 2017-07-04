@@ -8,6 +8,7 @@
 		<result column="subject" jdbcType="VARCHAR" property="subject" />
 		<result column="pic" jdbcType="VARCHAR" property="pic" />
 		<result column="school_id" jdbcType="INTEGER" property="schoolId" />
+		<result column="type" jdbcType="TINYINT" property="type" />
 	</resultMap>
 	<resultMap extends="BaseResultMap" id="ResultMapWithBLOBs"
 		type="com.huiming.emeng.model.Teacher">
@@ -69,6 +70,9 @@
 			<if test="introduction != null">
 				introduction,
 			</if>
+			<if test="type != null">
+				type,
+			</if>
 		</trim>
 		<trim prefix="values (" suffix=")" suffixOverrides=",">
 			<if test="id != null">
@@ -91,6 +95,9 @@
 			</if>
 			<if test="introduction != null">
 				#{introduction,jdbcType=LONGVARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=TINYINT},
 			</if>
 		</trim>
 	</insert>
@@ -115,6 +122,9 @@
 			<if test="introduction != null">
 				introduction = #{introduction,jdbcType=LONGVARCHAR},
 			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=TINYINT},
+			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
@@ -129,7 +139,8 @@
 		school_id =
 		#{schoolId,jdbcType=INTEGER},
 		introduction =
-		#{introduction,jdbcType=LONGVARCHAR}
+		#{introduction,jdbcType=LONGVARCHAR},
+		#{type,jdbcType=TINYINT},
 		where id = #{id,jdbcType=INTEGER}
 	</update>
 	<update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Teacher">
@@ -143,8 +154,7 @@
 		school_id = #{schoolId,jdbcType=INTEGER}
 		where id = #{id,jdbcType=INTEGER}
 	</update>
-	<select id="selectSelective"
-		resultMap="BaseResultMap">
+	<select id="selectSelective" resultMap="BaseResultMap">
 		select
 		<include refid="Base_Column_List" />
 		from teacher
@@ -152,29 +162,35 @@
 			<if test="teacher.id != null">
 				id = #{teacher.id,jdbcType=INTEGER}
 			</if>
-			<if test="name != null">
+			<if test="teacher.name != null">
 				AND name = #{teacher.name,jdbcType=VARCHAR}
 			</if>
-			<if test="direction != null">
+			<if test="teacher.direction != null">
 				AND direction = #{teacher.direction,jdbcType=VARCHAR}
 			</if>
-			<if test="subject != null">
+			<if test="teacher.subject != null">
 				AND subject = #{teacher.subject,jdbcType=VARCHAR}
 			</if>
-			<if test="pic != null">
+			<if test="teacher.pic != null">
 				AND pic = #{teacher.pic,jdbcType=VARCHAR}
 			</if>
-			<if test="school_id != null">
-				AND school_id = #{teacher.school_id,jdbcType=VARCHAR}
+			<if test="teacher.schoolId != null">
+				AND school_id = #{teacher.schoolId,jdbcType=VARCHAR}
+			</if>
+			<if test="teacher.type != null">
+				AND type = #{teacher.type,jdbcType=TINYINT}
 			</if>
 		</where>
 		limit #{fromIndex},#{pageSize}
 	</select>
 
-	<select id="selectAll" resultMap="BaseResultMap">
+	<select id="selectAll" resultMap="ResultMapWithBLOBs">
 		select
 		<include refid="Base_Column_List" />
-		from teacher
+		,
+		<include refid="Blob_Column_List" />
+		from teacher t
+		where t.type = #{teachertype} 
 		limit #{fromIndex},#{pageSize}
 	</select>
 	<select id="selectCountSelective" parameterType="com.huiming.emeng.model.Teacher"
@@ -197,14 +213,62 @@
 			<if test="pic != null">
 				AND pic = #{pic,jdbcType=VARCHAR}
 			</if>
-			<if test="school_id != null">
-				AND school_id = #{school_id,jdbcType=VARCHAR}
+			<if test="schoolId != null">
+				AND school_id = #{schoolId,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null">
+				AND type = #{type,jdbcType=TINYINT}
 			</if>
 		</where>
 	</select>
-	<select id="selectCount" resultType="java.lang.Integer">
+	<select id="selectCount" resultType="java.lang.Integer"
+		parameterType="java.lang.Byte">
 		select count(*)
-		from teacher
+		from teacher t
+		where t.type = #{teachertype,jdbcType=TINYINT}
 	</select>
 
+	<select id="selectCountByTeacher" resultType="java.lang.Integer"
+		parameterType="com.huiming.emeng.model.Teacher">
+		select count(*)
+		from teacher
+		<where>
+			<if test="name != null">
+				name LIKE concat(concat('%',#{name}),'%')
+			</if>
+			<if test="direction != null">
+				or direction LIKE concat(concat('%',#{direction}),'%')
+			</if>
+			<if test="subject != null">
+				or subject LIKE concat(concat('%',#{subject}),'%')
+			</if>
+			<if test="introduction != null">
+				or introduction LIKE concat(concat('%',#{introduction}),'%')
+			</if>
+		</where>
+	</select>
+
+
+	<select id="selectByTeacherSelective" resultMap="ResultMapWithBLOBs">
+		select
+		<include refid="Base_Column_List" />
+		,
+		<include refid="Blob_Column_List" />
+		from teacher
+		<where>
+			<if test="teacher.name != null">
+				name LIKE concat(concat('%',#{teacher.name}),'%')
+			</if>
+			<if test="teacher.direction != null">
+				or direction LIKE concat(concat('%',#{teacher.direction}),'%')
+			</if>
+			<if test="teacher.subject != null">
+				or subject LIKE concat(concat('%',#{teacher.subject}),'%')
+			</if>
+			<if test="teacher.introduction != null">
+				or introduction LIKE concat(concat('%',#{teacher.introduction}),'%')
+			</if>
+		</where>
+		limit #{fromIndex},#{pageSize}
+	</select>
 </mapper>

@@ -61,7 +61,7 @@
 				rolename = #{rolename,jdbcType=VARCHAR},
 			</if>
 			<if test="state != null">
-				state = #{state,jdbcType=TINYINT},
+				state = #{state,jdbcType=TINYINT}
 			</if>
 		</set>
 		where id = #{id,jdbcType=INTEGER}

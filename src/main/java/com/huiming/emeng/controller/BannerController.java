@@ -26,7 +26,6 @@ public class BannerController {
 	@RequestMapping("/getAllBanner")
 	@MappingDescription("查看所有的轮播文章")
 	public List<PassageWithBanner> getAllBanner() {
-		System.out.println("getAllBanner");
 		return bannerService.selectAll();
 	}
 

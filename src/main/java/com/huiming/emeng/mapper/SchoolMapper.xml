@@ -126,4 +126,26 @@
 		from school
 		limit #{fromIndex},#{pageSize}
 	</select>
+	<select id="selectByProvince" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from school
+		where province_id = #{provinceId,jdbcType=INTEGER}
+	</select>
+	<select id="selectSchoolsByType" resultMap="BaseResultMap"
+		parameterType="java.lang.Integer">
+		select
+		<include refid="Base_Column_List" />
+		from school s
+		where s.type = #{type,jdbcType=INTEGER}
+	</select>
+	
+	<select id="selectSchoolsByTypeAndProvinceId" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from school s
+		where s.type = #{type,jdbcType=INTEGER}
+		and s.province_id  = #{provinceId,jdbcType=INTEGER}
+	</select>
 </mapper>

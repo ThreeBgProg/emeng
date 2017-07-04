@@ -1,10 +1,12 @@
 package com.huiming.emeng.controller;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +27,19 @@ public class RoleController {
 	private String SUCCESS = "操作成功";
 	private String FAIL = "操作失败";
 
+	/**
+	 * Environment变量，用于加载application.properties
+	 */
+	@Autowired
+	private Environment env;
+
+	/**
+	 * 实现EnvironmentAware接口的方法确保environment注入成功
+	 */
+	public void setEnvironment(Environment env) {
+		this.env = env;
+	}
+
 	@Autowired
 	private UserService userService;
 
@@ -37,7 +52,7 @@ public class RoleController {
 	@RequestMapping("/addRole")
 	@MappingDescription("增加角色")
 	@ResponseBody
-	public String addRole(Role role, @RequestParam("permissionList[]")List<Integer> permissionList) {
+	public String addRole(Role role, @RequestParam("permissionList[]") List<Integer> permissionList) {
 		System.out.println(permissionList);
 		if (roleService.selectRole(role.getRolename()) == null) {
 			if (roleService.insert(role) != 0) {
@@ -59,11 +74,13 @@ public class RoleController {
 	public List<Role> getAllRole(ModelMap modelMap) {
 		return roleService.selectAll();
 	}
-	
+
 	@ResponseBody
 	@RequestMapping("/getAllRoleByPage")
 	@MappingDescription("分页获取所有角色")
-	public Pager<Role> getAllRoleByPage(ModelMap modelMap, Integer currentPage, Integer pageSize) {
+	public Pager<Role> getAllRoleByPage(ModelMap modelMap,
+			@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize) {
 		return roleService.selectAllByPage(currentPage, pageSize);
 	}
 
@@ -83,25 +100,35 @@ public class RoleController {
 	@RequestMapping("/updateRolePermission")
 	@MappingDescription("修改角色权限")
 	@ResponseBody
-	public String updateRolePermission(Role role, ModelMap modelMap, @RequestParam("permissionList[]")List<Integer> permissionList) {
-		roleService.updateByPrimaryKey(role);
-		List<Permission> list = roleService.selectPermissionByRoleId(role.getId());
-		for (Permission permission : list) {
-			// 数据库中该角色已经存在该权限
-			if (permissionList.contains(permission.getId())) {
-				list.remove(permission);
-				permissionList.remove(permission.getId());
-				continue;
-			} else {
-				// 不存在则插入
-				roleService.insertRolePermission(role.getId(), permission.getId());
-			}
+	public String updateRolePermission(Role role, ModelMap modelMap,
+			@RequestParam("permissionList[]") List<Integer> permissionList) {
+		if (role.getRolename() != null) {
+			roleService.updateByPrimaryKeySelective(role);
 		}
-		// 角色被删除的权限
-		for (Permission permission : list) {
-			roleService.deleteByPrimaryKey(permission.getId());
+		// 角色权限分配之后取消注释
+		// if(env.getRequiredProperty("role.unChangeRoleId").contains(role.getId().toString())){
+		// return "固定角色，无法修改";
+		// }
+		Integer roleId = role.getId();
+		//数据库中角色已经拥有的权限
+		List<Integer> list = roleService.selectPermissionIdByRoleId(roleId);
+		
+		//添加新权限权限
+		List<Integer> tempList = new ArrayList<>(permissionList);
+		tempList.removeAll(list);
+		for (Integer permissionId : tempList) {
+			roleService.insertRolePermission(roleId, permissionId);
+		}
+		tempList = null;
+		//移除权限
+		for (Integer permissionId : list) {
+			if(permissionList.contains(permissionId)){
+				continue;
+			}
+			roleService.deleteRolePermission(roleId, permissionId);
 		}
 		return SUCCESS;
+
 	}
 
 	@RequestMapping("/getPermissionsByRole")
@@ -114,14 +141,17 @@ public class RoleController {
 		Map<String, List<Permission>> list = new HashMap<String, List<Permission>>();
 		list.put("havedPermissionList", havedPermissionList);
 		list.put("unHavedPermissionList", unHavedPermissionList);
-        return list;
+		return list;
 	}
 
 	@RequestMapping("/deleteRole")
 	@MappingDescription("删除角色")
 	@ResponseBody
 	public String deleteRole(Role role, ModelMap modelMap) {
-		if (userService.getUserByRole(role.getId(),0,1) == null) {
+		if (env.getRequiredProperty("role.unChangeRoleId").contains(role.getId().toString())) {
+			return "固定角色，无法修改";
+		}
+		if (userService.getUserByRole(role.getId(), 1, 1).getTotalRecord() == 0) {
 			if (roleService.deleteByPrimaryKey(role.getId()) != 0) {
 				return SUCCESS;
 			} else

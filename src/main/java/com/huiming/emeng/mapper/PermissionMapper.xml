@@ -90,6 +90,25 @@
 		</set>
 		where id = #{id,jdbcType=INTEGER}
 	</update>
+	
+	<update id="updateByMapping" parameterType="com.huiming.emeng.model.Permission">
+		update permission
+		<set>
+			<if test="description != null">
+				description = #{description,jdbcType=VARCHAR},
+			</if>
+			<if test="function != null">
+				function = #{function,jdbcType=VARCHAR},
+			</if>
+			<if test="state != null">
+				state = #{state,jdbcType=TINYINT},
+			</if>
+		</set>
+		where mapping = #{mapping,jdbcType=VARCHAR}
+	</update>
+	
+	
+	
 	<update id="updateByPrimaryKey" parameterType="com.huiming.emeng.model.Permission">
 		update permission
 		mapping = #{mapping,jdbcType=VARCHAR},

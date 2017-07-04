@@ -31,6 +31,18 @@
 		role_permission
 		where id = #{id,jdbcType=INTEGER}
 	</delete>
+	<delete id="deleteByRolePermission" parameterType="com.huiming.emeng.model.RolePermission">
+		delete from
+		role_permission
+		<where>
+			<if test="roleId != null">
+				role_id = #{roleId,jdbcType=INTEGER}
+			</if>
+			<if test="permissionId != null">
+				AND permission_id = #{permissionId,jdbcType=INTEGER}
+			</if>
+		</where>
+	</delete>
 	<delete id="deleteByRoleId" parameterType="java.lang.Integer">
 		delete from
 		role_permission
