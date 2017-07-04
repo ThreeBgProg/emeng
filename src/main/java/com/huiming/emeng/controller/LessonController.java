@@ -47,7 +47,7 @@ public class LessonController {
 
     //章节模块
     @Autowired
-    private ChapterMapper chapterMapper;
+    private ChapterService chapterService;
 
     @Autowired
     private PassagePageService passagePageService;
@@ -74,7 +74,9 @@ public class LessonController {
 
     @MappingDescription("相应课程章节")
     @RequestMapping({"/{lessonId}/chapter"})
-    public Object allChapter(ModelMap modelMap, @PathVariable("lessonId") Integer lessonId){
+    public Object allChapter(ModelMap modelMap, @PathVariable("lessonId") Integer lessonId,
+                             @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
+                             @RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize){
 
         //添加导航表模块
 //        List<Navigation> navigationList = navigationService.selectAllNavigation();
@@ -83,7 +85,7 @@ public class LessonController {
         //添加精品在线模块(显示10条)
         List<Passage> qualityOnlinePassageList = passageMapper.selectByTypeAndDescendWithTime(PassageType.JINGPINZAIXIAN, 10);
         //课程所有章节
-        List<Chapter> chapterList = chapterMapper.selectAllChapterFromLesson(lessonId);
+        Pager<Chapter> chapterList = chapterService.selectAllChapterFromLesson(lessonId,pageSize,pageNum);
 
         modelMap.put("chapterList", chapterList);
 //        modelMap.put("navigationList", navigationList);
