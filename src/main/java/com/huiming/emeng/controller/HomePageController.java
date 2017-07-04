@@ -43,7 +43,7 @@ public class HomePageController {
      * @return 返回主页页面
      */
     @MappingDescription("主页所有需要用到的对象")
-    @RequestMapping("/")
+    @RequestMapping("/main")
     @ResponseBody
     public Object homePage(ModelMap model){
 
