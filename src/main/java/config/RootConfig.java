@@ -1,5 +1,6 @@
-package config;
+package config; 
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
@@ -7,6 +8,8 @@ import org.springframework.context.annotation.FilterType;
 import org.springframework.context.annotation.Import;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.stereotype.Controller;
+
+import com.huiming.emeng.listener.StartupListener;
 
 
 /**
@@ -21,12 +24,11 @@ import org.springframework.stereotype.Controller;
 @Import(DataSourceConfig.class)
 @EnableScheduling
 public class RootConfig {
-	
-//	
-//	@Bean(initMethod="initMethod")
-//	public StartupListener startupListener() {
-//		return new StartupListener();
-//	}
+
+	@Bean(initMethod="initMethod")
+	public StartupListener startupListener() {
+		return new StartupListener();
+	}
 	
 	
 }

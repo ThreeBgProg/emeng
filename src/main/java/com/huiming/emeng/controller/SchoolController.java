@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.huiming.emeng.annotation.MappingDescription;
@@ -41,7 +42,8 @@ public class SchoolController {
 	@RequestMapping("/getSchoolPage")
 	@MappingDescription("分页获取学校信息")
 	@ResponseBody
-	public Pager<SchoolWithLocation> getSchoolPager(Integer currentPage, Integer pageSize) {
+	public Pager<SchoolWithLocation> getSchoolPager(@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize) {
 		return schoolService.selectAllByPage(currentPage, pageSize);
 	}
 
@@ -71,7 +73,7 @@ public class SchoolController {
 	public String deleteSchool(School school) {
 		User user = new User();
 		user.setSchoolId(school.getId());
-		if (userService.selectSelective(user) == null) {
+		if (userService.selectAllSelective(user, 1, 1).getTotalRecord() == 0) {
 			if (schoolService.deleteByPrimaryKey(school.getId()) != 0) {
 				return SUCCESS;
 			}
@@ -88,5 +90,21 @@ public class SchoolController {
 		schoolWithLocation.setSchool(school);
 		schoolWithLocation.setLocation(locationService.selectByPrimaryKey(school.getProvinceId()));
 		return schoolWithLocation;
+	}
+	
+	
+	@RequestMapping("/selectSchoolsSelective")
+	@MappingDescription("查询获取学校信息(不分页)")
+	@ResponseBody
+	public List<SchoolWithLocation> selectSchoolsSelective(School school) {
+		return schoolService.selectSchoolSelective(school);
+	}
+	
+	@RequestMapping("/selectSchoolsSelectiveByPage")
+	@MappingDescription("查询获取学校信息(分页)")
+	@ResponseBody
+	public Pager<SchoolWithLocation> selectSchoolsSelectiveByPage(School school,@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize) {
+		return schoolService.selectSchoolSelectivePage(school, currentPage, pageSize);
 	}
 }

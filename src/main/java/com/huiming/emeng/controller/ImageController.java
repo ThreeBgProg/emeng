@@ -1,9 +1,11 @@
 package com.huiming.emeng.controller;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.bo.ValidateImageBO;
 import com.huiming.emeng.common.ValidateCodeUtil;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletOutputStream;
@@ -35,6 +37,7 @@ public class ImageController {
 			
 			ValidateImageBO validateBO = ValidateCodeUtil.getValidateBO();
 
+			request.setAttribute("validateCode",validateBO.getValue()+"");
 			request.getSession().setAttribute("validateCode",validateBO.getValue()+"");	
 			if(ImageIO.write(validateBO.getImg(), "JPEG", os)) {
 				response.flushBuffer(); 
@@ -48,6 +51,13 @@ public class ImageController {
 			e.printStackTrace();
 		}
 		
+	}
+	
+	@RequestMapping("/validateRandNum")
+	@MappingDescription("/验证用户输入的验证码")
+	@ResponseBody
+	public boolean validateRandNum(HttpServletRequest request,String value){
+		return request.getSession().getAttribute("validateCode").equals(value);
 	}
 	
 	

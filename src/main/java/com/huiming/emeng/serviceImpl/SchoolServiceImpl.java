@@ -18,10 +18,10 @@ public class SchoolServiceImpl implements SchoolService {
 
 	@Autowired
 	private SchoolMapper schoolmapper;
-	
+
 	@Autowired
 	private LocationMapper locationMapper;
-	
+
 	@Override
 	public int deleteByPrimaryKey(Integer id) {
 		return schoolmapper.deleteByPrimaryKey(id);
@@ -63,11 +63,10 @@ public class SchoolServiceImpl implements SchoolService {
 			schoolWithLocation.setLocation(locationMapper.selectByPrimaryKey(school.getProvinceId()));
 			schoolList.add(schoolWithLocation);
 		}
-		Pager<SchoolWithLocation> schoolPage = new Pager<>(pageSize, currentPage, totalRecord,
-				schoolList);
+		Pager<SchoolWithLocation> schoolPage = new Pager<>(pageSize, currentPage, totalRecord, schoolList);
 		return schoolPage;
 	}
-	
+
 	@Override
 	public List<SchoolWithLocation> selectAll() {
 		List<School> schools = schoolmapper.selectAll();
@@ -79,4 +78,35 @@ public class SchoolServiceImpl implements SchoolService {
 		}
 		return schoolList;
 	}
+
+	@Override
+	public Pager<SchoolWithLocation> selectSchoolSelectivePage(School school, Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = schoolmapper.countSelective(school);
+		List<School> schools = schoolmapper.selectAllSelectivePage(school, fromIndex, pageSize);
+		List<SchoolWithLocation> schoolList = new ArrayList<>();
+		for (School temp : schools) {
+			SchoolWithLocation schoolWithLocation = new SchoolWithLocation(temp);
+			schoolWithLocation.setLocation(locationMapper.selectByPrimaryKey(temp.getProvinceId()));
+			schoolList.add(schoolWithLocation);
+		}
+		Pager<SchoolWithLocation> schoolPage = new Pager<>(pageSize, currentPage, totalRecord, schoolList);
+		return schoolPage;
+	}
+
+	@Override
+	public List<SchoolWithLocation> selectSchoolSelective(School school) {
+		List<School> schools = schoolmapper.selectAllSelective(school);
+		List<SchoolWithLocation> schoolList = new ArrayList<>();
+		for (School temp : schools) {
+			SchoolWithLocation schoolWithLocation = new SchoolWithLocation(temp);
+			schoolWithLocation.setLocation(locationMapper.selectByPrimaryKey(temp.getProvinceId()));
+			schoolList.add(schoolWithLocation);
+		}
+		return schoolList;
+	}
+	
+	
+	
+	
 }

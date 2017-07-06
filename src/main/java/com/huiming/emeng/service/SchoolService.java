@@ -23,4 +23,7 @@ public interface SchoolService {
 
 	public List<SchoolWithLocation> selectAll();
 
+	public Pager<SchoolWithLocation> selectSchoolSelectivePage(School school,Integer currentPage, Integer pageSize);
+	
+	public List<SchoolWithLocation> selectSchoolSelective(School school);
 }

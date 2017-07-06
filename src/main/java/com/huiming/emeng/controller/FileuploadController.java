@@ -75,12 +75,18 @@ public class FileuploadController {
 			@RequestParam("fileUrl") String filename,
 			Model model)throws Exception
 	{
-
-		String[] string=filename.split("/");
+		String[] string=filename.split("\\"+File.separator);
 		int num=string.length;
+	    if (string[num-2].equals("")) {
+	    	string[num-2]=string[num-3];
+			}
+		System.out.println("dier"+string[num-2]);
 		
-		String path = request.getServletContext().getRealPath("/");
-		File file = new File(path+string[num-2]+"/"+File.separator+string[num-1]);		
+		String path = request.getServletContext().getRealPath(File.separator);
+		System.out.println("项目路劲"+path);
+		System.out.println(path+File.separator+string[num-2]+File.separator+string[num-1]);
+		
+		File file = new File(path+File.separator+string[num-2]+File.separator+string[num-1]);	
 		HttpHeaders headers = new HttpHeaders();
 		String downfileName = new String(filename.getBytes("UTF-8"),"iso-8859-1");
 		headers.setContentDispositionFormData("attachment", downfileName);
@@ -99,7 +105,7 @@ public class FileuploadController {
 		Map<String, String> respondate=new HashMap<>();
 		
 		if(!annex.isEmpty()){
-			String path = request.getServletContext().getRealPath("/meetings/");
+			String path = request.getServletContext().getRealPath(File.separator+"meetings"+File.separator);
 			String fileName=annex.getOriginalFilename();
 			File filepath = new File(path, fileName);
 			if(!filepath.getParentFile().exists()){
@@ -113,7 +119,7 @@ public class FileuploadController {
 			annex.transferTo(new File(path+File.separator+str)); 
 			String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 			System.out.println("端口号获取"+root);
-			respondate.put("annex",root+"/emeng/meeting/"+str);
+			respondate.put("annex",root+File.separator+"emeng"+File.separator+"meeting"+File.separator+str);
 		}
 		
 		Object object = JSON.toJSON(respondate);

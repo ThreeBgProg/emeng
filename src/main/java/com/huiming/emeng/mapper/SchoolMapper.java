@@ -19,9 +19,15 @@ public interface SchoolMapper {
 
 	int updateByPrimaryKey(School record);
 
-	List<School> selectAllByPage(@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+	List<School> selectAllByPage(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
 	List<School> selectAll();
 
+	List<School> selectAllSelectivePage(@Param("school")School school,@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
+
+	List<School> selectAllSelective(School school);
+	
+	int countSelective(School school);
+	
 	int selectCount();
 }

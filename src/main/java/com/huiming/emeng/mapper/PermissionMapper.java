@@ -2,6 +2,8 @@ package com.huiming.emeng.mapper;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.huiming.emeng.model.Permission;
 
 public interface PermissionMapper {
@@ -40,6 +42,8 @@ public interface PermissionMapper {
      */
     int updateByPrimaryKey(Permission record);
     
+    int updateByMapping(Permission record);
+    
     Permission selectSelective(Permission record);
     
     Permission selectByPrimaryKey(Integer id);
@@ -56,7 +60,7 @@ public interface PermissionMapper {
      * 分页获取所有有效的权限
      * @return
      */
-    List<Permission> selectAllEffectiveByPage(Integer fromIndex, Integer pageSize);
+    List<Permission> selectAllEffectiveByPage(@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
     
     /**
      * 获取所有的权限，包括无效的     

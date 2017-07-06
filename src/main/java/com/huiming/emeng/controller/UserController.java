@@ -10,7 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
@@ -35,12 +35,12 @@ public class UserController {
 	private SchoolService schoolService;
 	@Autowired
 	private RoleService roleService;
-	@Autowired	
+	@Autowired
 	private UserService userService;
 	@Autowired
 	private PermissionService permissionService;
 
-	@RequestMapping(value = "/login", method = RequestMethod.POST)
+	@RequestMapping(value = "/login")
 	@MappingDescription("用户登录")
 	@ResponseBody
 	public String login(HttpServletRequest request, User user) {
@@ -53,13 +53,25 @@ public class UserController {
 			Role role = userService.getUserRole(user.getId());
 			session.setAttribute("role", role);// 可以不加
 
+			// 添加用户的权限mapping
 			List<Permission> permissions = permissionService.selectByRole(role.getId());
-			session.setAttribute("permissionList", permissions);
+			List<String> permissionMappingList = new ArrayList<>();
+			for (Permission permission : permissions) {
+				permissionMappingList.add(permission.getMapping());
+			}
+			session.setAttribute("permissionList", permissionMappingList);
 
 		} else {
 			return "用户名或密码错误";
 		}
 		return "index";
+	}
+
+	@RequestMapping(value = "/getUserMessage")
+	@MappingDescription("用户登录")
+	@ResponseBody
+	public User getUserMessage(HttpServletRequest request) {
+		return (User) request.getSession().getAttribute("user");
 	}
 
 	@RequestMapping("/logout")
@@ -76,11 +88,33 @@ public class UserController {
 	@MappingDescription("添加用户/用户注册")
 	@ResponseBody
 	public String addUser(User user, Integer roleId) {
+		// 管理员添加用户直接确定用户角色，注册时未定义角色，由管理员审核并修改角色
 		User temp = new User();
 		temp.setUsername(user.getUsername());
-		if (userService.selectSelective(temp) == null && userService.insertUser(user) != 0) {
-			temp = userService.selectSelective(user);
-			userService.insertUserRole(roleId, temp.getId());
+		if (userService.selectSelective(temp) == null && userService.selectByJobId(user.getJobId())) {
+			if (roleId != null) {
+				user.setState((byte) 1);
+				userService.insertUser(user);
+				userService.insertUserRole(roleId, user.getId());
+			} else {
+				userService.insertUser(user);
+			}
+		} else {
+			return FAIL + " 用户名或工号已存在";
+		}
+		return SUCCESS;
+	}
+
+	@RequestMapping("/passUserRegister")
+	@MappingDescription("用户审核通过")
+	@ResponseBody
+	public String passUserRegister(Integer id, Integer roleId) {
+		// 管理员审核注册的用户并赋予角色
+		User temp = new User();
+		temp.setId(id);
+		temp.setState((byte) 1);
+		if (userService.updateUser(temp) != 0) {
+			userService.insertUserRole(roleId, id);
 		} else {
 			return FAIL + " 用户已存在";
 		}
@@ -100,7 +134,6 @@ public class UserController {
 	@MappingDescription("删除用户")
 	@ResponseBody
 	public String deleteUser(User user) {
-		System.out.println("/deleteUser");
 		// 改为---->修改用户的state为0
 		user.setState((byte) 0);
 		if (userService.updateUser(user) != 0) {
@@ -110,10 +143,19 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping("/ignoreUserRegister")
+	@MappingDescription("忽略用户注册")
+	@ResponseBody
+	public int ignoreUserRegister(Integer id) {
+		return userService.deleteReal(id);
+	}
+	
 	@RequestMapping("/getUserByRole")
 	@MappingDescription("分页获取某种角色的所有用户")
 	@ResponseBody
-	public Pager<User> getUserByRole(Role role, ModelMap modelMap, Integer currentPage, Integer pageSize) {
+	public Pager<User> getUserByRole(Role role, ModelMap modelMap,
+			@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize) {
 		return userService.getUserByRole(role.getId(), currentPage, pageSize);
 	}
 
@@ -129,10 +171,24 @@ public class UserController {
 		return JSON.toJSON(temp);
 	}
 
+	@RequestMapping("/getAllUnpassUser")
+	@MappingDescription("分页获取未审核的用户")
+	@ResponseBody
+	public Object getAllUnpassUser(ModelMap modelMap,
+			@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize) {
+		User user = new User();
+		user.setState((byte) 0);
+		modelMap.put("userList", getUserWithRole(userService.selectAllSelective(user, currentPage, pageSize)));
+		return JSON.toJSON(modelMap);
+	}
+
 	@RequestMapping("/getAllUser")
 	@MappingDescription("分页获取用户信息以及角色")
 	@ResponseBody
-	public Object getAllUser(ModelMap modelMap, Integer currentPage, Integer pageSize) {
+	public Object getAllUser(ModelMap modelMap,
+			@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize) {
 		modelMap.put("userList", getUserWithRole(userService.selectAllUser(currentPage, pageSize)));
 		return JSON.toJSON(modelMap);
 	}
@@ -141,15 +197,19 @@ public class UserController {
 	@MappingDescription("更改用户以及角色")
 	@ResponseBody
 	public String updateByPrimaryKey(User user, Integer roleId, ModelMap modelMap) {
-		if (userService.updateUser(user) != 0) {
-			Role temp = userService.getUserRole(user.getId());
-			if (!roleId.equals(temp.getId())) {
-				userService.updateUserRole(roleId, user.getId());
+		User temp = new User();
+		temp.setUsername(user.getUsername());
+		temp = userService.selectSelective(temp);
+		if (temp==null||temp.getId()==user.getId()) {
+			if (userService.updateUser(user) != 0) {
+				Role roletemp = userService.getUserRole(user.getId());
+				if (roleId != null && !roleId.equals(roletemp.getId())) {
+					userService.updateUserRole(roleId, user.getId());
+				}
+				return SUCCESS;
 			}
-			return SUCCESS;
-		} else {
-			return FAIL;
 		}
+		return FAIL;
 	}
 
 	public Pager<UserWithRole> getUserWithRole(Pager<User> users) {

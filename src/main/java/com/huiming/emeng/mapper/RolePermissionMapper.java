@@ -7,6 +7,8 @@ import com.huiming.emeng.model.RolePermission;
 public interface RolePermissionMapper {
 	int deleteByPrimaryKey(Integer id);
 	
+	int deleteByRolePermission(RolePermission record);
+	
 	int deleteByPermissionId(Integer id);
 	
 	int deleteByRoleId(Integer id);

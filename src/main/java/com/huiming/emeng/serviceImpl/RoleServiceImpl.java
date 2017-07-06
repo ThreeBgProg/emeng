@@ -91,8 +91,17 @@ public class RoleServiceImpl implements RoleService {
 	}
 
 	@Override
-	public int deleteRolePermission(RolePermission record) {
-		return rolePermissionMapper.deleteByPrimaryKey(record.getId());
+	public List<Integer> selectPermissionIdByRoleId(Integer id) {
+		List<Integer> permissionIds = rolePermissionMapper.selectAllByRoleId(id);
+		return permissionIds;
+	}
+	
+	@Override
+	public int deleteRolePermission(Integer roleId,Integer permissionId) {
+		RolePermission record = new RolePermission();
+		record.setPermissionId(permissionId);
+		record.setRoleId(roleId);
+		return rolePermissionMapper.deleteByRolePermission(record);
 	}
 
 	@Override

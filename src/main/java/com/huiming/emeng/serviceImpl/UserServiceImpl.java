@@ -29,13 +29,11 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public User selectByPrimaryKey(User user) {
-		user.setState((byte) 1);
 		return userMapper.selectByPrimaryKey(user.getId());
 	}
 	
 	@Override
 	public User selectSelective(User user) {
-		user.setState((byte) 1);
 		return userMapper.selectSelective(user);
 	}
 
@@ -90,6 +88,8 @@ public class UserServiceImpl implements UserService {
 		return userMapper.updateByPrimaryKeySelective(user);
 	}
 
+	
+	
 	// 有问题，这个方法不知道有没有用到
 	@Override
 	public Pager<User> findSelective(User record, Integer currentPage, Integer pageSize) {
@@ -100,6 +100,9 @@ public class UserServiceImpl implements UserService {
 		return userPage;
 	}
 
+	public Boolean selectByJobId(String jobId){
+		return userMapper.selectByJobId(jobId)==null;
+	}
 	/**
 	 * 修改用户角色
 	 * 
@@ -119,5 +122,10 @@ public class UserServiceImpl implements UserService {
 		userRole.setRoleId(roleId);
 		userRole.setUserId(userId);
 		return userRoleMapper.insert(userRole);
+	}
+
+	@Override
+	public int deleteReal(Integer id) {
+		return userMapper.deleteByPrimaryKey(id);
 	}
 }

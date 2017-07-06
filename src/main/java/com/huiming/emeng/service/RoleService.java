@@ -5,7 +5,6 @@ import java.util.List;
 import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Permission;
 import com.huiming.emeng.model.Role;
-import com.huiming.emeng.model.RolePermission;
 
 public interface RoleService {
 	public int deleteByPrimaryKey(Integer id);
@@ -57,7 +56,7 @@ public interface RoleService {
 	 * @param record
 	 * @return
 	 */
-	public int deleteRolePermission(RolePermission record);
+	public int deleteRolePermission(Integer roleId,Integer permissionId);
 
 	/**
 	 * 判断某种角色是否存在某种权限
@@ -75,5 +74,12 @@ public interface RoleService {
 	 * @return
 	 */
 	public Role selectRole(String rolename);
+	
+	/**
+	 * 获取角色权限id
+	 * @param id
+	 * @return
+	 */
+	public List<Integer> selectPermissionIdByRoleId(Integer id);
 
 }

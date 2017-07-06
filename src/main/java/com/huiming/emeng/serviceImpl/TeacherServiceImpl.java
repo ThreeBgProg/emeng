@@ -8,6 +8,10 @@ import com.huiming.emeng.mapper.TeacherMapper;
 import com.huiming.emeng.model.Teacher;
 import com.huiming.emeng.service.TeacherService;
 
+/**
+ * @author Achan
+ *
+ */
 @Service("teacherService")
 public class TeacherServiceImpl implements TeacherService {
 
@@ -27,7 +31,7 @@ public class TeacherServiceImpl implements TeacherService {
 	 * @return
 	 */
 	public int updateTeacher(Teacher teacher) {
-		return teacherMapper.updateByPrimaryKey(teacher);
+		return teacherMapper.updateByPrimaryKeySelective(teacher);
 
 	}
 
@@ -47,11 +51,11 @@ public class TeacherServiceImpl implements TeacherService {
 	 * 
 	 * @return
 	 */
-	public Pager<Teacher> selectAllTeacher(Integer currentPage, Integer pageSize) {
+	public Pager<Teacher> selectAllTeacher(Byte type, Integer currentPage, Integer pageSize) {
 		int fromIndex = (currentPage - 1) * pageSize;
-		int totalRecord = teacherMapper.selectCount();
+		int totalRecord = teacherMapper.selectCount(type);
 		Pager<Teacher> teacherPage = new Pager<>(pageSize, currentPage, totalRecord,
-				teacherMapper.selectAll(fromIndex, pageSize));
+				teacherMapper.selectAll(type, fromIndex, pageSize));
 		return teacherPage;
 
 	}
@@ -62,22 +66,41 @@ public class TeacherServiceImpl implements TeacherService {
 	 * @return
 	 */
 	public int insertTeacher(Teacher teacher) {
-		return teacherMapper.insert(teacher);
+		return teacherMapper.insertSelective(teacher);
 
 	}
 
 	/**
-	 * 使用某个或某些字段查询符合的所有信息
+	 * 使用某个或某些字段查询符合的所有信息 废弃？？
 	 * 
-	 * @param user
+	 * @param teacher
+	 * @param currentPage
+	 * @param pageSize
 	 * @return
 	 */
 	public Pager<Teacher> selectAllSelective(Teacher teacher, Integer currentPage, Integer pageSize) {
 		int fromIndex = (currentPage - 1) * pageSize;
-		int totalRecord = teacherMapper.selectCount();
+		int totalRecord = teacherMapper.selectCountSelective(teacher);
 		Pager<Teacher> teacherPage = new Pager<>(pageSize, currentPage, totalRecord,
 				teacherMapper.selectSelective(teacher, fromIndex, pageSize));
 		return teacherPage;
 
+	}
+
+	/**
+	 * 分页模糊查询名师信息
+	 * 
+	 * @param teacher
+	 * @param currentPage
+	 * @param pageSize
+	 * @return
+	 */
+	@Override
+	public Pager<Teacher> selectByTeacherSelective(Teacher teacher, Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = teacherMapper.selectCountByTeacher(teacher);
+		Pager<Teacher> teacherPage = new Pager<>(pageSize, currentPage, totalRecord,
+				teacherMapper.selectByTeacherSelective(teacher, fromIndex, pageSize));
+		return teacherPage;
 	}
 }

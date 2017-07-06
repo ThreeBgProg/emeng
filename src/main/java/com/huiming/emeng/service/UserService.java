@@ -7,6 +7,11 @@ import com.huiming.emeng.model.User;
 
 public interface UserService {
 
+	/**
+	 * 用户真删除
+	 * @return
+	 */
+	public int deleteReal(Integer id);
 	
 	/**
 	 * 用户信息更新
@@ -81,5 +86,17 @@ public interface UserService {
 	 * @return
 	 */
 	public User selectByPrimaryKey(User user);
+	
+	
+	/**
+	 * 判断是否存在工号用户
+	 * 存在-false,不存在-true
+	 * @param jobId
+	 * @return
+	 */
+	public Boolean selectByJobId(String jobId);
+	
+
+	
 
 }

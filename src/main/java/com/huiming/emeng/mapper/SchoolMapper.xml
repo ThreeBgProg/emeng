@@ -19,6 +19,78 @@
 		from school
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="selectAllSelective" parameterType="com.huiming.emeng.model.School"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from school
+		<where>
+			<if test="name != null">
+				name = #{school.name,jdbcType=VARCHAR}
+			</if>
+			<if test="link != null">
+				AND link = #{school.link,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null">
+				AND type = #{type,jdbcType=TINYINT}
+			</if>
+			<if test="pic != null">
+				AND pic = #{pic,jdbcType=VARCHAR}
+			</if>
+			<if test="provinceId != null">
+				AND province_id = #{provinceId,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	<select id="selectAllSelectivePage"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from school
+		<where>
+			<if test="school.name != null">
+				name = #{school.name,jdbcType=VARCHAR}
+			</if>
+			<if test="school.link != null">
+				AND link = #{school.link,jdbcType=VARCHAR}
+			</if>
+			<if test="school.type != null">
+				AND type = #{school.type,jdbcType=TINYINT}
+			</if>
+			<if test="school.pic != null">
+				AND pic = #{school.pic,jdbcType=VARCHAR}
+			</if>
+			<if test="school.provinceId != null">
+				AND province_id = #{school.provinceId,jdbcType=INTEGER}
+			</if>
+		</where>
+		limit #{fromIndex},#{pageSize}
+	</select>
+	<select id="countSelective" parameterType="com.huiming.emeng.model.School"
+		resultType="java.lang.Integer">
+		select
+		count(*)
+		from school
+		<where>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR}
+			</if>
+			<if test="link != null">
+				AND link = #{ink,jdbcType=VARCHAR}
+			</if>
+			<if test="type != null">
+				AND type = #{type,jdbcType=TINYINT}
+			</if>
+			<if test="pic != null">
+				AND pic = #{pic,jdbcType=VARCHAR}
+			</if>
+			<if test="provinceId != null">
+				AND province_id = #{provinceId,jdbcType=INTEGER}
+			</if>
+		</where>
+	</select>
+	
+	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from school
 		where id = #{id,jdbcType=INTEGER}
