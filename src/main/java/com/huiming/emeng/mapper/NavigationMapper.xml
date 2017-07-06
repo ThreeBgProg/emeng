@@ -85,4 +85,13 @@
     FROM navigation
   </select>
   
+   <select id="selectNumberfromNavigation" resultType="Integer">
+     select count(*) from navigation
+  </select>
+  <select id="selectNavigationWithPagesizeFromFromindex" resultMap="BaseResultMap">
+  
+  select * from navigation order by id asc limit #{fromIndex},#{pageSize}
+ 
+  </select>
+  
 </mapper>

@@ -70,22 +70,21 @@ public class FileuploadController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("download1")
+	@RequestMapping("filedownload")
 	public ResponseEntity<byte[]> download(HttpServletRequest request,
-			@RequestParam("filename") String filename,
+			@RequestParam("fileUrl") String filename,
 			Model model)throws Exception
 	{
-		//下载文件路径
-		String path = request.getServletContext().getRealPath("/images/");
-		File file = new File(path+File.separator+filename);
+
+		String[] string=filename.split("/");
+		int num=string.length;
+		
+		String path = request.getServletContext().getRealPath("/");
+		File file = new File(path+string[num-2]+"/"+File.separator+string[num-1]);		
 		HttpHeaders headers = new HttpHeaders();
-		//下载显示文件的头文件名，解决中文乱码问题
 		String downfileName = new String(filename.getBytes("UTF-8"),"iso-8859-1");
-		//通知浏览器一attachment的（下载方式）打开
 		headers.setContentDispositionFormData("attachment", downfileName);
-		//application/octet-stream二进制六数据（最常见的文件下载)
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		//201 HttpStatus.CREATED
 		
 		 return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),    
 	                headers, HttpStatus.CREATED);
@@ -112,8 +111,9 @@ public class FileuploadController {
 			   String str = fStrings[0]+str2+"."+fStrings[1];
 			   
 			annex.transferTo(new File(path+File.separator+str)); 
-			
-			respondate.put("annex","http://localhost:8080/emeng/meeting/"+str);
+			String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+			System.out.println("端口号获取"+root);
+			respondate.put("annex",root+"/emeng/meeting/"+str);
 		}
 		
 		Object object = JSON.toJSON(respondate);

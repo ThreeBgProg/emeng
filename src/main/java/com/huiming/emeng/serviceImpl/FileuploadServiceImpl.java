@@ -52,7 +52,12 @@ public class FileuploadServiceImpl {
 					   
 					   files[i].transferTo(new File(path+File.separator+str));
 					   System.out.println(str);
-					   respondate.add(i, "http://localhost:8080/emeng/wangEditor_images/"+str);
+					   
+					   String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+					   System.out.println("端口号获取"+root);
+					   
+					   
+					   respondate.add(i, root+"/emeng/wangEditor_images/"+str);
 				   }
 			   }
 		   }
@@ -78,7 +83,9 @@ public class FileuploadServiceImpl {
 			   link.transferTo(new File(path+File.separator+str));
 			   
 			   map.put("linkName", linkName);
-			   map.put("link", "http://localhost:8080/emeng/videos/"+str);
+			   String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+
+			   map.put("link", root+"/emeng/videos/"+str);
 		   }
 		   return map;
 
@@ -102,7 +109,10 @@ public class FileuploadServiceImpl {
 				   String str = fStrings[0]+str2+"."+fStrings[1];
 				   
 			   pic.transferTo(new File(path+File.separator+str));
-			   string = "http://localhost:8080/emeng/images/"+str;
+			   
+			   String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+
+			   string = root+"/emeng/images/"+str;
 		   }
 		   return string;
 	   }

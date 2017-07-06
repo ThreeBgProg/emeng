@@ -88,8 +88,12 @@ public class VideoController {
 			@RequestParam("filename") String filename,
 			Model model)throws Exception
 	{
-		String path = request.getServletContext().getRealPath("/videos/");
-		File file = new File(path+File.separator+filename);
+		
+		
+		String[] string=filename.split("/");
+		int num=string.length;
+		String path = request.getServletContext().getRealPath("/");
+		File file = new File(path+string[num-2]+"/"+File.separator+string[num-1]);
 		HttpHeaders headers = new HttpHeaders();
 		String downfileName = new String(filename.getBytes("UTF-8"),"iso-8859-1");
 		headers.setContentDispositionFormData("attachment", downfileName);

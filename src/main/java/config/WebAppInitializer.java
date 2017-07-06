@@ -65,6 +65,6 @@ public class WebAppInitializer extends AbstractAnnotationConfigDispatcherServlet
 		//临时目录：D:/temp/
 		//单文件最大容量：5242880 Byte == 500 MB
 		//请求文件最大容量：20971520 Byte == 2000 MB
-		registration.setMultipartConfig(new MultipartConfigElement(null, 524288000, 2097152000, 0));
+		registration.setMultipartConfig(new MultipartConfigElement(null, 2097152000, 2097152000, 0));
 	}
 }

@@ -40,6 +40,12 @@ public class PostController {
 		//获取发帖者信息
 		HttpSession session = request.getSession();
 		User user = (User) session.getAttribute("user");
+		
+		if(user==null){
+			String messgae="1";
+			return messgae;
+		}
+		
 		postWithBLOBs.setUserId(user.getId());
 		postWithBLOBs.setUsername(user.getUsername());
 		postWithBLOBs.setReleaseTime(new Date());

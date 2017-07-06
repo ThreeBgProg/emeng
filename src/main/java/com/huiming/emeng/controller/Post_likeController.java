@@ -36,7 +36,12 @@ public class Post_likeController {
 		
 		int id=post_id;
 		Post_like post_like = new Post_like();
-		User user = (User) request.getSession().getAttribute("user");		
+		User user = (User) request.getSession().getAttribute("user");
+		
+		if(user==null){
+			String message="请先登录";
+			return message;
+		}
 		post_like.setPost_id(post_id);		
 		post_like.setUser_id(user.getId());
 		List<Post_like> lists = post_likeService.isLiked(post_like);

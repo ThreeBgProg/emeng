@@ -37,7 +37,6 @@ public class MeetingController {
 	public Object insert(HttpServletRequest request,
 			@RequestParam("date")  String date,
 			Meeting meeting) throws Exception{
-
 		
 			meeting.setReleaseDate(StringToDate.StringToDate(date));		    
 			meetingService.insert(meeting);
