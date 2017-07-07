@@ -19,11 +19,11 @@ public interface RoleMapper {
 
 	int updateByPrimaryKey(Role record);
 
-	List<Role> selectByRolename(@Param("rolename")String rolename,@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+	List<Role> selectByRolename(@Param("rolename") String rolename, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
 	int selectCount();
 
 	Role selectRole(String rolename);
 
-	public List<Role> selectAll();
+	List<Role> selectAll();
 }

@@ -26,6 +26,12 @@ public class ChapterPublishController {
 //    public List<Chapter> showChapter(@RequestParam("lessonId") Integer lessonId){
 //        return chapterMapper.selectAllChapterFromLesson(lessonId);
 //    }
+
+    @MappingDescription("查询章节")
+    @RequestMapping(value = "/chapter")
+    public Chapter selectChapter(Integer chapterId){
+        return chapterMapper.selectByChapterNumber(chapterId);
+    }
 //    //新增章节
     @MappingDescription("增加章节")
     @RequestMapping(value = "/insert/chapter",method = RequestMethod.POST)

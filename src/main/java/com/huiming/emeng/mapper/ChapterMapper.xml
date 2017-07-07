@@ -43,6 +43,12 @@
       </if>
     </where>
   </select>
+  <select id="selectByChapterNumber" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from chapter
+    where number = #{chapterNumber,jdbcType=INTEGER}
+  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from chapter
     where id = #{id,jdbcType=INTEGER}

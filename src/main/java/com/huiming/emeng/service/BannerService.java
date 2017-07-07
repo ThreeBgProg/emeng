@@ -1,27 +1,27 @@
 package com.huiming.emeng.service;
 
-import java.util.List;
-
 import com.huiming.emeng.bo.PassageWithBanner;
 import com.huiming.emeng.model.Banner;
 
+import java.util.List;
+
 public interface BannerService {
 
-	public List<PassageWithBanner> selectAll();
+	List<PassageWithBanner> selectAll();
 
-	public int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-	public int deleteByPassageId(Integer id);
+	int deleteByPassageId(Integer id);
 
-	public int insert(Banner record);
+	int insert(Banner record);
 
-	public int insertSelective(Banner record);
+	int insertSelective(Banner record);
 
-	public int updateByPrimaryKeySelective(Banner record);
+	int updateByPrimaryKeySelective(Banner record);
 
-	public int updateByPrimaryKey(Banner record);
+	int updateByPrimaryKey(Banner record);
 
-	public Banner selectByPrimaryKey(Integer id);
+	Banner selectByPrimaryKey(Integer id);
 
-	public Banner selectByPassageId(Integer id);
+	Banner selectByPassageId(Integer id);
 }

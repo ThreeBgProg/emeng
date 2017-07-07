@@ -27,7 +27,7 @@ public interface UserMapper {
      * @param pageSize
      * @return
      */
-    List<User> selectPagerUser(@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+    List<User> selectPagerUser(@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
     
     /**
      * 根据user实例查询分页数据
@@ -36,7 +36,7 @@ public interface UserMapper {
      * @param pageSize
      * @return
      */
-    List<User> selectPagerUserSelective(@Param("user")User record,@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+    List<User> selectPagerUserSelective(@Param("user") User record, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
     
     /**
      * 模糊查询吧
@@ -45,7 +45,7 @@ public interface UserMapper {
      * @param pageSize
      * @return
      */
-    List<User> findSelective(@Param("user")User record,@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+    List<User> findSelective(@Param("user") User record, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
     
     /**
      * 根据user查询总条数

@@ -35,7 +35,7 @@ public interface UserRoleMapper {
 	 * @param pageSize
 	 * @return
 	 */
-	List<Integer> selectByRoleId(@Param("roleId")Integer roleId, @Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+	List<Integer> selectByRoleId(@Param("roleId") Integer roleId, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
 	int updateUserRole(UserRole record);
 

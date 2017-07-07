@@ -1,12 +1,9 @@
 package com.huiming.emeng.interceptor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.huiming.emeng.listener.StartupListener;
+import com.huiming.emeng.model.Permission;
+import com.huiming.emeng.model.User;
+import com.huiming.emeng.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -14,10 +11,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.huiming.emeng.listener.StartupListener;
-import com.huiming.emeng.model.Permission;
-import com.huiming.emeng.model.User;
-import com.huiming.emeng.service.RoleService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PermissionInterceptor extends HandlerInterceptorAdapter {
@@ -60,9 +58,8 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 		HttpSession session = request.getSession();
 
 		User user = (User) session.getAttribute("user");
-
 		if (user == null) {
-			// 没有登录默认使用游客身份
+			 //没有登录默认使用游客身份
 			List<Permission> permissions = roleService
 					.selectPermissionByRoleId(Integer.parseInt(env.getRequiredProperty("role.visitorId")));
 			List<String> permissionMappingList = new ArrayList<>();
@@ -79,9 +76,9 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		} else {
 			// 没有权限
-			response.sendRedirect("/nopermission");
+			response.sendRedirect("/noroot.html");
+			return false;
 		}
-		return super.preHandle(request, response, handler);
 	}
 	
 }
