@@ -90,4 +90,7 @@ public class TeacherController {
 	public Teacher selectByPrimaryKey(Teacher teacher) {
 		return teacherService.selectByPrimaryKey(teacher);
 	}
+
+
+	
 }

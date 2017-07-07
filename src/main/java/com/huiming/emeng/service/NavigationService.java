@@ -1,11 +1,13 @@
 package com.huiming.emeng.service;
 
-import com.huiming.emeng.mapper.NavigationMapper;
-import com.huiming.emeng.model.Navigation;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.mapper.NavigationMapper;
+import com.huiming.emeng.model.Navigation;
 
 /**
  * Created by LeoMs on 2017/5/20 0020.
@@ -45,5 +47,34 @@ public class NavigationService {
     public int updateByPrimaryKey(Navigation record){
     	return navigationMapper.updateByPrimaryKey(record);
     }
+    
+	/**
+	 * 分页查询友情链接
+	 */
+	public Pager<Navigation> selectnavigationMapperWithPagesizeFromFromindex(Integer pageNum, Integer pageSize) {
+		//总记录
+		Integer totalRecord = navigationMapper.selectNumberfromNavigation();
+		
+		//总页数
+		Integer totalPage = totalRecord/pageSize;
+		
+		if (totalRecord ==0) {
+			return null;
+		}
+		
+		if(totalRecord % pageSize !=0){
+			totalPage++;
+		}
+		if(pageNum > totalPage){
+        pageNum = totalPage;
+		}
+		
+		Integer fromIndex = (pageNum - 1) * pageSize;
+		Pager<Navigation> pager = new Pager<Navigation>(pageSize, pageNum, totalRecord, totalPage, 
+				navigationMapper.selectNavigationWithPagesizeFromFromindex(fromIndex, pageSize));
+		System.out.println(pager.getTotalRecord());
+		System.out.println(pager.getTotalRecord());
+		return pager;
+	}
     
 }

@@ -67,10 +67,6 @@ public class SchoolServiceImpl implements SchoolService {
 		return schoolPage;
 	}
 
-	public List<School> selectByProvince(Integer provinceId) {
-		return schoolmapper.selectByProvince(provinceId);
-	}
-
 	@Override
 	public List<SchoolWithLocation> selectAll() {
 		List<School> schools = schoolmapper.selectAll();
@@ -84,12 +80,33 @@ public class SchoolServiceImpl implements SchoolService {
 	}
 
 	@Override
-	public List<School> selectSchoolsByTypeAndProvinceId(Integer provinceId, Byte type) {
-		return schoolmapper.selectSchoolsByTypeAndProvinceId(provinceId, type);
+	public Pager<SchoolWithLocation> selectSchoolSelectivePage(School school, Integer currentPage, Integer pageSize) {
+		int fromIndex = (currentPage - 1) * pageSize;
+		int totalRecord = schoolmapper.countSelective(school);
+		List<School> schools = schoolmapper.selectAllSelectivePage(school, fromIndex, pageSize);
+		List<SchoolWithLocation> schoolList = new ArrayList<>();
+		for (School temp : schools) {
+			SchoolWithLocation schoolWithLocation = new SchoolWithLocation(temp);
+			schoolWithLocation.setLocation(locationMapper.selectByPrimaryKey(temp.getProvinceId()));
+			schoolList.add(schoolWithLocation);
+		}
+		Pager<SchoolWithLocation> schoolPage = new Pager<>(pageSize, currentPage, totalRecord, schoolList);
+		return schoolPage;
 	}
 
 	@Override
-	public List<School> selectSchoolsByType(Byte type) {
-		return schoolmapper.selectSchoolsByType(type);
+	public List<SchoolWithLocation> selectSchoolSelective(School school) {
+		List<School> schools = schoolmapper.selectAllSelective(school);
+		List<SchoolWithLocation> schoolList = new ArrayList<>();
+		for (School temp : schools) {
+			SchoolWithLocation schoolWithLocation = new SchoolWithLocation(temp);
+			schoolWithLocation.setLocation(locationMapper.selectByPrimaryKey(temp.getProvinceId()));
+			schoolList.add(schoolWithLocation);
+		}
+		return schoolList;
 	}
+	
+	
+	
+	
 }

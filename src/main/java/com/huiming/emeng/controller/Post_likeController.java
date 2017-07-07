@@ -36,7 +36,13 @@ public class Post_likeController {
 		
 		int id=post_id;
 		Post_like post_like = new Post_like();
-		User user = (User) request.getSession().getAttribute("user");		
+		User user = (User) request.getSession().getAttribute("user");
+		
+		if(user==null){
+			Map<String, Object> respondata = new HashMap<String, Object>();
+			respondata.put("message", "0");
+		    return respondata;
+		}
 		post_like.setPost_id(post_id);		
 		post_like.setUser_id(user.getId());
 		List<Post_like> lists = post_likeService.isLiked(post_like);
@@ -46,18 +52,20 @@ public class Post_likeController {
 			Post post=postService.selectByPrimaryKey(id);
 			post.setLike(post.getLike()-1);//点赞减一
 			postService.updateByPrimaryKey(post);
-			Map<String, Integer> respandta = new HashMap<String, Integer>();
-			respandta.put("msg", post.getLike());
-			return respandta;
+			Map<String, Object> respondata = new HashMap<String, Object>();
+			respondata.put("msg", post.getLike());
+			respondata.put("message", "1");
+			return respondata;
 		}else {
 			post_likeService.insert(post_like);//还没点赞过
 			//并且论坛点赞更新
 			Post post=postService.selectByPrimaryKey(id);
 			post.setLike(post.getLike()+1);//点赞加一
 			postService.updateByPrimaryKey(post);
-			Map<String, Integer> respandta = new HashMap<String, Integer>();
-			respandta.put("msg", post.getLike());
-		    return respandta;
+			Map<String, Object> respondata = new HashMap<String, Object>();
+			respondata.put("msg", post.getLike());
+			respondata.put("message", "2");
+		    return respondata;
 		}		
 	}
 }

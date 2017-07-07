@@ -95,8 +95,7 @@ public class UserController {
 			if (roleId != null) {
 				user.setState((byte) 1);
 				userService.insertUser(user);
-				temp = userService.selectSelective(user);
-				userService.insertUserRole(roleId, temp.getId());
+				userService.insertUserRole(roleId, user.getId());
 			} else {
 				userService.insertUser(user);
 			}
@@ -135,7 +134,6 @@ public class UserController {
 	@MappingDescription("删除用户")
 	@ResponseBody
 	public String deleteUser(User user) {
-		System.out.println("/deleteUser");
 		// 改为---->修改用户的state为0
 		user.setState((byte) 0);
 		if (userService.updateUser(user) != 0) {
@@ -145,6 +143,13 @@ public class UserController {
 		}
 	}
 
+	@RequestMapping("/ignoreUserRegister")
+	@MappingDescription("忽略用户注册")
+	@ResponseBody
+	public int ignoreUserRegister(Integer id) {
+		return userService.deleteReal(id);
+	}
+	
 	@RequestMapping("/getUserByRole")
 	@MappingDescription("分页获取某种角色的所有用户")
 	@ResponseBody

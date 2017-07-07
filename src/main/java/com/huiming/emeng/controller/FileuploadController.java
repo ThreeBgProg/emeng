@@ -70,22 +70,27 @@ public class FileuploadController {
 	 * @return
 	 * @throws Exception
 	 */
-	@RequestMapping("download1")
+	@RequestMapping("filedownload")
 	public ResponseEntity<byte[]> download(HttpServletRequest request,
-			@RequestParam("filename") String filename,
+			@RequestParam("fileUrl") String filename,
 			Model model)throws Exception
 	{
-		//下载文件路径
-		String path = request.getServletContext().getRealPath("/images/");
-		File file = new File(path+File.separator+filename);
+		String[] string=filename.split("\\"+File.separator);
+		int num=string.length;
+	    if (string[num-2].equals("")) {
+	    	string[num-2]=string[num-3];
+			}
+		System.out.println("dier"+string[num-2]);
+		
+		String path = request.getServletContext().getRealPath(File.separator);
+		System.out.println("项目路劲"+path);
+		System.out.println(path+File.separator+string[num-2]+File.separator+string[num-1]);
+		
+		File file = new File(path+File.separator+string[num-2]+File.separator+string[num-1]);	
 		HttpHeaders headers = new HttpHeaders();
-		//下载显示文件的头文件名，解决中文乱码问题
 		String downfileName = new String(filename.getBytes("UTF-8"),"iso-8859-1");
-		//通知浏览器一attachment的（下载方式）打开
 		headers.setContentDispositionFormData("attachment", downfileName);
-		//application/octet-stream二进制六数据（最常见的文件下载)
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
-		//201 HttpStatus.CREATED
 		
 		 return new ResponseEntity<byte[]>(FileUtils.readFileToByteArray(file),    
 	                headers, HttpStatus.CREATED);
@@ -100,7 +105,7 @@ public class FileuploadController {
 		Map<String, String> respondate=new HashMap<>();
 		
 		if(!annex.isEmpty()){
-			String path = request.getServletContext().getRealPath("/meetings/");
+			String path = request.getServletContext().getRealPath(File.separator+"meetings"+File.separator);
 			String fileName=annex.getOriginalFilename();
 			File filepath = new File(path, fileName);
 			if(!filepath.getParentFile().exists()){
@@ -112,8 +117,9 @@ public class FileuploadController {
 			   String str = fStrings[0]+str2+"."+fStrings[1];
 			   
 			annex.transferTo(new File(path+File.separator+str)); 
-			
-			respondate.put("annex","http://localhost:8080/emeng/meeting/"+str);
+			String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+			System.out.println("端口号获取"+root);
+			respondate.put("annex",root+File.separator+"emeng"+File.separator+"meeting"+File.separator+str);
 		}
 		
 		Object object = JSON.toJSON(respondate);

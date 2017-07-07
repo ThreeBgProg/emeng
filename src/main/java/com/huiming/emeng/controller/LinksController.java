@@ -36,7 +36,7 @@ public class LinksController {
 	public Object insert(Links links,Model model){
 
 		Map<String, String> respondate = new HashMap<>();
-		int result = linksService.insert(links);			
+		linksService.insert(links);			
 		respondate.put("message", "添加成功");
 
 		Object object = JSON.toJSON(respondate);
@@ -48,7 +48,7 @@ public class LinksController {
 	@ResponseBody
 	public Object insertSelect(Links links,Model model){
 		Map<String, String> respondate = new HashMap<>();
-		int result = linksService.insertSelective(links);
+		linksService.insertSelective(links);
 		respondate.put("message", "添加成功");
 		
 		Object object=JSON.toJSON(respondate);
@@ -73,7 +73,7 @@ public class LinksController {
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             Model model){
 		
-		int result = linksService.deleteByPrimaryKey(id);
+		linksService.deleteByPrimaryKey(id);
 		Map<Object, Object> respondate=new HashMap<>();
 		respondate.put("message", "删除成功");
 		//添加查询分页结果
@@ -93,7 +93,7 @@ public class LinksController {
             @RequestParam(value="pageSize", defaultValue = "15") Integer pageSize,
             Model model){
 		
-		int result = linksService.updateByPrimaryKey(links);
+		linksService.updateByPrimaryKey(links);
 		
 		Map<Object, Object> respondate=new HashMap<>();
 		respondate.put("message", "更新成功");
@@ -114,7 +114,7 @@ public class LinksController {
             Model model){
 		
 		Map<Object, Object> respondate=new HashMap<>();
-		int result = linksService.updateByPrimaryKeySelective(links);
+		linksService.updateByPrimaryKeySelective(links);
 		respondate.put("message", "更新成功");
 		//添加查询分页结果
         Pager<Link> linkList = linksService.selectLinkWithPagesizeFromFromindex(pageNum, pageSize);

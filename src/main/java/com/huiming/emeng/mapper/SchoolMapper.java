@@ -23,11 +23,11 @@ public interface SchoolMapper {
 
 	List<School> selectAll();
 
-	List<School> selectByProvince(Integer provinceId);
+	List<School> selectAllSelectivePage(@Param("school")School school,@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
-	List<School> selectSchoolsByTypeAndProvinceId(Integer provinceId,Byte type);
-
-	List<School> selectSchoolsByType(Byte type);
-
+	List<School> selectAllSelective(School school);
+	
+	int countSelective(School school);
+	
 	int selectCount();
 }

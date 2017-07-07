@@ -93,25 +93,18 @@ public class SchoolController {
 	}
 	
 	
-	@RequestMapping("/selectSchoolsByProvinceId")
-	@MappingDescription("根据省份获取学校信息")
+	@RequestMapping("/selectSchoolsSelective")
+	@MappingDescription("查询获取学校信息(不分页)")
 	@ResponseBody
-	public List<School> selectSchoolsByProvinceId(Integer id) {
-		List<School> list = schoolService.selectByProvince(id);
-		return list;
+	public List<SchoolWithLocation> selectSchoolsSelective(School school) {
+		return schoolService.selectSchoolSelective(school);
 	}
 	
-	
-	@RequestMapping("/selectSchoolsByType")
-	@MappingDescription("根据类型获取学校信息")
+	@RequestMapping("/selectSchoolsSelectiveByPage")
+	@MappingDescription("查询获取学校信息(分页)")
 	@ResponseBody
-	public List<School> selectSchoolsByType(Byte type) {
-		return schoolService.selectSchoolsByType(type);
+	public Pager<SchoolWithLocation> selectSchoolsSelectiveByPage(School school,@RequestParam(value = "currentPage", defaultValue = "1") Integer currentPage,
+			@RequestParam(value = "pageSize", defaultValue = "15") Integer pageSize) {
+		return schoolService.selectSchoolSelectivePage(school, currentPage, pageSize);
 	}
-//	
-//	@RequestMapping("/selectSchoolsByTypeAndProvinceId")
-//	@MappingDescription("根据类型跟省份获取学校信息")
-//	@ResponseBody
-//	public List<School> selectSchoolsByTypeAndProvinceId(Byte type,Integer provinceId) {
-//	}
 }

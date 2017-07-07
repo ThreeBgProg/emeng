@@ -36,7 +36,6 @@ public class UserApplyController {
 	@Autowired
 	private MeetingService meetingService;
 	
-
 	@RequestMapping("userApplyformCode")
 	@MappingDescription("后台生成报名表(邀请码方式报名)")
 	@ResponseBody
@@ -45,10 +44,18 @@ public class UserApplyController {
 			@RequestParam("meetingId") Integer meetingId,
 			@RequestParam("code") String code){
 		
-		//获取报名的用户的id（邀请码报名默认0）
-		//获取会议id
+		   //获取报名的用户的id（邀请码报名默认0）
+		   //获取会议id
+		   HttpSession session = request.getSession();
+		   User user =(User) session.getAttribute("user");
+		   Map<String, String> respondate = new HashMap<>();
+		   if(user==null){
+			   String message="您尚未登录，请先登录！";
+			   respondate.put("message", message);
+			   return respondate;
+		   }
 		    Meeting meeting = meetingService.selectByPrimaryKey(meetingId);
-		    Map<String, String> respondate = new HashMap<>();
+		   
 		    if (meeting.getCode().equals(code)) {
 				apply.setUserId(0);
 				apply.setMeetingId(meetingId);
@@ -73,6 +80,10 @@ public class UserApplyController {
 		    
 			HttpSession session = request.getSession();
 			User user =(User) session.getAttribute("user");
+			if(user==null){
+				String message="您尚未登录，请先登录！";
+				return message;
+			}
 			apply.setUserId(user.getId());
 			apply.setMeetingId(meetingId);
 			applyService.insert(apply);
