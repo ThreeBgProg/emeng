@@ -1,16 +1,11 @@
 package com.huiming.emeng.serviceImpl;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
-import javax.servlet.http.HttpServletRequest;
-
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import java.io.File;
+import java.util.*;
 
 @Service
 public class FileuploadServiceImpl {
@@ -45,7 +40,7 @@ public class FileuploadServiceImpl {
 					   //将文件存到一个目标文件当中
 					   
 					   long str2 = Date.parse((new Date()).toString());
-					   
+
 					   String[] fStrings = fileName.split("\\.");
 					   
 					   String str = fStrings[0]+str2+"."+fStrings[1];
