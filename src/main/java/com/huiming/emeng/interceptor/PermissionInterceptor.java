@@ -1,9 +1,12 @@
 package com.huiming.emeng.interceptor;
 
-import com.huiming.emeng.listener.StartupListener;
-import com.huiming.emeng.model.Permission;
-import com.huiming.emeng.model.User;
-import com.huiming.emeng.service.RoleService;
+import java.util.ArrayList;
+import java.util.List;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -11,11 +14,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
-import java.util.List;
+import com.huiming.emeng.listener.StartupListener;
+import com.huiming.emeng.model.Permission;
+import com.huiming.emeng.model.User;
+import com.huiming.emeng.service.RoleService;
 
 @Service
 public class PermissionInterceptor extends HandlerInterceptorAdapter {
@@ -45,21 +47,20 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 		String requestUrl = "";
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
-			
+
 			// 获取url请求对应的方法上的requestMapping注解
 			RequestMapping requestMapping = handlerMethod.getMethodAnnotation(RequestMapping.class);
 			// 获取类上的requestMapping里的值
 			String classRequestMapping = StartupListener
 					.getClassRequestMapping(handlerMethod.getMethod().getDeclaringClass());
 			// 拼接请求的方法对应的url
-			requestUrl = classRequestMapping + requestMapping.value();
+			requestUrl = classRequestMapping + requestMapping.value()[0];
 		}
-
 		HttpSession session = request.getSession();
 
 		User user = (User) session.getAttribute("user");
 		if (user == null) {
-			 //没有登录默认使用游客身份
+			// 没有登录默认使用游客身份
 			List<Permission> permissions = roleService
 					.selectPermissionByRoleId(Integer.parseInt(env.getRequiredProperty("role.visitorId")));
 			List<String> permissionMappingList = new ArrayList<>();
@@ -76,9 +77,8 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 			return true;
 		} else {
 			// 没有权限
-			response.sendRedirect("/noroot.html");
 			return false;
 		}
 	}
-	
+
 }

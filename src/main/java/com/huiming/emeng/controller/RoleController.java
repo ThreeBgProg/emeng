@@ -106,9 +106,9 @@ public class RoleController {
 			roleService.updateByPrimaryKeySelective(role);
 		}
 		// 角色权限分配之后取消注释
-		// if(env.getRequiredProperty("role.unChangeRoleId").contains(role.getId().toString())){
-		// return "固定角色，无法修改";
-		// }
+		if (env.getRequiredProperty("role.unChangeRoleId").contains(role.getId().toString())) {
+			return "固定角色，无法修改";
+		}
 		Integer roleId = role.getId();
 		//数据库中角色已经拥有的权限
 		List<Integer> list = roleService.selectPermissionIdByRoleId(roleId);
