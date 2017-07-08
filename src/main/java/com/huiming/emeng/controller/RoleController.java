@@ -1,10 +1,12 @@
 package com.huiming.emeng.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.model.Permission;
+import com.huiming.emeng.model.Role;
+import com.huiming.emeng.service.PermissionService;
+import com.huiming.emeng.service.RoleService;
+import com.huiming.emeng.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -13,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.huiming.emeng.annotation.MappingDescription;
-import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Permission;
-import com.huiming.emeng.model.Role;
-import com.huiming.emeng.service.PermissionService;
-import com.huiming.emeng.service.RoleService;
-import com.huiming.emeng.service.UserService;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class RoleController {

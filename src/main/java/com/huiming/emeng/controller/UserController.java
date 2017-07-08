@@ -1,18 +1,5 @@
 package com.huiming.emeng.controller;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseBody;
-
 import com.alibaba.fastjson.JSON;
 import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.bo.UserWithRole;
@@ -24,6 +11,18 @@ import com.huiming.emeng.service.PermissionService;
 import com.huiming.emeng.service.RoleService;
 import com.huiming.emeng.service.SchoolService;
 import com.huiming.emeng.service.UserService;
+import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class UserController {
@@ -45,6 +44,9 @@ public class UserController {
 	@ResponseBody
 	public String login(HttpServletRequest request, User user) {
 		System.out.println("/login");
+		if(StringUtils.isEmpty(user.getUsername())||StringUtils.isEmpty(user.getPassword())){
+			return null;
+		}
 		user = userService.selectSelective(user);
 		if (user != null) {
 			HttpSession session = request.getSession();

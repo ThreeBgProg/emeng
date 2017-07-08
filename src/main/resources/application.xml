@@ -23,7 +23,6 @@
 			<mvc:exclude-mapping path="/css/**"/>
 			<mvc:exclude-mapping path="/images/**"/>
 			<mvc:exclude-mapping path="/templates/**"/>
-			<mvc:exclude-mapping path="/thinkEM/**"/>
 			<mvc:exclude-mapping path="/thinkEM/angular-1.4.6/**"/>
 			<mvc:exclude-mapping path="/thinkEM/css/**"/>
 			<mvc:exclude-mapping path="/thinkEM/fonts/**"/>
