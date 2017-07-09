@@ -1,16 +1,7 @@
 package config;
 
-import java.nio.charset.Charset;
-import java.util.Arrays;
-import java.util.List;
-
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.*;
 import org.springframework.context.annotation.ComponentScan.Filter;
-import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.FilterType;
-import org.springframework.context.annotation.ImportResource;
-import org.springframework.context.annotation.PropertySource;
 import org.springframework.http.MediaType;
 import org.springframework.http.converter.ByteArrayHttpMessageConverter;
 import org.springframework.http.converter.FormHttpMessageConverter;
@@ -25,6 +16,10 @@ import org.springframework.web.servlet.config.annotation.DefaultServletHandlerCo
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+
+import java.nio.charset.Charset;
+import java.util.Arrays;
+import java.util.List;
 
 /**
  * SpringMVC：servletConfig
@@ -48,8 +43,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/WEB-INF/jsp/");
-		resolver.setSuffix(".jsp");
+		resolver.setPrefix("/");
+		resolver.setSuffix(".html");
 		resolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
 		resolver.setExposeContextBeansAsAttributes(true);
 		return resolver;
@@ -83,7 +78,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
 		// 为转换器设置所支持的媒体类型
 		stringConverter.setSupportedMediaTypes(
-				Arrays.asList(new MediaType[] { new MediaType("text", "html", Charset.forName("UTF-8")) }));
+				Arrays.asList(new MediaType("text", "html", Charset.forName("UTF-8"))));
 		// 添加字符串消息转换器
 		converters.add(stringConverter);
 
@@ -97,7 +92,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 		// 为转换器设置所支持的媒体类型
 		jsonConverter.setSupportedMediaTypes(
-				Arrays.asList(new MediaType[] { new MediaType("application", "json"), new MediaType("text", "json") }));
+				Arrays.asList(new MediaType("application", "json"), new MediaType("text", "json")));
 		// 添加json转换器
 		converters.add(jsonConverter);
 	}
