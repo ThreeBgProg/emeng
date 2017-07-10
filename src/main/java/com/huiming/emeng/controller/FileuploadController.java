@@ -75,7 +75,17 @@ public class FileuploadController {
 			@RequestParam("fileUrl") String filename,
 			Model model)throws Exception
 	{
-		String[] string=filename.split("\\"+File.separator);
+		String[] string=null;
+		System.out.println(File.separator);
+		if(File.separator.equals("/")||File.separator.equals("//"))
+		{
+			string=filename.split(File.separator);
+		}
+		else{
+			string=filename.split("\\"+File.separator);
+		}	
+		
+		
 		int num=string.length;
 	    if (string[num-2].equals("")) {
 	    	string[num-2]=string[num-3];
