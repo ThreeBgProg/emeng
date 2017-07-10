@@ -4,11 +4,11 @@ import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.Teacher;
 
 public interface TeacherService {
-	public int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-	public int updateTeacher(Teacher teacher);
+	int updateTeacher(Teacher teacher);
 
-	public Teacher selectByPrimaryKey(Teacher teacher);
+	Teacher selectByPrimaryKey(Teacher teacher);
 
 	/**
 	 * 分页查找所有名师
@@ -17,9 +17,9 @@ public interface TeacherService {
 	 * @param pageSize
 	 * @return
 	 */
-	public Pager<Teacher> selectAllTeacher(Byte type,Integer currentPage, Integer pageSize);
+    Pager<Teacher> selectAllTeacher(Byte type, Integer currentPage, Integer pageSize);
 
-	public int insertTeacher(Teacher teacher);
+	int insertTeacher(Teacher teacher);
 
 	/**
 	 * 分页查询名师信息
@@ -29,7 +29,7 @@ public interface TeacherService {
 	 * @param pageSize
 	 * @return
 	 */
-	public Pager<Teacher> selectAllSelective(Teacher teacher, Integer currentPage, Integer pageSize);
+    Pager<Teacher> selectAllSelective(Teacher teacher, Integer currentPage, Integer pageSize);
 	
 	 /** 分页模糊查询名师信息
 	 * 
@@ -38,5 +38,5 @@ public interface TeacherService {
 	 * @param pageSize
 	 * @return
 	 */
-	public Pager<Teacher> selectByTeacherSelective(Teacher teacher, Integer currentPage, Integer pageSize);
+     Pager<Teacher> selectByTeacherSelective(Teacher teacher, Integer currentPage, Integer pageSize);
 }

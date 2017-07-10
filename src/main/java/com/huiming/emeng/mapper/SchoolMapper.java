@@ -23,7 +23,7 @@ public interface SchoolMapper {
 
 	List<School> selectAll();
 
-	List<School> selectAllSelectivePage(@Param("school")School school,@Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
+	List<School> selectAllSelectivePage(@Param("school") School school, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 
 	List<School> selectAllSelective(School school);
 	

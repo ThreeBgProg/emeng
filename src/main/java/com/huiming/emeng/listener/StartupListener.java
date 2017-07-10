@@ -48,7 +48,6 @@ public class StartupListener {
 		}
 		// 置无效权限
 		for (Permission temp : permissionList) {
-			System.out.println(temp);
 			if (temp.getState() != 0) {
 				temp.setState((byte) 0);
 				permissionMapper.updateByPrimaryKeySelective(temp);

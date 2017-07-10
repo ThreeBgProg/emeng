@@ -28,14 +28,14 @@ public interface TeacherMapper {
 	 * @param record
 	 * @return
 	 */
-	List<Teacher> selectSelective(@Param("teacher")Teacher teacher,@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+	List<Teacher> selectSelective(@Param("teacher") Teacher teacher, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 	
 	
 	 /** 分页根据实例模糊查詢名师
 	 * @param record
 	 * @return
 	 */
-	List<Teacher> selectByTeacherSelective(@Param("teacher")Teacher teacher,@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+	List<Teacher> selectByTeacherSelective(@Param("teacher") Teacher teacher, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 	
 	
 	/**
@@ -43,7 +43,7 @@ public interface TeacherMapper {
 	 * @param record
 	 * @return
 	 */
-	List<Teacher> selectAll(@Param("teachertype")Byte teachertype,@Param("fromIndex")Integer fromIndex, @Param("pageSize")Integer pageSize);
+	List<Teacher> selectAll(@Param("teachertype") Byte teachertype, @Param("fromIndex") Integer fromIndex, @Param("pageSize") Integer pageSize);
 	
 	/**
 	 * 查询对应的数据总数
@@ -66,7 +66,7 @@ public interface TeacherMapper {
 	 */
 	int selectCountByTeacher(Teacher teacher);
 
-	public List<Teacher> findTeacher(Map<String, String> map);
+	List<Teacher> findTeacher(Map<String, String> map);
 	
 	
 }

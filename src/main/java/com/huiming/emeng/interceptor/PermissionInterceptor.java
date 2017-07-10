@@ -1,12 +1,10 @@
 package com.huiming.emeng.interceptor;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.huiming.emeng.listener.StartupListener;
+import com.huiming.emeng.model.Permission;
+import com.huiming.emeng.model.Role;
+import com.huiming.emeng.model.User;
+import com.huiming.emeng.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Service;
@@ -14,10 +12,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-import com.huiming.emeng.listener.StartupListener;
-import com.huiming.emeng.model.Permission;
-import com.huiming.emeng.model.User;
-import com.huiming.emeng.service.RoleService;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.util.ArrayList;
+import java.util.List;
 
 @Service
 public class PermissionInterceptor extends HandlerInterceptorAdapter {
@@ -44,25 +43,33 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 	@Override
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
+
 		String requestUrl = "";
 		if (handler instanceof HandlerMethod) {
 			HandlerMethod handlerMethod = (HandlerMethod) handler;
-			
+
 			// 获取url请求对应的方法上的requestMapping注解
 			RequestMapping requestMapping = handlerMethod.getMethodAnnotation(RequestMapping.class);
 			// 获取类上的requestMapping里的值
 			String classRequestMapping = StartupListener
 					.getClassRequestMapping(handlerMethod.getMethod().getDeclaringClass());
 			// 拼接请求的方法对应的url
-			requestUrl = classRequestMapping + requestMapping.value();
+			requestUrl = classRequestMapping + requestMapping.value()[0];
 		}
-
 		HttpSession session = request.getSession();
 
 		User user = (User) session.getAttribute("user");
-
+		Role role = (Role) session.getAttribute("role");
+		if(request.getRequestURI().contains("indexEM")){
+			System.out.println(Integer.parseInt(env.getRequiredProperty("role.adminId")));
+            return !(role == null || role.getId() != Integer.parseInt(env.getRequiredProperty("role.adminId")));
+		}else if(request.getRequestURI().contains("html")){
+			return true;
+		}
 		if (user == null) {
 			// 没有登录默认使用游客身份
+			user = new User();
+			session.setAttribute("user",user);
 			List<Permission> permissions = roleService
 					.selectPermissionByRoleId(Integer.parseInt(env.getRequiredProperty("role.visitorId")));
 			List<String> permissionMappingList = new ArrayList<>();
@@ -75,13 +82,10 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 		List<String> list = (List<String>) session.getAttribute("permissionList");
 
 		// 权限集合中包含请求的url
-		if (list.contains(requestUrl)) {
-			return true;
-		} else {
-			// 没有权限
-			response.sendRedirect("/nopermission");
-		}
-		return super.preHandle(request, response, handler);
+		System.out.println(requestUrl);
+		System.out.println(list.contains(requestUrl));
+        // 没有权限
+        return list.contains(requestUrl);
 	}
-	
+
 }

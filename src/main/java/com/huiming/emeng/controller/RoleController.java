@@ -1,10 +1,12 @@
 package com.huiming.emeng.controller;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
+import com.huiming.emeng.annotation.MappingDescription;
+import com.huiming.emeng.dto.Pager;
+import com.huiming.emeng.model.Permission;
+import com.huiming.emeng.model.Role;
+import com.huiming.emeng.service.PermissionService;
+import com.huiming.emeng.service.RoleService;
+import com.huiming.emeng.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.stereotype.Controller;
@@ -13,13 +15,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.huiming.emeng.annotation.MappingDescription;
-import com.huiming.emeng.dto.Pager;
-import com.huiming.emeng.model.Permission;
-import com.huiming.emeng.model.Role;
-import com.huiming.emeng.service.PermissionService;
-import com.huiming.emeng.service.RoleService;
-import com.huiming.emeng.service.UserService;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Controller
 public class RoleController {
@@ -106,9 +105,9 @@ public class RoleController {
 			roleService.updateByPrimaryKeySelective(role);
 		}
 		// 角色权限分配之后取消注释
-		// if(env.getRequiredProperty("role.unChangeRoleId").contains(role.getId().toString())){
-		// return "固定角色，无法修改";
-		// }
+		if (env.getRequiredProperty("role.unChangeRoleId").contains(role.getId().toString())) {
+			return "固定角色，无法修改";
+		}
 		Integer roleId = role.getId();
 		//数据库中角色已经拥有的权限
 		List<Integer> list = roleService.selectPermissionIdByRoleId(roleId);

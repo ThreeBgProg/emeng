@@ -22,6 +22,8 @@ public interface ChapterMapper {
 
     int selectCountByLesson(@Param("lessonId") Integer lessonId);
 
+    Chapter selectByChapterNumber(@Param("chapterNumber") Integer chapterNumber);
+
     List<Chapter> selectChapterPageFromLesson(@Param("lessonId") Integer lessonId,
                                                @Param("pageSize") Integer pageSize,
                                                @Param("fromIndex") Integer fromIndex);

@@ -25,10 +25,10 @@ import com.huiming.emeng.listener.StartupListener;
 @EnableScheduling
 public class RootConfig {
 
-	@Bean(initMethod="initMethod")
-	public StartupListener startupListener() {
-		return new StartupListener();
-	}
+//	@Bean(initMethod="initMethod")
+//	public StartupListener startupListener() {
+//		return new StartupListener();
+//	}
 	
 	
 }

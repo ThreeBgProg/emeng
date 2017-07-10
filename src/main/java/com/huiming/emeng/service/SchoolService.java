@@ -7,23 +7,23 @@ import com.huiming.emeng.dto.Pager;
 import com.huiming.emeng.model.School;
 
 public interface SchoolService {
-	public int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Integer id);
 
-	public int insert(School record);
+	int insert(School record);
 
-	public int insertSelective(School record);
+	int insertSelective(School record);
 
-	public School selectByPrimaryKey(Integer id);
+	School selectByPrimaryKey(Integer id);
 
-	public int updateByPrimaryKeySelective(School record);
+	int updateByPrimaryKeySelective(School record);
 
-	public int updateByPrimaryKey(School record);
+	int updateByPrimaryKey(School record);
 
-	public Pager<SchoolWithLocation> selectAllByPage(Integer currentPage, Integer pageSize);
+	Pager<SchoolWithLocation> selectAllByPage(Integer currentPage, Integer pageSize);
 
-	public List<SchoolWithLocation> selectAll();
+	List<SchoolWithLocation> selectAll();
 
-	public Pager<SchoolWithLocation> selectSchoolSelectivePage(School school,Integer currentPage, Integer pageSize);
+	Pager<SchoolWithLocation> selectSchoolSelectivePage(School school, Integer currentPage, Integer pageSize);
 	
-	public List<SchoolWithLocation> selectSchoolSelective(School school);
+	List<SchoolWithLocation> selectSchoolSelective(School school);
 }
