@@ -51,6 +51,15 @@
 		from user
 		where id = #{id,jdbcType=INTEGER}
 	</select>
+	<select id="selectByUsername" parameterType="String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from user
+		where username = #{username,jdbcType=VARCHAR}
+	</select>
+	
+	
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
 		delete from user
 		where id = #{id,jdbcType=INTEGER}
@@ -178,8 +187,8 @@
 			<if test="state != null">
 				AND state = #{state,jdbcType=TINYINT}
 			</if>
-			<if test="id != null">
-				AND id = #{id,jdbcType=INTEGER}
+			<if test="jobId != null">
+				AND job_id = #{jobId,jdbcType=INTEGER}
 			</if>
 		</where>
 	</select>
