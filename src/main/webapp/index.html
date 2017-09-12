@@ -1,9 +1,13 @@
 <!DOCTYPE html>
 <html ng-app="myApp">
 <head>
-  <title>首页</title>
+  <title>思政e盟</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+  
+	<link rel="icon" href="images/twtlogo.png?8.0.13" type="image/x-icon">
+    <link rel="shortcut icon" href="images/twtlogo.png?8.0.13" type="image/x-icon" media="screen">  
+  
     <link rel="stylesheet" type="text/css" href="thinkEM/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="thinkEM/css/common.css">
     <link rel="stylesheet" type="text/css" href="thinkEM/css/index.css">
@@ -27,8 +31,8 @@
         <span title="欢迎访问堂外堂思政e盟官方网站!">欢迎访问堂外堂思政e盟官方网站!</span>
         <ul>
           <!-- <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>联系我们</a></li> -->
-          <li><a href="#"><span class="glyphicon glyphicon-home"></span>设为主页</a></li>
-          <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span>加入收藏</a></li>
+          <li><a href=""><span class="glyphicon glyphicon-home"></span>设为主页</a></li>
+          <li><a href="./thinkEM/login.html" target='_blank'><span class="glyphicon glyphicon-transfer"></span>登录后台</a></li>
         </ul>
       </div>
     </div>
@@ -46,14 +50,14 @@
         <a ui-sref="login"><button class="btn btn-danger login" >登录</button></a>
         <a ui-sref="register"><button class="btn btn-default regis">注册</button></a>
         <br>
-        <a href="javascript:" ng-click="submission()"><button class="btn btn-xs submit btn-danger">我要投稿</button></a>
+        <a href='javascript:;'  ng-click="submission()"><button class="btn btn-xs submit btn-danger">我要投稿</button></a>
       </div>
       
       <div ng-show="appusername" class="login_btn" id='gl_user'>
         <a><button class="btn btn-danger login" id='gl_username' style='width:100px' ng-bind="appusername"></button></a>
-        <a><button class="btn btn-default regis" ng-click="getout()" id='gl_exit'>退出</button></a>
+        <a><button class="btn btn-default regis"  ng-click="getout()" id='gl_exit'>退出</button></a>
         <br>
-        <a href='./submisson.html' target='_blank'><button class="btn btn-xs submit btn-danger">我要投稿</button></a>
+        <a href='./thinkEM/submisson.html' target='_blank'><button class="btn btn-xs submit btn-danger">我要投稿</button></a>
       </div>
       <div class="search">
         <div class="input-group">
@@ -64,110 +68,111 @@
         </div>
       </div>
     </div>
-    <!-- 导航栏 -->
-     <!-- 导航栏 -->
-    <div id="nav_title">
-      <ul>
-        <li><a ng-bind="navigationList[0].document" href="{{navigationList[0].link}}"></a></li>
-        <li><a ng-bind="navigationList[1].document" href="{{navigationList[1].link}}"></a></li>
-        <li class="more"><a href="#">更多</a></li>
-        <li><a ng-bind="navigationList[2].document" href="{{navigationList[2].link}}"></a></li>
-        <li><a ng-bind="navigationList[3].document" href="{{navigationList[3].link}}"></a></li>
-        <li><a ng-bind="navigationList[4].document" href="{{navigationList[4].link}}"></a></li>
-        <li><a ng-bind="navigationList[5].document" href="{{navigationList[5].link}}"></a></li>
-        <li><a ng-bind="navigationList[6].document" href="{{navigationList[6].link}}"></a></li>
-
-        <li class="up"><a href="#">收起</a></li>
-      </ul>
+  <!-- 导航栏 -->
+  <!-- 导航栏 -->
+  <div id="nav_title">
+    <ul>
+      <li><a ng-bind="navigationList[0].document" href="{{navigationList[0].link}}"></a></li>
+      <li><a ng-bind="navigationList[1].document" href="{{navigationList[1].link}}"></a></li>
+      <li class="more" ng-show="phone&&!navShow" ng-click="showNav(1)"><a href="javascript:;">更多</a></li>
+      <li ng-hide="phone&&!navShow"><a ng-bind="navigationList[2].document" href="{{navigationList[2].link}}"></a></li>
+      <li ng-hide="phone&&!navShow"><a ng-bind="navigationList[3].document" href="{{navigationList[3].link}}"></a></li>
+      <li ng-hide="phone&&!navShow"><a ng-bind="navigationList[4].document" href="{{navigationList[4].link}}"></a></li>
+      <li ng-hide="phone&&!navShow"><a ng-bind="navigationList[5].document" href="{{navigationList[5].link}}"></a></li>
+      <li ng-hide="phone&&!navShow"><a ng-bind="navigationList[6].document" href="{{navigationList[6].link}}"></a></li>
+      <li class="up" ng-click="showNav(0)" ng-hide="phone&&!navShow"><a href="javascript:;" >收起</a></li>
+    </ul>
+  </div>
+  <!-- 二级导航栏 -->
+  <div id="nav_content">
+    <div class="nav_content">
+      <div class="nav_content_title"><a ng-bind="navigationList[7].document" href="{{navigationList[7].link}}"></a></div>
+      <div class="nav_content_content">
+        <ul>
+          <li><a ng-bind="navigationList[8].document" href="{{navigationList[8].link}}"></a></li>
+          <li><a ng-bind="navigationList[10].document" href="{{navigationList[10].link}}"></a></li>
+          <li><a ng-bind="navigationList[9].document"href="{{navigationList[9].link}}"></a></li>
+          <li><a ng-bind="navigationList[11].document" href="{{navigationList[11].link}}"></a></li>
+        </ul>
+      </div>
     </div>
-    <!-- 二级导航栏 -->
-    <div id="nav_content">
-      <div class="nav_content">
-        <div class="nav_content_title"><a ng-bind="navigationList[7].document" href="{{navigationList[7].link}}"></a></div>
-        <div class="nav_content_content">
-          <ul>
-        	<li><a ng-bind="navigationList[8].document" href="{{navigationList[8].link}}"></a></li>
-        	<li><a ng-bind="navigationList[10].document" href="{{navigationList[10].link}}"></a></li>
-       		<li><a ng-bind="navigationList[9].document"href="{{navigationList[9].link}}"></a></li>
-        	<li><a ng-bind="navigationList[11].document" href="{{navigationList[11].link}}"></a></li>
-          </ul>
-        </div>
+    <div class="nav_content">
+      <div class="nav_content_title"><a ng-bind="navigationList[12].document" href="{{navigationList[12].link}}"></a></div>
+      <div class="nav_content_content course">
+        <ul>
+          <li><a ng-bind="navigationList[13].document" href="{{navigationList[13].link}}"></a></li>
+          <li><a ng-bind="navigationList[15].document" href="{{navigationList[15].link}}"></a></li>
+          <li><a ng-bind="navigationList[14].document" href="{{navigationList[14].link}}"></a></li>
+          <li><a ng-bind="navigationList[16].document" href="{{navigationList[16].link}}"></a></li>
+        </ul>
       </div>
-      <div class="nav_content">
-        <div class="nav_content_title"><a ng-bind="navigationList[12].document" href="{{navigationList[12].link}}"></a></div>
-        <div class="nav_content_content course">
-          <ul>
-            <li><a ng-bind="navigationList[13].document" href="{{navigationList[13].link}}"></a></li>
-        	<li><a ng-bind="navigationList[15].document" href="{{navigationList[15].link}}"></a></li>
-       		<li><a ng-bind="navigationList[14].document" href="{{navigationList[14].link}}"></a></li>
-        	<li><a ng-bind="navigationList[16].document" href="{{navigationList[16].link}}"></a></li>
-          </ul>
-        </div>
+    </div>
+    <!-- 更多 -->
+    <div class="more" ng-show="phone&&!nav2Show" ng-click="showNav2(1)">
+      <span><a href="javascript:;">更多>></a></span>
+    </div>
+    <div class="nav_content" ng-hide="phone&&!nav2Show">
+      <div class="nav_content_title"><a ng-bind="navigationList[17].document" href="{{navigationList[17].link}}"></a></div>
+      <div class="nav_content_content">
+        <ul>
+          <li><a ng-bind="navigationList[18].document" href="{{navigationList[18].link}}"></a></li>
+          <li><a ng-bind="navigationList[20].document" href="{{navigationList[20].link}}"></a></li>
+          <li><a ng-bind="navigationList[19].document" href="{{navigationList[19].link}}"></a></li>
+          <li><a ng-bind="navigationList[21].document" href="{{navigationList[21].link}}"></a></li>
+        </ul>
       </div>
-      <!-- 更多 -->
-      <div class="more">
-        <span><a href="#">更多>></a></span>
+    </div>
+    <div class="nav_content" ng-hide="phone&&!nav2Show">
+      <div class="nav_content_title"><a ng-bind="navigationList[22].document" href="{{navigationList[22].link}}"></a></div>
+      <div class="nav_content_content">
+        <ul>
+          <li><a ng-bind="navigationList[23].document" href="{{navigationList[23].link}}"></a></li>
+          <li><a ng-bind="navigationList[25].document" href="{{navigationList[25].link}}"></a></li>
+          <li><a ng-bind="navigationList[24].document" href="{{navigationList[24].link}}"></a></li>
+          <li><a ng-bind="navigationList[26].document" href="{{navigationList[26].link}}"></a></li>
+        </ul>
       </div>
-      <div class="nav_content">
-        <div class="nav_content_title"><a ng-bind="navigationList[17].document" href="{{navigationList[17].link}}"></a></div>
-        <div class="nav_content_content">
-          <ul>
-            <li><a ng-bind="navigationList[18].document" href="{{navigationList[18].link}}"></a></li>
-        	<li><a ng-bind="navigationList[20].document" href="{{navigationList[20].link}}"></a></li>
-       		<li><a ng-bind="navigationList[19].document" href="{{navigationList[19].link}}"></a></li>
-        	<li><a ng-bind="navigationList[21].document" href="{{navigationList[21].link}}"></a></li>
-          </ul>
-        </div>
+    </div>
+    <div class="nav_content" ng-hide="phone&&!nav2Show">
+      <div class="nav_content_title"><a ng-bind="navigationList[27].document" href="{{navigationList[27].link}}"></a></div>
+      <div class="nav_content_content">
+        <ul>
+          <li><a ng-bind="navigationList[28].document" href="{{navigationList[28].link}}"></a></li>
+          <li><a ng-bind="navigationList[30].document" href="{{navigationList[30].link}}"></a></li>
+          <li><a ng-bind="navigationList[29].document" href="{{navigationList[29].link}}"></a></li>
+          <li><a  ng-bind="navigationList[31].document" href="{{navigationList[31].link}}"></a></li>
+        </ul>
       </div>
-      <div class="nav_content">
-        <div class="nav_content_title"><a ng-bind="navigationList[22].document" href="{{navigationList[22].link}}"></a></div>
-        <div class="nav_content_content">
-          <ul>
-            <li><a ng-bind="navigationList[23].document" href="{{navigationList[23].link}}"></a></li>
-        	<li><a ng-bind="navigationList[25].document" href="{{navigationList[25].link}}"></a></li>
-       		<li><a ng-bind="navigationList[24].document" href="{{navigationList[24].link}}"></a></li>
-        	<li><a ng-bind="navigationList[26].document" href="{{navigationList[26].link}}"></a></li>
-          </ul>
-        </div>
+    </div>
+    <div class="nav_content" ng-hide="phone&&!nav2Show">
+      <div class="nav_content_title"><a ng-bind="navigationList[32].document" href="{{navigationList[32].link}}"></a></div>
+      <div class="nav_content_content">
+        <ul>
+          <li><a ng-bind="navigationList[33].document" href="{{navigationList[33].link}}"></a></li>
+          <li><a ng-bind="navigationList[35].document" href="{{navigationList[35].link}}"></a></li>
+          <li><a ng-bind="navigationList[34].document" href="{{navigationList[34].link}}"></a></li>
+          <li><a ng-bind="navigationList[36].document" href="{{navigationList[36].link}}"></a></li>
+        </ul>
       </div>
-      <div class="nav_content">
-        <div class="nav_content_title"><a ng-bind="navigationList[27].document" href="{{navigationList[27].link}}"></a></div>
-        <div class="nav_content_content">
-          <ul>
-           <li><a ng-bind="navigationList[28].document" href="{{navigationList[28].link}}"></a></li>
-        	<li><a ng-bind="navigationList[30].document" href="{{navigationList[30].link}}"></a></li>
-       		<li><a ng-bind="navigationList[29].document" href="{{navigationList[29].link}}"></a></li>
-        	<li><a  ng-bind="navigationList[31].document" href="{{navigationList[31].link}}"></a></li>
-          </ul>
-        </div>
+    </div>
+    <div class="nav_content" ng-hide="phone&&!nav2Show">
+      <div class="nav_content_title"><a ng-bind="navigationList[37].document" href="{{navigationList[37].link}}"></a></div>
+      <div class="nav_content_content">
+        <ul>
+          <li><a ng-bind="navigationList[40].document" href="{{navigationList[40].link}}"></a></li>
+          <li><a ng-bind="navigationList[39].document" href="{{navigationList[39].link}}"></a></li>
+          <li><a ng-bind="navigationList[41].document" href="{{navigationList[41].link}}"></a></li>
+          <li><a ng-bind="navigationList[38].document" href="{{navigationList[38].link}}"></a></li>
+        </ul>
       </div>
-      <div class="nav_content">
-        <div class="nav_content_title"><a ng-bind="navigationList[32].document" href="{{navigationList[32].link}}"></a></div>
-        <div class="nav_content_content">
-          <ul>
-            <li><a ng-bind="navigationList[33].document" href="{{navigationList[33].link}}"></a></li>
-        	<li><a ng-bind="navigationList[35].document" href="{{navigationList[35].link}}"></a></li>
-       		<li><a ng-bind="navigationList[34].document" href="{{navigationList[34].link}}"></a></li>
-        	<li><a ng-bind="navigationList[36].document" href="{{navigationList[36].link}}"></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="nav_content">
-        <div class="nav_content_title"><a ng-bind="navigationList[37].document" href="{{navigationList[37].link}}"></a></div>
-        <div class="nav_content_content">
-          <ul>
-        	<li><a ng-bind="navigationList[40].document" href="{{navigationList[40].link}}"></a></li>
-       		<li><a ng-bind="navigationList[39].document" href="{{navigationList[39].link}}"></a></li>
-        	<li><a ng-bind="navigationList[41].document" href="{{navigationList[41].link}}"></a></li>
-        	 <li><a ng-bind="navigationList[38].document" href="{{navigationList[38].link}}"></a></li>
-          </ul>
-        </div>
-      </div>
-      <div class="up">
-        <span><a href="#">收起>></a></span>
-      </div>
+    </div>
+    <div class="up" ng-click="showNav2(0)" ng-hide="phone&&!nav2Show">
+      <span><a >收起>></a></span>
     </div>
   </div>
+  </div>
+
+
     <div class="clearfix"></div>
     <div id="content" >
       <div ui-view>

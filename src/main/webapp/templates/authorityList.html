@@ -1,0 +1,5 @@
+<ul class="ui_authority_list">
+	<li><a ui-sref=".articleid({articleid:1})"><span class="type"></span></span><span class="text">我省在第六届全国高校辅导员职业能力我省在第六届全国高校辅导员职业能力我省在第六届全国高校辅导员职业能力</span><span class="date">2017-4-19</span></a></li>
+	<li ng-repeat="x in page.data[page.currentindex]"><a ui-sref=".articleid({articleid:x.id})"><span class="type"></span></span><span class="text">{{x.title}}</span><span class="date">{{x.publish_time}}</span></a></li>
+</ul>				
+<div ng-show="pagingOptions.totalPage>1" class="tcdPageCode" pageset='getPagingData()'>

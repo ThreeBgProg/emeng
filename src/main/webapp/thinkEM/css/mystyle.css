@@ -1,0 +1,282 @@
+@charset "utf-8";
+* {
+    padding: 0;
+    margin: 0;
+}
+/* 去掉input date 的两个小三角 */
+input[type=date]::-webkit-inner-spin-button { visibility: hidden; }
+body {
+    font-family: "微软雅黑";
+}
+.my-red {
+    color: red;
+}
+.top5 {
+	top: 8px;
+	left: 80px;
+	line-height: 38px;
+}
+.top20 {
+	
+    margin-top: 20px;
+}
+.annex-box {
+	width:600px;
+}
+/*登录页面*/
+.login-box {
+    width: 400px;
+    height: 360px;
+    background: #F2F2F2;
+    border-radius: 20px;
+    margin: 80px auto;
+    overflow: hidden;
+}
+.login-top {
+    height: 60px;
+    width: 100%;
+    position: relative;
+}
+.login-mid {
+    position: relative;
+    box-sizing: border-box;
+    padding-top: 50px;
+    height: 300px;
+    width: 100%;
+    background: #fff;
+}
+.login-right li{
+    width: 20px;
+    height: 20px;
+    margin-left: 10px;
+    margin-top: 20px;
+    border-radius: 50%;
+    float: left;
+    cursor: pointer;
+}
+.my-login-box {
+    width: 370px;
+    height: 50px;
+    margin-left: 15px;
+    border-bottom: 1px solid #F2F2F2;
+}
+.my-login-box input{
+    border: 0px solid #000;
+    outline: 0px;
+    font-size: 28px;
+}
+.my-login-box i{
+    font-size: 28px;
+}
+.my-login-box label{
+    width: 30px;
+}
+#loginbtn{
+    position: absolute;
+    bottom: 0px;
+    width: 100%;
+    height: 70px;
+    border: none;
+    font-size: 30px;
+    color: #fff;
+    line-height: 70px;
+    margin: 0px;
+}
+#loginbtn .layui-btn{
+    width: 100%;
+    height: 100%;
+    background: #5FB878;
+}
+/*头部*/
+.main .header {
+    height: 55px;
+    border-bottom: 5px solid #5FB878;
+    background-color: #393D49;
+    color: #fff;
+}
+.main .header .logo img {
+    position: relative;
+    left: 30px;
+}
+.main .header .admin {
+    float: right;
+    background-color: transparent;
+}
+
+    /*左边*/
+.main .left {
+    float: left;
+    width: 200px;
+    height: 100%; 
+    overflow-x: hidden;
+    position: fixed;
+    bottom: 0;
+    top: 60px;
+    background-color: #393D49;
+}
+.main .left ul li {
+    line-height: 45px;
+}
+.main .left ul li i {
+    position: relative;
+    top: 3px;
+    font-size: 20px;
+    margin-right: 20px;
+}
+.main .left ul li a {
+    line-height: 45px;
+}
+.main .left ul li .layui-nav-child {
+    box-sizing: border-box;
+    width: 200px;
+}
+.main .left ul li .layui-nav-child a{
+    width: 200px;
+    padding-left:58px;
+}
+
+    /*
+    右边*/
+.main .right {
+    float: right;
+    position: fixed;
+    left: 210px;
+    right: 0;
+    top: 65px;
+    height: 100%;
+    border-left: 0px;
+}
+.main .myframe {
+    width: 100%;
+    height: 100%;
+}
+/*右边当前位置*/
+.iframe-content {
+    padding: 0 16px 0 4px;
+}
+ .now-position {
+    height: 39px;
+    line-height: 39px;
+    border-bottom: 1px solid rgb(229,229,229);
+}
+ .iframe-content #link_edit_form {
+     margin-top: 20px;
+ }
+/*显示所有置顶*/
+.show-all-up {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    padding: 5px;
+    line-height: 22px;
+    /* border-left: 5px solid #009688; */
+    border-radius: 0 2px 2px 0;
+    background-color: #f2f2f2;
+}
+
+.iframe-content table {
+    table-layout:fixed;/* 这行很重要*/
+}
+.iframe-content .layui-table .limit{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.iframe-content .layui-table .article-title{
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+.iframe-content .layui-table .article-content {
+    overflow: hidden;
+    text-overflow:ellipsis;
+    white-space: nowrap;
+}
+/*编辑投稿列表内容*/
+.contribute-edit-content {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid rgb(229,229,229);
+}
+/*隐藏id*/
+.layui-layer-title {
+    display: none;
+}
+.contribute-edit-box .contribute-type {
+     margin-left:30px;
+     display: block;
+     width: 400px;
+     padding: 8px 15px;
+     line-height: 20px;
+     border: 1px solid #e6e6e6;
+     border-radius: 2px 0 0 2px;
+     text-align: center;
+     background-color: #FBFBFB;
+     overflow: hidden;
+ }
+#lesson-type{
+    margin-left:30px;
+    display: block;
+    width: 400px;
+    padding: 8px 15px;
+    line-height: 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px 0 0 2px;
+    text-align: center;
+    background-color: #FBFBFB;
+    overflow: hidden;
+}
+
+.recommend-degree {
+    display: none;
+}
+#title {
+    width: 400px;
+}
+.iframe-content .layui-table .my-up i{
+    font-size: 14px;
+    margin-left: 2px;
+}
+ /*
+ 分页盒子 */
+#page {
+    margin:0  0 200px 250px;
+}
+
+
+
+/*光平*/
+#schoolSelect,#roleSelect,#lessonSelect,#chapterSelect{
+    display: block;
+}
+
+.now-position{
+    margin-bottom: 20px;
+}
+
+.layui-form-item input.layui-btn[type="submit"]{
+    margin-left: 50px; 
+}
+
+td{
+　　white-space: nowrap !important;
+　　overflow: hidden !important;
+　　text-overflow: ellipsis !important;
+}
+#mylessonbox .layui-unselect {
+	display:none;
+}
+select{
+    display: block !important;
+}
+#meeting_type {
+    margin-left:30px;
+    display: none !important;
+    width: 200px;
+    padding: 8px 15px;
+    line-height: 20px;
+    border: 1px solid #e6e6e6;
+    border-radius: 2px 0 0 2px;
+    text-align: center;
+    background-color: #FBFBFB;
+    overflow: hidden;
+}

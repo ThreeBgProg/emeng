@@ -1,0 +1,31 @@
+<div ng-controller="horseCtrl">
+		
+		<div  class="ui_content ui_content_authority">
+			<div class="ui_content_nav" active='authority'>
+				<span  class="ui_content_title">马院风采</span>
+				<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[0]})" class="">改革动态</a>
+				<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[1]})" class="">学科建设</a>
+				<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[2]})" class="">评估排行</a>
+				<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[3]})" class="">科研前沿 </a>
+				<div class="input-group">
+		                 <input type="text" class="form-control " placeholder="搜索"> 
+		                 <span class="input-group-btn">
+		                     <button class="btn btn-info" type="button"><span class="glyphicon glyphicon-search search"></span></button>
+		                 </span>
+	             </div>
+			</div>
+			<div class="trtr"><a>当前位置：</a>
+				<a href="#index.html">首页</a><a>>马院风采</a><a ng-show="$stateParams.taptype" ui-sref=".taptype({taptype:$stateParams.taptype})">>{{typeName[Map[$stateParams.taptype]]}}</a><a url="javascript:" ng-show="$stateParams.articleid&&!phone">>文章详细</a>
+			</div>
+			<div ng-show="phone"  class="ui_content_nav2"  active2>
+					<a ui-sref=".taptype({taptype:urlName[0]})" class="tab">改革动态</a>
+					<a ui-sref=".taptype({taptype:urlName[1]})" class="tab">学科建设</a>
+					<a ui-sref=".taptype({taptype:urlName[2]})" class="tab">评估排行</a>
+					<a ui-sref=".taptype({taptype:urlName[3]})" class="tab">科研前沿 </a>				
+		    </div>
+			<div class="clearfix"></div>
+			<!-- 文章列表 -->
+			<div ui-view="detail"></div>
+		</div>
+		<div ui-view="hotlist"></div>
+</div>

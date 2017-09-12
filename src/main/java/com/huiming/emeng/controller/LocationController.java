@@ -19,7 +19,7 @@ public class LocationController {
 	
 	
 	@RequestMapping("/getAllLocation")
-	@MappingDescription("修改学校信息")
+	@MappingDescription("获取全部省份")
 	@ResponseBody
 	public List<Location> getAllLocation() {
 		return locationService.selectAll();

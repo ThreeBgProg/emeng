@@ -1,0 +1,18 @@
+<div ng-controller="linksCrl">
+   <!-- 友情链接 -->
+        <div class="commonClass links " id='gl_links'>
+            <div class="news-title links-title">
+                <a href=" "><span class="links-logo"><img src="images/friend-logo.png"></span></a>
+                <a href="#" class="title"><span>友情链接</span></a>
+            </div>
+            <div class="trtr"><a>当前位置：</a>
+                <a href="#index.html">首页</a><a>>友情链接</a>
+            </div>
+            <div class="clearfix"></div>
+            <div class="common-content links-content">
+                    <ul id='more_link'>
+                         <a ng-repeat="x in linkList1" href='{{x.link}}'><li>{{x.name}}</li></a>
+                    </ul>
+             </div>
+         </div>
+     </div>

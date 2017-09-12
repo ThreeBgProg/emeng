@@ -1,0 +1,36 @@
+			<div ng-controller="teacherlistCtrl">
+			<div  class="ui_content ui_content_teacher" >
+				<div class="ui_content_nav" active2="teacher">
+					<span  class="ui_content_title">名师新秀</span>
+					<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[0]})" class="">{{typeName[0]}}</a>
+					<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[1]})" class="">{{typeName[1]}}</a>
+					<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[2]})" class="">{{typeName[2]}}</a>
+					<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[3]})" class="">{{typeName[3]}}</a>
+					<div class="input-group" ng-show="$stateParams.taptype==urlName[0]||$stateParams.taptype==urlName[2]||$stateParams.taptype==urlName[4]">
+			                <input ng-keyup="teacherkey($event)" ng-model="teachersearchText.value" type="text" class="form-control " placeholder="搜索" ng-model='searchText'>
+			                <span class="input-group-btn">
+			                    <button class="btn btn-info" type="button" ng-click="searchteacher()"><span class="glyphicon glyphicon-search search"></span></button>
+			               </span>
+		            </div>
+				</div>
+				<div class="trtr"><a>当前位置：</a>
+				<a href="#index.html">首页</a><a>>名师新秀</a><a ng-show="$stateParams.taptype" ui-sref=".taptype({taptype:$stateParams.taptype})">>{{typeName[Map[$stateParams.taptype]]}}</a><a ui-sref=".taptype.articleid({taptype:$stateParams.taptype,articleid:$stateParams.articleid})"  ng-show="current.related">>{{current.teacherName}}</a><a ui-sref=".taptype.articleid.related({taptype:$stateParams.taptype,articleid:$stateParams.articleid})" ng-show="current.related">>相关文论</a><a url="javascript:" ng-show="$stateParams.relatedid&&!phone">>文章详细</a>
+				</div>
+				<div ng-show="phone"  class="ui_content_nav2"  active>
+					<a ui-sref=".taptype({taptype:urlName[0]})" class="tab"><span >{{typeName[0]}}</span></a>
+					<a ui-sref=".taptype({taptype:urlName[1]})" class="tab"><span >{{typeName[1]}}</span></a>
+					<a ui-sref=".taptype({taptype:urlName[2]})" class="tab"><span >{{typeName[2]}}</span></a>
+					<a ui-sref=".taptype({taptype:urlName[3]})" class="tab"><span >{{typeName[3]}}</span></a>					
+		        </div>
+				
+				<div class="clearfix"></div>
+				<div ui-view="detail" id="detail">
+				</div>  
+				<div class="clearfix"></div>
+			</div>
+			<div ng-if="phone" ui-view="relatedlist"></div>
+			<div ui-view="hotlist"></div>
+			<div ng-if="!phone"  ui-view="relatedlist"></div>
+			</div>
+
+		

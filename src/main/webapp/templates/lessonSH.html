@@ -1,0 +1,10 @@
+	<!-- 文章列表 -->
+	<ul class="ui_news_list">
+		<li ng-repeat="x in page.data[page.currentindex]"><a href="#/lesson/{{bookUrl[x.lesson-1]}}/catalogue/{{x.chapter}}{{x.type|reverse3}}{{x.id}}"><span class="type"></span><span class="text">{{x.titile}}</span><span ng-hide="phone" class="date">{{x.publishTime|reverse}}</span></a></li>
+	     <div ng-hide="page.data[page.currentindex].length" class="IFlogin">
+                    <h4 class="middle">没有相关内容</h4>
+       </div>
+	</ul>
+	<div class="clearfix"></div>
+	<div ng-show="pagingOptions.totalPage>1" class="tcdPageCode" pageset='searchlesson()'>
+ 	</div>

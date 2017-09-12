@@ -71,12 +71,12 @@ public class FileuploadController {
 	 * @throws Exception
 	 */
 	@RequestMapping("filedownload")
+	@MappingDescription("文件下载")
 	public ResponseEntity<byte[]> download(HttpServletRequest request,
 			@RequestParam("fileUrl") String filename,
 			Model model)throws Exception
 	{
 		String[] string=null;
-		System.out.println(File.separator);
 		if(File.separator.equals("/")||File.separator.equals("//"))
 		{
 			string=filename.split(File.separator);
@@ -84,21 +84,20 @@ public class FileuploadController {
 		else{
 			string=filename.split("\\"+File.separator);
 		}	
-		
-		
 		int num=string.length;
 	    if (string[num-2].equals("")) {
 	    	string[num-2]=string[num-3];
 			}
 		System.out.println("dier"+string[num-2]);
-		
+//		String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 		String path = request.getServletContext().getRealPath(File.separator);
+//		String path = root+File.separator;
 		System.out.println("项目路劲"+path);
 		System.out.println(path+File.separator+string[num-2]+File.separator+string[num-1]);
 		
 		File file = new File(path+File.separator+string[num-2]+File.separator+string[num-1]);	
 		HttpHeaders headers = new HttpHeaders();
-		String downfileName = new String(filename.getBytes("UTF-8"),"iso-8859-1");
+		String downfileName = new String(string[num-1].getBytes("UTF-8"),"iso-8859-1");
 		headers.setContentDispositionFormData("attachment", downfileName);
 		headers.setContentType(MediaType.APPLICATION_OCTET_STREAM);
 		
@@ -115,7 +114,9 @@ public class FileuploadController {
 		Map<String, String> respondate=new HashMap<>();
 		
 		if(!annex.isEmpty()){
+//			String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 			String path = request.getServletContext().getRealPath(File.separator+"meetings"+File.separator);
+//			String path = root+File.separator+"meetings"+File.separator;
 			String fileName=annex.getOriginalFilename();
 			File filepath = new File(path, fileName);
 			if(!filepath.getParentFile().exists()){
@@ -128,8 +129,12 @@ public class FileuploadController {
 			   
 			annex.transferTo(new File(path+File.separator+str)); 
 			String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+			
+			
 			System.out.println("端口号获取"+root);
-			respondate.put("annex",root+File.separator+"emeng"+File.separator+"meeting"+File.separator+str);
+			respondate.put("annex",root+File.separator+"emeng"+File.separator+"meetings"+File.separator+str);
+//			respondate.put("annex",root+File.separator+"meetings"+File.separator+str);
+
 		}
 		
 		Object object = JSON.toJSON(respondate);

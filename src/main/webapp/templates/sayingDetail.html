@@ -1,0 +1,24 @@
+
+
+<div class="ui_artical">
+	<h4 class="">
+		<small class="auth"> <span class="glyphicon glyphicon-user"></span>{{detaildata.username}}</small><span class="text">{{detaildata.titile}}</span> 
+	</h4>
+	<hr>
+	<div class="HTMLcontent detailText" ng-bind-html="detaildata.content|htmlContent"></div>
+	<br>
+	<br>
+	<span class="blockspan pull-right text-right">浏览：{{detaildata.visit}}&nbsp;&nbsp;<a ng-hide="good.message">点赞：{{detaildata.like}}</a><a><img ng-click="upputsaying()"ng-src="{{good.message|reverse5}}">{{good.msg}}</a></span>
+	<div class="clearfix"></div>
+	<span class="blockspan pull-right text-right">{{detaildata.releaseTime|reverse2}}</span>	
+
+	<div class="clearfix"></div>
+</div>
+
+<div class="ui_response">
+	<p><span>回复：</span><span>{{detaildata.reply}}</span></p>
+<!-- 	<span class="blockspan pull-right text-right"><a href="javascript:;"><img src="images/good.jpg">{{detaildata.like}}</a></span>
+ -->	<div class="clearfix"></div>
+	<!-- <span class="blockspan pull-right text-right">4/9 9:00</span> -->
+	<div class="clearfix"></div>
+</div>				

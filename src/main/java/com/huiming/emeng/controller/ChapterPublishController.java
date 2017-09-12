@@ -28,9 +28,10 @@ public class ChapterPublishController {
 //    }
 
     @MappingDescription("查询章节")
-    @RequestMapping(value = "/chapter")
-    public Chapter selectChapter(Integer chapterId){
-        return chapterMapper.selectByChapterNumber(chapterId);
+    @RequestMapping("/selectChapter")
+    public Chapter selectChapter(@RequestParam("chapterId")Integer chapterId,
+    		@RequestParam("lessonId") Integer lessonId){
+        return chapterMapper.selectByChapterNumber(chapterId, lessonId);
     }
 //    //新增章节
     @MappingDescription("增加章节")

@@ -1,0 +1,45 @@
+<!-- 学校 -->
+		<!-- <div  class="ui_content ui_content_guess">
+						<div class="ui_content_nav">
+							<span  class="ui_content_title">猜你喜欢</span>
+						</div>
+						<ul class="ui_content_list">
+							<li><a href="#">我省在第六届全国高校辅导员职业能力我省在第六届全国高校辅导员职业能力我省在第六届全国高校辅导员职业能力我省在第六届全国高校辅导员职业能力我省在第六届全国高校辅导员职业能力</a></li>
+							<li><a href="#">我省在第六届全国高校辅导员职业能力</a></li>
+							<li><a href="#">我省在第六届全国高校辅导员职业能力</a></li>
+							<li><a href="#">我省在第六届全国高校辅导员职业能力</a></li>
+							<li><a href="#">我省在第六届全国高校辅导员职业能力</a></li>
+							<li><a href="#">我省在第六届全国高校辅导员职业能力</a></li>
+							<li><a href="#">我省在第六届全国高校辅导员职业能力</a></li>
+						</ul>
+		</div>
+	 -->
+ <!-- 盟员广场 -->
+        <div class="commonClass friend ui_content ui_content_guess" ng-controller="school">
+            <div class="news-title friend-title">
+                <a href="#"><span class="friend-logo"><img src="images/school-logo.png"></span></a>
+                <a href="#" class="title"><span>盟员广场</span></a>
+            </div>
+            <div class="trtr"><a>当前位置：</a>
+                <a href="#index.html">首页</a><a>>盟员广场</a>
+            </div>
+            <div class="clearfix"></div>
+            <div class="second-title"  active>
+                 <ul active>
+            
+            <li class=""> <a class="tab" ui-sref="school.taptype({taptype:urlName[0]})" >本科院校</a></li>
+            <li class=""> <a  class="tab" ui-sref="school.taptype({taptype:urlName[1]})" >独立学院</a></li>
+             <li class=""><a  class="tab"  ui-sref="school.taptype({taptype:urlName[2]})"  >高职院校</a></li>
+                    <li><span >
+               <select ng-model="province" name=province" id="province">
+                    <option value=''>省份</option>
+                    <option ng-repeat="x in locationList" value='{{x.id}}
+                    '>{{x.name}}</option>
+                    
+                </select>
+                <span ng-click="getschoolByTypeAndP()" id="move_to">查询</span></span></li>
+                </ul>
+                
+            </div>
+            <div ui-view='detail'></div>
+        </div>

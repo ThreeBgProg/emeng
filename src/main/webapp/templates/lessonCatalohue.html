@@ -1,0 +1,52 @@
+
+				<!-- 课程资源目录 -->
+
+
+					<div class="ui_source_3_detail">
+						<!--章节目录-->
+						<div  class="ui_content ui_content_catalogue">
+							<div class="ui_content_nav">
+								<span  class="ui_content_title">章节目录</span>
+							</div>
+							<div class="ui_catalogue_list">
+								<ul>
+									<li  ng-repeat="x in chapterListdata"><a ui-sref=".chapter({chapter:x.number})">{{x.name}} </a></li>
+								</ul>
+								<div class="clearfix"></div>
+							<div ng-show="pagingOptions.totalPage>1" class="tcdPageCode" pageset='getCatalogueData()'>
+						 	</div>
+						 	<br>
+							</div> 
+						</div>
+						<div class="pull-right">
+							<!--阅读书目-->
+							<div  class="ui_content ui_content_books ">
+								<div class="ui_content_nav">
+									<span  class="ui_content_title">阅读书目</span>
+									<a ui-sref="lesson.bookName.booklist" class="more"><span>更多>></span></a>
+								</div>
+								<!-- 书本列表 -->
+								<div class="ui_catalogue_list">
+									<ol>
+										<li ng-repeat="x in readbookListdata">&nbsp;&nbsp;<a ui-sref="lesson.bookName.booklist.articleid({articleid:x.id})" >{{x.titile}}</a></li>
+			
+									</ol>
+								</div> 
+							</div>
+							<div class="clearfix"></div>
+							<!--精品在线-->
+							<div  class="ui_content ui_content_quality">
+								<div class="ui_content_nav">
+									<span  class="ui_content_title">精品在线</span>
+									<a href="#/passage/qualityOnline" class="more"><span>更多>></span></a>
+								</div>
+								<!-- 精品在线列表 -->
+								<div class="ui_catalogue_list">
+									<ol>
+										<li ng-repeat="x in boutiqueListdata">&nbsp;&nbsp;<a href="#/passage/qualityOnline/{{x.id}}">{{x.titile}}</a></li>
+									
+									</ol>
+								</div> 
+							</div>
+						</div>
+					</div>

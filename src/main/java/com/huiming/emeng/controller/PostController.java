@@ -121,7 +121,7 @@ public class PostController {
 
 
 	@RequestMapping("postupPKW")
-	@MappingDescription("更新")
+	@MappingDescription("更新论坛")
 	@ResponseBody
 	public Object updateByPrimaryKeyWithBLOBs(PostWithBLOBs record,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,
@@ -139,7 +139,7 @@ public class PostController {
 
 
 	@RequestMapping("postupPK")
-	@MappingDescription("更新")
+	@MappingDescription("更新论坛")
 	@ResponseBody
 	public Object updateByPrimaryKey(Post record,
 			@RequestParam(value="pageNum",defaultValue = "1") Integer pageNum,

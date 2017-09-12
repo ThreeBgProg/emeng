@@ -10,6 +10,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.common.CustomException;
 import com.huiming.emeng.common.CustomException.UnauthorizedError;
 import com.huiming.emeng.mapper.LessonMapper;
@@ -37,7 +38,7 @@ public class TestContoller {
 	 * @return
 	 */
 	@RequestMapping("/test")
-	
+	@MappingDescription("测试数据库连接情况")
 	public String test(ModelMap map) {
 
 		//List<Navigation> navigationList = navigationService.selectAllNavigation();
@@ -58,14 +59,9 @@ public class TestContoller {
 	 * 测试自定义异常
 	 */
 	@RequestMapping("testException")
+	@MappingDescription("测试自定义异常")
 	public String testException() {
 		throw CustomException.genException(UnauthorizedError.class, "错误消息");
-	}
-	
-	@RequestMapping("/test1")
-	@ResponseBody
-	public String test1() {
-		return "fileupload";
 	}
 	
 }

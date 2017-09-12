@@ -1,0 +1,167 @@
+<!--注册-->
+<div class="register">
+    <div class="register-line"></div>
+    <div class="register-position">
+        您当前的位置：堂外堂 思政e盟>>注册
+    </div>
+    <div class="register-box">
+        <form name="myForm" ng-controller="registerCtrl" ng-submit="save()"  novalidate>
+                <ul>
+<!--                 pattern="^[\u4E00-\u9FA5A-Za-z0-9]+$" 用户名包含中文或英文或数字
+pattern="^\d{8,12}$"      8到12位数字       
+pattern="^[A-Za-z0-9]{8,12}$"  8到12位的数字或者英文字母 -->
+                <li>
+                    <label for="username"><span>*</span>用户名:</label>
+                    <input type="text" id='username'  ng-model="newuser.username" name="username" placeholder="中文或英文或数字" ng-pattern="/^[\u4E00-\u9FA5A-Za-z0-9]+$/" required />
+	                <span ng-show="!myForm.username.$error.required && myForm.username.$invalid && myForm.username.$dirty">用户名不能包含特殊字符</span>
+	                <span ng-show="myForm.username.$error.required && showAllErr">请输入用户名</span>
+ 	            </li>
+                <li>
+                    <label for="pro_num"><span>*</span>工号:</label>
+                    <input type="text" id='pro_num'  ng-model="newuser.job_id" name="uNum"  placeholder="请输入8到12位数字"  ng-pattern="/^\d{8,12}$/" required />
+                     <span ng-show="!myForm.uNum.$error.required && myForm.uNum.$invalid && myForm.uNum.$dirty">8到12位数字</span>
+                     <span ng-show="myForm.uNum.$error.required && showAllErr">请输入工号</span>
+                </li>
+                <li>
+                    <label for="school"><span>*</span>所在学校:</label>
+                     <select name="uSchool" ng-change="myFunc()"  ng-model="newuser.province_id"  required style="width:88px">
+                     	<option value="">选择省份</option>
+                        <option ng-repeat="x in allprovince" value="{{x.id}}">{{x.name}}</option>
+                    </select>
+                    <select id='school' name="uSchool"  ng-model="newuser.school_id"  required>
+                   		<option value="">选择学校</option>
+                        <option ng-repeat="x in allschool" value="{{x.school.id}}">{{x.school.name}}</option>
+                    </select>
+                    <span ng-show="!newuser.school_id && showAllErr">请选择学校</span>
+                </li>
+                <li>
+                    <label for="tel">*联系电话:</label>
+                    <input id="tel" type="text"  name="tel" ng-model="newuser.phone"  placeholder="请输入以1开头的11位号码"    ng-pattern="/^1\d{10}$/" required >
+                    <span ng-show="!myForm.tel.$error.required && myForm.tel.$invalid && myForm.tel.$dirty ">以1开头的11位号码</span>
+                    <span ng-show="myForm.tel.$error.required && showAllErr">请输入联系电话</span>
+                </li>
+                <li>
+                    <label for="email">*电子邮箱:</label>
+                    <input type="email" ng-model="newuser.mail" placeholder="登录名@主机名.域名"   name="email" required />
+                    <span ng-show="!myForm.email.$error.required && myForm.email.$invalid && myForm.email.$dirty ">登录名@主机名.域名</span>
+                    <span ng-show="myForm.email.$error.required && showAllErr">请输入电子邮箱</span>
+                </li>
+                <li>
+                    <label for="password"><span>*</span>密码:</label>
+                    <input type="password" id='password' name="Upass1" ng-model="newuser.password" placeholder="8到12位的数字或者英文字母"  ng-pattern="/^[A-Za-z0-9]{8,12}$/" required>
+                    <span ng-show="!myForm.Upass1.$error.required && myForm.Upass1.$invalid && myForm.Upass1.$dirty && !myForm.Upass1.$error.required">8到12位数字或英文字母</span> 
+                    <span ng-show="myForm.Upass1.$error.required && showAllErr">请输入密码</span>
+                </li>
+                <li>
+                    <label for="password_again"><span>*</span>确认密码:</label>
+                    <input type="password" name="Upass2" id='password_again' ng-model="password2" placeholder="请输入确认密码" required>
+                    <span ng-show="!myForm.Upass1.$invalid && password2!=newuser.password&&myForm.Upass2.$dirty && !myForm.Upass2.$error.required">密码不一致</span>
+                    <span ng-show="!myForm.Upass1.$invalid && myForm.Upass2.$error.required && showAllErr && !myForm.Upass1.$error.required">请输入确认密码</span>
+                    
+                </li>
+                <li>
+                    <label for="code"><span>*</span>验证码:</label>
+                    <input type="text" ng-model="inputcode"  id='code' name="code" required>
+                    <b ng-click="getcode()" ng-bind-html="random|htmlContent"></b>
+                    <span ng-show="myForm.code.$error.required && showAllErr">请输入验证码</span>
+                    <span ng-show="!showAllErr && myForm.code.$error.required && codeErr && myForm.code.$dirty">验证码错误</span>
+                </li>
+                <li><label for=""></label>
+                    <input type="submit" value='注册' id='register'>
+                    <span ng-show="myForm.username.$error.required||myForm.tel.$error.required||myForm.email.$error.required||myForm.uNum.$error.required||myForm.username.Upass1.required||myForm.username.Upass2.required||!newuser.school_id">带*号 为必填项<span>
+                    
+                </li>
+            </form>
+
+        <p class='has-registered'>已有账号？<a href="#/login">我要登录</a></p>
+    </div>
+</div>
+ 
+
+ <!--               <div ng-show="myForm.uEmail.$dirty && myForm.uEmail.$invalid"></div> --><!-- <span ng-show="myForm.uEmail.$error.email">邮箱不合法</span> -->
+
+ <!-- <div ng-controller="myCtr">
+  <div class="container">
+   <h2 class="text-center">注册系统</h2>
+   <div class="row">
+    <form name="myForm" class="form-horizontal" >
+     <div class="form-group">
+      <div class="col-xs-3 col-xs-offset-1">
+       <lable for="username">用户名：</lable>
+      </div>
+      <div class="col-xs-8">
+       <input id="username" type="text" ng-model="data.username" name="username" ng-required="true"> //ng-required="true"是设置输入框内必须填写内容，下同
+      </div>
+     </div>
+     <div class="form-group">
+      <div class="col-xs-3 col-xs-offset-1">
+       <lable for="tel">电话：</lable>
+      </div>
+      <div class="col-xs-8">
+       <input id="tel" type="text" ng-model="data.tel" name="tel" ng-pattern="/^1\d{10}$/" ng-required="true"> //ng-pattren="/XXX/"是设置正则验证，下同
+        
+      </div>
+     </div>
+     <div class="form-group">
+      <div class="col-xs-3 col-xs-offset-1">
+       <lable for="address">地址：</lable>
+      </div>
+      <div class="col-xs-8">
+       <input id="address" type="text" ng-model="data.address" name="address" ng-required="true">
+       
+      </div>
+     </div>
+     <div class="form-group">
+      <div class="col-xs-3 col-xs-offset-1">
+       <lable for="email">邮箱：</lable>
+      </div>
+      <div class="col-xs-8">
+       <input id="email" type="text" ng-model="data.email" name="email" ng-pattern="/^([a-zA-Z0-9_-])+@([a-zA-Z0-9_-])+(.[a-zA-Z0-9_-])+/" ng-required="true">
+      </div>
+     </div>
+     <div class="col-xs-8 col-xs-offset-4 text-danger" style="height:30px;overflow:hidden;">
+      <p ng-show="myForm.username.$invalid && myForm.username.$dirty">请填写用户名</p>
+      <p ng-show="myForm.tel.$invalid && myForm.tel.$dirty">请填写正确电话</p>
+      <p ng-show="myForm.address.$invalid && myForm.address.$dirty">请填写地址</p>
+      <p ng-show="myForm.email.$invalid && myForm.email.$dirty">请填写正确邮箱</p>
+      <p ng-show="showAllErr">请填写</p>
+     </div>
+     <div class="form-group">
+      <div class="col-xs-12">
+       <input class="btn btn-success" type="submit" style="width:100%" ng-click="check()">
+      </div>
+     </div>
+    </form>
+   </div>
+  </div>
+   
+ </div> -->
+<style type="text/css">
+    .register-box ul select {
+
+    border-width: 1px;
+    border-color: #ccc;
+    border-style: solid;
+    border-radius: 2px;
+    margin-left: 15px;
+    width: 241px;
+    height: 27px;
+    padding-left: 6px;
+}
+  .register-box ul b {
+    display: inline-block;
+    margin-left: 8px;
+    width: 65px;
+    height: 27px;
+    /* background-color: #87dbdc; */
+    vertical-align: top;
+    text-align: center;
+    /* line-height: 27px; */
+    letter-spacing: 4px;
+}
+
+b>img{
+    height: 25px;
+
+}
+</style>

@@ -1,5 +1,6 @@
 package com.huiming.emeng.controller;
 
+import com.huiming.emeng.annotation.MappingDescription;
 import com.huiming.emeng.model.Passage;
 import com.huiming.emeng.service.PassagePublishService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,23 +16,28 @@ public class PassagePublishController {
     @Autowired
     private PassagePublishService passagePublishService;
 
-
+    
     @ResponseBody
-    @RequestMapping(value = "/insert/passage", method = RequestMethod.POST)
+    @MappingDescription("添加文章")
+    @RequestMapping(value = "/insert/passage", method = RequestMethod.POST)    
     public int insertPassage(Passage passage){
 
         return passagePublishService.insertPassage(passage);
     }
 
+    
     @ResponseBody
+    @MappingDescription("更新文章")
     @RequestMapping(value = "/update/passage",method = RequestMethod.POST)
     public int updatePassage(Passage passage){
 
         return passagePublishService.updatePassage(passage);
     }
 
+    
     @ResponseBody
-    @RequestMapping(value = "/delete/passage", method = RequestMethod.POST)
+    @MappingDescription("删除文章")
+    @RequestMapping(value = "/delete/passage", method = RequestMethod.POST)   
     public int deletePassage(@RequestParam("passageId") Integer passageId){
 
         return passagePublishService.deletePassage(passageId);

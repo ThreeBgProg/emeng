@@ -1,0 +1,97 @@
+<div class="ui_source_4_detail">
+	<div class="pull-left">
+
+		<div  class="ui_content ui_source_4_detail_i ">
+			<div class="ui_content_nav">
+				<span  class="ui_content_titile">&nbsp;&nbsp;&nbsp;热点难点</span>
+				<a ui-sref=".passageType({passageType:passageTypeUrl[0]})" class="more"><span>更多>></span></a>
+			</div>
+			<div class="ui_catalogue_list">
+				<ol>
+					<li ng-repeat="x in chapterDetail.theories">&nbsp;&nbsp;<a  ui-sref=".passageType.articleid({passageType:passageTypeUrl[0],articleid:x.id})"> {{x.titile}}</a></li>
+				</ol>
+			</div> 
+			<div ng-hide="chapterDetail.theories.length" class="IFlogin">
+                    <h5 class="middle">内容完善中</h5>
+            </div>
+		</div>
+		<div  class="ui_content ui_source_4_detail_i ">
+			<div class="ui_content_nav">
+				<span  class="ui_content_titile">&nbsp;&nbsp;&nbsp;视频资源</span>
+				<a ui-sref=".passageType({passageType:passageTypeUrl[2]})" class="more"><span>更多>></span></a>
+			</div>
+			<div class="ui_catalogue_list">
+				<ol>
+					<li ng-repeat="x in chapterDetail.vidios">&nbsp;&nbsp;<a  ui-sref=".passageType.articleid({passageType:passageTypeUrl[2],articleid:x.id})"> {{x.titile}}</a></li>
+					
+				</ol>
+			</div> 
+			<div ng-hide="chapterDetail.vidios.length" class="IFlogin">
+                    <h5 class="middle">内容完善中</h5>
+            </div>
+		</div>
+		<div  class="ui_content ui_source_4_detail_i ">
+			<div class="ui_content_nav">
+				<span  class="ui_content_titile">&nbsp;&nbsp;&nbsp;参考资料</span>
+				<a ui-sref=".passageType({passageType:passageTypeUrl[4]})" class="more"><span>更多>></span></a>
+			</div>
+			<div class="ui_catalogue_list">
+				<ol>
+					<li ng-repeat="x in chapterDetail.references">&nbsp;&nbsp;<a   ui-sref=".passageType.articleid({passageType:passageTypeUrl[4],articleid:x.id})"> {{x.titile}}</a></li>
+				</ol>
+			</div> 
+			<div ng-hide="chapterDetail.references.length" class="IFlogin">
+                    <h5 class="middle">内容完善中</h5>
+            </div>
+		</div>
+</div>
+<div class="pull-right">
+	<!--案例资源-->
+	<div  class="ui_content ui_source_4_detail_i ">
+			<div class="ui_content_nav">
+				<span  class="ui_content_titile">&nbsp;&nbsp;&nbsp;案例资源</span>
+				<a ui-sref=".passageType({passageType:passageTypeUrl[1]})" class="more"><span>更多>></span></a>
+			</div>
+			<!-- 书本列表 -->
+			<div class="ui_catalogue_list">
+				<ol>
+					<li ng-repeat="x in chapterDetail.cases">&nbsp;&nbsp;<a  ui-sref=".passageType.articleid({passageType:passageTypeUrl[1],articleid:x.id})"> {{x.titile}}</a></li>
+				</ol>
+			</div> 
+			<div ng-hide="chapterDetail.cases.length" class="IFlogin">
+                    <h5 class="middle">内容完善中</h5>
+            </div>
+		</div>
+		<!--推荐教案-->
+		<div  class="ui_content ui_source_4_detail_i ">
+			<div class="ui_content_nav">
+				<span  class="ui_content_titile">&nbsp;&nbsp;&nbsp;推荐教案</span>
+				<a ui-sref=".passageType({passageType:passageTypeUrl[3]})" class="more"><span>更多>></span></a>
+			</div>
+			<!-- 书本列表 -->
+			<div class="ui_catalogue_list">
+				<ol>
+					<li ng-repeat="x in chapterDetail.schemes">&nbsp;&nbsp;<a  ui-sref=".passageType.articleid({passageType:passageTypeUrl[3],articleid:x.id})"> {{x.titile}}</a></li>
+				</ol>
+			</div> 
+			<div ng-hide="chapterDetail.schemes.length" class="IFlogin">
+                    <h5 class="middle">内容完善中</h5>
+            </div>
+		</div>
+		<div  class="ui_content ui_source_4_detail_i ">
+			<div class="ui_content_nav">
+				<span  class="ui_content_titile">&nbsp;&nbsp;&nbsp;精品课件</span>
+				<a ui-sref=".passageType({passageType:passageTypeUrl[5]})" class="more"><span>更多>></span></a>
+			</div>
+			<!-- 书本列表 -->
+			<div class="ui_catalogue_list">
+				<ol>
+					<li ng-repeat="x in chapterDetail.courseware">&nbsp;&nbsp;<a  ui-sref=".passageType.articleid({passageType:passageTypeUrl[5],articleid:x.id})"> {{x.titile}}</a></li>
+				</ol>
+			</div> 
+			<div ng-hide="chapterDetail.courseware.length" class="IFlogin">
+                    <h5 class="middle">内容完善中</h5>
+            </div>
+		</div>					
+	</div>
+</div>

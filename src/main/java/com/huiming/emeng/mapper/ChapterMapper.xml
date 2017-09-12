@@ -48,6 +48,7 @@
     <include refid="Base_Column_List" />
     from chapter
     where number = #{chapterNumber,jdbcType=INTEGER}
+    and lesson = #{lessonId}
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from chapter

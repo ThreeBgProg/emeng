@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content link-edit-box"  >
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>友情链接</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>链接管理</cite></a>
+                <a><cite>></cite></a>
+              <a><cite>编辑链接</cite></a>
+            </span>
+        </div>
+    <form class="layui-form" id='link_edit_form'>
+        <div class="layui-form-item">
+        <label for="link_name" class="layui-form-label">
+            <span class="my-red">*</span>链接名
+        </label>
+        <div class="layui-input-inline">
+            <input type="text" id="link_name" name="name" required="" lay-verify="required"
+                   autocomplete="off"  value="" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="link" class="layui-form-label">
+            <span class="my-red">*</span>URL
+        </label>
+        <div class="layui-input-inline">
+            <input type="url" id="link" name="link" required="" lay-verify="required"
+                   autocomplete="off" value="http://www.baidu.com" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label for="link_sort" class="layui-form-label">
+            <span class="my-red">*</span>排序
+        </label>
+        <div class="layui-input-inline">
+            <input type="number" id="link_sort" name="sort" required="" lay-verify="required"
+                   autocomplete="off" value="5" class="layui-input">
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <label class="layui-form-label"></label>
+        <input type="submit" id='link_submit' class="layui-btn" value='保存'>
+    </div>
+</form>
+    </div>
+</body>
+</html>

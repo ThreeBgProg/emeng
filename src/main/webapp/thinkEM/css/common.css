@@ -1,0 +1,420 @@
+@font-face {
+	 font-family: 'PingFang Medium';
+	 src: url('../fonts/PingFang Medium.eot');
+	 src: url('../fonts/PingFang Medium.ttf') format('truetype');
+}
+
+*{
+	margin: 0px;
+	padding: 0px;
+	font-family: PingFang Medium,"微软雅黑","宋体", Arial, Helvetica, sans-serif;
+}
+
+a{
+	color:#000;
+}
+html{
+	font-size: 62.5%;
+}
+
+/*媒体查询，适配pc端*/
+@media only screen and (min-width:500px) {
+/*头部部分*/
+#header{
+	color: #424242;
+}
+
+#header #welcome{
+	width: 100%;
+	height: 30px;
+	background:#dedede;
+	overflow: hidden;
+}
+
+#header #welcome .welcome{
+	width: 1080px;
+	margin: 0 auto;
+	overflow: hidden;
+	line-height: 25px;
+}
+
+#header #welcome .welcome>span{
+	float: left;
+	display: inline-block;
+	width: 400px;
+	font-size: 1.2rem;
+	margin-top: 4px;
+}
+
+#header #welcome .welcome ul{
+	float: right;
+	margin-top: 4px;
+	font-size: 1.2rem;
+	display: inline-block;
+}
+
+#header #welcome .welcome ul li{
+	display: inline-block;
+	padding-left: 55px;
+}
+
+#header #welcome .welcome ul li span{
+	padding-right: 8px;
+}
+
+#header #welcome .welcome ul li a{
+	color: #424242;
+}
+#nav-header{
+	overflow: hidden;
+}
+
+#nav-header,#nav_title,#nav_content{
+	width: 1080px;
+	margin:0px auto;
+}
+
+#nav-header>.logo{
+	float: left;
+	margin-top: 25px;
+}
+
+#nav-header>.logo img{
+	width:280px;
+}
+
+.login_btn{
+	font-size: 0px;
+	float: right;
+	margin-top: 50px;
+}
+
+#nav-header .weather{
+	float: left;
+	width: 220px;
+	height: 70px;
+	margin-top: 25px;
+	display: inline-block;
+	padding-left: 20px;
+}
+
+#nav-header>.search{
+	float: right;
+	margin-top: 50px;
+	margin-right: 75px;
+}
+
+#nav-header>.search input{
+	border-color: rgb(232, 65, 62);
+	font-size: 1.6rem;
+	border-top-left-radius: 8px;
+	border-bottom-left-radius: 8px;
+}
+
+#nav-header>.search span .btn{
+	border-top-right-radius: 8px;
+	border-bottom-right-radius: 8px;
+
+}
+
+#nav-header>.search>.input-group{
+	width: 330px;
+}
+#nav-header>.login_btn{
+	position:relative;
+}
+#nav-header>.login_btn .btn{
+	width: 63px;
+	border: 1px rgb(232, 65, 62) solid;
+	border-radius: 4px;
+}
+#gl_username {
+	width: 80px;
+}
+
+#nav-header>.login_btn .login{
+	border-top-right-radius: 0;
+	border-bottom-right-radius: 0;
+	        overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+}
+
+#nav-header>.login_btn .regis{
+	border-top-left-radius: 0;
+	border-bottom-left-radius: 0;
+}
+
+#nav-header>.login_btn .submit{	
+	font-size: 10px;
+	float:right;
+	margin-top: -68px;
+
+}
+
+#nav_title{
+	width: 1080px;
+	margin: 0px auto;
+}
+
+#nav_title ul{
+	width: 100%;
+	font-size: 0px;
+	/* border-right: 1px solid #e8413e;
+	border-left: 1px solid #e8413e; */
+}
+
+#nav_title ul li{
+	display: inline-block;
+	width: 14.28%;
+	background: #e8413e;
+	font-size: 1.6rem;
+	text-align: center;
+	padding: 8px 0 8px;
+	border-top: 1px solid #e8413e;
+	border-bottom: 1px solid #e8413e;
+}
+
+#nav_title ul li.up{
+	display: none;
+}
+
+#nav_title ul li>a{
+	color: #fff;
+}
+
+#nav_title ul li:hover{
+	background: #fff;
+	cursor: pointer;
+}
+
+#nav_title ul li:hover a{
+	color: #e8413e;
+	text-decoration: none;
+}
+
+#nav_title ul li.more{
+	display: none;
+}
+
+#nav_content{
+	width: 1080px;
+	margin: 0 auto;
+	font-size: 1.3rem;
+	text-align: center;
+}
+
+#nav_content .nav_content{
+	float: left;
+}
+
+#nav_content .nav_content .nav_content_title{
+	display: inline-block;
+	width: 30px;
+	float: left;
+}
+
+#nav_content .nav_content .nav_content_title>a{
+	color: #e8413e;
+}
+
+#header div.more{
+	display: none;
+}
+
+#nav_content .nav_content .nav_content_content,#nav_content .nav_content .nav_content_content>ul{
+	width: 160px;
+}
+
+#nav_content .nav_content .nav_content_content a{
+	color: #414141;
+	font-size: 1.3rem;
+}
+
+#nav_content .nav_content .nav_content_content>ul>li{
+	display: inline-block;
+}
+
+#nav_content .nav_content .course,#nav_content .nav_content .course>ul{
+	width: 120px;
+}
+
+#nav_content .nav_content .course ul li{
+	width:28px;
+}
+
+/*底部部分*/
+#footer{
+	width: 1080px;
+	margin: 0 auto;
+	text-align: center;
+	line-height: 25px;
+	letter-spacing: 2px;
+	font-size: 1.3rem;
+	margin-bottom:20px;
+}
+
+#footer .copyright{
+	font-family:Arial;
+}
+
+#header div.up span a{
+	display: none;
+}		
+}
+/*适配手机端*/
+@media only screen and (max-width: 500px) {
+	body{
+		overflow-X: hidden;
+	}
+
+	/*头部部分*/
+
+	
+	#header .welcome{
+	    display: none;
+	}
+
+	#header, #nav-header{
+		width: 100%;
+	}
+
+	#header #nav-header{
+		height: 115px;
+		border-bottom: 0.5px solid #787878;
+	}
+
+	#header #nav-header .search{
+		position: fixed;
+		top: 0;
+		width: 100%;
+		z-index:1000;
+	}
+
+	#header #nav-header .logo>a>img{
+		width: 50%;
+		position: relative;
+		top: 50px;
+		left:20px;
+	}
+
+	#header #nav-header .weather>iframe{
+		display:none;
+	}
+
+	#header #nav-header .login_btn{
+		display: inline-block;
+		float:right;
+		margin-top:15px;
+		margin-right:10px;
+		font-size: 0;
+	}
+
+	#nav-header>.login_btn .login{
+	    
+		border-top-right-radius: 0;
+		border-bottom-right-radius: 0;
+		max-width:70px;
+		display: inline-block;
+        overflow:hidden;
+            text-overflow:ellipsis;
+            white-space:nowrap;
+	}
+
+	#nav-header>.login_btn .regis{
+		border-top-left-radius: 0;
+		border-bottom-left-radius: 0;
+	}
+
+	#header #nav-header .submit{
+		display: none;
+	}
+
+	#nav_title{
+		width: 100%;
+		margin: 0px auto;
+	}
+
+	#nav_title ul{
+		width: 100%;
+		font-size: 0px;
+		border-right: 1px solid #e8413e;
+		border-left: 1px solid #e8413e;
+	}
+
+	#nav_title ul li{
+		display: inline-block;
+		width: 33.33%;
+		background: #e8413e;
+		font-size: 1.6rem;
+		text-align: center;
+		padding: 8px 0 8px;
+		border-top: 1px solid #e8413e;
+		border-bottom: 1px solid #e8413e;
+	}
+
+	#nav_title ul li>a{
+		color: #fff;
+	}
+
+	#nav_title ul li:hover{
+		background: #fff;
+		cursor: pointer;
+	}
+
+	#nav_title ul li:hover a{
+		color: #e8413e;
+		text-decoration: none;
+	}
+
+	#nav_content{
+		width: 100%;
+		margin: 0 auto;
+		font-size: 1.3rem;
+		text-align: center;
+	}
+
+	#nav_content .nav_content{
+		float: left;
+	}
+
+	#nav_content .nav_content .nav_content_title{
+		display: inline-block;
+		width: 38px;
+		float: left;
+		padding-left:8px;
+	}
+
+	#nav_content .nav_content .nav_content_title>a{
+		color: #e8413e;
+	}
+
+	#nav_content .nav_content .nav_content_content,#nav_content .nav_content .nav_content_content>ul{
+		/* width: 180px; */
+		width:158px;
+	}
+
+	#nav_content .nav_content .nav_content_content a{
+		color: #000;
+	}
+	#nav_content .nav_content .nav_content_content>ul>li{
+		display: inline-block;
+	}
+
+	#nav_content .nav_content .course,#nav_content .nav_content .course>ul{
+		width: 110px;
+	}
+
+	#header div.more span a,#header div.up span a{
+		color: #000;
+	}
+
+	/*底部部分*/
+	#footer{
+		width: 100%;
+		margin: 20 auto;
+		text-align: center;
+		font-size: 1.25rem;
+		font-family: "微软雅黑";
+	}
+}

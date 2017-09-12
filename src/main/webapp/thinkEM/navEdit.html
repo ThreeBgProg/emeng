@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content link-edit-box"  >
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>导航管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>导航管理</cite></a>
+                <a><cite>></cite></a>
+              <a><cite>编辑导航</cite></a>
+            </span>
+    </div>
+    <form class="layui-form top20" id='nav_edit_form'>
+        <div class="layui-form-item">
+            <label for="nav_position" class="layui-form-label" >
+                <span class="my-red">*</span>坑位
+            </label>
+            <div class="layui-input-inline">
+                <input type="number" disabled='' id="nav_position" name="name" required="" lay-verify="required"
+                       autocomplete="off"  value="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="nav_document" class="layui-form-label">
+                <span class="my-red">*</span>文案
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="nav_document" name="sort" required="" lay-verify="required"
+                       autocomplete="off" value="思政动态" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="nav_link" class="layui-form-label">
+                <span class="my-red">*</span>URL
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="nav_link" name="link" required="" lay-verify="required"
+                       autocomplete="off" value="http://www.baidu.com" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <input type="submit" id='nav_submit' class="layui-btn" value='保存'>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -16,12 +16,14 @@ public class FileuploadServiceImpl {
 			             MultipartFile[] files)throws Exception
 	   {
 		   
-		    List respondate = new ArrayList();
+		   List respondate = new ArrayList();
 
 		   if(files.length>0){ 
 			   
 			   for(int i=0;i<files.length;i++){
+//				   String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
 				   String path = request.getServletContext().getRealPath(File.separator+"wangEditor_images"+File.separator);
+//				   String path = root+File.separator+"wangEditor_images"+File.separator;
 				 //如果文件不为空，写入上传路劲
 				   if(!files[i].isEmpty()){
 					   //上传文件路劲
@@ -52,8 +54,8 @@ public class FileuploadServiceImpl {
 					   System.out.println("端口号获取"+root);
 					   
 					   System.out.println("分割符："+File.separator);
-					   
 					   respondate.add(i, root+ File.separator + "emeng" + File.separator + "wangEditor_images" + File.separator +str);
+//					   respondate.add(i, root + File.separator + "wangEditor_images" + File.separator +str);
 				   }
 			   }
 		   }
@@ -64,8 +66,12 @@ public class FileuploadServiceImpl {
 			   MultipartFile link)throws Exception
 	   {
 		  Map<String, String> map = new HashMap<>();
+//		   String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+
 		  if(!link.isEmpty()){
 			   String path = request.getServletContext().getRealPath(File.separator+"videos"+File.separator);
+//			   String path = root+File.separator+"videos"+File.separator;
+
 			   String linkName = link.getOriginalFilename();
 			   File linkpath = new File(path,linkName);
 			   if(!linkpath.getParentFile().exists()){
@@ -80,8 +86,8 @@ public class FileuploadServiceImpl {
 			   
 			   map.put("linkName", linkName);
 			   String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
-
 			   map.put("link", root+File.separator+"emeng"+File.separator+"videos"+File.separator+str);
+//			   map.put("link", root + File.separator+"videos"+File.separator+str);
 		   }
 		   return map;
 
@@ -93,6 +99,9 @@ public class FileuploadServiceImpl {
 	   {
 		   String string=null;
 		   if(!pic.isEmpty()){
+//			   String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
+//			  
+//			   String path = root+File.separator+"images"+File.separator;
 			   String path = request.getServletContext().getRealPath(File.separator+"images"+File.separator);
 			   String picName = pic.getOriginalFilename();
 			   File picpath = new File(path,picName);
@@ -107,8 +116,8 @@ public class FileuploadServiceImpl {
 			   pic.transferTo(new File(path+File.separator+str));
 			   
 			   String root = request.getScheme()+"://"+request.getServerName()+":"+request.getServerPort();
-
 			   string = root+File.separator+"emeng"+File.separator+"images"+File.separator+str;
+//			   string = root+File.separator+"images"+File.separator+str;
 		   }
 		   return string;
 	   }

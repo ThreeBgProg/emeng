@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>indexEM</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content article-edit-box"  >
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>文章管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>文章编辑</cite></a>
+            </span>
+    </div>
+    <form class="layui-form layui-form-pane" id='article_form' >
+        <div class="layui-form-item">
+            <label for="L_title" class="layui-form-label">
+                标题
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="L_title" name="title" required lay-verify="title" value="文章初始标题"
+                       autocomplete="off" class="layui-input" maxlength="64" placeholder="文章标题不超过64个字符">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <div class="layui-input-block">
+                        <textarea id="L_content" name="content"
+                                  placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+            </div>
+            <label for="L_content" class="layui-form-label" style="top: -2px;">
+                内容
+            </label>
+        </div>
+        <div class="layui-form-item">
+            <label  class="layui-form-label">
+                作者
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_author"
+                       autocomplete="off"   class="layui-input contribute-edit-title">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label  class="layui-form-label">
+                已有附件
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="L_annex" disabled=""
+                       autocomplete="off" 
+            </div>
+        </div>
+        <div class="layui-form-item top20" >
+        <label  class="layui-form-label" style='width:100px'>
+               替换或上传附件
+            </label>
+            
+        </div>
+        <div class="layui-form-item top20">
+            <input type="file" id='article_annex' lay-type="file"  name='annex'> <span class="my-red">（*请上传小于500M的附件）</span>
+        </div>
+        
+         <div id="parent" style='width:550px; height:10px; border:2px solid #09F; margin-top:10px;margin-bottom:10px;'>
+        <div id="son" style='width:0; height:100%; background-color:#09F; text-align:center; line-height:8px; font-size:20px; '></div>
+    	</div>   
+        
+        <div class="layui-form-item">
+            <!--<button class="layui-btn" key="set-mine"  lay-submit lay-filter="go" id='contribute-pass'>
+                处理
+            </button>-->
+            <input type="button" id='article_submit' class="layui-btn" value='修改'>
+        </div>
+    </form>
+     <div style='height:200px'></div>
+</div>
+<script src="libs/jquery.min.js" charset="utf-8"></script>
+<script src="libs/layui/layui.js" charset="utf-8"></script>
+<script src='js/articleEdit.js' charset="utf-8"></script>
+<script src="js/thinkEM.js" charset="utf-8"></script>
+</body>
+</html>

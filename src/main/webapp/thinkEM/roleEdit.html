@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>indexEM</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+    <style type="text/css">
+*{margin:0;padding:0;list-style-type:none;outline:none;}
+a,img{border:0;}
+body{font:12px/normal "microsoft yahei";}
+.selectbox{width:770px;height:220px;margin:50px auto;}
+#roleInput{
+	margin: 10px 0;
+}
+.selectbox div{float:left;}
+.selectbox .select-bar{padding:0 20px;}
+.selectbox .select-bar select{width:300px;height:250px;border:1px #A0A0A4 solid;padding:4px;font-size:20px;font-family:"microsoft yahei";}
+.btn-bar{}
+.btn-bar p{margin-top:16px;}
+.btn-bar p .btn{width:50px;height:30px;cursor:pointer;font-family:simsun;font-size:14px;}
+
+.submitBtn{
+	margin: 30px;
+}
+</style>
+    </style>
+</head>
+<body>
+
+
+<div class="iframe-content contribute-edit-box"  >
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>权限管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>角色管理</cite></a>
+                <a><cite>></cite></a>
+              <a><cite>编辑角色权限</cite></a>
+            </span>
+    </div>
+
+   
+				<div class="selectbox">
+				<div class="select-bar">
+				    <select multiple="multiple" id="select1">
+				<!--         <option value="增加"></option>
+				        <option value="删除"></option>
+				        <option value="修改"></option>
+				        <option value="查询"></option> -->
+				    </select>
+				</div>
+
+				<div class="btn-bar">
+				    <p><span id="add"><input type="button" class="btn" value=">" title="移动选择项到右侧"/></span></p>
+				    <p><span id="add_all"><input type="button" class="btn" value=">>" title="全部移到右侧"/></span></p>
+				    <p><span id="remove"><input type="button" class="btn" value="<" title="移动选择项到左侧"/></span></p>
+				    <p><span id="remove_all"><input type="button" class="btn" value="<<" title="全部移到左侧"/></span></p>
+				</div>
+
+				<div class="select-bar">
+				    <select multiple="multiple" id="select2"></select>
+				</div>
+				</div>
+	<form class="layui-form"  id='roleInfo'>
+              <div class="layui-form-item">
+                <label class="layui-form-label">角色</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="title" required  lay-verify="required" placeholder="请输入角色" autocomplete="off" class="layui-input rolename">
+                </div>
+              </div> 
+
+              <div class="layui-form-item submitBtn" id="rolesubmit">
+				        <input type="submit" id='contribute_submit' class="layui-btn">
+				</div>
+	</form>	 
+</div>
+<script src="libs/jquery.min.js" charset="utf-8"></script>
+<script src="libs/layui/layui.js" charset="utf-8"></script>
+<script src="js/thinkEM.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(function(){	
+	//移到右边
+	$('#add').click(function(){
+		//先判断是否有选中
+		if(!$("#select1 option").is(":selected")){			
+			alert("请选择需要移动的选项")
+		}
+		//获取选中的选项，删除并追加给对方
+		else{
+			$('#select1 option:selected').appendTo('#select2');
+		}	
+	});
+	
+	//移到左边
+	$('#remove').click(function(){
+		//先判断是否有选中
+		if(!$("#select2 option").is(":selected")){			
+			alert("请选择需要移动的选项")
+		}
+		else{
+			$('#select2 option:selected').appendTo('#select1');
+		}
+	});
+	
+	//全部移到右边
+	$('#add_all').click(function(){
+		//获取全部的选项,删除并追加给对方
+		$('#select1 option').appendTo('#select2');
+	});
+	
+	//全部移到左边
+	$('#remove_all').click(function(){
+		$('#select2 option').appendTo('#select1');
+	});
+	
+	//双击选项
+	$('#select1').dblclick(function(){ //绑定双击事件
+		//获取全部的选项,删除并追加给对方
+		$("option:selected",this).appendTo('#select2'); //追加给对方
+	});
+	
+	//双击选项
+	$('#select2').dblclick(function(){
+		$("option:selected",this).appendTo('#select1');
+	});
+});
+</script>
+</body>
+</html>

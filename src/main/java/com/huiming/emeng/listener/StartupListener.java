@@ -25,35 +25,35 @@ public class StartupListener {
 	@Autowired
 	private PermissionMapper permissionMapper;
 
-	public void initMethod() throws Exception {
-
-		System.err.println("startupListener---------------");
-
-		List<Permission> permissionList = permissionMapper.selectAll();
-		List<Method> methods = getMethodsNameInClass("com.huiming.emeng.controller");
-		for (Method m : methods) {
-
-			Permission permission = getPermissionFromMethod(m);
-			// 与数据库进行对比
-			if (permissionList.contains(permission)) {
-				// 权限存在数据库,但无效
-				permission.setState((byte) 1);
-				permissionMapper.updateByMapping(permission);
-				permissionList.remove(permission);
-			} else {
-				// 插入新权限
-				permission.setState((byte) 1);
-				permissionMapper.insert(permission);
-			}
-		}
-		// 置无效权限
-		for (Permission temp : permissionList) {
-			if (temp.getState() != 0) {
-				temp.setState((byte) 0);
-				permissionMapper.updateByPrimaryKeySelective(temp);
-			}
-		}
-	}
+//	public void initMethod() throws Exception {
+//
+//		System.err.println("startupListener---------------");
+//
+//		List<Permission> permissionList = permissionMapper.selectAll();
+//		List<Method> methods = getMethodsNameInClass("com.huiming.emeng.controller");
+//		for (Method m : methods) {
+//
+//			Permission permission = getPermissionFromMethod(m);
+//			// 与数据库进行对比
+//			if (permissionList.contains(permission)) {
+//				// 权限存在数据库,但无效
+//				permission.setState((byte) 1);
+//				permissionMapper.updateByMapping(permission);
+//				permissionList.remove(permission);
+//			} else {
+//				// 插入新权限
+//				permission.setState((byte) 1);
+//				permissionMapper.insert(permission);
+//			}
+//		}
+//		// 置无效权限
+//		for (Permission temp : permissionList) {
+//			if (temp.getState() != 0) {
+//				temp.setState((byte) 0);
+//				permissionMapper.updateByPrimaryKeySelective(temp);
+//			}
+//		}
+//	}
 
 	/**
 	 * 获取包下所有需要监控的方法的名称

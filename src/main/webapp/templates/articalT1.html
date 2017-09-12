@@ -1,0 +1,18 @@
+<!-- 文章详细 -->
+					<div class="ui_content_detail ui_news_detail">
+						<h4 class="text-center ">{{detaildata.titile}}</h4>
+						<hr>
+						<h6 class="text-center">时间：{{detaildata.publishTime|reverse2}} &emsp;<span ng-show="detaildata.author">作者：{{detaildata.author}}</span> <!-- 浏览：XXX --></h6>
+						 
+						<div style="word-wrap:break-word;word-break:break-all;"  class="detailText" ng-bind-html="detaildata.content|htmlContent"></div>
+						<br>
+						<div class="clearfix"></div>
+						<ul class="list-unstyled ui_news_up_down ">
+							<li ng-show="detaildata.annex">附件下载：<a style="word-wrap:break-word;word-break:break-all;"  style="color:#3C80BD" target="_blank" download  href="./filedownload?fileUrl={{detaildata.annex}}">{{detaildata.annex|reverse6}}</a><span ng-show="phone">（PC端下载）</span></li>
+							<li ng-show="detaildata.link" style="word-wrap:break-word;word-break:break-all;">文章来源：{{detaildata.link}}</li>
+						</ul>
+
+					
+						<div class="clearfix"></div>
+
+					</div>

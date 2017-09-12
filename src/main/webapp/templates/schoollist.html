@@ -1,0 +1,20 @@
+ <div class="common-content school-content" >
+     <ul>
+    <li ng-repeat="x in schoollist"><a href="{{x.school.link}}" ><span class="school-img"><img ng-src="{{x.school.pic}}"></span><br><span class="school-name">{{x.school.name}}</span></a></li>
+  </ul>
+ <div ng-hide="schoollist.length" class="IFlogin">
+                    <h4 class="middle">没有相关内容</h4>
+     </div>
+ 	<div class="clearfix"></div>
+	<div ng-show="pagingOptions.totalPage>1" class="tcdPageCode" pageset='getschoolByType()'>
+ 	</div>
+    
+    
+   	<!--   <ul style="display:none">
+         <li><a href="#"><span class="school-img"><img src="images/school-21.png"></span><br><span class="school-name">广东外语外贸大学</span></a></li>
+     </ul>
+     <ul style="display:none">
+         <li><a href="#"><span class="school-img"><img src="images/school-11.png"></span><br><span class="school-name">广州中医药大学</span></a></li>
+     </ul> -->
+ </div>
+ 

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style>
+#content {
+background-color: red;
+    width: 800px;
+    height: 800px;
+}
+</style>
+</head>
+<body>
+<div id='content' ></div>
+</body>
+<script src='libs/jquery.min.js'>
+</script>
+<script>
+    $.ajax({
+        url: "http://localhost:8082/emeng/passage/search/list",
+        dataType: "json",
+        async: true,
+        data: {'searchInfo':'lovess'},
+        type: "POST",
+        success: function (data) {
+           /* $('#content').html(data);*/
+           var a = JSON.stringify(data);
+            $('#content').html(a);
+
+        },
+        error: function () {
+            alert('失败')
+        }
+    })
+</script>
+</html>

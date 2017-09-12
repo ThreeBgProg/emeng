@@ -1,0 +1,1003 @@
+/*媒体查询，适配pc端*/
+@media only screen and (min-width:500px) {
+/*轮播展示*/
+#content{
+	width: 1080px;
+	margin: 0 auto;
+	max-width:100%;
+}
+
+#content #play{
+	width: 290px;
+	height: 250px;
+	background: gray;
+	display: inline-block;
+	float: left;
+	margin-right: 18px;
+	overflow: hidden;
+	border:1px solid rgb(120,120,120);
+	border-radius: 2px;
+}
+
+/*最新资料*/
+#content .commonClass{
+	border: 1px solid rgba(120,120,120,0.5);
+	border-radius: 2px;
+	width: 495px;
+	min-height: 250px;
+	float: left;
+}
+
+#content .commonClass .news-title{
+	border-bottom: 1px solid #fad8d7;
+	line-height: 35px;
+	font-size: 1.6rem;
+	color: #e8413e;
+	font-weight: 600;
+}
+
+#content .commonClass .news-title a.title{
+	color: #e8413e;
+}
+
+#content .commonClass .news-title a.more{
+	color: #5f5e5e;
+	float: right;
+	font-size: 1.3rem;
+	padding-right: 20px;
+}
+
+#content .commonClass .news-title img{
+	vertical-align: top;
+	margin: 3px 10px 0 25px;
+}
+
+#content .commonClass .common-content>ul{
+	margin:14px 0px 6px;
+}
+
+#content .commonClass .common-content>ul>li{
+	margin-left: 25px;
+	list-style: none;
+	width: 440px;
+	line-height: 19px;
+	border-bottom: 1px solid rgba(165, 165, 165,0.42);
+	margin-top: 3px;
+/* 	letter-spacing: 1px; */
+}
+
+#content .commonClass .common-content>ul>li span{
+	display: inline-block;
+}
+
+#content .commonClass .common-content>ul>li span.type{
+	color: #e8413e;
+	display: inline-block;
+	float: left;
+}
+
+#content .commonClass .common-content>ul>li span.text{
+	display: inline-block;
+	width: 340px;
+	text-overflow: ellipsis;
+	white-space: nowrap; 
+	overflow: hidden;
+}
+.headline span.text{
+width: 350px!important;
+}
+
+#content .commonClass .common-content>ul>li span.date{
+	float: right;
+	display: inline-block;
+	width:85px;
+	overflow:hidden;
+	text-align:right;
+		text-overflow: ellipsis;
+	white-space: nowrap; 
+	overflow: hidden;
+}
+
+#content .commonClass .common-content>ul>li>a{
+	color: #414141;
+	font-size: 1.4rem;
+	text-decoration: none;
+}
+
+#content .commonClass .common-content>ul>li>a:hover{
+	text-decoration: none;
+}
+
+/*名师新秀*/
+#content #teacher-show{
+	border: 1px solid rgba(120,120,120,0.5);
+	border-radius: 2px;
+	width: 255px;
+	height: 250px;
+	float: right;
+	margin-left: 15px;
+}
+
+#content #teacher-show .teacher-title{
+	border-bottom: 1px solid #fad8d7;
+	line-height: 35px;
+	font-size: 1.6rem;
+	color: #e8413e;
+	font-weight: 600;
+}
+
+#content #teacher-show .teacher-title a.title{
+	color: #e8413e;
+}
+
+#content #teacher-show .teacher-title a.more{
+	color: #5f5e5e;
+	float: right;
+	font-size: 1.3rem;
+	padding-right: 20px;
+}
+
+#content #teacher-show .teacher-title .teacher-logo>img{
+	vertical-align: top;
+	margin: 3px 10px 0 25px;
+}
+
+#content #teacher-show .teacher-content>ul{
+	margin:10px 0px 6px 15px;
+	list-style: none;
+}
+
+#content #teacher-show .teacher-content>ul li{
+	display: inline-block;
+	width: 238px;
+	height: 57px;
+	border-bottom: 1px solid rgba(165, 165, 165,0.42);
+	font-size: 1.3rem;
+	margin-top: 7px;
+}
+#content #teacher-show .teacher-content>ul li .tea-img{
+	padding-right: 15px;
+	float: left;
+	width:72px;
+    height:53px;
+}
+
+#content #teacher-show .teacher-content>ul li span.tea-intro{
+	display: inline-block;
+	width: 155px;
+	color: #000;
+	display: inline-block;
+	text-overflow: ellipsis;
+	white-space: nowrap; 
+	overflow: hidden;
+}
+
+/*思政动态和马院头条*/
+.dynamic-show{
+	margin-top: 10px;
+}
+
+#content .dynamic-show {
+    height: 400px;
+}
+
+#content .headline {
+    height: 400px;
+    float:right;
+}
+
+.headline{
+	margin-left: 40px;
+	width: 538px !important;
+	margin-top: 10px;
+}
+
+#content .commonClass .common-content>ul>li.headline-li{
+	width: 480px;
+}
+
+#content .commonClass .common-content>ul>li span{
+	display: inline-block;
+}
+
+/*猜你喜欢*/
+#interest .inter-container{
+	width: 100%;
+	height: 155px;
+	border-radius: 2px;
+	border: 1px solid rgba(120,120,120,0.5);	
+	float: left;
+	/* margin-top: 30px; */
+}
+
+#interest .inter-container .inter-title{
+	font-family: "微软雅黑";
+	font-size: 1.6rem;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+#interest .inter-container ul{
+	list-style-type: none;
+	width: 100%;
+}
+
+#interest .inter-container ul li{
+	margin: 5px 46px 9px 9px;
+	display: inline-block;
+}
+
+#interest .inter-container ul li .ad-text{
+	width: 220px;
+	height: 138px;
+}
+
+#interest .inter-container ul li .ad-text{
+	width: 220px;
+	height: 30px;
+	background: #000;
+/* 	opacity: 0.3; */
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+	top: -30px;
+}
+
+#interest .inter-container ul li span{
+	opacity: 1;
+	color: #fff;
+	position: relative;
+	top: 5px;
+}
+
+#interest .inter-container ul li.ad-last{
+	float: right;
+	margin-right: 9px;
+}
+
+#interest .inter-container ul li.ad-last .ad{
+	display: inline-block;
+	width: 60px;
+	height: 20px;
+	background: #fff;
+	float: right;
+	color: #000;
+	opacity: 0.8;
+	margin-top: 5px;
+}
+
+/*我有话说*/
+.express{
+	margin-top: 0px;
+	width: 790px !important;
+	height: 345px !important;
+}
+
+.commonClass .second-title{
+	width: 100%;
+	height: 31px;
+	background: #eceef2;
+	font-size: 1.5rem;
+}
+
+.commonClass .second-title a span{
+	padding-top: 5px;
+	color: #000;
+	padding-bottom: 5px;
+}
+
+.commonClass .second-title .tab{
+	display: inline-block;
+	width: 100px;
+	text-align: center;
+}
+
+.commonClass .second-title .active{
+	background: #deddf7;
+	height:28px;
+}
+
+.commonClass .second-title .edit{
+	float: right;
+	font-size: 2rem;
+	margin-right: 30px;
+}
+
+.commonClass .second-title .input-group{
+	width: 190px;
+	float: right;
+	margin-right: 40px;
+	margin-top: 2.5px;
+}
+
+.commonClass .second-title .input-group  input{
+	padding: 3px 8px;
+	height: 25px;
+}
+
+.commonClass .second-title .input-group button{
+	height: 25px;
+	vertical-align: middle;
+}
+
+.commonClass .second-title .input-group .search{
+	position: relative;
+	top: -2.5px;
+}
+
+.express .common-content .content1{
+	width: 730px;
+	margin: 15px 10px 10px 45px;
+	list-style-type: decimal;
+	font-size: 0px;
+	letter-spacing: 2px;
+}
+
+.express .common-content .content1 .name,.express .common-content .content1 .date,.express .common-content .content1 .glyphicon-user{
+	float: right;
+}
+
+.express .common-content .content1 .name{
+	margin-right: 30px;
+}
+
+.express .common-content .content1 .glyphicon-user{
+	position: relative;
+	top: 6px;
+	right: 8px;
+}
+
+.express .common-content .content1 a li{
+	color: #000;
+	line-height: 25px;
+	font-size: 1.2rem;
+	letter-spacing: 2px;
+	
+}
+
+.express .common-content .content2 a li{
+	padding-bottom: 7px;
+	border-bottom: 1px solid gray;
+	list-style: none;
+}
+
+.express .common-content .content1 a li span.title{
+	font-size: 1.4rem;
+	color: #2d64b3;
+}
+
+.express .common-content .content1 a li span.text{
+	font-size: 1.2rem;
+}
+
+.express .common-content  .more{
+	width: 100%;
+	text-align: center;
+	position: relative;
+	top: -8px;
+	color: #5f5e5e;
+}
+
+.express .common-content .more:hover{
+	background: #eceef2;
+}
+
+/*会议论坛*/
+.conference{
+	width: 255px !important;
+	float: left;
+	margin: 0px 0 0 35px;
+	height: 345px !important;
+}
+
+.conference  .common-content>ul>li{
+	width: 225px !important;
+	list-style-image: url(../images/disc.png) !important;
+	border:none !important; 
+}
+
+.conference .common-content>ul>li span.text{
+	display: inline-block;
+	position: relative;
+	top: 7px;
+	width: 215px !important;
+	text-decoration: none;
+}
+
+/*盟员广场*/
+.friend{
+	width: 100% !important;
+	margin-top: 25px;
+	min-height: 200px !important;
+}
+
+.friend .second-title .more{
+	font-size: 1.3rem;
+	float: right;
+	margin-right: 20px;
+	margin-top: 3px;
+	color: #5f5e5e;
+	font-weight:600;
+}
+
+.friend .second-title .more:hover{
+	cursor:pointer;
+	text-decoration:underline;
+}
+
+.friend .second-title span.tab {
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.friend .second-title span.tab:hover{
+	cursor: pointer;
+}
+
+.friend .second-title ul li{
+	display: inline-block;
+	list-style: none;
+}
+
+.friend .school-content ul{
+	width: 100%;
+}
+
+.friend .school-content ul li{
+	border: none !important;
+	width: 150px !important;
+	text-align: center;
+	display: inline-block;
+	margin-left: 25px !important;
+	margin-top: 20px !important;
+}
+
+
+
+.friend .school-content img{
+	width:90px;
+	height:70px;
+}
+.friend .school-content .left,.friend .school-content .right{
+	position: relative;
+	top: -70px;
+	display: inline-block;
+	width: 25px;
+	height: 25px;
+	background: #ccc;
+	opacity: 0.5;
+	padding: 4px 0 0 6px;
+	border-radius: 3px;
+}
+
+.friend .school-content .left:hover,.friend .school-content .right:hover{
+	opacity: 1;
+	cursor: pointer;
+}
+
+.friend .school-content .left{
+	left: 27px;
+}
+.friend .school-content .right{
+	width: 30px;
+	left: 982px;
+}	
+
+.friend .school-content ul li span.school-name{
+	font-size: 1.4rem;
+	letter-spacing: 0px;
+}
+
+.friend .other-school {
+	background-color: #ccc;
+	padding-left: 30px;
+}
+.friend .other-school select {
+	width: 200px;
+	margin-left: 20px;
+}
+#move_to {
+	display: inline-block;
+	width: 50px;
+	background-color: #87c8dc;
+	border-radius: 4px;
+	margin-left: 20px;
+	cursor: pointer;
+	text-align: center;
+	height: 23px;
+	vertical-align: top;
+	line-height: 23px;
+	letter-spacing: 4px;
+	margin:4px;
+}
+
+/*友情链接*/
+.links{
+	width: 100% !important;
+	margin-top: 20px;
+	    margin-bottom: 30px;
+    padding-bottom: 20px;
+}
+
+.links .common-content .content{
+	width: 160px;
+	margin: 30px 0px 30px 50px;
+	display: inline-block;
+}
+
+.links .common-content .content a li{
+	color: #000;
+	font-size: 1.2rem;
+	line-height: 25px;
+	font-family: "微软雅黑 Light";
+}
+
+.footer-line{
+	/* margin-top: 45px; */
+}
+.line-cut img{
+		width:100%;
+	}
+}
+
+/*媒体查询，适配移动端*/
+@media only screen and (max-width: 500px) {
+
+	html,body,#header,#content,#footer{
+		/*height:100%;*/
+		overflow-x:hidden
+	}
+	
+	.line-cut{
+		display: none;
+	}
+	
+	#content{
+		width: 100%;
+		max-width:100%;
+	}
+	
+
+	/*最新资料*/
+	#content .commonClass{
+		border:none;
+		min-height: 150px;
+		float: left;
+		margin-top: 15px;
+		width: 100%;
+	}
+
+	#content .commonClass .news-title{
+		border-bottom: 1px solid #fad8d7;
+		line-height: 35px;
+		font-size: 1.6rem;
+		color: #e8413e;
+		font-weight: 600;
+	}
+
+	#content .commonClass .news-title a.title{
+		color: #e8413e;
+	}
+
+	#content .commonClass .news-title a.more{
+		color: #000;
+		float: right;
+		font-size: 1.3rem;
+		padding-right: 20px;
+	}
+
+	#content .commonClass .news-title img{
+		vertical-align: top;
+		margin: 3px 10px 0 25px;
+	}
+
+	#content .commonClass .common-content>ul{
+		margin:14px 20px 6px;
+	}
+
+	#content .commonClass .common-content>ul>li{
+		/* margin-left: 20px; */
+		list-style: none;
+		width: 100%;
+		line-height: 1.4em;
+		border-bottom: 1px solid #a5a5a5;
+		margin-top: 7px;
+		/* letter-spacing: 2px; */
+	}
+
+	#content .commonClass .common-content>ul>li span{
+		display: inline-block;
+	}
+
+	#content .commonClass .common-content>ul>li span.type{
+		color: #e8413e;
+		display: inline-block;
+		float: left;
+		width:18px;
+
+	}
+
+	#content .commonClass .common-content>ul>li span.text{
+		display: inline-block;
+	/* 	width: 50%; */
+		text-overflow: ellipsis;
+		white-space: nowrap; 
+		overflow: hidden;
+	}
+
+	#content .commonClass .common-content>ul>li span.date{
+		float: right;
+		display: inline-block;
+		width:62px;
+	    text-align: right;
+		text-overflow: ellipsis;
+		white-space: nowrap; 
+		overflow: hidden;
+	}
+
+	#content .commonClass .common-content>ul>li>a{
+		color: #000;
+		font-size: 1.4rem;
+		text-decoration: none;
+	}
+
+	#content .commonClass .common-content>ul>li>a:hover{
+		text-decoration: none;
+	}
+
+	/*名师新秀*/
+	#content #teacher-show{
+		border:none;
+		width: 100%;
+		height: 250px;
+		float: left;
+		margin-top: 15px;
+	}
+
+	#content #teacher-show .teacher-title{
+		width: 100%;
+		border-bottom: 1px solid #fad8d7;
+		line-height: 35px;
+		font-size: 1.6rem;
+		color: #e8413e;
+		font-weight: 600;
+		margin-left: 20px;
+	}
+
+	#content #teacher-show .teacher-title a.title{
+		color: #e8413e;
+	}
+
+	#content #teacher-show .teacher-title a.more{
+		color: #000;
+		float: right;
+		font-size: 1.3rem;
+		margin-right: 20px;
+		padding-right:25px;
+	}
+
+	#content #teacher-show .teacher-title .teacher-logo>img{
+		vertical-align: top;
+		margin: 3px 10px 0 10px;
+	}
+
+	#content #teacher-show .teacher-content>ul{
+		margin:10px 0px 6px 25px;
+		list-style: none;
+	}
+
+	#content #teacher-show .teacher-content>ul li{
+		display: inline-block;
+		width: 90%;
+		height: 57px;
+		border-bottom: 1px solid #a5a5a5;
+		font-size: 1.4rem;
+		margin-top: 7px;
+	}
+	#content #teacher-show .teacher-content>ul li .tea-img{
+		padding-right: 15px;
+		float: left;
+		width:72px;
+    	height:53px;
+	}
+
+	#content #teacher-show .teacher-content>ul li span.tea-intro{
+		display: inline-block;
+		width: 70%;
+	/* 	margin-top: 6px; */
+		vertical-align: middle;
+		letter-spacing: 0px;
+		color: #000;
+		display: inline-block;
+		text-overflow: ellipsis;
+		white-space: nowrap; 
+		overflow: hidden;
+	}
+
+	/*思政动态和马院头条*/
+	.dynamic-show{
+		margin-top: 10px;
+	}
+
+	.headline{
+		margin-left: 0px !important;
+		width: 100% !important;
+		margin-top: 15px;
+	}
+
+	#content .commonClass .common-content>ul>li.headline-li{
+		/* width: 90%; */
+	}
+
+	#content .commonClass .common-content>ul>li span{
+		display: inline-block;
+	}
+
+	#content .dynamic-show{
+	    height: 400px;
+	}
+
+	#content .headline {
+	    height: 370px;
+	}
+
+
+	/*我有话说*/
+	.express{
+		/* margin-top: 10px !important; */
+		width: 100% !important;
+		/* height: 345px !important; */
+	}
+
+	.commonClass .second-title{
+		width: 100%;
+		 line-height: 30px;
+		background: #eceef2;
+		font-size: 1.5rem;	
+	}
+
+	.commonClass .second-title a span{
+		padding-top: 3px;
+		font-size: 1.3rem;
+		color: #000;
+		padding-bottom: 5px;
+		    font-weight: 600;
+	}
+
+	.commonClass .second-title .tab{
+		display: inline-block;
+		width: 66px;
+		text-align: center;
+	}
+
+	.commonClass .second-title .active{
+		background: #deddf7;
+	}
+
+	.commonClass .second-title .edit{
+		float: right;
+		font-size: 2rem;
+		margin-right: 30px;
+		    line-height: 30px;
+	}
+
+
+
+	.express .common-content .content1{
+		width: 85%;
+		list-style-type: decimal;
+		font-size: 0px;
+		letter-spacing: 2px;
+		text-indent: 20px;
+		margin-top:20px;
+	}
+
+	.express .common-content .content2{
+		text-indent: 10px;
+	}
+
+	.express .common-content .content1 .name,.express .common-content .content1 .date,.express .common-content .content1 .glyphicon-user{
+		float: right;
+		position: relative;
+		top: -29px;
+		left: 30px;
+	}
+
+	.express .common-content .content1 .glyphicon-user{
+		right: 8px;
+	}
+
+	.express .common-content .content2 .name,.express .common-content .content2 .date,.express .common-content .content2 .glyphicon-user{
+		float: right;
+		position: relative;
+		top: 0px;
+		left: 30px;
+	}
+
+	.express .common-content .content1 a li{
+		color: #000;
+		line-height: 15px;
+		/*height: 30px;*/
+		font-size: 1.2rem;
+		letter-spacing: 2px;
+		padding-top: 6px;
+	}
+
+	.express .common-content .content2 a li{
+		padding-bottom: 17px;
+		border-bottom: 1px solid gray;
+		margin-top: 10px;
+		margin-left: 35px;
+		list-style: none;
+	}
+
+	.express .common-content .content1 a li span.text{
+		display: inline-block;
+		width: 25%;
+		display: -webkit-box;   
+		-webkit-box-orient: vertical;   
+		-webkit-line-clamp: 1;   
+		overflow: hidden;  
+		position: relative;
+		top: -15px;
+	}
+
+	.express .common-content .content1 a li span.title{
+		font-size: 1.4rem;
+		color: #2d64b3;
+
+	}
+
+	.express .common-content .content2 a li span.text{
+		width: 80%;
+		font-size: 1.2rem;
+		position: relative;
+		top: 10px;
+
+	}
+
+	.express .common-content .content2 a li span.glyphicon-user{
+		position: relative;
+		top: 4px;
+	}
+
+	.express .common-content  .more{
+		width: 100%;
+		text-align: center;
+		position: relative;
+		top: -8px;
+		color: #000;
+		background: #eceef2;
+	}
+
+
+	/*会议论坛*/
+	.conference{
+		width: 100% !important;
+		/* height: 345px !important; */
+		/* margin: 5px 0 0 0px!important; */
+		/*text-indent: 25px;*/
+	}
+	
+	.conference  .common-content>ul{
+		margin-left: 40px!important;
+	}
+
+	.conference  .common-content>ul>li{
+		width: 100% !important;
+		list-style-image: url(../images/disc.png) !important;
+		border:none !important; 
+	}
+
+	.conference .common-content>ul>li span.text{
+		display: inline-block;
+		position: relative;
+		top: 7px;
+		width: 100% !important;
+		text-decoration: none;
+	}
+
+	/*盟员广场*/
+	.friend{
+		width: 100% !important;
+		margin-top: 15px;
+	}
+	
+	.friend .school-content img{
+		width:100px;
+		height:78px;
+	}
+	.friend .second-title .more{
+		float: right;
+		margin-top: 3px;
+		padding-right: 20px;
+	} 
+
+	.friend .second-title span.tab {
+	    padding-top: 5px;
+	    padding-bottom: 5px;
+	}
+	
+	.friend .second-title ul li {
+		display: inline-block;
+		line-height:30px;
+	}
+
+	.friend .second-title ul li  span.tab{
+		display: inline-block;
+		list-style: none;
+		width: 70px !important;
+		padding-top: 5px;
+	    padding-bottom: 5px;
+	}
+
+	.friend .second-title .input-group{
+		display: none;
+	}
+
+	.friend .school-content ul{
+		width: 100%;
+	}
+
+	.friend .school-content ul li{
+		border: none !important;
+		width: 43% !important;
+		text-align: center;
+		display: inline-block;
+		/* margin-left: 19px !important; */
+		margin-top: 18px !important;
+	}
+
+	.friend .school-content ul .more{
+		font-size: 0.7rem;
+	}
+
+	.friend .school-content ul li span.school-name{
+		font-size: 1。3rem;
+		letter-spacing: 0px;
+	}
+	
+	.friend .school-content .left,.friend .school-content .right{
+		display: none;
+	}
+	/*友情链接*/
+	.links{
+		width: 100% !important;
+		margin-top: 15px !important;
+		margin-bottom: 5px;
+	}
+
+	.links .common-content .content{
+		padding-left: 20px;
+		width: 25%;
+		margin: 0px 0px 0px 20px;
+		display: inline-block;
+	}
+
+	.links .common-content .content a li{
+		color: #000;
+		font-size: 1.2rem;
+		line-height: 25px;
+		font-family: "微软雅黑 Light";
+	}
+
+	.footer-line img{
+		margin-top: 10px;
+		margin-bottom: 5px;
+	}
+	#move_to {
+    display: inline-block;
+    width: 50px;
+    background-color: #87c8dc;
+    border-radius: 4px;
+    margin-left: 20px;
+    cursor: pointer;
+    text-align: center;
+    height: 23px;
+    vertical-align: top;
+    line-height: 23px;
+    letter-spacing: 4px;
+    margin:4px;
+}
+	
+}

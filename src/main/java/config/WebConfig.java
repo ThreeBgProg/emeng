@@ -43,8 +43,8 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 	@Bean
 	public ViewResolver viewResolver() {
 		InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-		resolver.setPrefix("/");
-		resolver.setSuffix(".html");
+		resolver.setPrefix("/WEB-INF/jsp/");
+		resolver.setSuffix(".jsp");
 		resolver.setViewClass(org.springframework.web.servlet.view.JstlView.class);
 		resolver.setExposeContextBeansAsAttributes(true);
 		return resolver;
@@ -78,7 +78,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		StringHttpMessageConverter stringConverter = new StringHttpMessageConverter();
 		// 为转换器设置所支持的媒体类型
 		stringConverter.setSupportedMediaTypes(
-				Arrays.asList(new MediaType("text", "html", Charset.forName("UTF-8"))));
+				Arrays.asList(new MediaType[] { new MediaType("text", "html", Charset.forName("UTF-8")) }));
 		// 添加字符串消息转换器
 		converters.add(stringConverter);
 
@@ -92,7 +92,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 		MappingJackson2HttpMessageConverter jsonConverter = new MappingJackson2HttpMessageConverter();
 		// 为转换器设置所支持的媒体类型
 		jsonConverter.setSupportedMediaTypes(
-				Arrays.asList(new MediaType("application", "json"), new MediaType("text", "json")));
+				Arrays.asList(new MediaType[] { new MediaType("application", "json"), new MediaType("text", "json") }));
 		// 添加json转换器
 		converters.add(jsonConverter);
 	}

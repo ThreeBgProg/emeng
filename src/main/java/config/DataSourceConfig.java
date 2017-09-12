@@ -1,7 +1,5 @@
 package config;
 
-import javax.sql.DataSource;
-
 import org.apache.commons.dbcp2.BasicDataSource;
 import org.apache.ibatis.session.ExecutorType;
 import org.apache.ibatis.session.SqlSessionFactory;
@@ -14,8 +12,9 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.core.env.Environment;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.jdbc.datasource.DataSourceTransactionManager;
+
+import javax.sql.DataSource;
 
 /**
  * 数据库配置
@@ -74,7 +73,6 @@ public class DataSourceConfig implements EnvironmentAware{
 			throws Exception {
         SqlSessionFactoryBean sqlSessionFactoryBean = new SqlSessionFactoryBean();
         sqlSessionFactoryBean.setDataSource(dataSource);  
-        //sqlSessionFactoryBean.setConfigLocation(new ClassPathResource("classpath:mybaitsconfig.xml"));
         return sqlSessionFactoryBean.getObject();
 	}
 	

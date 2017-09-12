@@ -1,0 +1,16 @@
+
+	<div  class="ui_content ui_content_hot" ng-hide="$stateParams.taptype=='recommend'&&phone">
+			<div class="ui_content_nav">
+				<span class="ui_content_logo"><img src="images/recommend.png"></span>
+				<span  class="ui_content_title">热点推荐</span>
+				<a ui-sref="passage.taptype({taptype:'recommend'})" class="more"><span>更多>></span></a>
+			</div>
+			<ul class="ui_content_list">
+				<li ng-repeat="x in allRecommand"><a  ui-sref="passage.taptype.articleid({taptype:'recommend',articleid:x.id})"><span class="type"></span>{{x.titile}}</a></li>
+			</ul>
+	</div>
+
+		
+
+		
+	

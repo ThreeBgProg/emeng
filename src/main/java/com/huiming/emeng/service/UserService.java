@@ -20,7 +20,7 @@ public interface UserService {
     int updateUser(User user);
 	
 	/**
-	 * 查询是否存在有效用户
+	 * 查询是否存在用户
 	 * @param user
 	 * @return 
 	 */
@@ -43,6 +43,12 @@ public interface UserService {
 	 * @return
 	 */
     int insertUser(User user);
+    
+    /**
+	 * 添加用户
+	 * @return
+	 */
+    int insertSelective(User user);
 	
 	
 	/**
@@ -95,8 +101,6 @@ public interface UserService {
 	 * @return
 	 */
     Boolean selectByJobId(String jobId);
-	
-
 	
 
 }

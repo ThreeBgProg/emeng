@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content link-edit-box"  >
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>课程发布</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>章节编辑</cite></a>
+            </span>
+    </div>
+    <form class="layui-form top20" id='chapter_add_form'>
+        <div class="layui-form-item">
+            <label for="chapter_num" class="layui-form-label">
+                <span class="my-red">*</span>章节序号
+            </label>
+            <div class="layui-input-inline">
+                <input type="number" id="chapter_num" name="name" required="" lay-verify="required"
+                       autocomplete="off"  value="" class="layui-input">
+            </div>
+            <label  class="layui-form-label" style='width:124px'>
+                <span class="my-red">*章节序号不能重复</span>
+            </label>
+        </div>
+        <div class="layui-form-item">
+            <label for="chapter_name" class="layui-form-label">
+                <span class="my-red">*</span>章节名称
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="chapter_name" name="sort" required="" lay-verify="required"
+                       autocomplete="off" value="走进世界" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="chapter_lesson" class="layui-form-label">
+                <span class="my-red">*</span>所属课程
+            </label>
+            <div class="layui-input-inline">
+                <input type="url" disabled id="chapter_lesson" name="link" required="" lay-verify="required"
+                       autocomplete="off" value="基础" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label"></label>
+            <input type="submit" id='chapter_submit' class="layui-btn" value='保存'>
+        </div>
+    </form>
+</div>
+</body>
+</html>

@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content">
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>友情链接</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>链接管理</cite></a>
+            </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+
+    <form class="layui-form " action="" id='form_add_url'>
+    <div class="layui-form-pane" style="margin-top: 15px;">
+        <div class="layui-form-item">
+            <label class="layui-form-label">链接名</label>
+            <div class="layui-input-inline">
+                <input type="text" name="name"  required placeholder="链接名" autocomplete="off" class="layui-input" id='add_link_name'>
+            </div>
+            <label class="layui-form-label">URL</label>
+            <div class="layui-input-inline">
+                <input type="url" name="link"  required placeholder="http://www.baidu.com" autocomplete="off" class="layui-input" id='add_link'>
+            </div>
+            <label class="layui-form-label">排序</label>
+            <div class="layui-input-inline">
+                <input type="number" name="link" required  placeholder="20" autocomplete="off" class="layui-input" id='add_link_sort'>
+            </div>
+            <div class="layui-input-inline" style="width:80px">
+                <button class="layui-btn" type='submit' id='button_link_add'><i class="layui-icon">&#xe608;</i>添加</button>
+            </div>
+        </div>
+    </div>
+    </form>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th>
+                ID
+            </th>
+            <th>
+                链接名
+            </th>
+            <th>
+                url
+            </th>
+            <th>
+                排序
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+
+    <div id="page"></div>
+</div>
+</body>
+<script src='libs/jquery.min.js'></script>
+<script src='libs/layui/layui.js'></script>
+<script src='js/linkManage.js'></script>
+</html>

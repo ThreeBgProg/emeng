@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>思政e盟后台登录</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body style="background-color: #393D49">
+<div class="login-box">
+    <div class="login-top">
+        <ul class="login-right">
+            <li style="background-color: #F1C85F;" color="#F1C85F">
+            </li>
+            <li style="background-color: #EA569A;" color="#EA569A">
+            </li>
+            <li style="background-color: #393D49;" color="#393D49">
+            </li>
+        </ul>
+    </div>
+    <div class="login-mid">
+        <div class="input">
+            <form class="layui-form"  method='post' id='login_form'>
+                <div class="layui-form-item my-login-box">
+                    <label for="username" class="layui-form-label">
+                        <i class="layui-icon">&#xe612;</i>
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="text" id="username" name="username" required="" lay-verify="username"
+                               autocomplete="off" placeholder="username" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item my-login-box">
+                    <label for="pass" class="layui-form-label">
+                        <i class="layui-icon">&#xe628;</i>
+                    </label>
+                    <div class="layui-input-inline">
+                        <input type="password" id="pass" name="password" required="" lay-verify="pass"
+                               autocomplete="off" placeholder="******" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-form-item" id="loginbtn">
+                    <button  class="layui-btn" type='button' id='login_button'>
+                        登 录
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<p style="color:#fff;text-align: center;">欢迎登录思政E盟后台管理系统！ </p>
+</body>
+<script src='libs/jquery.min.js'></script>
+<script src='libs/layui/layui.js'></script>
+<script src="js/check.js" charset="utf-8"></script>
+
+<script src='js/login.js'></script>
+</html>

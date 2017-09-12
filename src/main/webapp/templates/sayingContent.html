@@ -1,0 +1,27 @@
+<div ng-controller="saying">
+	<!-- 我有话说 -->
+		<div  class="ui_content ui_content_tolk">
+			<div class="ui_content_nav">
+					<span class="ui_content_logo"><img src="images/saying-Logo.png"></span>
+					<span  class="ui_content_title">我有话说</span>
+			</div>
+			<div class="trtr"><a>当前位置：</a>
+				<a href="#index.html">首页</a><a>>我有话说</a><a ng-show="$stateParams.taptype" ui-sref=".taptype({taptype:$stateParams.taptype})">>{{typeName[Map[$stateParams.taptype]]}}</a><a url="javascript:" ng-show="$stateParams.articleid&&!phone">>文章详细</a>
+			</div>
+			<div class="clearfix"></div>
+			<div class="ui_content_nav2" active="saying" active>					
+				<a class="tab"  ui-sref="saying.taptype({taptype:urlName[0]})"><span >热帖榜</span></a>
+				<a class="tab" ui-sref="saying.taptype({taptype:urlName[1]})"><span >实时更新</span></a>
+		        <!-- <div class="input-group">
+		              <input type="text" class="form-control " placeholder="搜索">
+		              <span class="input-group-btn">
+		                  <button class="btn btn-info" type="button"><span class="glyphicon glyphicon-search search"></span></button>
+		              </span>
+		        </div>    -->             	
+		        <a  ui-sref="saying.taptype({taptype:urlName[2]})"><span class="glyphicon glyphicon-edit edit"></span></a>
+			</div>
+			<!-- 列表 -->
+			<div ui-view="detail" >
+			</div>
+		</div>
+</div> 

@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>indexEM</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content contribute-edit-box" id='hello' >
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>权限管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>权限管理</cite></a>
+                <a><cite>></cite></a>
+              <a><cite>编辑用户权限</cite></a>
+            </span>
+    </div>
+
+        <form class="layui-form" action="" id="authorityInfoform">
+              <div class="layui-form-item">
+                <label class="layui-form-label">请求URL</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="title" required  lay-verify="required" placeholder="请输入请求URL" autocomplete="off" class="layui-input id" disabled="true">
+                </div>
+              </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">描述</label>
+                    <div class="layui-input-block">
+                      <textarea name="desc" placeholder="请输入描述" class="layui-textarea text"></textarea>
+                    </div>
+                </div>
+              <div class="layui-form-item">
+                    <input type="submit" id='contribute_submit' class="layui-btn">
+                </div>
+       </form>
+</div>
+<script src="libs/jquery.min.js" charset="utf-8"></script>
+<script src="libs/layui/layui.js" charset="utf-8"></script>
+<script src="js/thinkEM.js" charset="utf-8"></script>
+</body>
+</html>

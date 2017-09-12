@@ -1,0 +1,35 @@
+<div ng-controller="onlinelesson">
+			<!-- 在线课程 -->
+		<div  class="ui_content ui_content_online">
+			<div class="ui_content_nav">
+				<!-- <span class="ui_content_logo"><img src="images/saying-Logo.png"></span> -->
+				<span  class="ui_content_title">在线课程</span>
+				<!-- <div class="input-group">
+		            <input type="text" class="form-control " placeholder="搜索">
+		            <span class="input-group-btn">
+		                <button class="btn btn-info" type="button"><span class="glyphicon glyphicon-search search"></span></button>
+		            </span>
+	             </div> -->
+			</div>
+			<div class="trtr"><a>当前位置：</a>
+				<a href="#index.html">首页</a><a>>在线课程</a>
+			</div>
+			<div class="ui_content_list">
+					<a ng-repeat="x in detaildata" class="ui_online_list_i" href="{{x.link}}">
+						<img ng-src="{{x.pic}}" class="thumbnail">
+						<p class="dotdotdot" ng-bind ="x.name" dot></p>
+					</a>
+			</div> 
+			<div ng-hide="detaildata.length" class="IFlogin">
+                    <h4 class="middle">没有相关内容</h4>
+    		 </div>
+			<div class="clearfix"></div>
+			<div ng-show="pagingOptions.totalPage>1" class="tcdPageCode" pageset='getPagingData()'>
+		 	</div>
+		</div>
+		<div ui-view="hotlist"></div>
+</div>
+		
+
+		
+	

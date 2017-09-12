@@ -1,0 +1,22 @@
+<!-- 文章详细 -->
+					<div class="ui_content_detail ui_news_detail">
+						<h4 class="text-center ">{{detaildata[1].titile}}</h4>
+						<hr>
+						<h6 class="text-center">时间：{{detaildata[1].publishTime|reverse2}}  &emsp;<span ng-show="detaildata.author">作者：{{detaildata[1].author}}</span> <!-- 浏览：XXX --></h6>
+						 
+						<div class="detailText" style="word-wrap:break-word;word-break:break-all;"  ng-bind-html="detaildata[1].content|htmlContent"></div>
+						<div class="clearfix"></div>
+						<br>	
+						<ul class="list-unstyled ui_news_up_down ">
+<!-- 							<li ng-show="detaildata[1].annex">附件下载：<a style="color:blue"  href="javascript:;" ng-click="getDownload(detaildata[1].annex)" >{{detaildata[1].annex|reverse6}}</a></li>
+ -->
+ 							<li ng-show="detaildata[1].annex">附件下载：<a style="word-wrap:break-word;word-break:break-all;"  style="color:#3C80BD" target="_blank" download  href="./filedownload?fileUrl={{detaildata[1].annex}}" >{{detaildata[1].annex|reverse6}}</a><span ng-show="phone">（PC端下载）</span></li>
+ 							<li ng-show="detaildata[1].link" style="word-wrap:break-word;word-break:break-all;" >文章来源：{{detaildata[1].link}}</li>
+						</ul>
+						<div class="clearfix"></div>
+						<hr>
+						<ul class="list-unstyled ui_news_up_down">
+							<li ng-show="detaildata[0].id"><a href="{{detaildata[0].type|reverse3}}{{detaildata[0].id}}"><span class="pull-left">上一篇：</span><span class="text">{{detaildata[0].titile}}</span><span class="date">{{detaildata[0].publishTime|reverse2}} </span></a></li>
+							<li ng-show="detaildata[2].id"><a href="{{detaildata[2].type|reverse3}}{{detaildata[2].id}}"><span class="pull-left">下一篇：</span><span class="text">{{detaildata[2].titile}}</span><span class="date">{{detaildata[2].publishTime|reverse2}} </span></a></li>
+						</ul>
+					</div>

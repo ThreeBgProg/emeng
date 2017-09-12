@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>思政e盟后台管理系统</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+    <div class="main">
+        <div class="header">
+            <a href="indexEM.html" class="logo">
+                <img src="images/logo-white-last.png" alt="" width='200px'>
+            </a>
+            <ul class="layui-nav admin">
+                <li class='layui-nav-item'>
+                    <a href="javascript:;" id='B_username'></a>
+                    <dl class="layui-nav-child">
+                        <dd><a href="./login.html" id='B_logout'>退出</a></dd>
+                    </dl>
+                </li>
+                <li class='layui-nav-item'><a href='../index.html#/index'>前台首页</a></li>
+            </ul>
+        </div>
+        <div class="left">
+            <div class="layui-side-scroll">
+                <ul class="layui-nav layui-nav-tree " >
+                    <li class="layui-nav-item" id='user_contribute'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;">&#xe63c;</i><cite>用户投稿</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="contributeList.html" id='contribute_list'>
+                                    <cite>投稿列表</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='article_manage'>
+                        <a href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;">&#xe60a;</i><cite>文章管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="latestInformation.html">
+                                    <cite>最新资料</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="ideologicDynamic.html">
+                                    <cite>思政动态</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="headline.html">
+                                    <cite>马院头条</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="writer.html">
+                                    <cite>经典作家</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="talk.html">
+                                    <cite>领导讲话</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="document.html">
+                                    <cite>厅部文件</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="announcement.html">
+                                    <cite>通知公告</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="reform.html">
+                                    <cite>改革动态</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="constration.html">
+                                    <cite>学科建设</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="assess.html">
+                                    <cite>评估排行</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="science.html">
+                                    <cite>科研前沿</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="hottopic.html">
+                                    <cite>热点推荐</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="booklist.html">
+                                    <cite>阅读书目</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="online.html">
+                                    <cite>精品在线</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                                <a href="javascript:;" data-href="teacherforum.html">
+                                    <cite>名师新论</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                                <a href="javascript:;" data-href="teacherforumnew.html">
+                                    <cite>新秀论坛</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='lesson_publish'>
+                        <a href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;">&#xe609;</i><cite>课程发布</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="javascript:;" data-href="basic.html">
+                                    <cite>基础</cite>
+                                </a>
+                            </dd>
+                            <dd class="">
+                                <a href="javascript:;" data-href="generality.html">
+                                    <cite>概论</cite>
+                                </a>
+                            </dd>
+                            <dd class="">
+                                <a href="javascript:;" data-href="theory.html">
+                                    <cite>原理</cite>
+                                </a>
+                            </dd>
+                            <dd class="">
+                                <a href="javascript:;" data-href="essentials.html">
+                                    <cite>纲要</cite>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='authority_manage'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;">&#xe612;</i><cite>权限管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="userManage.html">
+                                    <cite>用户管理</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="userReview.html">
+                                    <cite>用户审核</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="authorityManage.html">
+                                    <cite>权限管理</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="roleManage.html">
+                                    <cite>角色管理</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='friendly_link'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;font-size: 16px">&#xe64c;
+                            </i><cite>友情链接</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                            <dd class="">
+                                <a href="javascript:;" data-href="linkManage.html">
+                                    <cite>链接管理</cite>
+                                </a>
+                            </dd>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='meeting_manage'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;font-size: 16px">&#xe613;</i><cite>会议管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="javascript:;" data-href="meetingManage.html">
+                                    <cite>会议管理</cite>
+                                </a>
+                            </dd>
+                            <dd class="">
+                                <a href="javascript:;" data-href="meetingSignup.html">
+                                    <cite>会议报名</cite>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='nav_manage'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;">&#xe632;</i><cite>导航管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="javascript:;" data-href="navManagenew.html">
+                                    <cite>一级导航管理</cite>
+                                </a>
+                            </dd>
+                            <dd class="">
+                                <a href="javascript:;" data-href="navManage.html">
+                                    <cite>二级导航管理</cite>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='vedio_manage'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;">&#xe623;</i><cite>视频资源</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="javascript:;" data-href="vedioManage.html">
+                                    <cite>视频资源</cite>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='ad_manage'>
+                        <a href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;">&#xe630;</i><cite>广告管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="javascript:;" data-href="adManage.html">
+                                    <cite>广告管理</cite>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='forum'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;">&#xe63a;</i><cite>论坛帖子</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="javascript:;" data-href="forumManagepass.html">
+                                    <cite>审核通过帖子</cite>
+                                </a>
+                            </dd>
+                            <dd class="">
+                            <a href="javascript:;" data-href="forumManagenosee.html">
+                                <cite>未审核帖子</cite>
+                            </a>
+                            </dd>
+                            <dd class="">
+                            <a href="javascript:;" data-href="forumManagenopass.html">
+                                <cite>审核不通过帖子</cite>
+                            </a>
+                            </dd>
+                        </dl>
+                    </li>
+                     <li class="layui-nav-item" id='teacher_manage'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;font-size: 16px">&#xe642;</i><cite>名师管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="javascript:;" data-href="teacherManage.html">
+                                    <cite>名师风采</cite>
+                                </a>
+                            </dd>
+                            <dd class="">
+                                <a href="javascript:;" data-href="teacherManageOld.html">
+                                    <cite>教坛新秀</cite>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                    <li class="layui-nav-item" id='school_manage'>
+                        <a  href="javascript:;">
+                            <i class="layui-icon" style="top: 3px;font-size: 16px">&#xe62a;</i><cite>学校管理</cite>
+                        </a>
+                        <dl class="layui-nav-child">
+                            <dd class="">
+                                <a href="javascript:;" data-href="schoolManage.html">
+                                    <cite>学校管理</cite>
+                                </a>
+                            </dd>
+                        </dl>
+                    </li>
+                </ul>
+                <div style='height:100px'></div>
+            </div>
+        </div>
+        <div class="right">
+            <iframe src="contributeList.html" frameborder="0" class='myframe'></iframe>
+        </div>
+    </div>
+    <script src='libs/jquery.min.js'></script>
+    <script src="libs/layui/layui.js" charset="utf-8"></script>
+    <script src="js/thinkEM.js" charset="utf-8"></script>
+</body>
+</html>

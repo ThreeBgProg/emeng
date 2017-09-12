@@ -1,0 +1,251 @@
+<div ng-controller="indexALL">
+
+
+    <!-- 内容部分 -->
+        <!-- 轮播展示 -->
+        <div class="line-cut"><img src="images/line-cut-top.png"></div>
+        <div id="play" ng-controller="playCtr">
+          <div id="player">
+                        <div id="myCarousel" class="carousel slide">
+                          <!-- 轮播（Carousel）指标 -->
+                          <ol class="carousel-indicators">
+                            <li class="ccc" ng-show="player[0].passage.type" data-target="#myCarousel" data-slide-to="0" class="active"></li>
+                            <li class="ccc" ng-show="player[1].passage.type" data-target="#myCarousel" data-slide-to="1"></li>
+                            <li class="ccc" ng-show="player[2].passage.type" data-target="#myCarousel" data-slide-to="2"></li>
+                            <li class="ccc" ng-show="player[3].passage.type" data-target="#myCarousel" data-slide-to="3"></li>
+                          </ol>   
+                          <!-- 轮播（Carousel）项目 -->
+                          <div class="carousel-inner">
+                            <div class="item active" ng-if="player[0].passage.type">
+                              <a href="{{player[0].passage.type|reverse3}}{{player[0].passage.id}}"><img playheight ng-src="player[0].banner.pic" alt="{{player[0].passage.titile}}"></a>
+                              <div class="carousel-caption"><a href="{{player[0].passage.type|reverse3}}{{player[0].passage.id}}">{{player[0].passage.titile}}</a></div>
+                            </div>
+                            <div class="item" ng-if="player[1].passage.type">
+                               <a href="{{player[1].passage.type|reverse3}}{{player[1].passage.id}}"><img playheight ng-src="{{player[1].banner.pic}}" alt="{{player[1].passage.titile}}"></a>
+                              <div class="carousel-caption"><a href="{{player[1].passage.type|reverse3}}{{player[1].passage.id}}">{{player[1].passage.titile}}</a></div>
+                            </div>
+                            <div class="item" ng-if="player[2].passage.type">
+                               <a href="{{player[2].passage.type|reverse3}}{{player[2].passage.id}}"><img playheight ng-src="{{player[2].banner.pic}}" alt="{{player[2].passage.titile}}"></a>
+                              <div class="carousel-caption"><a href="{{player[2].passage.type|reverse3}}{{player[2].passage.id}}">{{player[2].passage.titile}}</a></div>
+                            </div>
+                            <div class="item" ng-if="player[3].passage.type">
+                               <a href="{{player[3].passage.type|reverse3}}{{player[3].passage.id}}"><img playheight ng-src="{{player[3].banner.pic}}" alt="{{player[3].passage.titile}}"></a>
+                              <div class="carousel-caption"><a href="{{player[3].passage.type|reverse3}}{{player[3].passage.id}}">{{player[3].passage.titile}}</a></div>
+                            </div>
+                          </div>
+                          <!-- 轮播（Carousel）导航 -->
+                          <a lineheight class="carousel-control left prev-slide" href="#myCarousel" 
+                             data-slide="prev">&lsaquo;</a>
+                          <a lineheight class="carousel-control right next-slide" href="#myCarousel" 
+                             data-slide="next">&rsaquo;</a>
+                        </div> 
+
+                  </div>
+
+        </div>
+        <!-- 最新资料 -->
+        <div class="commonClass news-show">
+            <div class="news-title">
+                <a ><span class="news-logo"><img src="images/news-logo.png"></span></a>
+                <a  class="title"><span>最新资料</span></a>
+                <a ui-sref="passage.taptype({taptype:'latestnews'})" class="more"><span>更多>></span></a>
+            </div>
+            <div class="common-content news-content">
+                <ul>
+                    <li ng-repeat="x in newestPassageList"><a ui-sref="passage.taptype.articleid({taptype:'latestnews',articleid:x.id})"><span class="type">>&nbsp;</span><span class="text" textwidth>{{x.titile}}</span><span class="date">{{x.publishTime|reverse}}</span></a></li>
+                </ul>
+            </div>
+        </div>
+          <!-- 名师新秀 -->
+        <div id="teacher-show">
+            <div class="teacher-title">
+                <a ><span class="teacher-logo"> <img src="images/tea-logo.png"></span></a>
+                <a  class="title" ><span> 名师新秀</span></a>
+                <a ui-sref="teacher.taptype({taptype:'elegant'})" class="more"><span>更多>></span></a>
+            </div>
+            <div class="teacher-content">
+                <ul>
+                    <li ng-repeat="x in indexTeacher"><a ui-sref="teacher.taptype.articleid({taptype:'elegant',articleid:x.id})"  >
+                    <img ng-src="{{x.pic}}" class="tea-img">
+                    <span class="tea-intro" >{{schoolname[$index]}}</span>
+                    <span class="tea-intro">{{x.name}}&nbsp教授</span>
+                    </a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 分割线 -->
+        <div class="line-cut"><img src="images/line-cut.png"></div>
+        <!-- 思政动态 -->
+        <div class="commonClass dynamic-show">
+            <div class="news-title dynamic-title">
+                <a ><span class="dynamic-logo"><img src="images/dynamic-logo.png"></span></a>
+                <a  class="title"><span>思政动态</span></a>
+                <a ui-sref="passage.taptype({taptype:'IPstate'})" class="more"><span>更多>></span></a>
+            </div>
+            <div class="common-content dynamic-content">
+                <ul>
+                    <li ng-repeat="x in dynamicList"><a ui-sref="passage.taptype.articleid({taptype:'IPstate',articleid:x.id})" ><span class="type">>&nbsp;</span><span class="text" textwidth>{{x.titile}}</span><span class="date">{{x.publishTime|reverse}}</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 马院头条 -->
+        <div class="commonClass headline">
+            <div class="news-title headline-title">
+                <a ><span class="headline-logo"><img src="images/topLine-logo.png"></span></a>
+                <a  class="title"><span>马院头条</span></a>
+                <a ui-sref="passage.taptype({taptype:'headline'})" class="more"><span>更多>></span></a>
+            </div>
+            <div class="common-content headline-content">
+                <ul>
+                    <li ng-repeat="x in headlineList" class="headline-li"><a ui-sref="passage.taptype.articleid({taptype:'headline',articleid:x.id})"><span class="type">>&nbsp;</span><span class="text" textwidth>{{x.titile}}</span><span class="date">{{x.publishTime|reverse}}</span></a></li>
+                </ul>
+            </div>
+        </div>
+        
+      <!-- 猜你兴趣 -->
+        <div id="interest" ng-controller="adCtr">
+        	<div ng-if="!phone" class="img_l" id='ad_left'><img src="images/left.gif" /></div>
+            <div ng-if="!phone" class="inter-container">
+                <ul id='ad_w'>
+                    <li ng-repeat="x in adList">
+                        <a href="{{x.link}}"><img src="{{x.pic}}" class="ad-img" >
+                        <div class="ad-text">
+                            <span>{{x.slogan}}</span>
+                        </div>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+            <div ng-if="!phone" class="img_l" id='ad_right'><img src="images/right.gif" /></div>
+            
+       
+            
+             <div id="play2" ng-if="phone">
+                        <div id="myCarousel2" class="carousel slide">
+                          <!-- 轮播（Carousel）项目 -->
+                          <div class="carousel-inner">
+                            <div class="item active" >
+                              <a href="{{adList[0].link}}"><img playheight2 ng-src="adList[0].pic" ></a>
+                              <div class="carousel-caption"><a href="{{adList[0].link}}">{{adList[0].slogan}}</a></div>
+                            </div>
+                            <div ng-repeat="x in adList" ng-if="$index" class="item">
+                              <a href="{{x.link}}"><img playheight2 ng-src="x.pic" ></a>
+                              <div class="carousel-caption"><a href="{{x.link}}">{{x.slogan}}</a></div>
+                            </div>
+                          </div>
+                          <!-- 轮播（Carousel）导航 -->
+                          <a lineheight2 class="carousel-control left prev-slide" href="#myCarousel2" 
+                             data-slide="prev">&lsaquo;</a>
+                          <a lineheight2 class="carousel-control right next-slide" href="#myCarousel2" 
+                             data-slide="next">&rsaquo;</a>
+                           <script type="text/javascript">
+                           $("#myCarousel2").carousel('cycle');
+                             	// 循环轮播到上一个项目
+                   		$(".prev-slide").click(function(){
+                   		 $("#myCarousel2").carousel('cycle');
+                   		 $("#myCarousel").carousel('cycle');
+
+                   		});
+                   		// 循环轮播到下一个项目
+                   		$(".next-slide").click(function(){
+                   		 $("#myCarousel2").carousel('cycle');
+                   		 $("#myCarousel").carousel('cycle');
+
+                   		}); 
+                  		// 循环轮播到下一个项目
+                   		$(".ccc").click(function(){
+                   		 $("#myCarousel").carousel('cycle');
+                   		}); 
+                           </script>
+                        </div> 
+
+                  </div>
+            
+            
+            
+        </div>
+        
+        
+        <!-- 我有话说 -->
+        <div class="commonClass express" >
+                <div class="news-title express-title">
+                    <a ><span class="news-logo"><img src="images/saying-Logo.png"></span></a>
+                    <a  class="title"><span>我有话说</span></a>
+                    <a ui-sref="saying.taptype({taptype:'hotPost'})" class="more"><span>更多>></span></a>
+                </div>
+                <div class="second-title" active2>
+                        <a ng-click="getSayingData(0)" href="javascript:;" ><span class="tab  tab-one sayingTab">热帖榜</span></a>
+                        <a ng-click="getSayingData(1)" href="javascript:;" ><span class="tab active tab-two sayingTab">实时更新</span></a>
+                        <a ui-sref="saying.taptype({taptype:'post'})"><span class="glyphicon glyphicon-edit edit"></span></a>
+                    </div>
+                <div class="common-content">
+                    <div  id="content-one" >
+                        <ul class="list-unstyled ui_tolk_list" >
+							<li ng-repeat="x in indexSaying"><a ui-sref="saying.taptype.articleid({taptype:sayingtype,articleid:x.id})"><span class="type">{{($index+1)}}</span><span class="text" textwidth>{{x.titile}}</span><span class="date">{{x.releaseTime|reverseX}}</span><span class="auth"> <span class="glyphicon glyphicon-user"></span>{{x.username}}</span></a></li>
+						</ul>
+                    </div>
+                </div>
+            </div>
+        <!-- 会议论坛 -->
+        <div class="commonClass conference" >
+            <div class="news-title conference-title">
+                <a ><span class="conference-logo"><img src="images/conference-logo.png"></span></a>
+                <a  class="title"><span>会议论坛</span></a>
+                <a ui-sref="meeting" class="more"><span>更多>></span></a>
+            </div>
+            <div class="common-content saying-content" id="common-content">
+                <ul>
+                    <li  ng-repeat="x in meeting"><a ui-sref="meeting.articleid({articleid:x.id})"><span class="text">{{x.title}}</span></a></li>
+                </ul>
+            </div>
+        </div>
+        <!-- 盟员广场 -->
+        <div class="commonClass friend">
+            <div class="news-title friend-title">
+                <a ><span class="friend-logo"><img src="images/school-logo.png"></span></a>
+                <a  class="title"><span>盟员广场</span></a>
+            </div>
+            <div class="second-title">
+                <ul active>
+                    <li ng-click="getschoolByType2(1)" class="active"><span class="tab">本科院校</span></li>
+                    <li ng-click="getschoolByType2(2)" class=""><span class="tab">独立学院</span></li>
+                    <li ng-click="getschoolByType2(3)" class=""><span class="tab">高职院校</span></li>
+                    <a ><span ui-sref="school.taptype({taptype:'undergraduate'})"  class="more">更多学校>></span></a>
+                </ul>
+            </div>
+            <div class="common-content school-content">
+                <ul>
+                    <li ng-repeat="x in schoollist"><a href="{{x.school.link}}" ><span class="school-img"><img ng-src="{{x.school.pic}}"></span><br><span class="school-name">{{x.school.name}}</span></a></li>
+                </ul>
+
+              <!--   <span class="left"><<</span>
+                <span class="right">>></span> -->
+            </div>
+        </div>
+
+        <!-- 友情链接 -->
+       <div class="commonClass links">
+            <div class="news-title links-title">
+                <a><span class="links-logo"><img src="images/friend-logo.png"></span></a>
+                <a  class="title"><span>友情链接</span></a>
+                <a ui-sref="links" class="more"><span>更多>></span></a>
+            </div>
+            <div class="common-content links-content">
+               <ul>
+                        <a ng-repeat="x in linkList" href='{{x.link}}'><li>{{x.name}}</li></a>
+                    </ul>
+            </div>
+        </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+    

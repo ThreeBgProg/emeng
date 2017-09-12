@@ -62,5 +62,7 @@ public interface UserMapper {
    int selectCount();
    
    User selectByJobId(String jobId);
+   
+   List<User> selectByUsername(String username);
 
 }

@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html ng-app="myApp">
+<head>
+  <title>首页</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="css/common.css">
+    <link rel="stylesheet" type="text/css" href="css/index.css">
+    <link rel="stylesheet" type="text/css" href="css/index2.css">
+    <link rel="stylesheet" type="text/css" href="css/cyhadd.css">
+    <link rel="stylesheet" href="css/pageCode.css" />
+    <link rel="stylesheet" href="css/register.css">
+    <link rel="stylesheet" href="css/login.css">
+    <script type="text/javascript" src="js/jquery-3.1.0.min.js"></script>
+    <script src="js/jQuery.dotdotdot-master/src/jquery.dotdotdot.min.js" type="text/javascript"></script>
+    <script src="angular-1.4.6/angular.js"></script>
+    <script src="angular-1.4.6/angular-sanitize.js"></script>
+    <script src="js/angular-ui-router.js"></script>
+    <script src="js/directives.js"></script>
+</head>
+<body ng-controller="appcontroller">
+  <!-- 头部部分 -->
+  <div class="header" id="header" ng-controller="navigationCtr">
+    <div id="welcome">
+      <div class="welcome">
+        <span title="欢迎访问堂外堂思政e盟官方网站!">欢迎访问堂外堂思政e盟官方网站!</span>
+        <ul>
+          <!-- <li><a href="#"><span class="glyphicon glyphicon-earphone"></span>联系我们</a></li> -->
+          <li><a href="#"><span class="glyphicon glyphicon-home"></span>设为主页</a></li>
+          <li><a href="#"><span class="glyphicon glyphicon-bookmark"></span>加入收藏</a></li>
+        </ul>
+      </div>
+    </div>
+    <div id="nav-header">
+      <div class="logo">
+        <a href="#/index">
+          <img src="images/logo-back-last.png" >
+        </a>
+      </div>
+      <div class="weather" style='position:relative;top:6px;'>
+        <iframe width="200" scrolling="no" height="50" frameborder="0" allowtransparency="true" src="http://i.tianqi.com/index.php?c=code&id=12&icon=1&num=1"></iframe>
+      </div>
+
+      <div ng-show="!appusername" class="login_btn">
+        <a ui-sref="login"><button class="btn btn-danger login" >登录</button></a>
+        <a ui-sref="register"><button class="btn btn-default regis">注册</button></a>
+        <br>
+        <a href='javascript:;'  ng-click="submission()"><button class="btn btn-xs submit btn-danger">我要投稿</button></a>
+      </div>
+      
+      <div ng-show="appusername" class="login_btn" id='gl_user'>
+        <a><button class="btn btn-danger login" id='gl_username' style='width:100px' ng-bind="appusername"></button></a>
+        <a><button class="btn btn-default regis" ng-click="getout()" id='gl_exit'>退出</button></a>
+        <br>
+        <a href='./submisson.html' target='_blank'><button class="btn btn-xs submit btn-danger">我要投稿</button></a>
+      </div>
+      <div class="search">
+        <div class="input-group">
+          <input ng-keyup="mykey($event)" ng-model="allsearch.value" type="text" class="form-control" placeholder="搜索您感兴趣的内容">
+              <span class="input-group-btn">
+                <button class="btn btn-danger" ng-click="getsearchData()" type="button"><span class="glyphicon glyphicon-search"></span> 搜索</button>
+              </span>
+        </div>
+      </div>
+    </div>
+    <!-- 导航栏 -->
+     <!-- 导航栏 -->
+    <div id="nav_title">
+      <ul>
+        <li><a ng-bind="navigationList[0].document" href="{{navigationList[0].link}}"></a></li>
+        <li><a ng-bind="navigationList[1].document" href="{{navigationList[1].link}}"></a></li>
+         <li class="more"><a href="#">更多</a></li>
+        <li><a ng-bind="navigationList[2].document" href="{{navigationList[2].link}}"></a></li>
+        <li><a ng-bind="navigationList[3].document" href="{{navigationList[3].link}}"></a></li>
+        <li><a ng-bind="navigationList[4].document" href="{{navigationList[4].link}}"></a></li>
+        <li><a ng-bind="navigationList[5].document" href="{{navigationList[5].link}}"></a></li>
+        <li><a ng-bind="navigationList[6].document" href="{{navigationList[6].link}}"></a></li>
+
+        <li class="up"><a href="#">收起</a></li>
+      </ul>
+    </div>
+    <!-- 二级导航栏 -->
+    <div id="nav_content">
+      <div class="nav_content">
+        <div class="nav_content_title"><a ng-bind="navigationList[7].document" href="{{navigationList[7].link}}"></a></div>
+        <div class="nav_content_content">
+          <ul>
+        	<li><a ng-bind="navigationList[8].document" href="{{navigationList[8].link}}"></a></li>
+        	<li><a ng-bind="navigationList[10].document" href="{{navigationList[10].link}}"></a></li>
+       		<li><a ng-bind="navigationList[9].document"href="{{navigationList[9].link}}"></a></li>
+        	<li><a ng-bind="navigationList[11].document" href="{{navigationList[11].link}}"></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav_content">
+        <div class="nav_content_title"><a ng-bind="navigationList[12].document" href="{{navigationList[12].link}}"></a></div>
+        <div class="nav_content_content course">
+          <ul>
+            <li><a ng-bind="navigationList[13].document" href="{{navigationList[13].link}}"></a></li>
+        	<li><a ng-bind="navigationList[15].document" href="{{navigationList[15].link}}"></a></li>
+       		<li><a ng-bind="navigationList[14].document" href="{{navigationList[14].link}}"></a></li>
+        	<li><a ng-bind="navigationList[16].document" href="{{navigationList[16].link}}"></a></li>
+          </ul>
+        </div>
+      </div>
+      <!-- 更多 -->
+      <div class="more">
+        <span><a href="#">更多>></a></span>
+      </div>
+      <div class="nav_content">
+        <div class="nav_content_title"><a ng-bind="navigationList[17].document" href="{{navigationList[17].link}}"></a></div>
+        <div class="nav_content_content">
+          <ul>
+            <li><a ng-bind="navigationList[18].document" href="{{navigationList[18].link}}"></a></li>
+        	<li><a ng-bind="navigationList[20].document" href="{{navigationList[20].link}}"></a></li>
+       		<li><a ng-bind="navigationList[19].document" href="{{navigationList[19].link}}"></a></li>
+        	<li><a ng-bind="navigationList[21].document" href="{{navigationList[21].link}}"></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav_content">
+        <div class="nav_content_title"><a ng-bind="navigationList[22].document" href="{{navigationList[22].link}}"></a></div>
+        <div class="nav_content_content">
+          <ul>
+            <li><a ng-bind="navigationList[23].document" href="{{navigationList[23].link}}"></a></li>
+        	<li><a ng-bind="navigationList[25].document" href="{{navigationList[25].link}}"></a></li>
+       		<li><a ng-bind="navigationList[24].document" href="{{navigationList[24].link}}"></a></li>
+        	<li><a ng-bind="navigationList[26].document" href="{{navigationList[26].link}}"></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav_content">
+        <div class="nav_content_title"><a ng-bind="navigationList[27].document" href="{{navigationList[27].link}}"></a></div>
+        <div class="nav_content_content">
+          <ul>
+           <li><a ng-bind="navigationList[28].document" href="{{navigationList[28].link}}"></a></li>
+        	<li><a ng-bind="navigationList[30].document" href="{{navigationList[30].link}}"></a></li>
+       		<li><a ng-bind="navigationList[29].document" href="{{navigationList[29].link}}"></a></li>
+        	<li><a  ng-bind="navigationList[31].document" href="{{navigationList[31].link}}"></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav_content">
+        <div class="nav_content_title"><a ng-bind="navigationList[32].document" href="{{navigationList[32].link}}"></a></div>
+        <div class="nav_content_content">
+          <ul>
+            <li><a ng-bind="navigationList[33].document" href="{{navigationList[33].link}}"></a></li>
+        	<li><a ng-bind="navigationList[35].document" href="{{navigationList[35].link}}"></a></li>
+       		<li><a ng-bind="navigationList[34].document" href="{{navigationList[34].link}}"></a></li>
+        	<li><a ng-bind="navigationList[36].document" href="{{navigationList[36].link}}"></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="nav_content">
+        <div class="nav_content_title"><a ng-bind="navigationList[37].document" href="{{navigationList[37].link}}"></a></div>
+        <div class="nav_content_content">
+          <ul>
+        	<li><a ng-bind="navigationList[40].document" href="{{navigationList[40].link}}"></a></li>
+       		<li><a ng-bind="navigationList[39].document" href="{{navigationList[39].link}}"></a></li>
+        	<li><a ng-bind="navigationList[41].document" href="{{navigationList[41].link}}"></a></li>
+        	 <li><a ng-bind="navigationList[38].document" href="{{navigationList[38].link}}"></a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="up">
+        <span><a href="#">收起>></a></span>
+      </div>
+    </div>
+  </div>
+    <div class="clearfix"></div>
+    <div id="content" >
+      <div ui-view>
+      </div> 
+          <!-- 分割线 -->
+    <div class="clearfix"></div>
+      <div class="footer-line ">
+          <img src="images/footer-line.png">
+      </div>  
+    </div>
+    
+    <div class="clearfix"></div>
+    <!-- 尾部部分 -->
+    <footer>
+      <div id="footer">
+        <div>主办：广东白云学院思想政治理论教育研究院  浙江绍兴市堂外堂教育信息咨询公司   广州堂外堂信息科技有限公司</div>
+        <div>浙ICP备16036060号 <span class="copyright">Copyright (C) 2016Tangwaitang.cn All Right Reserved.</span> 违法和不良信息举报电话：020-31564732</div>
+       
+
+      </div>
+    </footer>
+  <script type="text/javascript" src="js/bootstrap.min.js"></script>
+  <script type="text/javascript" src="js/index.js"></script>
+  <script src="js/jquery.page.js"></script>
+    <script src="js/app.js"></script>
+    <script src="js/controllers.js"></script>
+    <script src="js/controller/indexcontrollers.js"></script>
+    <script src="js/service.js"></script>
+     <script src="js/adMove.js"></script>
+      <script src="libs/layui/layui.js"></script>
+</body>
+</html>
+

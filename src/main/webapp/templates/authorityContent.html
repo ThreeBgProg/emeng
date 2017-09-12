@@ -1,0 +1,25 @@
+<div ng-controller="authoritylistCtrl">
+		<!-- 权威发布 -->
+		<div  class="ui_content ui_content_authority">
+			<div class="ui_content_nav"  active2>
+				<span  class="ui_content_title">权威发布</span>
+				<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[0]})" class="">经典作家</a>
+				<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[1]})" class="">领导讲话</a>
+				<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[2]})" class="">厅部文件</a>
+				<a ng-show="!phone" ui-sref=".taptype({taptype:urlName[3]})" class="">通知报告</a>
+			</div>
+			<div class="trtr"><a>当前位置：</a>
+				<a href="#index.html">首页</a><a>>权威发布</a><a ng-show="$stateParams.taptype" ui-sref=".taptype({taptype:$stateParams.taptype})">>{{typeName[Map[$stateParams.taptype]]}}</a><a url="javascript:" ng-show="$stateParams.articleid&&!phone">>文章详细</a>
+			</div>
+			<div ng-show="phone"  class="ui_content_nav2"  active>
+					<a ui-sref=".taptype({taptype:urlName[0]})" class="tab"><span >经典作家</span></a>
+					<a ui-sref=".taptype({taptype:urlName[1]})" class="tab"><span >领导讲话</span></a>
+					<a ui-sref=".taptype({taptype:urlName[2]})" class="tab"><span >厅部文件</span></a>
+					<a ui-sref=".taptype({taptype:urlName[3]})" class="tab"><span >通知报告</span></a>					
+		        </div>
+			<div class="clearfix"></div>
+			<!-- 文章列表 -->
+			<div ui-view="detail"></div>
+		</div>
+		<div ui-view="hotlist"></div>
+</div>

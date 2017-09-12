@@ -1,0 +1,851 @@
+/*媒体查询，适配pc端*/
+@media only screen and (min-width:500px) {
+body {
+	overflow-x:hidden;
+}	
+* {
+	
+    word-wrap: break-word;
+    word-break: break-all;
+}	
+.trtr{
+			 border-top-left-radius:2px;
+			 border-bottom-left-radius:2px;
+			 display:block; 
+			 float:left; 
+			 height:26px; 
+			 line-height: 25px;
+			 font-size: 1.4rem;
+			 background:#FF7B79; 
+			 text-align:center; 
+			 padding:0 45px; 
+			 position:relative; 
+			 margin:0 10px 0px 0;   
+			 text-decoration:none; 
+			 color:#000; 
+		}
+	.trtr>a{
+		display:inline-block;
+		 color:#000; 
+		 max-width:230px;
+		 overflow: hidden;
+	    text-overflow: ellipsis;
+	    white-space: nowrap;
+	     height:26px; 
+		line-height: 25px;
+	
+}
+.trtr:after { 
+			float:left; 
+			content:"";   
+			border-top:13px solid #FF7B79; 
+			border-bottom:13px solid #FF7B79; 
+			border-right:25px solid transparent ; 
+			position:absolute;
+			right:-25px;
+			top:0; 
+}	
+
+
+/* lesson */
+.ui_content_spread{
+	margin: 40px;
+	padding: 0;
+	padding-bottom: 30px;
+	min-height: 550px;
+}/* 
+.ui_catalogue_list>ol{
+	margin:12px 0px;
+}
+.ui_catalogue_list>ol>li{
+	list-style-position:inside;padding-left:10px;
+	margin:5px 30px 0px 30px; 
+	border-bottom: 1px solid #ccc; 
+	height: 26px;
+	overflow:hidden;
+	text-overflow:ellipsis;
+	white-space:nowrap;
+}
+.ui_catalogue_list>ol>li>a{
+	color: #000;
+	text-decoration: none;
+	color: #000;
+	font-size: 1.2rem;
+	margin-left: -10px;
+}	 */	
+
+
+
+.apply {
+    width: 598px;
+    margin: 20px auto 0;
+}
+.apply h4 {
+    line-height: 1.6em;
+}
+.apply ul {
+    text-decoration: none;
+    list-style: none;
+    font-family: "微软雅黑 Light";
+    font-size: 14px;
+    color: #414141;
+}
+.apply ul li:first-child {
+    margin-top: 25px;
+}
+.apply ul li {
+    height: 38px;
+    line-height: 38px;
+}
+.apply ul label {
+    width: 167px;
+    text-align: right;
+}
+.apply ul input {
+
+    border-width: 1px;
+    border-color: #ccc;
+    border-style: solid;
+    border-radius: 2px;
+    margin-left: 15px;
+    width: 241px;
+    height: 27px;
+    line-height:27px;
+    padding-left: 6px;
+}
+#checkbox{
+	    width: 15px;
+    height: 15px;
+    position: relative;
+    top: 3px;
+    margin-right: 10px;
+}
+.apply ul slect {
+
+    border-width: 1px;
+    border-color: #ccc;
+    border-style: solid;
+    border-radius: 2px;
+    margin-left: 15px;
+    width: 241px;
+    height: 27px;
+    padding-left: 6px;
+}
+
+.apply ul span {
+    color: #e8413e;
+        margin: 0 20px;
+}
+.apply ul i{
+    display: inline-block;
+    margin-left: 8px;
+    width: 65px;
+    height: 27px;
+    background-color: #87dbdc;
+    vertical-align: top;
+    text-align: center;
+    line-height: 27px;
+    letter-spacing: 4px;
+}
+
+.apply  .has-registered {
+   padding-left: 180px;
+}
+.apply  .has-registered a {
+    color: #e8413e;
+}
+
+
+
+                #content #play{
+                    width: 290px;
+                    height: 250px;
+                    background: #FFF;
+                    display: inline-block;
+                    float: left;
+                    margin-right: 18px;
+                    overflow: hidden;
+                    border:0px solid rgb(120,120,120);
+                    border-radius: 2px;
+                }
+
+                #player{
+                    position: relative;
+                    width: 290px;
+                    height: 250px;
+                  }
+                 #player img{
+                  width: 290px;
+                  height: 250px;
+                 }
+                  #player .carousel-control.right {
+                    right: 0;
+                    left: auto;
+                    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    background-image: -o-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.0001)),to(rgba(0,0,0,.05)));
+                    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+                    background-repeat: repeat-x;
+                    line-height: 250px;
+                }
+                #player .carousel-control.left {
+                    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    background-image: -o-linear-gradient(left,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.05)),to(rgba(0,0,0,.0001)));
+                    background-image: linear-gradient(to right,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+                    background-repeat: repeat-x;
+                    line-height: 250px;
+                }
+
+                #player .carousel-caption {
+                    width: 100%;
+                    position: absolute;
+                    right: 0;
+                    bottom: 35px;
+                    left: 0;
+                    z-index: 10;
+                    padding-bottom: 6px;
+                    padding-top: 6px;
+                    margin-bottom: 6px;
+                    color: #fff;
+                    text-align: center;
+                    text-shadow: 0 1px 2px rgba(255,255,255,.1);
+                    background:rgba(255, 255, 255, 0.7)!important;
+                  filter:Alpha(opacity=60); background:#FFFFFF; /*　使用IE专属滤镜实现IE背景透明*/
+                }
+
+                #player .carousel-indicators {
+                    position: absolute;
+                    bottom: 10px;
+                    left: 50%;
+                    z-index: 15;
+                    width: 60%;
+                    padding-left: 0;
+                    margin-left: -30%;
+                    text-align: center;
+                    list-style: none;
+                }
+                 
+                   .carousel-control:focus, .carousel-control:hover{
+				 	
+					opacity:1;
+				}
+                     .carousel-control{
+					opacity:1;
+				}
+                 
+
+
+.common-content.links-content ul{
+	box-sizing: border-box;
+	padding-left: 26px;
+}
+.common-content.links-content ul a {
+	  
+ 		display: inline-block;
+ 		width: 210px;
+ 		overflow:hidden;
+        text-overflow:ellipsis;
+         white-space:nowrap;
+ 	}
+ 	.common-content.links-content ul li {
+ 	  list-style:none;
+ 	  color: gray;
+ 	  font-family:"Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
+ 	  line-height: 28px;
+ 	}
+ 	
+ 	
+ 	
+ 	
+/*猜你喜欢*/
+#interest .inter-container{
+	width: 100%;
+	height: 185px;
+	border-radius: 2px;
+	border: 1px solid rgba(120,120,120,0.5);	
+	float: left;
+	margin-top: 0px;
+	margin:20px auto;
+}
+
+#interest .inter-container .inter-title{
+	font-family: "微软雅黑";
+	font-size: 1.6rem;
+	margin-left: 20px;
+	margin-top: 10px;
+}
+
+#interest .inter-container ul{
+	list-style-type: none;
+	width: 100%;
+}
+
+#interest .inter-container ul li{
+	margin: 25px 40px 9px 10px;
+	display: inline-block;
+	width:220px;
+	height: 138px;
+}
+#interest .inter-container ul li img{
+	width:220px;
+	height:138px;
+}
+#interest #ad_left {
+    cursor: pointer;
+    position: relative;
+    top: 99px;
+    left:2px;
+    z-index: 10001;
+    width: 50px;
+    height: 50px;
+}
+#interest #ad_left img{
+	cursor: pointer;
+		position:relative;
+		z-index:999; 
+}
+#interest .inter-container{
+	position:relative;
+	overflow:hidden;
+}
+#interest #ad_w {
+	width: 100000px;
+	position:absolute;
+	transform:translateX(12px);
+}
+#interest #ad_right {
+	position:relative;
+	cursor: pointer;
+	left:1051px;
+	top:-120px;
+	height:0px;
+
+}
+#interest #ad_right img{
+/* 	position:relative;
+		z-index:999; */
+}
+
+
+#interest .inter-container ul li .ad-text{
+	width: 220px;
+	height: 138px;
+}
+
+#interest .inter-container ul li .ad-text{
+	width: 220px;
+	height: 30px;
+	background:rgba(0, 0, 0, 0.3)!important;
+    filter:Alpha(opacity=30); background:#000; /*　使用IE专属滤镜实现IE背景透明*/
+	text-align: center;
+	vertical-align: middle;
+	position: relative;
+	top: -30px;
+}
+
+#interest .inter-container ul li span{
+	opacity: 1;
+	color: #fff;
+	position: relative;
+	top: 5px;
+}
+
+#interest .inter-container ul li.ad-last{
+	float: right;
+	margin-right: 9px;
+}
+
+#interest .inter-container ul li.ad-last .ad{
+	display: inline-block;
+	width: 60px;
+	height: 20px;
+	background: #fff;
+	float: right;
+	color: #000;
+	opacity: 0.8;
+	margin-top: 5px;
+}
+	/* 论坛自适应 */
+.HTMLcontent{
+	position:relative;
+}
+.HTMLcontent img{
+	max-width:100%;
+}
+
+.IFlogin{
+	width:100%;
+	height:300px;
+	text-align:center;
+	padding:100px;
+}
+	
+}
+
+
+/*媒体查询，适配移动端*/
+@media only screen and (max-width:500px) {
+.detailText{
+	padding:10px;
+}
+.IFlogin{
+    width:100%;
+    /* height:300px; */
+    text-align:center;
+    padding:30px 20px;
+    l
+}
+.IFlogin h4{
+	    line-height: 3.5rem;
+    font-size: 1.6rem;
+	}
+	
+                body {
+                	overflow-x:hidden;
+                }		
+                .trtr{
+                            width:100%;
+                			 border-top-left-radius:2px;
+                			 border-bottom-left-radius:2px;
+                			 display:block; 
+                			 float:left; 
+                			 min-height:25px;
+                			 line-height: 25px;
+                			 font-size: 1.4rem;
+                			 background:#FF7B79; 
+                			 text-align:left; 
+                			 padding:0 15px; 
+                			 position:relative; 
+                			 margin:0 10px 0px 0;   
+                			 text-decoration:none; 
+                			 color:#000; 
+                			
+                		}
+                	.trtr>a{
+                		 color:#000; 
+                		 
+                	
+                }
+              /*   .trtr:after { 
+                			float:left; 
+                			content:"";   
+                			border-top:26px solid #FF7B79;
+                			border-bottom:26px solid #FF7B79;
+                			border-right:25px solid transparent ; 
+                			position:absolute;
+                			right:-25px;
+                			top:0; 
+                }	
+ */
+			/* 论坛自适应 */
+			.HTMLcontent{
+					position:relative;
+				}
+				.HTMLcontent img{
+					max-width:100%;
+				}
+
+
+
+
+                /* lesson */
+                .ui_content_spread{
+                	margin: 40px;
+                	padding: 0;
+                	padding-bottom: 30px;
+                	min-height: 550px;
+                }/* 
+                .ui_catalogue_list>ol{
+                	margin:12px 0px;
+                }
+                .ui_catalogue_list>ol>li{
+                	list-style-position:inside;padding-left:10px;
+                	margin:5px 30px 0px 30px; 
+                	border-bottom: 1px solid #ccc; 
+                	height: 26px;
+                	overflow:hidden;
+                	text-overflow:ellipsis;
+                	white-space:nowrap;
+                }
+                .ui_catalogue_list>ol>li>a{
+                	color: #000;
+                	text-decoration: none;
+                	color: #000;
+                	font-size: 1.2rem;
+                	margin-left: -10px;
+                }	 */	
+
+
+
+                .apply {
+                    /* width: 598px; */
+                    min-height: 366px;
+                    margin: 20px auto 0;
+                }
+                 .apply h4{
+                      padding-left: 10px;
+					    padding-right: 10px;
+					    font-size: 1.6rem;
+					    line-height: 1.6em;
+                }
+                .apply ul {
+                    text-decoration: none;
+                    list-style: none;
+                    font-family: "微软雅黑 Light";
+                    font-size: 14px;
+                    color: #414141;
+                }
+                .apply ul li:first-child {
+                    margin-top: 25px;
+                }
+                .apply ul li {
+                    min-height: 35px;
+                    line-height: 35px;
+                }
+                .apply ul label {
+                    width: 70px;
+                    text-align: right;
+                    color:#666;
+                }
+                .apply ul input {
+
+                    border-width: 1px;
+                    border-color: #ccc;
+                    border-style: solid;
+                    border-radius: 2px;
+                    margin-left: 15px;
+					width: 63%; 
+                    height: 27px;
+                    line-height: 27px;
+                    padding-left: 6px;
+                }
+                #checkbox{
+                	    width: 15px;
+                    height: 15px;
+                    position: relative;
+                    top: 3px;
+                    margin-right: 10px;
+                }
+                .apply ul slect {
+
+                    border-width: 1px;
+                    border-color: #ccc;
+                    border-style: solid;
+                    border-radius: 2px;
+                    margin-left: 15px;
+                    width: 241px;
+                    height: 27px;
+                    padding-left: 6px;
+                }
+
+                .apply ul span {
+                    color: #e8413e;
+                        display: block;
+    margin-left: 88px;
+                }
+                .apply ul i{
+                    display: inline-block;
+                    margin-left: 8px;
+                    width: 65px;
+                    height: 27px;
+                    background-color: #87dbdc;
+                    vertical-align: top;
+                    text-align: center;
+                    line-height: 27px;
+                    letter-spacing: 4px;
+                }
+
+                .apply  .has-registered {
+                   padding-left: 180px;
+                }
+                .apply  .has-registered a {
+                    color: #e8413e;
+                }
+
+
+
+                  #content #play {
+                	position: relative;
+				    width: 100%;
+				    height: auto;
+				    background: #FFF;
+				    display: inline-block;
+				    float: left;
+				    margin-right: 18px;
+				    overflow: hidden;
+				   border:0px solid rgb(120,120,120);
+				    border-radius: 2px;
+				}
+			
+                 #player img{
+                  width: 100%;
+                     /*height: 300px;*/
+                 }
+                 
+                  #player .carousel-control.right {
+                    right: 0;
+                    left: auto;
+                    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    background-image: -o-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.0001)),to(rgba(0,0,0,.05)));
+                    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+                    background-repeat: repeat-x;
+                    line-height: 250px;
+                }
+                #player .carousel-control.left {
+                    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    background-image: -o-linear-gradient(left,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.05)),to(rgba(0,0,0,.0001)));
+                    background-image: linear-gradient(to right,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+                    background-repeat: repeat-x;
+                    line-height: 250px;
+                }
+                .carousel-control:focus, .carousel-control:hover{
+				 	
+					opacity:1;
+				}
+                     .carousel-control{
+					font-size:35px;
+					opacity:1;
+					line-height:100%;
+				}
+               
+                 
+                  #player .carousel-caption {
+                    width: 100%;
+                    position: absolute;
+                    right: 0;
+                    bottom: 35px;
+                    left: 0;
+                    z-index: 10;
+                    padding-bottom: 6px;
+                    padding-top: 6px;
+                    margin-bottom: 6px;
+                    color: #fff;
+                    text-align: center;
+                     text-shadow: 0 1px 2px rgba(255,255,255,.1);
+                    background:rgba(255, 255, 255, 0.6)!important;
+                  filter:Alpha(opacity=60); background:#FFFFFF; /*　使用IE专属滤镜实现IE背景透明*/
+                }
+
+                #player .carousel-indicators {
+                    position: absolute;
+                    bottom: 10px;
+                    left: 50%;
+                    z-index: 15;
+                    width: 60%;
+                    padding-left: 0;
+                    margin-left: -30%;
+                    text-align: center;
+                    list-style: none;
+                }
+                                 
+
+   #content #play2 {
+                	position: relative;
+				    width: 100%;
+				    height: auto;
+				    background: #FFF;
+				    display: inline-block;
+				    float: left;
+				    margin-right: 18px;
+				    margin-top:15px;
+				    overflow: hidden;
+				   border:0px solid rgb(120,120,120);
+				   padding:0;
+				    
+				}
+			
+                 #play2 img{
+                  width: 100%;
+                     /*height: 300px;*/
+                 }
+                 
+                  #play2 .carousel-control.right {
+                    right: 0;
+                    left: auto;
+                    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    background-image: -o-linear-gradient(left,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.0001)),to(rgba(0,0,0,.05)));
+                    background-image: linear-gradient(to right,rgba(0,0,0,.0001) 0,rgba(0,0,0,.05) 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#80000000', GradientType=1);
+                    background-repeat: repeat-x;
+                    line-height: 250px;
+                }
+                #play2 .carousel-control.left {
+                    background-image: -webkit-linear-gradient(left,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    background-image: -o-linear-gradient(left,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    background-image: -webkit-gradient(linear,left top,right top,from(rgba(0,0,0,.05)),to(rgba(0,0,0,.0001)));
+                    background-image: linear-gradient(to right,rgba(0,0,0,.05) 0,rgba(0,0,0,.0001) 100%);
+                    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#80000000', endColorstr='#00000000', GradientType=1);
+                    background-repeat: repeat-x;
+                    line-height: 250px;
+                }
+                 
+                 
+                  #play2 .carousel-caption {
+                    width: 100%;
+                    position: absolute;
+                    right: 0;
+                    bottom: 0px;
+                    left: 0;
+                    z-index: 10;
+                    padding-bottom: 10px;
+                    padding-top: 8px;
+                    margin-bottom: 0px;
+                    color: #fff;
+                    text-align: center;
+                     text-shadow: 0 1px 2px rgba(255,255,255,.1);
+                    background:rgba(255, 255, 255, 0.6)!important;
+                  filter:Alpha(opacity=60); background:#FFFFFF; /*　使用IE专属滤镜实现IE背景透明*/
+                }
+
+                #play2 .carousel-indicators {
+                    position: absolute;
+                    bottom: 10px;
+                    left: 50%;
+                    z-index: 15;
+                    width: 60%;
+                    padding-left: 0;
+                    margin-left: -30%;
+                    text-align: center;
+                    list-style: none;
+                }
+                   
+
+
+
+
+
+
+
+
+
+
+                 #content .commonClass {
+                	height: auto;
+                }
+                .common-content.links-content ul{
+                	box-sizing: border-box;
+                	padding-left: 8px;
+                	padding-right: 25px;
+                }
+                .common-content.links-content ul a {
+                 		display: inline-block;
+                 		width: 100%;
+                 		overflow:hidden;
+						text-overflow:ellipsis;
+						white-space:nowrap;
+                 	}
+                 	.common-content.links-content ul li {
+                 	  list-style:none;
+                 	  color: gray;
+                 	  font-family:"Microsoft Yahei","Helvetica Neue",Helvetica,Arial,sans-serif;
+                 	  line-height: 1.8rem;
+                 	      text-align: center;
+                 	}
+                 	
+                 	
+                 	
+                 	
+                /*猜你喜欢*/
+                #interest .inter-container{
+                	width: 100%;
+                	height: 185px;
+                	border-radius: 2px;
+                	border: 1px solid rgba(120,120,120,0.5);	
+                	float: left;
+                	margin-top: 15px;
+                }
+
+                #interest .inter-container .inter-title{
+                	font-family: "微软雅黑";
+                	font-size: 1.6rem;
+                	margin-left: 20px;
+                	margin-top: 10px;
+                }
+
+                #interest .inter-container ul{
+                	list-style-type: none;
+                	width: 100%;
+                }
+
+                #interest .inter-container ul li{
+                	margin: 25px 40px 9px 14px;
+                	display: inline-block;
+                	width:224px;
+                	height: 138px;
+                }
+                #interest .inter-container ul li img{
+                	width:220px;
+                	height:138px;
+                }
+                #interest #ad_left {
+                	display:none;
+                }
+                #interest #ad_left img{
+                	cursor: pointer;
+                }
+                #interest .inter-container{
+                	position:relative;
+                	overflow:hidden;
+                }
+                #interest #ad_w {
+                	width: 100000px;
+                	position:absolute;
+                }
+                #interest #ad_right {
+                	display:none;
+                }
+                #interest .inter-container ul li .ad-text{
+                	width: 220px;
+                	height: 138px;
+                }
+
+                #interest .inter-container ul li .ad-text{
+                	width: 220px;
+                	height: 30px;
+                	background: #000;
+                	opacity: 0.3;
+                	text-align: center;
+                	vertical-align: middle;
+                	position: relative;
+                	top: -30px;
+                }
+
+                #interest .inter-container ul li span{
+                	opacity: 1;
+                	color: #fff;
+                	position: relative;
+                	top: 5px;
+                }
+
+                #interest .inter-container ul li.ad-last{
+                	float: right;
+                	margin-right: 9px;
+                }
+
+                #interest .inter-container ul li.ad-last .ad{
+                	display: inline-block;
+                	width: 60px;
+                	height: 20px;
+                	background: #fff;
+                	float: right;
+                	color: #000;
+                	opacity: 0.8;
+                	margin-top: 5px;
+                }
+
+* {
+	
+    word-wrap: break-word;
+    word-break: break-all;
+}	
+
+	
+}

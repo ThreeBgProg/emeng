@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content" data-tag=8>
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>文章管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>改革动态</cite></a>
+            </span>
+        <a class="layui-btn layui-btn-small" style="line-height:1.6em;margin-top:3px;float:right"  href="javascript:location.replace(location.href);" title="刷新"><i class="layui-icon" style="line-height:30px">ဂ</i></a>
+    </div>
+    <div class="show-all-up passage-add">
+        <button class="layui-btn" id='passage_add'>
+            <i class="layui-icon">&#xe608;</i>发布
+        </button>
+    </div>
+    <table class="layui-table">
+        <thead>
+        <tr>
+            <th style='width: 20em'>
+                标题
+            </th>
+            <th>
+                作者
+            </th>
+            <th>
+                时间
+            </th>
+            <th>
+                操作
+            </th>
+        </tr>
+        </thead>
+        <tbody>
+        </tbody>
+    </table>
+    <div id="page"></div>
+</div>
+</body>
+<script src='libs/jquery.min.js'></script>
+<script src='libs/layui/layui.js'></script>
+<script src='js/articlejs.js'></script>
+</html>

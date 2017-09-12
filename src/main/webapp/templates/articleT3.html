@@ -1,0 +1,92 @@
+<div class="ui_content_detail ui_news_detail">
+						<h4 class="pull-left">会议名称：{{detaildata.title}}</h4>
+						<div class="clearfix"></div>
+						<hr>
+						<h5 class="pull-left">会议内容：</h5>
+						<div class="clearfix"></div>
+						<div style="word-wrap:break-word;word-break:break-all;"  class="detailText" ng-bind-html="detaildata.content|htmlContent"></div>
+						<div class="clearfix"></div>
+						<h5 class=" pull-left">会议时间：{{detaildata.releaseDate|reverse2}}</h5>
+						<div class="clearfix"></div>
+						
+						<br>
+						<a ng-show='detaildata.type' href="javascript:;"  ng-click="ApplyIF()" class="btn btn-default btn-sm pull-right"  style="width: 180px; margin:10px">会议报名</a>
+						<div class="clearfix"></div>
+						<a ng-show='detaildata.annex' target="_blank" download  href="./filedownload?fileUrl={{detaildata.annex}}"  class="btn btn-default btn-sm pull-right" style="width: 180px; margin:10px">附件下载<span ng-show="phone">（PC端）</span></a>
+						<div class="clearfix"></div>
+						<a ng-show='detaildata.link'  href="{{detaildata.link}}" class="btn btn-default btn-sm pull-right" style="width: 180px; margin:10px">会议链接</a>
+						<div class="clearfix"></div>
+						<br />				
+					</div>
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form name="apllyForm" ng-controller="apllyCtrl"  ng-submit="attentmeeting()" novalidate autocomplete="off">
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+					</button>
+					<h4 class="modal-title" id="myModalLabel">
+						会议报名
+					</h4>
+				</div>
+				<div class="modal-body">
+						    <div class="apply">						
+						    	<h4 class="text-center" style="max-width:560px">{{meetingName.value}}</h4>
+						        <ul> 
+						        	 <li>
+						                <label for="name">姓名:</label>
+						                 <input type="text"   ng-model="apply.name" name="name" id="name" required />
+						            </li>
+						            <li>
+						                <label for="company">所在单位:</label>
+						                <input type="text"  name="company" ng-model="apply.company" required />
+						            </li>
+						            <li>
+						                <label for="duty">职务:</label>
+						                <input type="text" ng-model="apply.duty"  id='duty' name="duty" required />
+						            </li>
+						            <li>
+						                <label for="jobTitle">职称:</label>
+						                 <input type="text" id='jobTitle'  ng-model="apply.jobTitle" name="jobTitle"  required />
+						            </li>
+						           
+						             <li>
+					                    <label for="phone">联系电话:</label>
+					                    <input id="phone" type="text" ng-model="apply.phone" name="tel" placeholder=''  ng-pattern="/^1\d{10}$/" >
+					                    <span ng-show="apllyForm.tel.$invalid && apllyForm.tel.$dirty">请填1开头的11位号码</span>
+					                </li>
+					                <li>
+					                    <label for="mail">电子邮箱:</label>
+					                    <input type="email" id="mail" ng-model="apply.email" name="email" />
+					                    <span ng-show="apllyForm.email.$invalid && apllyForm.email.$dirty">邮箱格式错误</span>
+					                </li>
+						            <li>
+						                <label for="codecheckbox"></label>
+						                <input type="checkbox" ng-model='checkboxIF'  id="checkbox" />我有邀请码？
+						            </li>
+						             <li ng-if='checkboxIF'>
+						                <label for=""></label>
+						                <input  type="text" id='code' ng-model="apply.code" name='code'  placeholder='请输入邀请码'  />
+						            </li>
+						            <li ng-show="showAllErr">
+						                <label for="" ng-if="!phone"></label>
+	                					<span >请按要求填写所有字段</span>
+						            </li>
+						            
+						        </ul>
+						</div>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-default btn-sm" data-dismiss="modal">
+						关闭
+					</button>
+					<button type="submit" class="btn btn-primary btn-sm" style="    background-color:#e8413e">
+						提交报名表
+					</button>
+				</div>
+			</form>
+		</div><!-- /.modal-content -->
+	</div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+

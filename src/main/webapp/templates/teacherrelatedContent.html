@@ -1,0 +1,15 @@
+<!-- 相关论文 -->
+		<div ng-show="relativelistdata.length"  class="ui_content ui_content_related">
+			<div class="ui_content_nav">
+				<span class="ui_content_logo"><img src="images/saying-Logo.png"></span>
+				<span  class="ui_content_title">相关论文</span>
+				<a ui-sref=".related" class="more"><span>更多>></span></a>
+			</div>
+			<ul class="ui_content_list" >
+				<li ng-repeat="x in relativelistdata"><a href="{{x.type|reverse3}}{{x.id}}">{{x.titile}}</a></li>
+			 <div ng-hide="relativelistdata.length" class="IFlogin">
+                    <h4 class="middle">没有相关内容</h4>
+    		 </div>
+    		</ul>
+    		 
+		</div>

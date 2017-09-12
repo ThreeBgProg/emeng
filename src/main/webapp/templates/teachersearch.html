@@ -1,0 +1,16 @@
+<div class="ui_content_list" >
+	<a  ng-repeat="x in page.data[page.currentindex]" href="{{x.type|reverse4}}{{x.id}}" class="ui_teacher_list_i">
+		<img ng-src="{{x.pic}}">
+		<div >
+			<span>{{x.name}}</span>
+			<p class="dotdotdot" ng-bind="x.introduction" dot>{{x.introduction}}</p>
+		</div>
+	</a>
+	<div ng-hide="page.data[page.currentindex].length" class="IFlogin">
+                    <h4 class="middle">没有相关内容</h4>
+      </div>
+	<div class="clearfix"></div>
+	<div ng-show="pagingOptions.totalPage>1" class="tcdPageCode" pageset='searchteacher()'>
+ 	</div>
+</div>
+

@@ -1,0 +1,38 @@
+<div ng-controller="lesson">
+		<!-- 课程资源 -->
+		<div  class="ui_content ui_content_source" id="ui_content" ng-class="{'ui_content_source_3':$stateParams.bookName&&!$stateParams.passageType&&current.ifCata!='booklist'&&current.ifCata!='search'}">
+				<div class="ui_content_nav" active="lesson" active>
+<!-- 					<span class="ui_content_logo"><img src="images/saying-Logo.png"></span>
+ -->					<span  class="ui_content_title" >课程资源</span>
+					<a ng-show='$stateParams.bookName&&!phone' ui-sref=".bookName.catalogue({bookName:bookUrl[0]})" class="">基础</a>
+                    <a ng-show='$stateParams.bookName&&!phone' ui-sref=".bookName.catalogue({bookName:bookUrl[1]})" class="active">原理</a>					
+                    <a ng-show='$stateParams.bookName&&!phone' ui-sref=".bookName.catalogue({bookName:bookUrl[2]})" class="">概论</a>
+					<a ng-show='$stateParams.bookName&&!phone' ui-sref=".bookName.catalogue({bookName:bookUrl[3]})" class="">纲要</a>
+					<div class="input-group" ng-show="$stateParams.bookName">
+			            <input  ng-model="lessonsearch.value" ng-keyup="lessonkey($event)" type="text" class="form-control " placeholder="搜索">
+			            <span class="input-group-btn">
+			                <button class="btn btn-info" ng-click='searchlesson()' type="button"><span class="glyphicon glyphicon-search search"></span></button>
+			            </span>
+			          </div >
+				</div>
+				<div class="trtr "><a>当前位置：</a>
+				<a href="#index.html">首页</a><a ui-sref="lesson">>课程资源</a><a ui-sref=".bookName.catalogue" ng-show="$stateParams.bookName" >>{{bookName[Map[$stateParams.bookName]]}}</a><!-- <a url="javascript:" ng-show="current.ifCata=='catalogue'" ui-sref=".bookName.catalogue({bookName:$stateParams.bookName})">>章节目录</a> --><a url="javascript:" ng-show="current.ifCata=='booklist'" ui-sref=".bookName.booklist({bookName:$stateParams.bookName })">>阅读书目</a><a url="javascript:" ng-show="current.ifCata=='search'" ui-sref=".bookName.search({bookName:$stateParams.bookName })">>搜索结果</a><a  ng-show="$stateParams.chapter" ui-sref=".bookName.catalogue.chapter({bookName: $stateParams.bookName,chapter:$stateParams.chapter})">>{{chapterName.value}}</a><a ui-sref=".bookName.catalogue.chapter.passageType" ng-show="$stateParams.passageType" >>{{passageTypeName[Map[$stateParams.passageType]]}}</a><a ng-show="$stateParams.articleid&&!phone" >>文章详细</a>
+				</div>
+				<div ng-show="phone"  class="ui_content_nav2"  active2>
+					<a ng-show='$stateParams.bookName&&phone' class="tab" ui-sref=".bookName.catalogue({bookName:bookUrl[0]})" class="">基础</a>
+                    <a ng-show='$stateParams.bookName&&phone' class="tab" ui-sref=".bookName.catalogue({bookName:bookUrl[1]})" class="active">原理</a>					
+                    <a ng-show='$stateParams.bookName&&phone' class="tab" ui-sref=".bookName.catalogue({bookName:bookUrl[2]})" class="">概论</a>
+					<a ng-show='$stateParams.bookName&&phone' class="tab" ui-sref=".bookName.catalogue({bookName:bookUrl[3]})" class="">纲要</a>				
+		        </div>
+				<div class="clearfix"></div>
+				<div ng-hide="appusername" class="IFlogin">
+				    <h4 class="middle">注册成为会员才能查看课程资源！~，请 先   <a ui-sref="register"><button class="btn btn-default btn-sm" >注册</button></a> 或  <a ui-sref="login"><button class="btn btn-default btn-sm" >登录</button></a></h4>
+				</div>
+				<div ng-if="appusername" ui-view="detail"></div>
+		</div> 
+		<div ng-hide="$stateParams.bookName&&!$stateParams.passageType&&current.ifCata!='booklist'&&current.ifCata!='search'" ui-view="hotlist"></div>
+
+		
+</div>
+		
+	

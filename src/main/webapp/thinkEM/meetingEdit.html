@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content">
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>会议管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>会议管理</cite></a>
+                <a><cite>></cite></a>
+              <a><cite>会议信息</cite></a>
+            </span>
+    </div>
+    <form class="layui-form layui-form-pane top20" id='meeting_form'>
+        <div class="layui-form-item">
+            <label for="meeting_title" class="layui-form-label">
+                会议标题
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="meeting_title"  required lay-verify="required"
+                       autocomplete="off" value="会议初始标题"  class="layui-input" style='width:600px;' maxlength="64" placeholder="会议标题不超过64个字符">
+            </div>
+        </div>
+       <!--  <div class="layui-form-item layui-form-text">
+            <label for="meeting_content" class="layui-form-label">
+                会议内容
+            </label>
+            <div class="layui-input-block">
+                         <textarea  id="meeting_content" name="content" autocomplete="off" placeholder="换行处请添加&lt;br&gt;标签"
+                                   class="layui-textarea" style="height: 80px;">思政E盟棒棒的会议啊!</textarea>
+            </div>
+        </div> -->
+        <div class="layui-form-item layui-form-text">
+            <div class="layui-input-block">
+                        <textarea id="meeting_content" name="content"
+                                  placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+            </div>
+            <label for="meeting_content" class="layui-form-label" style="top: -2px;">
+                                             会议内容
+            </label>
+        </div>
+        
+        
+        <div class="layui-form-item">
+            <label for="meeting_link" class="layui-form-label">
+                会议链接
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="meeting_link"  
+                       autocomplete="off" placeholder="如http://www.baidu.com"  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label class="layui-form-label">会议类型</label>
+            <div class="layui-input-inline" >
+                <select name="fid"  id='meeting_type' lay-filter="test">
+                    <option value="0">外部会议</option>
+                    <option value="1">自举会议</option>
+                </select>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="meeting_time" class="layui-form-label">
+               会议日期
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="meeting_time"  required lay-verify="required"
+                       autocomplete="off" value='2017/06/20 00:00'  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label for="meeting_code" class="layui-form-label">
+                邀请码
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="meeting_code"  required lay-verify="required"
+                       autocomplete="off" placeholder='1234'  class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label  class="layui-form-label">
+                已有附件
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="meeting_annex_had" disabled=""
+                       autocomplete="off"   class="layui-input contribute-edit-title" value='无' style='width:800px;'>
+            </div>
+        </div>
+        <div class="layui-form-item top20" >
+        <label  class="layui-form-label" style='width:100px'>
+               替换或上传附件
+            </label>
+            
+        </div>
+        <input type="file" id='meeting_annex' lay-type="file"  >
+        
+          <div id="parent" style='width:550px; height:10px; border:2px solid #09F; margin-top:10px;margin-bottom:10px;'>
+        <div id="son" style='width:0; height:100%; background-color:#09F; text-align:center; line-height:8px; font-size:20px; '></div>
+    	</div>  
+        
+        <span class="my-red">（*请上传小于500M的附件）</span>
+        <div class="layui-form-item top20">
+            <input type="submit" id='meeting_submit' class="layui-btn" value='保存'>
+        </div>
+    </form>
+    <div style='height:200px'></div>
+</div>
+</body>
+<script src='libs/jquery.min.js'></script>
+<script src='libs/layui/layui.js'></script>
+<script type="text/javascript">
+var timer=null;
+var times=0;
+var setArea = function(){
+	 times=times+1;
+	 if(times>=6){
+		 clearInterval(timer); 
+	 }
+	 if($('#meeting_content').val()){
+		 clearInterval(timer); 
+		 layui.use(['layedit'], function() {
+	        layedit = layui.layedit;
+	        layedit.set({
+	            uploadImage: {
+	                url: "../picupload" //接口url
+	                ,type: 'post' //默认post
+	                ,sucess:function(e) {
+	                    console.log(e);
+	                }
+	            }
+	        })
+	        //创建一个编辑器
+	        editIndex = layedit.build('meeting_content',{
+	          height: 300   //设置编辑器高度
+	        });
+	    })
+	    /*表单提交*/
+	    $("#meeting_submit").mouseenter(function (e) {
+	        layedit.sync(editIndex);
+	    })
+	        
+	} 
+ } 
+timer=setInterval(setArea,500);
+	
+
+	
+
+
+
+</script>
+
+</html>

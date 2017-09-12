@@ -1,0 +1,208 @@
+
+/*媒体查询，适配pc端*/
+@media only screen and (min-width:500px) {
+.register {
+    width: 1080px;
+    margin: 0 auto;
+}
+
+.register .register-line {
+    height: 20px;
+    background: url("../images/register/register-bgline.png");
+}
+.register-position {
+    color: #414141;
+    font-family: "微软雅黑 Light";
+    font-size: 12px;
+}
+
+.register-box {
+    border-width: 1px;
+    border-color: #f1aaa8;
+    border-style: solid;
+    border-radius: 4px;
+    background-color: #f6f5ea;
+    width: 598px;
+    height: 466px;
+    margin: 30px auto 0;
+}
+.register-box ul {
+    text-decoration: none;
+    list-style: none;
+    font-family: "微软雅黑 Light";
+    font-size: 14px;
+    color: #414141;
+}
+.register-box ul li:first-child {
+    margin-top: 38px;
+}
+.register-box ul li {
+    height: 38px;
+}
+.register-box ul label {
+    width: 167px;
+    text-align: right;
+}
+.register-box ul input {
+
+    border-width: 1px;
+    border-color: #ccc;
+    border-style: solid;
+    border-radius: 2px;
+    margin-left: 15px;
+    width: 241px;
+    height: 27px;
+    padding-left: 6px;
+}
+#username {
+    width: 180px;
+}
+#school {
+    width: 150px;
+}
+#tel {
+    width: 180px;
+}
+#email {
+    width: 180px;
+}
+#code {
+    width: 100px;
+}
+.register-box ul span {
+    color: #e8413e;
+}
+.register-box ul i{
+    display: inline-block;
+    margin-left: 8px;
+    width: 65px;
+    height: 27px;
+    background-color: #87dbdc;
+    vertical-align: top;
+    text-align: center;
+    line-height: 27px;
+    letter-spacing: 4px;
+}
+#register {
+    border-radius: 4px;
+    background-color: rgb(232, 75, 72);
+    width: 147px;
+    height: 29px;
+    color: #ececec;
+    letter-spacing: 4px;
+}
+
+.register-box  .has-registered {
+   padding-left: 180px;
+}
+.register-box  .has-registered a {
+    color: #e8413e;
+}
+}
+
+
+
+/*媒体查询，适配pc端*/
+@media only screen and (max-width:500px) {
+    .register {
+        width: 100%;
+        margin: 0 auto;
+    }
+
+    .register .register-line {
+        height: 20px;
+        background: url("../images/register/register-bgline.png");
+    } 
+    .register-position {
+        color: #414141;
+        font-family: "微软雅黑 Light";
+        font-size: 12px;
+            margin-left: 10px;
+    }
+
+    .register-box {
+       padding:10px;
+        border-radius: 4px;
+        width: 100%;
+        margin: 0px auto 0;
+    }
+    .register-box ul {
+        text-decoration: none;
+        list-style: none;
+        font-family: "微软雅黑 Light";
+        font-size: 14px;
+        color: #414141;
+    }
+    .register-box ul li:first-child {
+        margin-top: 20px;
+    }
+    .register-box ul li {
+        min-height: 38px;
+    }
+    .register-box ul label {
+        width: 88px;
+        text-align: right;
+    }
+    .register-box ul input {
+
+        border-width: 1px;
+        border-color: #ccc;
+        border-style: solid;
+        border-radius: 2px;
+        margin-left: 15px;
+        width: 172px;
+        height: 27px;
+        padding-left: 6px;
+    }
+    #username {
+        width: 170px;
+    }
+    #school {
+        width: 98px;
+        margin-left:0px;
+    }
+    #tel {
+        width: 180px;
+    }
+    #email {
+        width: 180px;
+    }
+    #code {
+        width: 100px;
+    }
+    .register-box ul span {
+        color: #e8413e;
+
+    }
+        .register-box ul li>span {
+        color: #e8413e;
+        display:block;
+        margin-left:105px;
+    }
+    .register-box ul i{
+        display: inline-block;
+        margin-left: 8px;
+        width: 65px;
+        height: 27px;
+        background-color: #87dbdc;
+        vertical-align: top;
+        text-align: center;
+        line-height: 27px;
+        letter-spacing: 4px;
+    }
+    #register {
+        border-radius: 4px;
+        background-color: rgb(232, 75, 72);
+        width: 147px;
+        height: 29px;
+        color: #ececec;
+        letter-spacing: 4px;
+    }
+
+    .register-box  .has-registered {
+       padding-left: 100px;
+    }
+    .register-box  .has-registered a {
+        color: #e8413e;
+    }
+}

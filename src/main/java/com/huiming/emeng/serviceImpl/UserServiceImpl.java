@@ -82,6 +82,11 @@ public class UserServiceImpl implements UserService {
 		user.setState((byte) 1);
 		return userMapper.insert(user);
 	}
+	
+	@Override
+	public int insertSelective(User user) {
+		return userMapper.insertSelective(user);
+	}
 
 	@Override
 	public int updateUser(User user) {
@@ -128,4 +133,5 @@ public class UserServiceImpl implements UserService {
 	public int deleteReal(Integer id) {
 		return userMapper.deleteByPrimaryKey(id);
 	}
+
 }

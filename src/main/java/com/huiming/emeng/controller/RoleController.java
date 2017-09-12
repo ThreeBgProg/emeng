@@ -52,7 +52,6 @@ public class RoleController {
 	@MappingDescription("增加角色")
 	@ResponseBody
 	public String addRole(Role role, @RequestParam("permissionList[]") List<Integer> permissionList) {
-		System.out.println(permissionList);
 		if (roleService.selectRole(role.getRolename()) == null) {
 			if (roleService.insert(role) != 0) {
 				role = roleService.selectRole(role.getRolename());
@@ -88,12 +87,7 @@ public class RoleController {
 	@ResponseBody
 	public String updateRole(Role role) {
 		role.setState((byte) 1);
-		System.out.println(roleService.updateByPrimaryKey(role));
-		// if (roleService.updateByPrimaryKey(role) != 0) {
 		return SUCCESS;
-		// } else {
-		// return FAIL;
-		// }
 	}
 
 	@RequestMapping("/updateRolePermission")

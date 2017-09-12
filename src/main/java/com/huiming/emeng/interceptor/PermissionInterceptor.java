@@ -61,8 +61,10 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 		User user = (User) session.getAttribute("user");
 		Role role = (Role) session.getAttribute("role");
 		if(request.getRequestURI().contains("indexEM")){
-			System.out.println(Integer.parseInt(env.getRequiredProperty("role.adminId")));
-            return !(role == null || role.getId() != Integer.parseInt(env.getRequiredProperty("role.adminId")));
+			System.out.println("1");
+//			response.sendRedirect("/emeng/noroot.html");
+			//管理员进入后台页面
+			return role != null && role.getId() == Integer.parseInt(env.getRequiredProperty("role.adminId"));
 		}else if(request.getRequestURI().contains("html")){
 			return true;
 		}
@@ -79,12 +81,14 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 			session.setAttribute("permissionList", permissionMappingList);
 		}
 		// 从session中获取用户允许访问的资源
+		@SuppressWarnings("unchecked")
 		List<String> list = (List<String>) session.getAttribute("permissionList");
 
 		// 权限集合中包含请求的url
-		System.out.println(requestUrl);
-		System.out.println(list.contains(requestUrl));
         // 没有权限
+		if(null == list){
+			return  false;
+		}
         return list.contains(requestUrl);
 	}
 

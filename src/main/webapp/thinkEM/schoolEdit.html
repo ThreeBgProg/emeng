@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>indexEM</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content contribute-edit-box" id='teaInfo'>
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>学校管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>学校管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>编辑学校信息</cite></a>
+            </span>
+    </div>
+
+        <form class="layui-form" id="schInfoform" enctype='multipart/form-data'>
+              
+              <div class="layui-form-item">
+                <label class="layui-form-label">学校名称</label>
+                <div class="layui-input-inline">
+                  <input type="text" name="password" required lay-verify="required" placeholder="请输入学校名称" autocomplete="off" class="layui-input schName">
+                </div>
+              </div>
+
+              <div class="layui-form-item">
+                  <label class="layui-form-label">对应链接</label>
+                  <div class="layui-input-block">
+                    <input type="url" name="title" required  lay-verify="required" placeholder="对应链接" autocomplete="off" class="layui-input schLink">
+                  </div>
+              </div>
+
+               <div class="layui-form-item">
+                <label class="layui-form-label">高校类型</label>
+                <div class="layui-input-block">
+                  <select  id="typeSelect">
+                   <option value="0"></option>
+                   <option value="1">本科学院</option>
+                   <option value="2">独立学院</option>
+                   <option value="3">高职院校</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="layui-form-item">
+                <label class="layui-form-label">所属省份</label>
+                <div class="layui-input-block">
+                  <select  id="provinceSelect">
+                   <!-- <option value="0">aaa</option>
+ -->                  </select>
+                </div>
+              </div>
+
+              <div id="uploadImg" style="margin:10px 150px;">
+                    <img id="schPreview" style="padding:10px; border:1px dotted #ccc;margin: 5px; "   />
+                   <label class="layui-form-label">预览图片</label>
+                  <input type="file" name="file" onchange="imgPreview(this)"  id="schImgInput" />
+              </div>
+              <div class="layui-form-item">
+                   <input type="submit" id="contribute_submitVid" class="layui-btn">
+              </div>
+       </form>
+</div>
+<script src="libs/jquery.min.js" charset="utf-8"></script>
+<script src="libs/layui/layui.js" charset="utf-8"></script>
+<script src="js/thinkEM.js" charset="utf-8"></script>
+
+<!-- 图片上传以及预览 -->
+<script type="text/javascript">
+    function imgPreview(fileDom){
+        //判断是否支持FileReader
+        if (window.FileReader) {
+            var reader = new FileReader();
+        } else {
+            alert("您的设备不支持图片预览功能，如需该功能请升级您的设备！");
+        }
+        //获取文件
+        var file = fileDom.files[0];
+        var imageType = /^image\//;
+        //是否是图片
+        if (!imageType.test(file.type)) {
+            alert("请选择图片！");
+            return;
+        }
+        //读取完成
+        reader.onload = function(e) {
+            //获取图片dom
+            var img = document.getElementById("schPreview");
+            //图片路径设置为读取的图片
+            img.style.width = '100px';
+                    var file = document.getElementById('schImgInput').files[0];
+                    // var file = fileinput[0].files[0];
+                    var formData1 = new FormData();
+                    formData1.append("picpic",file);
+
+                    $.ajax({
+                        url: "../addpic",    //请求的url地址
+                        dataType: "json",   //返回格式为json
+                        async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+                        processData: false,    //必须设置
+                        contentType: false,    //必须设置
+                        data:formData1,
+                        /*data: {'title':meeting_title,'content':meeting_content,'link':meeting_link,'type':meeting_type,'release_date':new Date(meeting_releaseDate),'code':meeting_code,'annex':formData},    //参数值 可能不用*/
+                        type: "POST",   //请求方式
+                        success: function(data) {
+                            console.log(data.pic);
+                            pic = data.pic;
+                            img.src = pic;
+                        },
+                        error: function(){
+                            console.log('上传文件失败');
+                        }
+                    });
+        };
+        reader.readAsDataURL(file);
+    }
+
+</script>
+</body>
+</html>

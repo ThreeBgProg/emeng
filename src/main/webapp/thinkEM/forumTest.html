@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content">
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>论坛帖子</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>帖子管理</cite></a>
+                <a><cite>></cite></a>
+              <a><cite>帖子回复</cite></a>
+            </span>
+    </div>
+    <form class="layui-form layui-form-pane top20" id='forum_reply_form'>
+        <div class="layui-form-item">
+            <label for="forum_username" class="layui-form-label">
+                发帖者
+            </label>
+            <div class="layui-input-inline">
+                <input type="text" id="forum_username" name="username" required lay-verify="required"
+                       autocomplete="off" value="" disabled="" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <label for="forum_content" class="layui-form-label">
+                帖子内容
+            </label>
+            <div class="layui-block contribute-edit-content" id="forum_content">
+                帖子内容
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <input type="button" id='forum_pass' class="layui-btn" value='通过'>
+            <input type="button" id='forum_nopass' class="layui-btn" value='不通过'>
+        </div>
+    </form>
+</div>
+</body>
+<script src='libs/jquery.min.js'></script>
+<script src='libs/layui/layui.js'></script>
+</html>

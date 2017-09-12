@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="libs/layui/css/layui.css">
+    <link rel="stylesheet" href="css/mystyle.css">
+</head>
+<body>
+<div class="iframe-content link-edit-box"  >
+    <div class="now-position">
+            <span>
+              <a><cite>首页</cite></a>
+              <a><cite>></cite></a>
+              <a><cite>文章管理</cite></a>
+                 <a><cite>></cite></a>
+              <a><cite>增加轮播</cite></a>
+            </span>
+    </div>
+    <form class="layui-form" enctype='multipart/form-data' id='banner_add_form'>
+        <div class="layui-form-item">
+            <label  class="layui-form-label top20">
+                <span class="my-red">*</span>轮播图
+            </label>
+            <div class="layui-input-inline">
+                <div class="top20">
+                    <div class="layui-box layui-upload-button">
+                        <div target="layui-upload-iframe" method="post" key="set-mine" >
+                            <input type="file" name="file" class="layui-upload-file" id="banner_file" required></div>
+                        <span class="layui-upload-icon"><i class="layui-icon"></i>上传图片</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="layui-form-item">
+            <label  class="layui-form-label">缩略图(推荐尺寸290px*250px)
+            </label>
+            <img id="banner_upload" width="400" src="">
+        </div>
+        <div class="layui-form-item">
+            <label  class="layui-form-label">
+            </label>
+            <button  type='submit' class='layui-btn'>
+                增加
+            </button>
+        </div>
+    </form>
+</div>
+</body>
+</html>

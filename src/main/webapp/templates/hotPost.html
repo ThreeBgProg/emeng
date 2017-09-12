@@ -1,0 +1,11 @@
+<ul class="list-unstyled ui_tolk_list" >
+	<li ng-repeat="x in page.data[page.currentindex]"><a ui-sref=".articleid({articleid:x.id})"><span class="type">{{($index+1)}}</span><span class="text" textwidth>{{x.titile}}</span><span class="date">{{x.releaseTime|reverseX}}</span><span class="auth"> <span class="glyphicon glyphicon-user"></span>{{x.username}}</span></a></li>
+	 <div ng-hide="page.data[page.currentindex].length" class="IFlogin">
+                    <h4 class="middle">没有相关内容</h4>
+     </div>
+
+</ul>
+
+
+<div class="clearfix"></div>
+	

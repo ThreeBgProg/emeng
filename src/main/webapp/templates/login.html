@@ -1,0 +1,36 @@
+
+<!--注册-->
+<div class="register">
+    <div class="register-line"></div>
+    <div class="register-position">
+        您当前的位置：堂外堂 思政e盟>>登录
+    </div>
+    <div class="register-box">
+        <form name="loginForm" ng-controller="loginCtrl"  ng-submit="save()" novalidate>
+        <ul>
+            <li>
+                <label for="username">用户名或工号:</label>
+                 <input type="text" id='username'  ng-model="loginUser.username" name="username" required />
+                  <span ng-show="loginForm.username.$invalid && showAllErr">请填写用户名或工号</span>
+            </li>
+            <li>
+                <label for="password">密码:</label>
+                <input type="password" id='password' name="Upass1" ng-model="loginUser.password" required>
+                <span ng-show="loginForm.Upass1.$invalid && showAllErr">请填写密码</span>
+            </li>
+            <li>
+                <label for="code">验证码:</label>
+                <input type="text" ng-model="inputcode"  id='code' name="code" required>
+                    <b ng-click="getcode()" ng-bind-html="random|htmlContent"></b>
+                    <span ng-show="loginForm.code.$error.required && showAllErr">请输入验证码</span>
+                    <span ng-show="!showAllErr && loginForm.code.$error.required && codeErr && loginForm.code.$dirty">验证码错误</span>
+            <li>
+                <label for=""></label>
+                <input type="submit" value='立即登录' id='register'>
+                <span ng-show="showAllErr">请按要求填写表单<span>
+            </li>
+        </ul>
+        <p class='has-registered'>还没有账号？<a href="#/register">我要注册</a></p>
+        </form>
+    </div>
+</div>

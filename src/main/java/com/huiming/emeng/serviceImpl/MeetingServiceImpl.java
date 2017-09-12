@@ -91,6 +91,9 @@ public class MeetingServiceImpl implements MeetingService {
 					}
 				}
 				Integer fromIndex = (pageNum - 1) * pageSize;
+				if(fromIndex < 0) {
+		            fromIndex = 0;
+		        }
 				Pager<Meeting> pager = new Pager<Meeting>(pageSize, pageNum, totalRecord, totalPage, 
 						meetingMapper.selectMeetingWithPagesizeFromFromindex(fromIndex, pageSize));
 				return pager;

@@ -1,0 +1,114 @@
+<link rel="stylesheet" href="thinkEM/libs/layui/css/layui.css">
+<div ng-hide="appusername" class="IFlogin">
+<h4 class="middle">登陆后才能发帖！~，请 先   <a ui-sref="login"><button class="btn btn-default btn-sm" >登录</button></a></h4>
+</div>
+<form ng-show="appusername" class="layui-form layui-form-pane" id='F_form' >
+        <div class="layui-form-item">
+            <label for="F_title" class="layui-form-label">
+                标题
+            </label>
+            <div class="layui-input-block">
+                <input type="text" id="F_title" name="title" required lay-verify="title" value=""
+                       autocomplete="off" class="layui-input">
+            </div>
+        </div>
+        <div class="layui-form-item layui-form-text">
+            <div class="layui-input-block">
+                        <textarea id="F_content" name="content"
+                                  placeholder="请输入内容" class="layui-textarea fly-editor" style="height: 260px;"></textarea>
+            </div>
+            <label for="L_content" class="layui-form-label" style="top: -2px;">
+                内容
+            </label>
+        </div>
+        <div class="layui-form-item">
+            <input type="button" id='F_submit' class="layui-btn" value='发贴'>
+        </div>
+    </form>
+    <style>
+    #F_form {
+    margin: 20px 20px 0;
+    }
+    
+    div{
+    margin-top: 3px;
+    padding: 0;
+    -webkit-tap-highlight-color: rgba(0,0,0,0);
+}
+    </style>
+  
+    <script>
+    
+    layui.use(['element'], function() {
+    	
+    	layui.use(['layedit'], function() {
+            layedit = layui.layedit;
+            layedit.set({
+                uploadImage: {
+                    url: "./picupload" //接口url
+                    ,type: 'post' //默认post
+                    ,sucess:function(e) {
+                    	console.log(e);
+                    }
+                }
+            })
+            //创建一个编辑器
+            editIndex = layedit.build('F_content',{
+          	  height: 360,tool: [
+          	                   'strong' //加粗
+          	                 ,'italic' //斜体
+          	                 ,'underline' //下划线
+          	                 ,'del' //删除线
+          	                 
+          	                 ,'|' //分割线
+          	                 
+          	                 ,'left' //左对齐
+          	                 ,'center' //居中对齐
+          	                 ,'right' //右对齐
+          	                 ,'unlink' //清除链接
+          	                 ,'face' //表情
+          	                 ,'image' //插入图片
+          	                 ,'help' //帮助
+          	               ]   //设置编辑器高度
+            });
+        })
+
+        
+        
+        
+        $ = layui.jquery;
+        element = layui.element();
+        
+      $('#F_submit').on('click',function(){
+    	  
+    	  var $F_content = layedit.getContent(editIndex);
+    	  var $F_title = $('#F_title').val();
+    	  if($F_title&&$F_content){
+		          $.ajax({
+		              url: "./postinsert",    //请求的url地址
+		              dataType: "json",   //返回格式为json
+		              async: true, //请求是否异步，默认为异步，这也是ajax重要特性
+		              data: {'titile':$F_title,'content':$F_content,'visit':0,'like':0},    //参数值 可能不用
+		              type: "POST",   //请求方式
+		              success: function(data) {
+		            	  if(data==1) {layer.alert("请登录后发帖", {icon: 9})}
+		            	  else {layer.alert("帖子发送成功，审核通过后将展示", {icon: 6},function () {
+		              		location.reload();
+		                  });
+		            	  }
+		              },
+		              error: function() {
+		              	layer.alert("发帖失败", {icon: 9},function () {
+		                       location.reload();
+		                  });
+		              }
+		          });
+    	  }else{
+    		  alert("请填写标题和内容后再提交！~")
+    	  }
+      })
+        
+        })
+    
+    
+    </script>
